@@ -67,9 +67,7 @@
   </view>
   <!-- 上传者信息 -->
   <view class="upload_info">
-    <view class="title">上传者介绍
-      <van-icon name="chat-o" size="18px" bindtap="jump2Chat" />
-    </view>
+    <view class="title">上传者介绍</view>
     <view class="template">
       <text class="name">皇甫素素</text>，电子信息学院大二。
       年级排名 1 / 235，多次获得一等奖学金。

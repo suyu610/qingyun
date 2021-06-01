@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/empty/empty",
+    "pages/public/setting_profile/setting_profile",
     "pages/document_detail/document_detail",
     "pages/public/upload/upload",
     "pages/me/me",
@@ -12,7 +13,6 @@
     "pages/public/self_profile/self_profile",
     "pages/public/others_profile/others_profile",
     "pages/public/feedback/feedback",
-    "pages/public/setting/setting",
     "pages/category/category",
     "pages/public/search/search"
   ],
@@ -50,4 +50,6 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
+
+
 }

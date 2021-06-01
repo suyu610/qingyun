@@ -52,6 +52,11 @@ Page({
     if (token != '' && ssNumber != '') {
       console.log("都存在")
       // 检测token是否有效
+      setTimeout(() => {
+        router.relaunch({
+          name: "homepage"
+        })
+      }, 500);
     } else {
       console.log("没有token或ssNumber")
       // 跳转到登陆页面
@@ -61,11 +66,7 @@ Page({
       return;
     }
 
-    setTimeout(() => {
-      router.relaunch({
-        name: "homepage"
-      })
-    }, 500);
+  
   },
 
   onReady: function () {

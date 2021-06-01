@@ -1,12 +1,10 @@
 <!--pages/me/me.wxml-->
 <scroll-view class="container" scroll-y="{{true}}">
 
-  <view class="header">
-    <van-uploader>
+  <view class="header" bindtap="jump2SettingProfile">
       <view class="avatar">
         <image src="https://cdns.qdu.life/logo.png"></image>
       </view>
-    </van-uploader>
     <view class="title">
       <van-icon name="edit" color="white" size="14" />
       皇甫素素
@@ -15,7 +13,6 @@
       电子信息学院
       <view class="stu_number">2019205913</view>
     </view>
-
   </view>
 
   <view class="main_info">

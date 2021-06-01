@@ -114,7 +114,7 @@ const documentList = [{
 import {
   push
 } from '../../utils/router/index.js';
-
+let app = getApp()
 Page({
   data: {
     documentList: documentList,
@@ -192,25 +192,7 @@ Page({
     })
   },
 
+  
+  
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    const promise = new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          title: '青云知识库',
-          imageUrl:"https://cdns.qdu.life/qingyun/images/share_1.png",
-          path: '/pages/empty/empty',
-
-
-        })
-      }, 0)
-    })
-    return {
-      title: '青云知识库',
-      promise
-    }
-  }
 })

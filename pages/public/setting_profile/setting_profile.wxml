@@ -1,0 +1,37 @@
+<!--pages/public/setting/setting.wxml-->
+<!--pages/public/upload/upload.wxml-->
+<scroll-view class="container" scroll-y="{{true}}">
+  <view class="main">
+    <van-cell title="头像" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
+      <van-uploader>
+        <van-image round width="3rem" height="3rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+      </van-uploader>
+    </van-cell>
+
+    <van-cell title="姓名" value="皇甫素素"></van-cell>
+    <van-cell title="学号" value="2019205913"></van-cell>
+    <van-cell title="学院" value="电子信息学院"></van-cell>
+    <van-cell title="专业" value="微电子工程"></van-cell>
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
+          label-class="input_label" icon="edit" label="介绍" type="textarea" border="{{ true }}" maxlength="200"
+          show-word-limit autosize />
+      </van-cell-group>
+    </view>
+
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
+          label-class="input_label" icon="edit" label="学习荣誉" type="textarea" border="{{ false }}" maxlength="200"
+          show-word-limit autosize />
+      </van-cell-group>
+    </view>
+  </view>
+
+  <view class="submit_btn">
+    <van-button color="#0CB1FF">保存</van-button>
+    <van-button color="#0CB1FF">预览</van-button>
+
+  </view>
+</scroll-view>

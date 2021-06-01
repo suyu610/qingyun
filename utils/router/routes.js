@@ -21,3 +21,7 @@ export const search = {
 export const upload = { 
   path:'/pages/public/upload/upload'
 }
+
+export const setting_profile = { 
+  path:'/pages/public/setting_profile/setting_profile'
+}

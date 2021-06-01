@@ -9,6 +9,10 @@ Page({
   data: {
 
   },
+
+  jump2SettingProfile:function(){
+    push({name:"setting_profile"})
+  },
   jump2Upload:function(){
     push({name:"upload"})
   },

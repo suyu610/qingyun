@@ -9,6 +9,8 @@ view{
   background-color: #27B1FF;
   position: relative;
 }
+
+
 .header .ads{
   height: 65%;
   top:0;
@@ -96,4 +98,15 @@ view{
 
 .dropdown-item-title{
   font-size: 14px!important;
+}
+
+@media only screen 
+and (min-device-width: 375px) 
+and (-webkit-device-pixel-ratio : 2) {
+  .header{  
+    height: 38vh;
+  }
+  .body{
+    height: 62vh;
+  } 
 }

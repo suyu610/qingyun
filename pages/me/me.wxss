@@ -14,19 +14,19 @@
   color: white;
   padding-top: 5vh;
   padding-bottom: 4vh;
+
 }
 
 
-.header van-uploader .avatar {
+.header  .avatar {
+  margin-left: 42.5vw;
   width: 15vw;
   height: 15vw;
   text-align: center!important;
 
 }
-van-uploader{
-  text-align: center!important;
-}
-.header van-uploader .avatar image {
+
+.header .avatar image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
