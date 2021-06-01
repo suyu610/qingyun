@@ -24,7 +24,7 @@
       <van-cell-group size="large" center border="{{ false }}">
         <van-field value="{{ message }}" size="large" label-class="input_label" label="标签" type="textarea"
           border="{{ true }}" maxlength="30" use-button-slot center disabled>
-          <van-button color="#0CB1FF" slot="button" size="small" type="primary">
+          <van-button color="#0CB1FF" slot="button" size="small" type="primary" custom-style="border-radius:5px;">
             选择
           </van-button>
         </van-field>
@@ -55,7 +55,7 @@
     </view>
   </view>
   <view class="submit_btn">
-    <van-button type="warning" color="#0CB1FF">保存</van-button>
-    <van-button type="info" color="#0CB1FF">同意用户须知并上传</van-button>
+    <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;">保存</van-button>
+    <van-button type="info" color="#0CB1FF" custom-style="border-radius:5px;">同意用户须知并上传</van-button>
   </view>
 </scroll-view>
