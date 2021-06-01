@@ -1,0 +1,78 @@
+/* components/input_comment/index.wxss */
+
+.container {
+  height: 65px;
+  line-height: 65px;
+  background-color: #fff;
+  width: 100vw;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: middle;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.search {
+  height: 40px;
+  line-height: 40px;
+  background-color: #fcf6f6;
+  color: #999;
+  box-sizing: border-box;
+  padding-left: 10px;
+  border-radius: 20px;
+  width: 50vw;
+  display: inline-block;
+}
+.input_view{
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  width: 100%;
+  border-radius: 20px;
+  background: #fcf6f6;
+  flex-direction: row;
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+}
+
+.input_view  input{
+  padding-left: 10px;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  background-color: transparent;
+
+flex: 1;
+font-size: 30rpx;
+}
+.input_view text {
+  padding-left: 10px;
+  vertical-align: 1px;
+
+}
+
+.like {
+  display: inline-block;
+  color: #000;
+  padding-left: 8vw;
+}
+
+.like text {
+  vertical-align: 1px;
+  padding-left: 10px;
+}
+
+.share {
+  display: inline-block;
+  color: #000;
+  padding-left: 5vw;
+}
+
+.share text {
+  vertical-align: 1px;
+  padding-left: 10px;
+}
+.phClass{
+  font-size: 12px;
+}

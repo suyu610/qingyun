@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-uploader": "@vant/weapp/uploader/index"
+
+  },
+  "navigationStyle": "custom",
+  "disableScroll":true
+
+
+
+}

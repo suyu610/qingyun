@@ -1,0 +1,4 @@
+/* pages/category/category.wxss */
+view{
+  box-sizing: content-box;
+}

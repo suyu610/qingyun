@@ -1,0 +1,15 @@
+/* pages/empty/empty.wxss */
+
+.logo{
+  animation: rotate 10s ease-in infinite;
+  animation-delay:.3s;
+}
+
+@keyframes rotate{
+	0%{
+		transform: rotateZ(0deg);/*从0度开始*/
+	}
+	100%{
+		transform: rotateZ(360deg);/*360度结束*/
+	}
+}

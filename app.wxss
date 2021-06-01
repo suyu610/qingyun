@@ -1,0 +1,9 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  overflow: hidden;
+} 
+
+
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";

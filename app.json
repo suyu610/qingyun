@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/empty/empty",
+    "pages/document_detail/document_detail",
+    "pages/public/upload/upload",
+    "pages/me/me",
+    "pages/homepage/homepage",
+    "pages/ourshop/ourshop",
+    "pages/public/login/login",
+    "pages/public/chat/chat",
+    "pages/public/order/order",
+    "pages/public/self_profile/self_profile",
+    "pages/public/others_profile/others_profile",
+    "pages/public/feedback/feedback",
+    "pages/public/setting/setting",
+    "pages/category/category",
+    "pages/public/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#27B1FF",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "color": "#979797",
+    "selectedColor": "#0CB1FF",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "iconPath": "/icons/homepage/logo_un.png",
+        "selectedIconPath": "/icons/homepage/logo_sl.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "iconPath": "/icons/category/logo_un.png",
+        "selectedIconPath": "/icons/category/logo_sl.png"
+      },
+      {
+        "pagePath": "pages/ourshop/ourshop",
+        "iconPath": "/icons/ourshop/logo_un.png",
+        "selectedIconPath": "/icons/ourshop/logo_sl.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "/icons/me/logo_un.png",
+        "selectedIconPath": "/icons/me/logo_sl.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

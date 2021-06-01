@@ -1,0 +1,99 @@
+/* pages/homepage/homepage.wxss */
+view{
+  box-sizing:content-box;
+}
+.header{  
+  overflow: hidden;
+  width: 100vw;
+  height: 30vh;
+  background-color: #27B1FF;
+  position: relative;
+}
+.header .ads{
+  height: 65%;
+  top:0;
+  
+}
+
+.header .ads swiper{
+  height: 100%;
+}
+.search-body{
+  padding: 5vw;
+}
+.ads-item{
+  height:100%;
+  position: relative;
+  padding: 5vw;
+  width: 85vw;
+}
+
+.header .ads-item .info{
+  color:#ffffff99;
+  font-size: 26rpx;
+}
+.header .ads-item .title{
+  color:#ffffff;
+  font-weight: bold;
+  padding-top:10px;
+  font-size: 45rpx;
+}
+.header .ads-item .price{
+  color:#ffffff;
+  font-weight: bold;
+  font-size: 35rpx;
+  display: inline-block;
+  padding-top:10px;
+
+}
+
+.header .ads-item  .entry-btn{
+  padding-left: 3vw;
+  color:#ffffff;
+  font-size: 28rpx;
+  display: inline-block;
+}
+.header .ads-item image{
+  position:  absolute;
+  right: 0px;
+  top:5vw;
+  border-radius: 10px;
+  width: 20vw;
+  height: 22vw;
+}
+
+
+.header .search{
+  width:90%;
+  bottom: 10vw;
+  position: absolute;
+}
+
+.search{
+  padding: 0!important;
+}
+
+.body{
+  position: relative;
+  /* border-radius: 30px; */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: -4vh;
+  overflow: hidden;
+  padding-top:2vh;
+  height: 70vh;
+  width: 100vw;
+  background-color: #fff;
+}
+.search-result{
+  padding: 2vh;  
+}
+
+
+.tab-item{
+  height: 65vh;
+}
+
+.dropdown-item-title{
+  font-size: 14px!important;
+}

@@ -1,0 +1,27 @@
+<!--components/input_comment/index.wxml-->
+<view class="container">
+  <!-- 输入框 -->
+  <view class='search'>
+    <view class="input_view">
+      <van-icon name="edit" />
+      <input placeholder='添加评论' placeholder-class="phClass"></input>
+    </view>
+  </view>
+  <view class="like">
+    <van-icon name="star-o" />
+    <text>20k</text>
+  </view>
+  <view class="share" bindtap="onTapshareBtn">
+    <van-icon name="share-o" />
+    <text>534</text>
+  </view>
+</view>
+
+<van-share-sheet
+  show="{{ showShare }}"
+  title="立即分享给好友"
+  options="{{ options }}"
+  bind:select="onShareSelect"
+  bind:close="onShareClose"
+
+/>

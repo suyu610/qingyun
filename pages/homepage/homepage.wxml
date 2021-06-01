@@ -1,0 +1,110 @@
+<!--pages/homepage/homepage.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="ads">
+      <swiper indicator-dots="{{adsIndicatorDots}}" indicator-active-color="#fff" indicator-color="#ffffff55"
+        circular="{{true}}" autoplay="{{adsAutoplay}}" interval="{{adsInterval}}" duration="{{adsDuration}}">
+        <block wx:for="{{adsList}}" wx:key="index" wx:for-item="item">
+          <swiper-item>
+            <view class="ads-item">
+              <view class="info">拍客艺术专场</view>
+              <view class="title">派克艺术全套</view>
+              <view class="price">￥9.9</view>
+              <image src="{{item.imgUrl}}" mode="aspectFill"></image>
+              <view class="entry-btn">立即抢购</view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="search-body">
+      <van-search bind:focus="onSearchTap" custom-class="search" value="{{ value }}" background="#27B1FF"
+        use-action-slot placeholder="请输入搜索关键词">
+        <view slot="action" bind:tap="onTapCancelSearch" style="color:white" wx:if="{{showSearch}}">取消</view>
+      </van-search>
+    </view>
+  </view>
+  <!-- 搜索页面 -->
+  <view class="search_view" wx:if="{{showSearch}}" class="body ">
+    <scroll-view scroll-y="{{true}}" style="height:100%">
+      <van-cell-group title="试卷 (10)">
+        <block wx:for="{{10}}" wx:key="index" wx:index="index">
+          <van-cell title="试卷标题 - {{index}}" value="黄霸霸" border="{{false}}" is-link />
+        </block>
+      </van-cell-group>
+      <van-cell-group title="笔记 (5)">
+        <block wx:for="{{5}}" wx:key="index" wx:index="index">
+          <van-cell title="笔记标题 - {{index}}" value="皇小狗" border="{{false}}" is-link />
+        </block>
+      </van-cell-group>
+    </scroll-view>
+
+  </view>
+  <view class="body" wx:else>
+    <van-tabs active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
+      swipeable animated bind:change="onChange">
+      <van-tab title="热门">
+        <view class="tab-item hot">
+          <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
+              <course_item bindtap="jump2Detail" docuType="{{item.docuType}}" title="{{item.title}}"
+                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}"
+                downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+              <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
+            </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+      <van-tab title="求助">
+        <view class="tab-item help" id="helpView">
+          <scroll-view style="height:100%" scroll-y="{{true}}" refresher-threshold="{{100}}" refresher-enabled
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            <view
+              style="display: flex;justify-content: space-between;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
+              <van-button icon="filter-o" size="small" style="padding-right:10px" round>筛选</van-button>
+              <van-button icon="plus" type="primary" custom-style="color:black" color="#ffe9a7" size="small" round>
+                <text style="color:black!important">发布求助</text>
+              </van-button>
+            </view>
+            <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
+              <view class="cu-card article no-card">
+                <view class="cu-item shadow">
+                  <view class="title">
+                    <view class="text-cut">求求大佬们，发发高数笔记，救救孩子吧 </view>
+                  </view>
+                  <view class="content">
+                    <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill">
+                    </image>
+                    <view class="desc">
+                      <view class="text-content"> 需要高等数学2B的期末复习笔记需要高等数学2B的期末复习笔记...</view>
+                      <view>
+                        <view class="cu-tag bg-blue  sm round">8h以前</view>
+                        <view class="cu-tag light sm round" style="color:black;background-color:#FFE9A7">高等数学</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+      <van-tab title="攻略">
+        <view class="tab-item trick">
+          <scroll-view scroll-y="{{true}}">
+            <van-grid column-num="2" square border="{{false}}">
+              <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
+                <van-grid-item use-slot>
+                  <image style="width: 100%; height: 80%;border-radius:10px;background-color:lightgrey"
+                    src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
+                  <view style="font-weight:bold;padding-top:10px;font-size:14px">八八八</view>
+                </van-grid-item>
+              </block>
+            </van-grid>
+          </scroll-view>
+        </view>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

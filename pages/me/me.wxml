@@ -1,0 +1,51 @@
+<!--pages/me/me.wxml-->
+<scroll-view class="container" scroll-y="{{true}}">
+
+  <view class="header">
+    <van-uploader>
+      <view class="avatar">
+        <image src="https://cdns.qdu.life/logo.png"></image>
+      </view>
+    </van-uploader>
+    <view class="title">
+      <van-icon name="edit" color="white" size="14" />
+      皇甫素素
+    </view>
+    <view class="subtitle">
+      电子信息学院
+      <view class="stu_number">2019205913</view>
+    </view>
+
+  </view>
+
+  <view class="main_info">
+    <view class="remain">
+      <view class="count">￥ 0.00</view>
+      <view class="info_title">钱包</view>
+    </view>
+    <view class="upload_count">
+      <view class="count">0 份</view>
+      <view class="info_title">上传资料</view>
+    </view>
+    <view class="download_count">
+      <view class="count">0 次</view>
+      <view class="info_title">被下载</view>
+    </view>
+    <view class="upload" bindtap="jump2Upload">
+      <van-icon name="fire" color="red" /><text>上传资料</text>
+    </view>
+  </view>
+
+  <view class="setting">
+    <van-cell-group title="资料">
+      <van-cell title="我的消息" icon="chat" is-link value="2" />
+      <van-cell title="我的订单" icon="shopping-cart" is-link value="2" />
+      <van-cell title="我的收藏" icon="star" is-link value="2" />
+    </van-cell-group>
+    <van-cell-group title="系统">
+      <van-cell title="系统设置" icon="setting" is-link />
+      <van-cell title="反馈建议" icon="service" is-link />
+      <van-cell title="关于我们" icon="gem" is-link />
+    </van-cell-group>
+  </view>
+</scroll-view>

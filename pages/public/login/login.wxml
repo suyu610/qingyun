@@ -1,0 +1,41 @@
+<!--pages/public/login/login.wxml-->
+<view class="container">
+  <view class="right-circle"></view>
+  <view class="title">
+    <text> 欢迎来到，</text>
+    <view>青云知识库。</view>
+  </view>
+  <view class="sub_title">
+    <text> 本程序仅为青岛大学实名使用 </text> 
+    <van-icon name="question-o" color="#00000088"/>
+  </view>
+  <view class="login_box">
+
+    <van-tabs active="{{ active }}" color="#000" bind:change="onChange">
+      <van-tab title="简单认证">
+        <view class="login_form">
+          <view class="name inputline">
+            <input type="text" placeholder="请输入姓名" placeholder-style=";" />
+          </view>
+
+          <view class="ssNumber inputline">
+            <input type="text" placeholder="请输入学号" placeholder-style=";" />
+          </view>
+        </view>
+      </van-tab>
+      <van-tab title="教务认证">
+        <view class="baned">暂不支持</view>
+
+      </van-tab>
+      <van-tab title="邮箱认证">
+        <view class="baned">暂不支持</view>
+      </van-tab>
+    </van-tabs>
+    <view class="login_btn">
+      <view class="mark_btn">联系我们</view>
+      <view class="buy_btn" bindtap="onLoginBtnTap">认证</view>
+    </view>
+  </view>
+
+
+</view>

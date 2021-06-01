@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@vant/weapp": "^1.6.8"
+  },
+  "devDependencies": {
+    "tcb-router": "^1.1.2"
+  }
+}

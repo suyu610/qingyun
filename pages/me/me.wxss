@@ -1,0 +1,102 @@
+/* pages/me/me.wxss */
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #F8F8F8;
+}
+
+.header {
+  background-color: #000;
+  background: no-repeat center center url(https://cdns.qdu.life/banner.png);
+  text-align: center;
+  position: relative;
+  color: white;
+  padding-top: 5vh;
+  padding-bottom: 4vh;
+}
+
+
+.header van-uploader .avatar {
+  width: 15vw;
+  height: 15vw;
+  text-align: center!important;
+
+}
+van-uploader{
+  text-align: center!important;
+}
+.header van-uploader .avatar image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.header .title {
+  font-size: 18px;
+  padding-top: 1vh;
+  font-weight: bold;
+}
+
+.header .subtitle {
+  padding-top: 0.5vh;
+  font-size: 14px;
+}
+
+
+.header .msg {
+  width: 30vw;
+  margin-top: 2vh;
+  font-size: 14px;
+  height: 3vh;
+  line-height: 3vh;
+  margin-left: 35vw;
+}
+
+.header .msg text,
+.upload text {
+  padding-left: 5px;
+  vertical-align: 2px;
+}
+
+
+.main_info {
+  padding-top: 30px;
+  width: 100vw;
+  padding-bottom: 20px;
+  background-color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.main_info .remain,
+.upload_count,
+.download_count {
+  color: grey;
+  display: inline-block;
+  width: 33.33vw;
+  font-size: 12px;
+}
+
+.count {
+  color: black;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main_info .count {
+  padding-bottom: 10px;
+}
+
+.main_info .upload {
+  margin-top: 20px;
+  width: 80vw;
+  margin-left: 10vw;
+  border: 1px solid #000;
+  height: 4.5vh;
+  line-height: 4.5vh;
+
+  border-radius: 30px;
+
+}

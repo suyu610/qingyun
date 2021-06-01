@@ -1,0 +1,24 @@
+<!--pages/category/category.wxml-->
+<view class="container">
+  <view>
+    <view class="search-body">
+      <van-search custom-class="search" value="{{ value }}" background="#27B1FF" placeholder="请输入搜索关键词" />
+    </view>
+    <van-cell title="筛选" icon="filter-o" is-link bind:click="showPopup" />
+  </view>
+  <view style="height:85vh">
+  <scroll-view scroll-y="{{true}}" style="height:100%;" refresher-threshold="{{100}}" refresher-enabled
+    refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+    <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
+      <document_item bindtap="jump2Detail" docuType="{{item.docuType}}" title="{{item.title}}"
+        subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}"
+        downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+    </block>
+  </scroll-view>
+</view>
+</view>
+
+
+<van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 80%" round>
+  <van-area area-list="{{ areaList }}" title="分类" />
+</van-popup>

@@ -1,0 +1,61 @@
+<!--pages/public/upload/upload.wxml-->
+<scroll-view class="container" scroll-y="{{true}}">
+  <van-uploader>
+
+    <view class="upload">
+      <van-icon name="plus" />点击上传
+    </view>
+  </van-uploader>
+  <view class="main">
+    <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
+      autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
+      type="textarea" border="{{ true }}" maxlength="50">
+    </van-field>
+
+    <van-cell title="分类" title-class="input_label" size="large" is-link></van-cell>
+
+    <van-cell-group size="large" center border="{{ false }}">
+      <van-field input-align="right" value="{{ message }}" size="large" placeholder="输入数字"
+        placeholder-style="font-size:14px" label-class="input_label" label="价格" type="number" border="{{ true }}"
+        maxlength="30" />
+    </van-cell-group>
+
+    <view class="tags">
+      <van-cell-group size="large" center border="{{ false }}">
+        <van-field value="{{ message }}" size="large" label-class="input_label" label="标签" type="textarea"
+          border="{{ true }}" maxlength="30" use-button-slot center disabled>
+          <van-button color="#0CB1FF" slot="button" size="small" type="primary">
+            选择
+          </van-button>
+        </van-field>
+      </van-cell-group>
+    </view>
+
+    <view class="can_preview">
+      <van-cell border="{{ true }}" title="可预览页数" title-class="input_label" size="large">
+        <van-stepper value="{{ 0 }}" min="{{0}}" integer />
+      </van-cell>
+    </view>
+
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
+          label-class="input_label" label="介绍" placeholder-style="font-size:14px" placeholder="资料的介绍"      input-align="right"
+ type="textarea" border="{{ false }}" maxlength="200" show-word-limit
+          autosize />
+      </van-cell-group>
+    </view>
+  </view>
+  <view class="need_know">
+    <class class="title input_label">用户须知</class>
+    <view class="need_know_text">
+      <view>1. 巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
+      <view>2.巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
+      <view>3.巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
+    </view>
+  </view>
+  <view class="submit_btn">
+    <van-button type="warning" color="#0CB1FF">保存</van-button>
+    <van-button type="info" color="#0CB1FF">同意用户须知并上传</van-button>
+  </view>
+</scroll-view>

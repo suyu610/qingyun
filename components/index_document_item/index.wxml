@@ -1,0 +1,31 @@
+<!--components/test/test.wxml-->
+<view class="container">
+  <view class="leftBox">
+    <view wx:if="{{docuType=='paper'}}" class="leftBoxChild paper">
+      <view class="type">试卷</view>
+      <view class="downCount">
+        <van-icon name="like" />
+        <text>{{downCount}}</text>
+      </view>
+    </view>
+
+    <view wx:else class="leftBoxChild note">
+      <view class="type">笔记</view>
+      <view class="downCount">
+        <van-icon name="like" />
+        <text>{{downCount}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="title">
+      <van-icon name="fire" color="#f00" wx:if="{{isHot}}"/> {{title}}
+    </view>
+    <view class="subTitle">{{subTitle}}</view>
+    <view class="thirdTitle">{{thirdTitle}}</view>
+  </view>
+  <view class="subInfo">
+    <view class="price">￥{{price}}</view>
+    <view class="authorName">{{authorName}}</view>
+  </view>
+</view>

@@ -1,0 +1,102 @@
+/* components/course_item/index.wxss */
+.container {
+  width: 90vw;
+  height: 9vh;
+  padding:2vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  vertical-align: top;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+.leftBox {
+  display: inline-block;
+  height: 9vh;
+  width: 9vh;
+  border-radius: 11px;
+} 
+
+.leftBoxChild{
+  height: 9vh;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 9vh;
+  box-sizing: border-box;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.leftBoxChild .type{
+  font-size: 12px;
+  padding-bottom: 6px;
+  padding-top: 10px;
+}
+.leftBoxChild .downCount{
+  font-size: 10px;
+}
+.leftBoxChild .downCount text{
+  vertical-align: 1px;
+  padding-left: 1px;
+}
+.paper{
+  background-color: #27B1FF;
+  color: white;
+}
+
+.note{
+  background-color: #ffe9a7;
+  color: black;
+}
+
+.info {
+  vertical-align: top;
+  height: 10vh;
+  display: inline-block;
+  width: 52%;
+  padding-right: 10px;
+  line-height: 3.333vh;
+  padding-left: 10px;
+}
+
+.info .title {
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+.info .subTitle {
+  color: #938E8E;
+  font-size: 12px;
+}
+
+.info .thirdTitle {
+  color: #938E8E;
+  font-size: 12px;
+}
+
+
+.subInfo {  
+  position: relative;
+  text-align: right;
+  float: right;
+  height: 10vh;
+}
+
+.subInfo .authorName {
+  color: #938E8E;
+  vertical-align: bottom;
+  font-size: 12px;
+  position: absolute;
+  bottom: 2.4px;
+  right: 0;
+  text-align: right;
+}
+
+.subInfo .price{
+  overflow: hidden;
+  font-size: 14px; 
+}
