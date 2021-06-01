@@ -1,4 +1,8 @@
 // pages/public/setting/setting.js
+import {
+  push
+} from '../../../utils/router/index.js';
+
 Page({
 
   /**
@@ -8,7 +12,15 @@ Page({
     
   },
   
-
+  jump2Profile: function () {
+    push({
+      name: 'profile',
+      data: {
+        id: '123',
+        type: 1,
+      },
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

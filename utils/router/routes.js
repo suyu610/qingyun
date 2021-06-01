@@ -25,3 +25,6 @@ export const upload = {
 export const setting_profile = { 
   path:'/pages/public/setting_profile/setting_profile'
 }
+export const profile = { 
+  path:'/pages/public/profile/profile'
+}

@@ -1,0 +1,78 @@
+<!--pages/public/self_profile/self_profile.wxml-->
+
+<scroll-view class="container" scroll-y="{{true}}">
+  <view class="header">
+    <van-icon name="arrow-left" size="20px" style="left:10px;position:absolute"/>
+    <view class="avatar">
+      <image mode="aspectFill" src="https://cdns.qdu.life/logo.png"></image>
+    </view>
+    <view class="name">
+      <text>黄鹏宇</text>
+      <van-icon name="like-o" color="white" size="14px"/>
+      <text style="font-size:14px"> 14</text>
+    </view>
+    <view class="tags">
+      <view class="tag">学霸</view>
+      <view class="tag">牛逼</view>
+      <view class="tag">+</view>
+    </view>
+  </view>
+
+  <view class="main_info">
+    <view class="basic">
+      <view class="title">基本信息</view>
+      <text class="content">电子信息学院 微电子工程 2019级</text>
+    </view>
+    <view class="honor">
+      <view class="title">学习荣誉</view>
+      <text class="content">2020年 排名 1、235\n多次获得一等奖学金</text>
+    </view>
+    <view class="intro">
+      <view class="title">介绍</view>
+      <text class="content">我的名字是我资料质量的保证</text>
+    </view>
+    <view class="medal">
+      <view class="medal-title">青云荣誉
+        <van-icon name="arrow" />
+      </view>
+      <view class="medal-content">
+        <viwe class="medal_detail_parent">
+          <view class="medal_detail">
+            <image class="medal_icon" src="https://cdns.qdu.life/qingyun/images/medal.png"></image>
+            <text>乐于助人</text>
+          </view>
+        </viwe>
+        <viwe class="medal_detail_parent">
+          <view class="medal_detail">
+            <image class="medal_icon" src="https://cdns.qdu.life/qingyun/images/medal.png"></image>
+            <text>无私奉献</text>
+          </view>
+        </viwe>
+
+      </view>
+    </view>
+  </view>
+
+  <view class="related_doc">
+    <view class="col_title">
+      <view>
+        <text class="title_text">他的资料</text>
+        <text class="count">共5门</text>
+      </view>
+      <van-icon name="arrow" />
+
+    </view>
+    <view class="doc_grid">
+      <van-grid column-num="2" square border="{{false}}">
+        <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
+          <van-grid-item use-slot>
+            <image style="width: 100%; height: 80%;border-radius:10px;background-color:lightgrey"
+              src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
+            <view style="padding-top:10px;font-size:12px;text-align:left;width:100%">高等数学笔记 / 第{{index+1}}章</view>
+          </van-grid-item>
+        </block>
+      </van-grid>
+    </view>
+  </view>
+
+</scroll-view>

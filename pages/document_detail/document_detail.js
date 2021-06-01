@@ -140,6 +140,17 @@ Page({
       }
     })
   },
+
+  jump2Profile: function () {
+    push({
+      name: 'profile',
+      data: {
+        id: '123',
+        type: 1,
+      },
+    });
+  },
+
   jump2Chat: function () {
     push({
       name: 'chat',

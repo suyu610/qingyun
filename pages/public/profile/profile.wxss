@@ -1,0 +1,162 @@
+/* pages/public/self_profile/self_profile.wxss */
+
+view {
+  box-sizing: content-box;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #F8F8F8;
+}
+
+.header {
+  background-color: #000;
+  background: no-repeat center center url(https://cdns.qdu.life/banner.png);
+  text-align: center;
+  position: relative;
+  color: white;
+  height: 20vh;
+  padding-top: 5vh;
+  padding-bottom: 4vh;
+}
+
+.header .avatar {
+  margin-left: 5.5vw;
+  bottom: 2vh;
+  position: absolute;
+  width: 15vw;
+  height: 15vw;
+  text-align: center !important;
+}
+
+.header .avatar image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.header .name {
+  left: 23vw;
+  font-size: 18px;
+  font-weight: bold;
+  bottom: 6vh;
+  position: absolute;
+}
+
+.name text{
+  vertical-align: 2px;
+  padding-right: 10px;
+}
+
+.header .tags {
+  position: absolute;
+  display: inline-block;
+  left: 23vw;
+  bottom: 2vh;
+}
+
+.header .tags .tag {
+  width: 20vw;
+  height: 2vh;
+  line-height: 2vh;
+  padding: 2px;
+  background-color: #79a1ec;
+  color: #ffffff;
+  font-size: 12px;
+  display: inline-block;
+  box-sizing: content-box;
+  margin-left: 10px;
+  border-radius: 15px;
+}
+
+.header .tags .tag:first-child {
+  margin-left: 0;
+}
+
+.main_info {
+  background-color: #fff;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 5.5vw;
+  padding-top: 0;
+  padding-bottom: 2vw;
+}
+
+.title {
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.medal {
+  box-sizing: content-box;
+
+}
+
+.medal-title {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.medal-content {
+  height: 10vw;
+  padding-top: 10px;
+}
+
+.medal_detail_parent {
+  padding-left: 10px;
+  display: inline-block;
+}
+
+.medal_detail_parent:first-child {
+  padding-left: 0;
+}
+
+.medal_detail {
+  display: flex;
+  align-items: center;
+  line-height: 8vw;
+  height: 8vw;
+}
+
+.medal_detail text {
+  vertical-align: middle;
+  line-height: 8vw;
+  font-weight: bold;
+  padding-left: 2px;
+}
+
+.medal_icon {
+  display: inline-block;
+  width: 8vw;
+  height: 8vw;
+}
+
+.content {
+  padding-top: 4px;
+  display: block;
+  color: #999999;
+}
+.related_doc{
+  box-sizing: content-box;
+  padding: 5.5vw;
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.col_title{
+  display: flex;
+  justify-content: space-between;
+}
+.related_doc .col_title .title_text{
+  font-weight: bold;
+
+}
+
+.related_doc .col_title .count{
+  padding-left: 10px;
+  font-size: 12px;
+}

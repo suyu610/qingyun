@@ -10,10 +10,10 @@
 
 
 .main {
-  width: 90vw;
-  margin: 5vw;
-  margin-top: 10vh;
-  box-shadow: #D8E6E6E6 0 2px 6px 0;
+  width: 92vw;
+  margin: 4vw;
+  margin-top: 7vh;
+  box-shadow: #efefefe6 1px 5px 20px 0px;
   border-radius: 10px;
   background-color: #fff;
 }
@@ -25,14 +25,14 @@
   font-size: 14px !important;
 }
 
-.submit_btn {
+.submit_btn{
+  padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
 }
 
 .submit_btn van-button {
-  padding-left: 10px;
-
+  margin-left: 30px;
 }
 
 .need_know {

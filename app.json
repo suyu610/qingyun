@@ -1,16 +1,16 @@
 {
   "pages": [
     "pages/empty/empty",
+    "pages/public/profile/profile",
+    "pages/me/me",
     "pages/public/setting_profile/setting_profile",
     "pages/document_detail/document_detail",
     "pages/public/upload/upload",
-    "pages/me/me",
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",
     "pages/public/chat/chat",
     "pages/public/order/order",
-    "pages/public/self_profile/self_profile",
     "pages/public/others_profile/others_profile",
     "pages/public/feedback/feedback",
     "pages/category/category",
