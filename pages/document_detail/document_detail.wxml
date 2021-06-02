@@ -58,7 +58,7 @@
           <van-icon name="star-o" />
           <text style="margin-left: 5px;vertical-align: 1px;">收藏</text>
         </view>
-        <view class="buy_btn" bindtap="pay">
+        <view class="buy_btn" bindtap="jump2BuyConfirm">
           <van-icon name="cart" />
           <text style="margin-left: 5px;vertical-align: 1px;">购买</text>
         </view>

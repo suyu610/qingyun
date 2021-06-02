@@ -1,0 +1,57 @@
+<!--pages/public/buy_confirm/buy_confirm.wxml-->
+<view class="container">
+  <!-- 地址 -->
+  <view class="address" bindtap="pay_success">
+    <view>
+      <view class="icon">
+        <van-icon name="location-o" />
+      </view>
+      <view class="info">
+        <view class="name">黄鹏宇</view>
+        <view class="tel">17685837371</view>
+        <view class="address_info">浮山校区泓园3号楼</view>
+      </view>
+    </view>
+    <van-icon name="arrow" color="#afacac" />
+  </view>
+  <view class="goods">
+    <view class="goods_body">
+      <view class="info">
+        <view class="info_title">高等数学期末试卷</view>
+        <view class="sub_title">2014-2020年</view>
+        <view class="author">作者：黄鹏宇</view>
+      </view>
+      <view class="price">￥10</view>
+    </view>
+
+
+    <view class="circle_left_1"></view>
+    <view class="circle_right_1"></view>
+
+  </view>
+  <!-- 留言 -->
+  <view class="comment">
+    <van-cell-group>
+      <van-field label="备注" value="{{ value }}" autosize placeholder="比如送货时间" border="{{ false }}"
+        bind:change="onChange" />
+    </van-cell-group>
+  </view>
+
+  <view class="need_know">
+    <class class="title input_label">* 购买前须知</class>
+    <view class="need_know_text">
+      <view>1. 由于商品的特殊性，一般情况不支持退款，请谨慎购买</view>
+      <view>2. 随纸质版附赠一套在线文档，可在小程序和网页版浏览，网页版只能一人同时登录。网址: <text style="font-weight:bold">book.qdu.life</text> </view>
+      <view>3. 笔记为大家的劳动成果，尊重原创 ，能使大家<text style="font-weight:bold">更有动力创作优质资源</text>。</view>
+      <view>4. 一起努力，俟实扬华。</view>
+    </view>
+  </view>
+</view>
+
+<van-dialog id="van-dialog" />
+
+
+<van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="pay" tip="{{ true }}">
+  <van-tag type="primary">标签</van-tag>
+  <view slot="tip">您暂未填写收货地址 <text>填写地址</text></view>
+</van-submit-bar>

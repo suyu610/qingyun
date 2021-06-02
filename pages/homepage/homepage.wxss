@@ -50,10 +50,16 @@ view{
 }
 
 .header .ads-item  .entry-btn{
-  padding-left: 3vw;
-  color:#ffffff;
+  margin-left: 3vw;
+  color:#000;
   font-size: 28rpx;
   display: inline-block;
+  border-radius: 2px;
+  background-color: #ffe9a7;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bold;
+
 }
 .header .ads-item image{
   position:  absolute;

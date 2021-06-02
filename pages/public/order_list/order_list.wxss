@@ -18,14 +18,13 @@ page {
   align-items: center;
 }
 
-
 .indexBar .indexBar-box {
   width: 40rpx;
   height: auto;
   background: #fff;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 20rpx rgba(196, 191, 191, 0.1);
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
   border-radius: 10rpx;
 }
 
@@ -72,14 +71,4 @@ movable-view.indexBar-item::before {
   line-height: 100rpx;
   text-align: center;
   font-size: 48rpx;
-}
-
-.circle{
-  background-color: #27b0ffa9;
-  font-size: 20rpx;
-}
-
-.course_title{
-  font-weight: bold;
-  font-size: 24rpx!important;
 }

@@ -19,6 +19,7 @@
 
 .header  .avatar {
   margin-left: 42.5vw;
+  border-radius: 50%;
   width: 15vw;
   height: 15vw;
   text-align: center!important;
@@ -92,10 +93,9 @@
   margin-top: 20px;
   width: 80vw;
   margin-left: 10vw;
-  border: 1px solid #000;
   height: 4.5vh;
   line-height: 4.5vh;
-
+  box-shadow: #eae7dc6b 1px 2px 1px 1px;
   border-radius: 30px;
 
 }

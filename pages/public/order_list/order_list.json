@@ -1,13 +1,13 @@
 {
   "usingComponents": {
-
     "van-area": "@vant/weapp/area/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-search": "@vant/weapp/search/index",
-    "document_item":"/components/index_document_item/index",
-    "van-sticky": "@vant/weapp/sticky/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "document_item": "/components/index_document_item/index",
+    "van-sticky": "@vant/weapp/sticky/index"
   }
+
+
 }

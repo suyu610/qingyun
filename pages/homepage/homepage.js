@@ -176,7 +176,20 @@ Page({
       })
     }, 1000);
   },
-
+  // 跳转小程序
+  jump2Qk: function () {
+    wx.navigateToMiniProgram({
+      appId: 'wx607821b428f6d5d1',
+      path: '',
+      envVersion: 'release', // 打开正式版
+      success(res) {
+        // 打开成功
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    })
+  },
   jump2Detail: function () {
     push({
       name: 'document_detail',
@@ -187,12 +200,16 @@ Page({
     });
   },
   onLoad: function (options) {
+    wx.setTabBarBadge({
+      index: 3,
+      text: '9',
+    })
     wx.setNavigationBarTitle({
       title: '青云知识库',
     })
   },
 
-  
-  
+
+
 
 })

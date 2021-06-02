@@ -6,12 +6,12 @@
         circular="{{true}}" autoplay="{{adsAutoplay}}" interval="{{adsInterval}}" duration="{{adsDuration}}">
         <block wx:for="{{adsList}}" wx:key="index" wx:for-item="item">
           <swiper-item>
-            <view class="ads-item">
-              <view class="info">拍客艺术专场</view>
-              <view class="title">派克艺术全套</view>
-              <view class="price">￥9.9</view>
+            <view class="ads-item" bindtap="jump2Qk">
+              <view class="info">一键搜索青大空教室</view>
+              <view class="title"> 青空教室 </view>
+              <view class="price">素语出品</view>
               <image src="{{item.imgUrl}}" mode="aspectFill"></image>
-              <view class="entry-btn">立即抢购</view>
+              <view class="entry-btn beauty_shadow">进入</view>
             </view>
           </swiper-item>
         </block>
@@ -74,7 +74,7 @@
                     <view class="text-cut">求求大佬们，发发高数笔记，救救孩子吧 </view>
                   </view>
                   <view class="content">
-                    <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill">
+                    <image src="https://cdns.qdu.life/qingyun/images/ad_{{ index % 4 +1 }}.jpg" mode="aspectFill">
                     </image>
                     <view class="desc">
                       <view class="text-content"> 需要高等数学2B的期末复习笔记需要高等数学2B的期末复习笔记...</view>
@@ -98,7 +98,7 @@
                 <van-grid-item use-slot>
                   <image style="width: 100%; height: 80%;border-radius:10px;background-color:lightgrey"
                     src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
-                  <view style="font-weight:bold;padding-top:10px;font-size:14px">八八八</view>
+                  <view style="padding-top:10px;font-size:12px;width:100%;text-align:left">八八八</view>
                 </van-grid-item>
               </block>
             </van-grid>

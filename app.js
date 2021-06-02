@@ -15,15 +15,16 @@ const router = require('utils/router/index.js');
         };
       }
     }, pageConfig);
-    
+
     pageConfig = Object.assign({
-    onShareTimeline: function (res) {
-      return {
-        title: '青云知识库',
-        query: 'id=12345678'
+      onShareTimeline: function (res) {
+        return {
+          title: '青云知识库',
+          query: 'id=12345678'
+        }
       }
-    }  }, pageConfig);
-  
+    }, pageConfig);
+
     PageTmp(pageConfig);
   };
 }();
@@ -40,6 +41,19 @@ App({
       success(res) {
         console.log(res.result.openid)
         that.globalData.openid = res.result.openid
+      }
+    });
+    
+    wx.getSystemInfo({
+      success: e => {
+        this.globalData.StatusBar = e.statusBarHeight;
+        let capsule = wx.getMenuButtonBoundingClientRect();
+        if (capsule) {
+          this.globalData.Custom = capsule;
+          this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+        } else {
+          this.globalData.CustomBar = e.statusBarHeight + 50;
+        }
       }
     })
   },

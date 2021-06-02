@@ -1,19 +1,20 @@
 {
   "pages": [
+    "pages/category/category",
+    "pages/public/order_list/order_list",
+    "pages/public/order_detail/order_detail",
+    "pages/public/setting_profile/setting_profile",
+    "pages/public/buy_confirm/buy_confirm",
     "pages/empty/empty",
     "pages/public/profile/profile",
     "pages/me/me",
-    "pages/public/setting_profile/setting_profile",
     "pages/document_detail/document_detail",
     "pages/public/upload/upload",
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",
     "pages/public/chat/chat",
-    "pages/public/order/order",
-    "pages/public/others_profile/others_profile",
     "pages/public/feedback/feedback",
-    "pages/category/category",
     "pages/public/search/search"
   ],
   "window": {
@@ -50,6 +51,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-
-
 }

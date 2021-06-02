@@ -28,3 +28,6 @@ export const setting_profile = {
 export const profile = { 
   path:'/pages/public/profile/profile'
 }
+export const buy_confirm = { 
+  path:'/pages/public/buy_confirm/buy_confirm'
+}

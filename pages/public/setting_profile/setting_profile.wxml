@@ -2,7 +2,7 @@
 <!--pages/public/upload/upload.wxml-->
 <scroll-view class="container" scroll-y="{{true}}">
   <view class="main">
-    <van-cell title="头像" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
+    <van-cell title="头像 *" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
       <van-uploader>
         <van-image round width="3rem" height="3rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
       </van-uploader>
@@ -14,8 +14,25 @@
     <van-cell title="专业" value="微电子工程"></van-cell>
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" 
+          label-class="input_label"  label="联系方式 *"    input-align="right"
+ placeholder="用于收货时联系"  type="textarea" border="{{ true }}"  />
+      </van-cell-group>
+    </view>
+
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" 
+          label-class="input_label"  label="收货地址 *"     input-align="right"
+type="textarea" placeholder="XX校区XXX" border="{{ true }}" 
+           />
+      </van-cell-group>
+    </view>
+
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
         <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" icon="edit" label="介绍" type="textarea" border="{{ true }}" maxlength="200"
+          label-class="input_label" icon="edit" label="介绍 *" type="textarea" border="{{ true }}" maxlength="200"
           show-word-limit autosize />
       </van-cell-group>
     </view>
@@ -23,15 +40,15 @@
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
         <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" icon="edit" label="学习荣誉" type="textarea" border="{{ false }}" maxlength="200"
+          label-class="input_label" icon="edit" label="学习荣誉 *" type="textarea" border="{{ false }}" maxlength="200"
           show-word-limit autosize />
       </van-cell-group>
     </view>
   </view>
 
   <view class="submit_btn">
-    <van-button color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">预览</van-button>
-    <van-button color="#0CB1FF" custom-style="border-radius:5px;width:40vw">保存</van-button>
+    <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">预览</van-button>
+    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw">保存</van-button>
 
   </view>
 </scroll-view>

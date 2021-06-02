@@ -22,7 +22,7 @@
   width: 90vw;
   margin: 5vw;
   margin-top: 0vw;
-  box-shadow: #D8E6E6E6 0 2px 6px 0;
+  box-shadow: #efefefe6 1px 5px 20px 0px;
   border-radius: 10px;
   background-color: #fff;
 }

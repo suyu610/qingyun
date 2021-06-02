@@ -7,7 +7,7 @@
       <image mode="aspectFill" src="https://cdns.qdu.life/logo.png"></image>
     </view>
     <view class="name">
-      <text>黄鹏宇</text>
+      <text>皇甫素素</text>
       <van-icon name="like-o" color="white" size="14px"/>
       <text style="font-size:14px"> 14</text>
     </view>

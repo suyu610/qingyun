@@ -1,4 +1,4 @@
-// pages/public/others_profile/others_profile.js
+// pages/public/order_detail/order_detail.js
 Page({
 
   /**

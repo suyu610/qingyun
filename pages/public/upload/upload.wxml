@@ -6,7 +6,7 @@
       <van-icon name="plus" />点击上传
     </view>
   </van-uploader>
-  <view class="main">
+  <view class="main ">
     <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
       autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">

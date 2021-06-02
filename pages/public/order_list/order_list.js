@@ -1,7 +1,4 @@
 const app = getApp();
-import {
-  push
-} from '../../utils/router/index.js';
 
 const areaList = {
 
@@ -51,15 +48,7 @@ Page({
     hidden: true,
     areaList:areaList
   },
-  jump2Detail: function () {
-    push({
-      name: 'document_detail',
-      data: {
-        id: '123',
-        type: 1,
-      },
-    });
-  },
+
   showPopup: function () {
     this.setData({
       show: true
@@ -71,9 +60,6 @@ Page({
     });
   },
   onLoad() {
-    wx.setNavigationBarTitle({
-      title: '课程分类',
-    })
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)

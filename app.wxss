@@ -3,6 +3,25 @@
   height: 100%;
   overflow: hidden;
 } 
+/* 新拟态 */
+.neumorphism{
+  box-shadow: -7px -7px 20px 0px #fff9,
+              -4px -4px 5px 0px #fff9,
+              7px 7px 20px 0px #0002,
+              4px 4px 5px 0px #0001;
+}
+.neumorphismin,.neumorphism:active{
+  box-shadow: 0px 0px 0px 0px #fff9,
+              0px 0px 0px 0px #fff9,
+              0px 0px 0px 0px #0001,
+              0px 0px 0px 0px #0001,
+              inset -7px -7px 20px 0px #fff9,
+              inset -4px -4px 5px 0px #fff9,
+              inset 7px 7px 20px 0px #0003,
+              inset 4px 4px 5px 0px #0001;
+}
+
+
 
 
 @import "colorui/main.wxss";
