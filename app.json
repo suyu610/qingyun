@@ -20,7 +20,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#27B1FF",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "青云知识库",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
