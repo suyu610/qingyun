@@ -3,7 +3,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #f7f7f7;
+  background-color: #F6F6F6;
 }
 
 .address {
@@ -74,7 +74,7 @@
   width: 20px;
   height: 20px;
   border-radius: 20px;
-  background-color: #f7f7f7;
+  background-color: #F6F6F6;
   left: -10px;
   top: 45%;
 }
@@ -84,7 +84,7 @@
   width: 20px;
   height: 20px;
   border-radius: 20px;
-  background-color: #f7f7f7;
+  background-color: #F6F6F6;
   right: -10px;
   top: 45%;
 }
