@@ -1,0 +1,40 @@
+/* pages/public/msg_detail/msg_detail.wxss */
+
+.container {
+  text-align: center;
+  margin: 0 auto;
+  width: 90vw;
+  box-sizing: content-box;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  padding-bottom: 4px;
+  padding-top: 30vh;
+
+}
+.time{
+  font-size: 24rpx;
+
+}
+.content{
+  text-align: justify;
+  padding-top: 30px;
+}
+
+.from {
+  text-align: right;
+}
+
+.submit_btn {
+  padding-top: 20px;
+
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.submit_btn van-button {
+  padding-left: 10px;
+
+}

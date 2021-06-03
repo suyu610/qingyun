@@ -1,4 +1,5 @@
 // pages/public/order_list/order_list.js
+import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 import {
   push
@@ -35,6 +36,20 @@ Page({
     value1: 0,
     value2: 'a',
 
+  },
+
+  addComment:function(){
+    Dialog.confirm({
+      title: '高等数学历年试卷',
+    })
+      .then(() => {
+        wx.showToast({
+          title: '评论成功',
+        })
+      })
+      .catch(() => {
+        // on cancel
+      });
   },
   jump2PreviewDoc:function(){
     push({name:"preview_doc"})

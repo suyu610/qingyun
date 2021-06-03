@@ -1,8 +1,9 @@
 /* pages/homepage/homepage.wxss */
-view{
-  box-sizing:content-box;
+view {
+  box-sizing: content-box;
 }
-.header{  
+
+.header {
   overflow: hidden;
   width: 100vw;
   height: 30vh;
@@ -11,108 +12,114 @@ view{
 }
 
 
-.header .ads{
+.header .ads {
   height: 65%;
-  top:0;
-  
+  top: 0;
+
 }
 
-.header .ads swiper{
+.header .ads swiper {
   height: 100%;
 }
-.search-body{
+
+.search-body {
   padding: 5vw;
 }
-.ads-item{
-  height:100%;
+
+.ads-item {
+  height: 100%;
   position: relative;
   padding: 5vw;
   width: 85vw;
 }
 
-.header .ads-item .info{
-  color:#ffffff99;
+.header .ads-item .info {
+  color: #ffffff99;
   font-size: 26rpx;
 }
-.header .ads-item .title{
-  color:#ffffff;
+
+.header .ads-item .title {
+  color: #ffffff;
   font-weight: bold;
-  padding-top:10px;
+  padding-top: 10px;
   font-size: 45rpx;
 }
-.header .ads-item .price{
-  color:#ffffff;
+
+.header .ads-item .price {
+  color: #ffffff;
   font-weight: bold;
   font-size: 35rpx;
   display: inline-block;
-  padding-top:10px;
+  padding-top: 10px;
 
 }
 
-.header .ads-item  .entry-btn{
+.header .ads-item .entry-btn {
   margin-left: 3vw;
-  color:#000;
+  color: #fff;
   font-size: 28rpx;
   display: inline-block;
-  border-radius: 2px;
-  background-color: #ffe9a7;
+  /* background-color: #ffe9a7; */
+  border-bottom: #ffe9a7 2px solid;
   padding-left: 5px;
+  margin-top: -7px;
+  vertical-align: middle;
   padding-right: 5px;
   font-weight: bold;
-
 }
-.header .ads-item image{
-  position:  absolute;
+
+.header .ads-item image {
+  position: absolute;
   right: 0px;
-  top:5vw;
+  top: 5vw;
   border-radius: 10px;
   width: 20vw;
   height: 22vw;
 }
 
 
-.header .search{
-  width:90%;
+.header .search {
+  width: 90%;
   bottom: 10vw;
   position: absolute;
 }
 
-.search{
-  padding: 0!important;
+.search {
+  padding: 0 !important;
 }
 
-.body{
+.body {
   position: relative;
   /* border-radius: 30px; */
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-top: -4vh;
   overflow: hidden;
-  padding-top:2vh;
+  padding-top: 2vh;
   height: 70vh;
   width: 100vw;
   background-color: #fff;
 }
-.search-result{
-  padding: 2vh;  
+
+.search-result {
+  padding: 2vh;
 }
 
 
-.tab-item{
+.tab-item {
   height: 65vh;
 }
 
-.dropdown-item-title{
-  font-size: 14px!important;
+.dropdown-item-title {
+  font-size: 14px !important;
 }
 
-@media only screen 
-and (min-device-width: 375px) 
-and (-webkit-device-pixel-ratio : 2) {
-  .header{  
+@media only screen and (min-device-width: 375px) and (-webkit-device-pixel-ratio : 2) {
+  .header {
     height: 38vh;
   }
-  .body{
+
+  .body {
     height: 62vh;
-  } 
+  }
 }

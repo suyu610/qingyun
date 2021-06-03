@@ -99,3 +99,8 @@
   border-radius: 30px;
 
 }
+
+.van-cell-text{
+  display: inline-block;
+  padding-right:10px;
+}

@@ -7,55 +7,48 @@
   width: 100vw;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 10px;
+
   vertical-align: middle;
   position: fixed;
   bottom: 0;
   left: 0;
+  display: flex;
+  justify-content: space-between;
+
 }
 
-.search {
-  height: 40px;
-  line-height: 40px;
-  background-color: #fcf6f6;
-  color: #999;
-  box-sizing: border-box;
-  padding-left: 10px;
-  border-radius: 20px;
-  width: 50vw;
-  display: inline-block;
-}
-.input_view{
+.controller {
   height: 40px;
   line-height: 40px;
   display: flex;
-  width: 100%;
-  border-radius: 20px;
-  background: #fcf6f6;
-  flex-direction: row;
-  margin-right: 20rpx;
-  margin-left: 20rpx;
+  justify-content: space-between;
+  width: 40%;
 }
 
-.input_view  input{
-  padding-left: 10px;
+.buy_btn {
   height: 40px;
-  width: 100%;
   line-height: 40px;
-  background-color: transparent;
-
-flex: 1;
-font-size: 30rpx;
+  background-color: #FED456;
+  color: #000;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 30vw;
+  font-size: 26rpx;
+  font-weight: bold;
+  text-align: center;
 }
+
 .input_view text {
   padding-left: 10px;
   vertical-align: 1px;
-
 }
 
 .like {
+  height: 40px;
+  line-height: 40px;
   display: inline-block;
   color: #000;
-  padding-left: 8vw;
 }
 
 .like text {
@@ -64,15 +57,18 @@ font-size: 30rpx;
 }
 
 .share {
+  height: 40px;
+  line-height: 40px;
   display: inline-block;
   color: #000;
-  padding-left: 5vw;
+  padding-left: 7vw;
 }
 
 .share text {
   vertical-align: 1px;
   padding-left: 10px;
 }
-.phClass{
+
+.phClass {
   font-size: 12px;
 }

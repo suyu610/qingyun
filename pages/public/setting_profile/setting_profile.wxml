@@ -1,6 +1,6 @@
 <!--pages/public/setting/setting.wxml-->
 <!--pages/public/upload/upload.wxml-->
-<scroll-view class="container" scroll-y="{{true}}">
+<scroll-view class="container bg" scroll-y="{{true}}">
   <view class="main">
     <van-cell title="头像 *" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
       <van-uploader>

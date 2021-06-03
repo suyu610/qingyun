@@ -2,9 +2,9 @@
 <scroll-view class="container" scroll-y="{{true}}">
 
   <view class="header" bindtap="jump2SettingProfile">
-      <view class="avatar beauty_shadow">
-        <image src="https://cdns.qdu.life/logo.png"></image>
-      </view>
+    <view class="avatar beauty_shadow">
+      <image src="https://cdns.qdu.life/logo.png"></image>
+    </view>
     <view class="title">
       <van-icon name="edit" color="white" size="14" />
       皇甫素素
@@ -35,8 +35,13 @@
 
   <view class="setting">
     <van-cell-group title="资料">
-      <van-cell title="我的消息" icon="chat" is-link value="2" />
-      <van-cell title="我的订单" icon="shopping-cart" is-link value="2" bindtap="jump2OrderList" />
+      <van-cell  icon="chat" is-link value="9" bindtap="jump2MsgList">
+        <view slot="title">
+          <view class="van-cell-text">我的消息</view>
+          <van-tag type="danger">new</van-tag>
+        </view>
+      </van-cell>
+      <van-cell title="我的知识库" icon="shopping-cart" is-link value="2" bindtap="jump2OrderList" />
       <van-cell title="我的收藏" icon="star" is-link value="2" />
     </van-cell-group>
     <van-cell-group title="系统">

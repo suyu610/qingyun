@@ -1,5 +1,5 @@
 <!--pages/public/upload/upload.wxml-->
-<scroll-view class="container" scroll-y="{{true}}">
+<scroll-view class="container bg" scroll-y="{{true}}">
   <van-uploader>
 
     <view class="upload">

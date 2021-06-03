@@ -39,3 +39,9 @@ export const order_list = {
 export const preview_doc = { 
   path:'/pages/public/preview_doc/preview_doc'
 }
+export const msg_list = { 
+  path:'/pages/public/msg_list/msg_list'
+}
+export const msg_detail = { 
+  path:'/pages/public/msg_detail/msg_detail'
+}

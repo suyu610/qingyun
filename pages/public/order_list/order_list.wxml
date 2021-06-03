@@ -8,22 +8,31 @@
   <view class="order_list">
     <block wx:for="{{8}}" wx:key="index">
       <view class="order">
-        <van-card centered custom-class="order_body"  price="10.00" tag="已完成"
+        <van-card centered custom-class="order_body" price="10.00" tag="已完成"
           thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg">
           <view slot="title">
             <view class="order_id">订单号:20200708</view>
             <view class="order_title">高等数学历年试卷</view>
           </view>
           <view slot="desc" class="order_desc">
-            <view>作者：黄鹏宇</view>   
+            <view>作者：黄鹏宇</view>
             <view>2020-06-03 12:24</view>
           </view>
           <view slot="footer" class="footer">
-            <van-button size="small" custom-style="border-radius:5px!important" type="danger">删除</van-button>
-            <van-button size="small" custom-style="border-radius:5px!important"  color="#27B1FF" bindtap="jump2PreviewDoc">查看电子版</van-button>
+            <van-button size="small" custom-style="border-radius:5px!important;color:black"
+              color="#ffe9a7;font-weight:bold" bindtap="addComment">评论</van-button>
+            <van-button size="small" custom-style="border-radius:5px!important" color="#27B1FF"
+              bindtap="jump2PreviewDoc">查看电子版</van-button>
           </view>
         </van-card>
       </view>
     </block>
   </view>
 </scroll-view>
+
+<van-dialog use-slot id="van-dialog">
+  <van-divider dashed hairline custom-style="margin-top:10px;margin-bottom:10px" />
+
+  <van-field value="{{ message }}" label="评论" type="textarea" autosize border="{{ false }}" />
+
+</van-dialog>

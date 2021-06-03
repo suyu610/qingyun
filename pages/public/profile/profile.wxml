@@ -2,7 +2,7 @@
 
 <scroll-view class="container" scroll-y="{{true}}">
   <view class="header">
-    <van-icon name="arrow-left" size="20px" style="left:10px;position:absolute"/>
+    <van-icon name="arrow-left" size="20px" style="left:10px;position:absolute" bindtap="backTo"/>
     <view class="avatar">
       <image mode="aspectFill" src="https://cdns.qdu.life/logo.png"></image>
     </view>

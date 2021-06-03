@@ -1,4 +1,8 @@
-// pages/public/self_profile/self_profile.js
+// pages/public/msg_list/msg_list.js
+import {
+  push
+} from '../../../utils/router/index.js';
+
 Page({
 
   /**
@@ -7,10 +11,9 @@ Page({
   data: {
 
   },
-  backTo:function(){
-wx.navigateBack({
-  delta: 0,
-})
+  jump2MsgDetail:function(){
+    push({name:"msg_detail"})
+
   },
   /**
    * 生命周期函数--监听页面加载

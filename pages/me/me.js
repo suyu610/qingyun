@@ -9,6 +9,10 @@ Page({
   data: {
 
   },
+  jump2MsgList:function(){
+    push({name:"msg_list"})
+
+  },
   jump2OrderList:function(){
     push({name:"order_list"})
   },

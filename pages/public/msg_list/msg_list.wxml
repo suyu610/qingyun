@@ -1,0 +1,18 @@
+<!--pages/public/msg_list/msg_list.wxml-->
+<scroll-view scroll-y="{{true}}" class="container bg">
+  <block wx:for="{{4}}" wx:key="index">
+    <view class="msg" bindtap="jump2MsgDetail">
+      <view class="msg_avatar">
+        <van-image width="10vw" height="10vw" round src="https://cdns.qdu.life/logo.png" />
+      </view>
+      <view class="msg_body">
+        <view class="msg_first">
+          <text class="msg_title">[ 未读 ] 系统通知
+          </text>
+          <text class="msg_time">2小时前</text>
+        </view>
+        <view class="msg_content">我们已收到你的订单，将尽快与你协商送货时间与地点。</view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
