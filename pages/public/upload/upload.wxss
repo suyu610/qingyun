@@ -5,17 +5,28 @@
   height: 100vh;
   width: 100vw;
 }
-
-.upload {
+.uploader_view{
   width: 90vw;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.upload {
+  width: 44vw;
   background-color: #fff;
   border-radius: 10px;
   height: 80px;
+  display: inline-block;
   line-height: 80px;
   text-align: center;
-  margin: 5vw;
   font-size: 14px;
   box-shadow: #efefefe6 1px 5px 20px 0px;
+}
+
+.upload text {
+  padding-left: 5px;
+  vertical-align: 1px;
+
 }
 
 .main {
@@ -25,6 +36,14 @@
   box-shadow: #efefefe6 1px 5px 20px 0px;
   border-radius: 10px;
   background-color: #fff;
+}
+
+.preview {
+  width: 90vw;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: #fff;
+  padding:10px 0 0 10px;
 }
 
 
@@ -49,13 +68,14 @@
   margin: 5vw;
   padding-bottom: 20px;
 }
-.need_know .need_know_text{
+
+.need_know .need_know_text {
   padding-top: 5px;
   font-size: 12px;
   text-align: justify;
 }
 
-.need_know .need_know_text view{
+.need_know .need_know_text view {
   padding-top: 10px;
   color: grey;
 }

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/empty/empty",
+    "pages/public/upload/upload",
     "pages/public/order_list/order_list",
     "pages/public/msg_detail/msg_detail",
     "pages/public/msg_list/msg_list",
@@ -12,7 +13,6 @@
     "pages/public/buy_confirm/buy_confirm",
     "pages/public/profile/profile",
     "pages/me/me",
-    "pages/public/upload/upload",
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",

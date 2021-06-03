@@ -56,7 +56,7 @@ Page({
         router.relaunch({
           name: "homepage"
         })
-      }, 2500);
+      }, 800);
     } else {
       console.log("没有token或ssNumber")
       // 跳转到登陆页面

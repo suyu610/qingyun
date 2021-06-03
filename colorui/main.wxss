@@ -1533,7 +1533,7 @@ button.icon.lg {
 	display: flex;
 	position: relative;
 	align-items: center;
-	min-height: 100rpx;
+	min-height: 70rpx;
 	justify-content: space-between;
 }
 
@@ -2483,7 +2483,7 @@ button.icon.lg {
 	margin-right: auto;
 	width: 680rpx;
 	max-width: 100%;
-	background-color: #f8f8f8;
+	background-color: transparent;
 	border-radius: 10rpx;
 	overflow: hidden;
 }
@@ -2532,7 +2532,7 @@ button.icon.lg {
 .cu-modal .cu-dialog>.cu-bar:first-child .action{
   min-width: 100rpx;
   margin-right: 0;
-  min-height: 100rpx;
+  min-height: 70rpx;
 }
 /* ==================
          轮播

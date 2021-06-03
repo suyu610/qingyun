@@ -1,11 +1,24 @@
 <!--pages/public/upload/upload.wxml-->
 <scroll-view class="container bg" scroll-y="{{true}}">
-  <van-uploader>
+  <view class="preview">
+    <van-uploader preview-size="60px" show-upload="{{false}}" file-list="{{ fileList }}"></van-uploader>
+  </view>
+  <view class="uploader_view">
+    <van-uploader accept="all">
+      <view class="upload">
+        <van-icon name="chat-o" />
+        <text style="font-weight:bold">聊天记录中上传</text>
+      </view>
+    </van-uploader>
 
-    <view class="upload">
-      <van-icon name="plus" />点击上传
-    </view>
-  </van-uploader>
+    <van-uploader accept="image">
+      <view class="upload">
+        <van-icon name="photo-o" />
+        <text style="font-weight:bold">相册中上传</text>
+      </view>
+    </van-uploader>
+  </view>
+
   <view class="main ">
     <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
       autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
@@ -22,13 +35,38 @@
 
     <view class="tags">
       <van-cell-group size="large" center border="{{ false }}">
-        <van-field value="{{ message }}" size="large" label-class="input_label" label="标签" type="textarea"
-          border="{{ true }}" maxlength="30" use-button-slot center disabled>
-          <van-button color="#0CB1FF" slot="button" size="small" type="primary" custom-style="border-radius:5px;">
-            选择
-          </van-button>
-        </van-field>
+        <van-cell value="{{ message }}" title-width="30px" size="large" label-class="input_label" label="标签"
+          border="{{ true }}" center>
+          <view class="tag_cell_value">
+            <block wx:for="{{selected_tag_list}}" wx:key="index" wx:for-item="item">
+              <view class="cu-tag bg-cyan ">{{item}}</view>
+            </block>
+            <van-button bindtap="onTapChooseTag" color="#0CB1FF" slot="button" size="small" type="primary"
+              custom-style="border-radius:5px;margin-left:5px!important">
+              选择
+            </van-button>
+          </view>
+        </van-cell>
       </van-cell-group>
+    </view>
+
+    <view class="cu-modal  bottom-modal {{modalName=='chooseTag'?'show':''}}" bindtap="hideChooseTagModal">
+      <view class="cu-dialog" catchtap="noop" style="background-color:transprent">
+        <view class="cu-bar " style="border-radius:5px 5px 0 0 ;background-color:white">
+          <view class="action text-black" bindtap="hideChooseTagModal">取消</view>
+          <view class="action text-black text-bold" bindtap="confirmChooseTag">确定</view>
+        </view>
+        <view class="grid col-3 padding-bottom-lg padding-top-lg bg-white">
+          <view wx:for="{{checkbox}}" class="padding-xs" wx:key="index">
+            <button class="cu-btn blue df block {{item.checked?'bg-blue':'line-grey'}}" bindtap="ChooseCheckbox"
+              data-value="{{item.value}}">
+              <van-icon color="{{item.checked?'white':'bg-blue'}}" wx:if="{{item.hot}}" name="fire"
+                style="padding-right:2px" />
+              {{item.name}}
+            </button>
+          </view>
+        </view>
+      </view>
     </view>
 
     <view class="can_preview">
@@ -40,19 +78,20 @@
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
         <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" label="介绍" placeholder-style="font-size:14px" placeholder="资料的介绍"      input-align="right"
- type="textarea" border="{{ false }}" maxlength="200" show-word-limit
-          autosize />
+          label-class="input_label" label="介绍" placeholder-style="font-size:14px" placeholder="资料的介绍"
+          input-align="right" type="textarea" border="{{ false }}" maxlength="200" show-word-limit autosize />
       </van-cell-group>
     </view>
   </view>
   <view class="need_know">
-    <class class="title input_label">用户须知</class>
-    <view class="need_know_text">
-      <view>1. 巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
-      <view>2.巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
-      <view>3.巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</view>
-    </view>
+    <van-cell wx:for="{{ 1 }}" wx:key="index" custom-style="border-radius: 10px!important" value-class="value-class"
+      clickable data-index="{{ index }}" bind:click="jump2NeedKnow" is-link center>
+      <van-checkbox value="{{ checkedNeedKnow }}" icon-size="35rpx" bind:change="onChangeNeedKown"><text
+          style="font-weight:bold">用户须知</text> </van-checkbox>
+
+    </van-cell>
+
+
   </view>
   <view class="submit_btn">
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;">保存</van-button>
