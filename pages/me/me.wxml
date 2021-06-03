@@ -36,13 +36,14 @@
   <view class="setting">
     <van-cell-group title="资料">
       <van-cell title="我的消息" icon="chat" is-link value="2" />
-      <van-cell title="我的订单" icon="shopping-cart" is-link value="2" />
+      <van-cell title="我的订单" icon="shopping-cart" is-link value="2" bindtap="jump2OrderList" />
       <van-cell title="我的收藏" icon="star" is-link value="2" />
     </van-cell-group>
     <van-cell-group title="系统">
       <van-cell title="系统设置" icon="setting" is-link />
-      <van-cell title="反馈建议" icon="service" is-link />
-      <van-cell title="关于我们" icon="gem" is-link />
+      <van-cell title="反馈建议" icon="comment" is-link />
+      <van-cell title="在线客服" icon="wechat" is-link />
+      <van-cell title="关于青云" icon="gem" is-link />
     </van-cell-group>
   </view>
 </scroll-view>

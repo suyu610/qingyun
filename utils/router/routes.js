@@ -31,3 +31,11 @@ export const profile = {
 export const buy_confirm = { 
   path:'/pages/public/buy_confirm/buy_confirm'
 }
+export const order_list = { 
+  path:'/pages/public/order_list/order_list'
+}
+
+
+export const preview_doc = { 
+  path:'/pages/public/preview_doc/preview_doc'
+}

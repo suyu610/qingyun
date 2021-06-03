@@ -10,7 +10,9 @@
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-uploader": "@vant/weapp/uploader/index",
     "van-stepper": "@vant/weapp/stepper/index",
-    "van-image": "@vant/weapp/image/index"
+    "van-image": "@vant/weapp/image/index",
+    "van-notify": "@vant/weapp/notify/index"
+
 
   
   }

@@ -1,0 +1,2 @@
+<!--pages/public/preview_doc/preview_doc.wxml-->
+<web-view src="https://www.qdu.life/pdfh5/" />

@@ -1,6 +1,25 @@
 // pages/public/buy_confirm/buy_confirm.js
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import {
+  relaunch,
+  replace,
+  push
+} from '../../../utils/router/index.js';
 
+const beforeClose = (action) => new Promise((resolve) => {
+  setTimeout(() => {
+    if (action === 'confirm') {
+      replace({
+        name: "order_list"
+      });
+    } else {
+      // 拦截取消操作
+      relaunch({
+        name: "homepage"
+      })
+    }
+  }, 0);
+});
 Page({
 
   /**
@@ -10,26 +29,25 @@ Page({
     imageURL: "https://cdns.qdu.life/qingyun/images/ad_1.jpg"
   },
 
-
+  jump2SettingProfile: function () {
+    push({
+      name: "setting_profile"
+    })
+  },
   pay_success: function () {
     Dialog.confirm({
-        title: '支付成功',
-        message: '可在订单页查看文档\n网页地址为 book.qdu.life',
-        // customStyle:'font-weight:bold',
-        messageAlign:'left',
-        confirmButtonText:'前往订单页',
-        cancelButtonText:'返回首页',
-        
-
-      })
-      .then(() => {
-        // on confirm
-      })
-      .catch(() => {
-        // on cancel
-      });
+      title: '支付成功',
+      message: '可在订单页查看文档\n网页地址为 book.qdu.life',
+      // customStyle:'font-weight:bold',
+      messageAlign: 'left',
+      confirmButtonText: '前往订单页',
+      cancelButtonText: '返回首页',
+      beforeClose
+    })
   },
+
   pay: function () {
+    let that = this;
     wx.showLoading({
       title: '处理中，请稍后',
     })
@@ -94,10 +112,7 @@ Page({
                     },
                     success(e) {
                       console.log(e)
-                      wx.showToast({
-                        title: '支付成功',
-                        icon: 'success'
-                      })
+                      that.pay_success()
                     },
                     fail(err) {
                       console.log(err)

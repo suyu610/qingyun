@@ -1,74 +1,36 @@
-page {
-  padding-top: 100rpx;
-  background-color: #f2f2f2ab;
-}
-.search{
-  background-color: #27B1FF;
-}
-.indexes {
-  position: relative;
+/* pages/public/order_list/order_list.wxss */
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FAFAFA;
 }
 
-.indexBar {
-  position: fixed;
-  right: 0px;
-  bottom: 0px;
-  padding: 20rpx 20rpx 20rpx 60rpx;
-  display: flex;
-  align-items: center;
+.order_list {
+  width: 94vw;
+  margin: 0 auto;
 }
 
-.indexBar .indexBar-box {
-  width: 40rpx;
-  height: auto;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
-  border-radius: 10rpx;
+
+.order_list .order{
+  padding-top: 5px!important;
+}
+.order_list .order_body .order_id{
+  color:#CECECE;
+  text-align: right;
 }
 
-.indexBar-item {
-  flex: 1;
-  width: 40rpx;
-  height: 40rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24rpx;
-  color: #888;
+.order_list .order_body .order_title{
+  font-size: 30rpx;
+  font-weight: bold;
 }
-
-movable-view.indexBar-item {
-  width: 40rpx;
-  height: 40rpx;
-  z-index: 9;
-  position: relative;
+.order_list .order .order_body{
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: 5px;
 }
-
-movable-view.indexBar-item::before {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 10rpx;
-  height: 20rpx;
-  width: 4rpx;
-  background-color: #f37b1d;
+.order_desc{
+  color:#CECECE!important
 }
-
-.indexToast {
-  position: fixed;
-  top: 0;
-  right: 80rpx;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 10rpx;
-  margin: auto;
-  color: #fff;
-  line-height: 100rpx;
-  text-align: center;
-  font-size: 48rpx;
+.footer van-button {
+  padding-left: 5px;
 }

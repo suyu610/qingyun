@@ -9,7 +9,9 @@ Page({
   data: {
 
   },
-
+  jump2OrderList:function(){
+    push({name:"order_list"})
+  },
   jump2SettingProfile:function(){
     push({name:"setting_profile"})
   },

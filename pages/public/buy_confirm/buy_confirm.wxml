@@ -1,7 +1,7 @@
 <!--pages/public/buy_confirm/buy_confirm.wxml-->
 <view class="container">
   <!-- 地址 -->
-  <view class="address" bindtap="pay_success">
+  <view class="address" bindtap="jump2SettingProfile">
     <view>
       <view class="icon">
         <van-icon name="location-o" />

@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/category/category",
+    "pages/empty/empty",
+    "pages/public/preview_doc/preview_doc",
     "pages/public/order_list/order_list",
+    "pages/category/category",
     "pages/public/order_detail/order_detail",
     "pages/public/setting_profile/setting_profile",
     "pages/public/buy_confirm/buy_confirm",
-    "pages/empty/empty",
     "pages/public/profile/profile",
     "pages/me/me",
     "pages/document_detail/document_detail",

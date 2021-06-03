@@ -48,7 +48,9 @@ type="textarea" placeholder="XX校区XXX" border="{{ true }}"
 
   <view class="submit_btn">
     <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">预览</van-button>
-    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw">保存</van-button>
+    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw" bindtap="saveOk">保存</van-button>
 
   </view>
 </scroll-view>
+
+<van-notify id="van-notify" />

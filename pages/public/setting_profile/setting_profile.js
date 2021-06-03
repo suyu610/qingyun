@@ -3,6 +3,8 @@ import {
   push
 } from '../../../utils/router/index.js';
 
+import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+
 Page({
 
   /**
@@ -11,7 +13,10 @@ Page({
   data: {
     
   },
-  
+  saveOk:function(){
+    Notify({ type: 'success', message: '保存成功' });
+
+  },
   jump2Profile: function () {
     push({
       name: 'profile',
