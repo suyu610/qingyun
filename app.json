@@ -4,8 +4,8 @@
   },
   "pages": [
     "pages/empty/empty",
-    "pages/public/my_upload_list/my_upload_list",
     "pages/public/money_list/money_list",
+    "pages/public/my_upload_list/my_upload_list",
     "pages/public/my_upload_modify/my_upload_modify",
     "pages/public/upload_preview/upload_preview",
     "pages/public/upload/upload",

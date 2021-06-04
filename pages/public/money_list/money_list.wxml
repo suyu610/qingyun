@@ -5,7 +5,6 @@
       title-inactive-color="#10101055" swipeable animated>
 
       <van-tab title="收入">
-        <van-divider customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
         <view class="tab-item help" id="helpView">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" bindscrolltolower="loadMore">
             <block wx:for="{{3}}" wx:key="index" wx:for-item="item">
@@ -25,7 +24,6 @@
         </view>
       </van-tab>
       <van-tab title="支出">
-        <van-divider customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
         <view class="tab-item trick">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}">
             <!-- <block wx:for="{{3}}" wx:key="index" wx:for-item="item"> -->

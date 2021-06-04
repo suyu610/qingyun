@@ -37,7 +37,7 @@ scroll-view {
 }
 .need_know{
   border-radius: 10px;
-  height: 400px;
+  height: 350px;
   padding: 3vw;
   background-color: rgba(0, 0, 0, 0.02);
   margin: 0 auto;
