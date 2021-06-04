@@ -63,7 +63,7 @@
           <view
             style="display: flex;justify-content: space-between		;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
             <text style="font-weight:bold;line-height:30px">共4门</text>
-            <van-button type="primary" custom-style="color:black" color="#ffe9a7" size="small" round
+            <van-button type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7" size="small" 
               bindtap="jump2OrderList">
               <text style="color:black!important">查看所有</text>
             </van-button>
@@ -89,8 +89,8 @@
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <view
               style="display: flex;justify-content: space-between;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
-              <van-button icon="filter-o" size="small" style="padding-right:10px" round>筛选</van-button>
-              <van-button icon="plus" type="primary" custom-style="color:black" color="#ffe9a7" size="small" round>
+              <van-button icon="filter-o" size="small" custom-style="color:black;border-radius:8px" style="padding-right:10px" >筛选</van-button>
+              <van-button icon="plus" type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7" size="small" >
                 <text style="color:black!important">发布求助</text>
               </van-button>
             </view>

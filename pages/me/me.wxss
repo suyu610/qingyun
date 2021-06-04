@@ -104,3 +104,14 @@
   display: inline-block;
   padding-right:10px;
 }
+
+.contact_btn::after{
+  border: none;
+}
+
+.contact_btn {
+  position: static !important;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}

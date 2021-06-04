@@ -7,7 +7,9 @@
       <text class="bg-orange" style="width:4rem"></text>
       <!-- last-child选择器-->
     </view>
+
   </view>
+  <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
 
   <view class="body">
     <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"

@@ -4,6 +4,8 @@
   },
   "pages": [
     "pages/empty/empty",
+    "pages/public/money_list/money_list",
+    "pages/me/me",
     "pages/public/star_list/star_list",
     "pages/public/doc_list/doc_list",
     "pages/category/category",
@@ -17,7 +19,6 @@
     "pages/public/setting_profile/setting_profile",
     "pages/public/buy_confirm/buy_confirm",
     "pages/public/profile/profile",
-    "pages/me/me",
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",

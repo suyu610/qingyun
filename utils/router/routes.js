@@ -53,3 +53,6 @@ export const doc_list = {
 export const star_list = { 
   path:'/pages/public/star_list/star_list'
 }
+export const money_list = { 
+  path:'/pages/public/money_list/money_list'
+}

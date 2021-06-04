@@ -1,0 +1,68 @@
+/* pages/public/doc_list/doc_list.wxss */
+page {
+  box-sizing: content-box;
+
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: lightgrey; */
+}
+
+scroll-view {
+  box-sizing: content-box;
+}
+
+.body {
+  width: 100vw;
+  box-sizing: content-box;
+  margin: 0 auto;
+}
+
+.tab-active {
+  font-weight: bold !important;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.box-head {
+  flex-shrink: 0;
+  height: 1px;
+}
+.need_know{
+  height: 190px;
+  padding: 5vw;
+
+  margin: 0 auto;
+  color:#666;
+  font-size: 24rpx;
+}
+
+.box-scroll {
+  flex: 1;
+  height: 1px;
+}
+
+.title{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.subtitle{
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.van-cell-text{
+  display: inline-block;
+  padding-right: 10px;
+}

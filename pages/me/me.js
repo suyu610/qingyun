@@ -28,6 +28,10 @@ Page({
   jump2Upload:function(){
     push({name:"upload"})
   },
+
+  jump2MoneyList:function(){
+    push({name:"money_list"})
+  },
   /**
    * 生命周期函数
    */
