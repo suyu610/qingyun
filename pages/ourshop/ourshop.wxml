@@ -23,22 +23,26 @@
       swipeable animated bind:change="onChange">
       <van-tab title="教材">
         <view class="tab-item hot">
+          <van-empty image="network" description="暂未上架教材" />
+<!-- 
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
-          </scroll-view>
+          </scroll-view> -->
         </view>
       </van-tab>
       <van-tab title="周边">
         <view class="tab-item help" id="helpView">
+          <van-empty image="error" description="暂无周边产品" />
+<!-- 
           <scroll-view style="height:100%" scroll-y="{{true}}" refresher-threshold="{{100}}" refresher-enabled
-            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
-      
-          </scroll-view>
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">            
+          </scroll-view> -->
         </view>
       </van-tab>
-      <van-tab title="网课">
+      <van-tab title="优选资料">
         <view class="tab-item trick">
-          <scroll-view scroll-y="{{true}}">
+          <van-empty image="search" description="暂无优选资料" />
+          <!-- <scroll-view scroll-y="{{true}}">
             <van-grid column-num="2" square border="{{false}}">
               <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
                 <van-grid-item use-slot>
@@ -48,7 +52,7 @@
                 </van-grid-item>
               </block>
             </van-grid>
-          </scroll-view>
+          </scroll-view> -->
         </view>
       </van-tab>
     </van-tabs>

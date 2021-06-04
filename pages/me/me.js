@@ -13,6 +13,12 @@ Page({
     push({name:"msg_list"})
 
   },
+  jump2StarList:function(){
+    push({name:"star_list"})
+
+  },
+
+  
   jump2OrderList:function(){
     push({name:"order_list"})
   },

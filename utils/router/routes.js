@@ -49,3 +49,7 @@ export const msg_detail = {
 export const doc_list = { 
   path:'/pages/public/doc_list/doc_list'
 }
+
+export const star_list = { 
+  path:'/pages/public/star_list/star_list'
+}

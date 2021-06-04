@@ -1,0 +1,41 @@
+/* pages/public/order_list/order_list.wxss */
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FAFAFA;
+}
+
+.order_list {
+  width: 94vw;
+  margin: 0 auto;
+}
+
+
+.order_list .order {
+  padding-top: 5px !important;
+}
+
+.order_list .order_body .order_id {
+  color: #CECECE;
+  text-align: right;
+}
+
+.order_list .order_body .order_title {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.order_list .order .order_body {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.order_desc {
+  color: #CECECE !important;
+  padding: 7px 0px 7px 0;
+}
+
+.footer van-button {
+  padding-left: 5px;
+}

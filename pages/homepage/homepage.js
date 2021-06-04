@@ -190,6 +190,18 @@ Page({
       }
     })
   },
+
+  jump2OrderList: function () {
+    push({
+      name: 'order_list',
+    });
+  },
+
+  jump2DocDetail: function () {
+    push({
+      name: 'preview_doc',
+    });
+  },
   jump2Detail: function () {
     push({
       name: 'document_detail',

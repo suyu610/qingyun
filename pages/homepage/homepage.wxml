@@ -41,18 +41,45 @@
 
   </view>
   <view class="body" wx:else>
-    <van-tabs tab-active-class="tab-active"  active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
-      swipeable animated bind:change="onChange">
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+      title-inactive-color="#10101055" swipeable animated bind:change="onChange">
+
+
       <van-tab title="热门">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
               <course_item bindtap="jump2Detail" docuType="{{item.docuType}}" title="{{item.title}}"
-                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}"
-                downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
+                price="{{item.price}}" downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+      <van-tab title="已购">
+        <view class="tab-item trick">
+          <view
+            style="display: flex;justify-content: space-between		;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
+            <text style="font-weight:bold;line-height:30px">共4门</text>
+            <van-button type="primary" custom-style="color:black" color="#ffe9a7" size="small" round
+              bindtap="jump2OrderList">
+              <text style="color:black!important">查看所有</text>
+            </van-button>
+          </view>
+
+          <scroll-view scroll-y="{{true}}">
+            <van-grid column-num="3" square border="{{false}}">
+              <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
+                <van-grid-item use-slot bindtap="jump2DocDetail">
+                  <image mode="aspectFill"
+                    style="width: 100%; height: 100%;border-radius:5px;background-color:lightgrey"
+                    src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
+                  <view style="padding-top:10px;font-size:12px;width:100%;text-align:left">高等数学试卷</view>
+                </van-grid-item>
+              </block>
+            </van-grid>
           </scroll-view>
         </view>
       </van-tab>
@@ -90,21 +117,7 @@
           </scroll-view>
         </view>
       </van-tab>
-      <van-tab title="攻略">
-        <view class="tab-item trick">
-          <scroll-view scroll-y="{{true}}">
-            <van-grid column-num="2" square border="{{false}}">
-              <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
-                <van-grid-item use-slot>
-                  <image style="width: 100%; height: 80%;border-radius:10px;background-color:lightgrey"
-                    src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
-                  <view style="padding-top:10px;font-size:12px;width:100%;text-align:left">八八八</view>
-                </van-grid-item>
-              </block>
-            </van-grid>
-          </scroll-view>
-        </view>
-      </van-tab>
+
     </van-tabs>
   </view>
 </view>

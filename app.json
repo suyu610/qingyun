@@ -1,6 +1,10 @@
 {
+  "usingComponents": {
+    "van-empty": "@vant/weapp/empty/index"
+  },
   "pages": [
     "pages/empty/empty",
+    "pages/public/star_list/star_list",
     "pages/public/doc_list/doc_list",
     "pages/category/category",
     "pages/public/upload/upload",
