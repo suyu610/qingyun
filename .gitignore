@@ -1,2 +1,3 @@
 node_modules
-cloudfunction
+cloudfunction/getOpenid/node_modules
+cloudfunction/payment/node_modules
