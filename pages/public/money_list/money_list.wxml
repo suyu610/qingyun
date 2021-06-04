@@ -59,7 +59,7 @@
   </van-submit-bar>
 </van-uploader>
 
-<van-submit-bar wx:else price="{{ 5000 }}" disabled label="可提现：" button-text="提现" >
+<van-submit-bar wx:else price="{{ 5000 }}" disabled label="可提现：" button-text="提现" bindtap="onTapWithdrawBtn">
   <view>
     <van-button slot="button" size="small" plain type="danger" bindtap="onTapWithdrawBtn" round>
       校验密码
@@ -69,7 +69,7 @@
 
 <van-popup show="{{ showCheckPwdPopup }}" closeable round position="bottom" custom-style="height: 30%"
   bind:close="hideCheckPwdPopup">
-  <view class="title"> 为了资金安全，请在此输入你的密码</view>
+  <view class="title text-bold"> 为了资金安全，请在此输入你的密码</view>
   <van-cell-group>
     <van-field model:value="{{ pwd }}" placeholder="请输入密码">
       <van-button slot="button" size="small" type="primary" bindtap="checkPwd" loading="{{checkPwdLoading}}">
