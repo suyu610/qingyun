@@ -1,0 +1,21 @@
+<!--pages/public/need_know/need_know.wxml-->
+<view class="need_know bg" id="need_know">
+  <view class="title"></view>
+  <view class="cu-bar">
+    <view class="action sub-title">
+      <text class="text-lg text-bold text-black">提现须知</text>
+      <text class="bg-blue" style="width:2.8rem"></text>
+      <!-- last-child选择器-->
+    </view>
+  </view>
+
+  <van-divider></van-divider>
+  <text>1. 出于安全考虑，提现前需要先<text style="font-weight:bold;color:red">校验密码</text>。
+
+    2. 由于我们暂时不能对个人转账，点击提现后，请上传你的微信<text style="font-weight:bold;color:red">收款码</text>，我们会尽快处理。
+
+    3. 每一笔交易，<text style="font-weight:bold;color:red">微信</text>都会抽取<text
+      style="font-weight:bold;color:red">1%</text>的手续费，请谅解。
+
+    4. 谢谢你的付出，使青大学习氛围更为浓郁。</text>
+</view>

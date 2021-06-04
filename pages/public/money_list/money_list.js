@@ -1,4 +1,8 @@
 // pages/public/money_list/money_list.js
+import {
+  push
+} from '../../../utils/router/index.js';
+
 Page({
 
   /**
@@ -17,20 +21,31 @@ Page({
     allPages: '', // 总页数
     currentPage: 1, // 当前页数  默认是1
     activeNames: [],
-    toView:"",
+    toView: "",
 
   },
+
+  jump2NeedKnow: function () {
+    console.log("123")
+    push({
+      name: "my_upload_modify"
+    })
+  },
+
   onChange(event) {
     let toView;
-    if(event.detail.length>0){
-      toView="need_know"
-    }else{
+    if (event.detail.length > 0) {
+      toView = "need_know"
+    } else {
       toView = "body"
     }
-    this.setData({
-      toView,
-      activeNames: event.detail,
-    });
+    setTimeout(() => {
+      this.setData({
+        toView,
+        activeNames: event.detail,
+      });
+    }, 100);
+
   },
 
   // 点击提现按钮
@@ -136,7 +151,7 @@ Page({
     wx.getSystemInfo({
       success(res) {
         that.setData({
-          height: res.windowHeight - 64 - 44 - 120 + "px"
+          height: res.windowHeight - 64 - 44 - 50 + "px"
         })
         console.log(res.windowHeight)
       }

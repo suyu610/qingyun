@@ -25,7 +25,8 @@
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",
-    "pages/public/search/search"
+    "pages/public/search/search",
+    "pages/public/need_know/need_know"
   ],
   "window": {
     "backgroundTextStyle": "light",

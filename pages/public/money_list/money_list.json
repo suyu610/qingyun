@@ -15,7 +15,9 @@
     "van-tag": "@vant/weapp/tag/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-collapse": "@vant/weapp/collapse/index",
-    "van-collapse-item": "@vant/weapp/collapse-item/index"
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
+
   
 
 

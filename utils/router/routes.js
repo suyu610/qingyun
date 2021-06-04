@@ -67,3 +67,7 @@ export const my_upload_list = {
 export const upload_preview = { 
   path:'/pages/public/upload_preview/upload_preview'
 }
+
+export const need_know = { 
+  path:'/pages/public/need_know/need_know'
+}

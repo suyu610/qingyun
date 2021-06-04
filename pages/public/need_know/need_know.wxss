@@ -1,0 +1,12 @@
+/* pages/public/need_know/need_know.wxss */
+
+.need_know{
+  overflow: hidden;
+  border-radius: 10px;
+  height: 90vh;
+  padding: 4vw;
+  margin: 0 auto;
+  color: rgba(0, 0, 0, 1);
+  font-size: 30rpx;
+  width: 90vw;
+}
