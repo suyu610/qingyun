@@ -10,8 +10,8 @@
       <text>534</text>
     </view>
   </view>
-  <view class='buy_btn'>
-    <text>购买</text>
+  <view class='buy_btn' bindtap="jump2BuyConfirm">
+    <text>{{mode=="preview"?"返回":"购买"}}</text>
   </view>
 </view>
 

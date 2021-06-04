@@ -1,4 +1,7 @@
-// pages/public/upload/upload.js
+// pages/public/my_upload_modify/my_upload_modify.js
+
+import {push} from '../../../utils/router/index.js';
+
 Page({
 
   /**
@@ -56,9 +59,6 @@ Page({
       modalName: e.currentTarget.dataset.target
     })
   },
-  jump2DocPreview:function(){
-    push({name:"upload_preview"})
-  },
   hideChooseTagModal(e) {
     this.setData({
       modalName: null
@@ -91,6 +91,10 @@ Page({
       })
     }
 
+  },
+
+  jump2DocPreview:function(){
+    push({name:"upload_preview"})
   },
   ChooseCheckbox(e) {
     let items = this.data.checkbox;
@@ -135,7 +139,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '上传资料',
+      title: '修改已上传的资料',
     })
   },
 

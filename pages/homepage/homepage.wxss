@@ -109,7 +109,7 @@ view {
 
 
 .tab-item {
-  height: 65vh;
+  height: 63vh;
 }
 
 .dropdown-item-title {
@@ -122,7 +122,7 @@ view {
   }
 
   .body {
-    height: 62vh;
+    height: 59vh;
   }
 }
 

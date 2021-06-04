@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "input_comment":"/components/input_comment/index",
+    "van-share-sheet": "@vant/weapp/share-sheet/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-divider": "@vant/weapp/divider/index"
+
+  }
+}

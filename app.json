@@ -4,12 +4,15 @@
   },
   "pages": [
     "pages/empty/empty",
-    "pages/public/money_list/money_list",
-    "pages/me/me",
+    "pages/public/my_upload_list/my_upload_list",
+    "pages/public/my_upload_modify/my_upload_modify",
+    "pages/public/upload_preview/upload_preview",
+    "pages/public/upload/upload",
     "pages/public/star_list/star_list",
     "pages/public/doc_list/doc_list",
+    "pages/me/me",
+    "pages/public/money_list/money_list",
     "pages/category/category",
-    "pages/public/upload/upload",
     "pages/public/order_list/order_list",
     "pages/public/msg_detail/msg_detail",
     "pages/public/msg_list/msg_list",
@@ -22,8 +25,6 @@
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/login/login",
-    "pages/public/chat/chat",
-    "pages/public/feedback/feedback",
     "pages/public/search/search"
   ],
   "window": {

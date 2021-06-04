@@ -11,7 +11,8 @@ Component({
     price: String,
     downCount: String,
     authorName:String,
-    isHot:Boolean
+    isHot:Boolean,
+    mode:String
   },
 
   /**

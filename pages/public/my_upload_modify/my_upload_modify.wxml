@@ -19,7 +19,9 @@
     </van-uploader>
   </view>
 
+
   <view class="main ">
+
     <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
       autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">
@@ -95,8 +97,7 @@
   </view>
   <view class="submit_btn">
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;" bindtap="jump2DocPreview">预览</van-button>
-
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;">保存</van-button>
-    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black">同意用户须知并上传</van-button>
+    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black">确认修改并提交审查</van-button>
   </view>
 </scroll-view>

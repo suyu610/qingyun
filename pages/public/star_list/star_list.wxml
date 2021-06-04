@@ -9,7 +9,7 @@
     <block wx:for="{{8}}" wx:key="index">
       <view class="order">
         <van-card centered custom-class="order_body" price="10.00"
-          thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg" bindtap="jump2DocDetail">
+          thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg" bindtap="jump2DocPreview">
           <view slot="title" >
             <view class="order_id">[ 试卷 ]</view>
             <view class="order_title">高等数学历年试卷</view>

@@ -197,7 +197,7 @@ Page({
     });
   },
 
-  jump2DocDetail: function () {
+  jump2DocPreview: function () {
     push({
       name: 'preview_doc',
     });

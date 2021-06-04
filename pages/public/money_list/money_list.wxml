@@ -1,22 +1,27 @@
 <!--pages/public/doc_list/doc_list.wxml-->
-<view class="container">
+<view class="container bg">
   <view class="body">
-    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF" 
       title-inactive-color="#10101055" swipeable animated>
 
       <van-tab title="收入">
         <van-divider customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
         <view class="tab-item help" id="helpView">
-          <scroll-view scroll-y="{{true}}" style="height:{{height}}">
-            <!-- <block wx:for="{{3}}" wx:key="index" wx:for-item="item"> -->
-            <van-cell title="完成”上传任务“，获得￥5奖励" title-width="80%" value="￥5元" icon="balance-o" label="2020-07-04 12:00" />
-            <van-cell title="充值" title-width="80%" value="￥50元" icon="balance-o" label="2020-07-04 12:00" />
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}" bindscrolltolower="loadMore">
+            <block wx:for="{{3}}" wx:key="index" wx:for-item="item">
+              <van-cell title="完成”上传任务“，获得￥5奖励" title-width="75%" value="￥5元" center icon="balance-o"
+                label="2020-07-04 12:00" is-link />
+              <van-cell title="充值" title-width="80%" value="￥50元" icon="balance-o" label="2020-07-04 12:00" />
+              <van-cell title="黄鹏宇购买了你的《高等数学历年试卷》" title-width="80%" value="￥8元" icon="balance-o"
+                label="2020-07-04 12:00" />
+              <van-cell title="匿名购买了你的《高等数学》" title-width="80%" value="￥8元" icon="balance-o" label="2020-07-04 12:00" />
 
-            <van-cell title="黄鹏宇购买了你的《高等数学历年试卷》" title-width="80%" value="￥8元" icon="balance-o"
-              label="2020-07-04 12:00" />
-            <van-cell title="匿名购买了你的《高等数学》" title-width="80%" value="￥8元" icon="balance-o" label="2020-07-04 12:00" />
-            <!-- </block> -->
+            </block>
+            <view class="bottom" hidden="{{hideBottom}}">
+              <view>{{loadMoreData}}</view>
+            </view>
           </scroll-view>
+
         </view>
       </van-tab>
       <van-tab title="支出">

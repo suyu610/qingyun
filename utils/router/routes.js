@@ -56,3 +56,14 @@ export const star_list = {
 export const money_list = { 
   path:'/pages/public/money_list/money_list'
 }
+
+export const my_upload_modify = { 
+  path:'/pages/public/my_upload_modify/my_upload_modify'
+}
+
+export const my_upload_list = { 
+  path:'/pages/public/my_upload_list/my_upload_list'
+}
+export const upload_preview = { 
+  path:'/pages/public/upload_preview/upload_preview'
+}

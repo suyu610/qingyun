@@ -7,7 +7,6 @@ page {
 .container {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   /* background-color: lightgrey; */
 }
 
@@ -36,40 +35,8 @@ scroll-view {
   flex-shrink: 0;
   height: 1px;
 }
-.need_know{
-  height: 190px;
-  padding: 5vw;
-
-  margin: 0 auto;
-  color:#666;
-  font-size: 24rpx;
-}
 
 .box-scroll {
   flex: 1;
   height: 1px;
-}
-
-.title{
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.subtitle{
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-weight: bold;
-}
-
-.van-cell-text{
-  display: inline-block;
-  padding-right: 10px;
-}
-
-.bottom{
-  padding-top: 3px;
-  text-align: center;
-  font-size: 14px;
-  color:#969799
 }

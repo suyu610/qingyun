@@ -9,7 +9,14 @@ Page({
     checkPwdRight: false,
     showCheckPwdPopup: false,
     checkPwdLoading: false,
-    pwd: ""
+    pwd: "",
+    loadMoreData: '加载中..',
+    hideBottom: true,
+    refreshTime: '', // 刷新的时间 
+    contentlist: [], // 列表显示的数据源
+    allPages: '', // 总页数
+    currentPage: 1, // 当前页数  默认是1
+
 
   },
   // 点击提现按钮
@@ -61,15 +68,61 @@ Page({
 
 
   },
+
+  loadMore: function(){
+    var self = this;
+    // 当前页是最后一页
+    if (self.data.currentPage == self.data.allPages){
+      self.setData({
+        loadMoreData: '已经到顶'
+      })
+      return;
+    }
+    setTimeout(function(){
+      console.log('上拉加载更多');
+      var tempCurrentPage = self.data.currentPage;
+      tempCurrentPage = tempCurrentPage + 1;
+      self.setData({
+        currentPage: tempCurrentPage,
+        hideBottom: false  
+      })
+      self.getData()
+    },500);
+  },
+
+  getData: function(){
+    var self = this;
+    var pageIndex = self.data.currentPage;
+    wx.request({
+      url: 'https://route.showapi.com/582-2',
+      data: {
+        showapi_appid: '19297',
+        showapi_sign: 'cf606a68a01f45d196b0061a1046b5b3',
+        page: pageIndex
+      },
+      fail: function(){
+        console.log("???")
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    var date = new Date();
+    this.setData({
+      refreshTime: date.toLocaleTimeString()
+    })
+
+    wx.setNavigationBarTitle({
+      title: '我的钱包',
+    })
     let that = this
     wx.getSystemInfo({
       success(res) {
         that.setData({
-          height: res.windowHeight - 64 - 44 - 10 - 240 + "px"
+          height: res.windowHeight - 64 - 44 - 10 - 200 + "px"
         })
         console.log(res.windowHeight)
       }

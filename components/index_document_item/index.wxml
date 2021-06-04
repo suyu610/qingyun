@@ -1,6 +1,6 @@
 <!--components/test/test.wxml-->
 <view class="container">
-  <view class="leftBox">
+  <view class="leftBox" wx:if="{{mode!='preview'}}">
     <view wx:if="{{docuType=='paper'}}" class="leftBoxChild paper">
       <view class="type">试卷</view>
       <view class="downCount">
@@ -34,7 +34,9 @@
     <view class="thirdTitle">{{thirdTitle}}</view>
   </view>
   <view class="subInfo">
-    <view class="price">￥{{price}}</view>
+    <view class="price_preview" wx:if="{{mode=='preview'}}">赚取: {{price}}</view>
+    <view class="price" wx:else>￥{{price}}</view>
+    
     <view class="authorName">{{authorName}}</view>
   </view>
 </view>

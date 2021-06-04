@@ -53,7 +53,7 @@ Page({
         // on cancel
       });
   },
-  jump2DocDetail: function () {
+  jump2DocPreview: function () {
     push({
       name: "document_detail"
     })

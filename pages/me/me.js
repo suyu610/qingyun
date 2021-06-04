@@ -15,7 +15,10 @@ Page({
   },
   jump2StarList:function(){
     push({name:"star_list"})
+  },
 
+  jump2MyUploadList:function(){
+    push({name:"my_upload_list"})
   },
 
   

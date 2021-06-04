@@ -109,3 +109,10 @@
   overflow: hidden;
   font-size: 14px;
 }
+
+.subInfo .price_preview{
+  font-weight: bold;
+  vertical-align: bottom;
+  font-size: 12px;
+  text-align: right;
+}

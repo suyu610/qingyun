@@ -1,0 +1,58 @@
+<!--pages/public/doc_list/doc_list.wxml-->
+<view scroll-y="{{true}}" class="container">
+  <view class="cu-bar   bg-white padding-lg">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-black">我上传的资料</text>
+      <text class="text-bold" style="padding-left:20px"> 共{{noteList.length + paperList.length + strategyList.length}}份</text>
+      <text class="bg-orange" style="width:6.4rem"></text>
+      <!-- last-child选择器-->
+    </view>
+    <van-button type="warning" color="#0CB1FF" size="small" custom-style="border-radius:5px;" bindtap="jump2Upload">上传新资料</van-button>
+  </view>
+  <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
+
+  <view class="body">
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
+      swipeable animated bind:change="onChange">
+      <van-tab title="笔记 (4)">
+        <view class="tab-item hot">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            <block wx:for="{{noteList}}" wx:key="index" wx:for-item="item">
+              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}" title="{{item.title}}"
+                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
+                price="{{item.price}}" downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+              <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
+            </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+      <van-tab title="试卷 (3)">
+        <view class="tab-item help" id="helpView">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            <block wx:for="{{paperList}}" wx:key="index" wx:for-item="item">
+              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}" title="{{item.title}}"
+                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
+                price="{{item.price}}" downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+              <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
+            </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+      <van-tab title="攻略 (2)">
+        <view class="tab-item trick">
+          <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            <block wx:for="{{strategyList}}" wx:key="index" wx:for-item="item">
+              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}" title="{{item.title}}"
+                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
+                price="{{item.price}}" downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+              <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
+            </block>
+          </scroll-view>
+        </view>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>
