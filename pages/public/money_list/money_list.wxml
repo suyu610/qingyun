@@ -1,7 +1,7 @@
 <!--pages/public/doc_list/doc_list.wxml-->
-<view class="container bg">
-  <view class="body">
-    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF" 
+<scroll-view scroll-y="{{true}}" class="container bg" scroll-into-view="{{toView}}" scroll-with-animation	>
+  <view class="body" id="body">
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
       title-inactive-color="#10101055" swipeable animated>
 
       <van-tab title="收入">
@@ -49,17 +49,21 @@
       </van-tab>
     </van-tabs>
   </view>
-  <view class="need_know">
-    <van-divider content-position="center" dashed customStyle="margin-top:1px;margin-bottom:10px">提现须知</van-divider>
+  <view class="need_know" id="need_know">
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+      <van-collapse-item title="*提现须知" name="1">
+        <text>1. 由于我们暂时不能对个人转账，点击提现后，请上传你的<text style="font-weight:bold;color:red">微信收款码</text>，我们会尽快处理。
 
-    <text>1. 由于暂时不能对个人转账，点击提现后，请上传你的<text style="font-weight:bold;color:red">微信收款码</text>，我们会尽快处理。
+          2. 每一笔交易，<text style="font-weight:bold;color:red">微信支付</text>都会抽取<text
+            style="font-weight:bold;color:red">1%的手续费</text>，请谅解。
 
-      2. 每一笔交易，<text style="font-weight:bold;color:red">微信支付</text>都会抽取<text
-        style="font-weight:bold;color:red">1%的手续费</text>，请谅解。
-
-      3. 谢谢你的付出，使青大学习氛围更为浓郁。</text>`
+          3. 谢谢你的付出，使青大学习氛围更为浓郁。</text>
+      </van-collapse-item>
+    </van-collapse>
   </view>
-</view>
+
+
+</scroll-view>
 <van-uploader wx:if="{{checkPwdRight}}" accept="image" capture="album" use-before-read bind:before-read="beforeRead">
   <van-submit-bar price="{{ 5000 }}" label="可提现： " button-text="提现" bind:submit="onSubmit" tip>
 
@@ -80,7 +84,6 @@
 <van-popup show="{{ showCheckPwdPopup }}" closeable round position="bottom" custom-style="height: 30%"
   bind:close="hideCheckPwdPopup">
   <view class="title"> 为了资金安全，请在此输入你的密码</view>
-
   <van-cell-group>
     <van-field model:value="{{ pwd }}" placeholder="请输入密码">
       <van-button slot="button" size="small" type="primary" bindtap="checkPwd" loading="{{checkPwdLoading}}">

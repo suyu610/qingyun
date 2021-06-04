@@ -16,9 +16,23 @@ Page({
     contentlist: [], // 列表显示的数据源
     allPages: '', // 总页数
     currentPage: 1, // 当前页数  默认是1
-
+    activeNames: [],
+    toView:"",
 
   },
+  onChange(event) {
+    let toView;
+    if(event.detail.length>0){
+      toView="need_know"
+    }else{
+      toView = "body"
+    }
+    this.setData({
+      toView,
+      activeNames: event.detail,
+    });
+  },
+
   // 点击提现按钮
   onSubmit: function () {
 
@@ -69,28 +83,28 @@ Page({
 
   },
 
-  loadMore: function(){
+  loadMore: function () {
     var self = this;
     // 当前页是最后一页
-    if (self.data.currentPage == self.data.allPages){
+    if (self.data.currentPage == self.data.allPages) {
       self.setData({
         loadMoreData: '已经到顶'
       })
       return;
     }
-    setTimeout(function(){
+    setTimeout(function () {
       console.log('上拉加载更多');
       var tempCurrentPage = self.data.currentPage;
       tempCurrentPage = tempCurrentPage + 1;
       self.setData({
         currentPage: tempCurrentPage,
-        hideBottom: false  
+        hideBottom: false
       })
       self.getData()
-    },500);
+    }, 500);
   },
 
-  getData: function(){
+  getData: function () {
     var self = this;
     var pageIndex = self.data.currentPage;
     wx.request({
@@ -100,7 +114,7 @@ Page({
         showapi_sign: 'cf606a68a01f45d196b0061a1046b5b3',
         page: pageIndex
       },
-      fail: function(){
+      fail: function () {
         console.log("???")
       }
     })

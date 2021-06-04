@@ -7,7 +7,6 @@ page {
 .container {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   /* background-color: lightgrey; */
 }
 
@@ -37,14 +36,20 @@ scroll-view {
   height: 1px;
 }
 .need_know{
-  height: 190px;
-  padding: 5vw;
-
+  border-radius: 10px;
+  height: 400px;
+  padding: 3vw;
+  background-color: rgba(0, 0, 0, 0.02);
   margin: 0 auto;
-  color:#666;
+  color: rgba(0, 0, 0, 1);
   font-size: 24rpx;
 }
 
+.collapse{
+  border-radius: 10px;
+
+}
+ 
 .box-scroll {
   flex: 1;
   height: 1px;

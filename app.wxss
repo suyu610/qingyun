@@ -36,7 +36,9 @@ box-sizing: content-box;
 }
 
 
-
+.bg-transparent{
+  background-color: transparent;
+}
 
 
 @import "colorui/main.wxss";
