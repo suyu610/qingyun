@@ -17,9 +17,12 @@
           <view slot="desc" class="order_desc">
             <view>作者：黄鹏宇</view>
           </view>
-          <view slot="footer" class="footer" catchtap="deleteStar">
-            <van-button size="small" custom-style="border-radius:5px!important" color="red" >删除
+          <view slot="footer" class="footer" >
+            <van-button size="small" custom-style="border-radius:5px!important;" color="#0CB1FF" plain catchtap="deleteStar">删除
             </van-button>
+            <van-button size="small" custom-style="border-radius:5px!important" color="#0CB1FF" >购买
+            </van-button>
+
           </view>
         </van-card>
       </view>

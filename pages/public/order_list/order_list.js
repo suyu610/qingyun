@@ -51,6 +51,12 @@ Page({
         // on cancel
       });
   },
+
+  onLoad:function(){
+    wx.setNavigationBarTitle({
+      title: '我的知识库',
+    })
+  },
   jump2PreviewDoc:function(){
     push({name:"preview_doc"})
   },
