@@ -1,13 +1,14 @@
 {
   "pages": [
     "pages/empty/empty",
+    "pages/public/doc_list/doc_list",
+    "pages/category/category",
     "pages/public/upload/upload",
     "pages/public/order_list/order_list",
     "pages/public/msg_detail/msg_detail",
     "pages/public/msg_list/msg_list",
     "pages/document_detail/document_detail",
     "pages/public/preview_doc/preview_doc",
-    "pages/category/category",
     "pages/public/order_detail/order_detail",
     "pages/public/setting_profile/setting_profile",
     "pages/public/buy_confirm/buy_confirm",

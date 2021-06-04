@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "course_item":"/components/index_document_item/index"
+
+
+  }
+}

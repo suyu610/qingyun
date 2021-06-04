@@ -41,7 +41,7 @@
 
   </view>
   <view class="body" wx:else>
-    <van-tabs active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
+    <van-tabs tab-active-class="tab-active"  active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
       swipeable animated bind:change="onChange">
       <van-tab title="热门">
         <view class="tab-item hot">

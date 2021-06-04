@@ -51,9 +51,9 @@ Page({
     hidden: true,
     areaList:areaList
   },
-  jump2Detail: function () {
+  jump2DocList: function () {
     push({
-      name: 'document_detail',
+      name: 'doc_list',
       data: {
         id: '123',
         type: 1,

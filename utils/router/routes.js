@@ -45,3 +45,7 @@ export const msg_list = {
 export const msg_detail = { 
   path:'/pages/public/msg_detail/msg_detail'
 }
+
+export const doc_list = { 
+  path:'/pages/public/doc_list/doc_list'
+}

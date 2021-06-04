@@ -22,9 +22,7 @@ view {
   height: 100%;
 }
 
-.search-body {
-  padding: 5vw;
-}
+
 
 .ads-item {
   height: 100%;
@@ -77,15 +75,19 @@ view {
   height: 22vw;
 }
 
-
-.header .search {
-  width: 90%;
-  bottom: 10vw;
-  position: absolute;
+.search-body {
+  width: 90vw;
+  margin: 0 auto;
+  /* padding: 5vw; */
 }
+
 
 .search {
   padding: 0 !important;
+}
+
+.tab-active {
+  font-weight: bold !important;
 }
 
 .body {
@@ -123,3 +125,4 @@ view {
     height: 62vh;
   }
 }
+

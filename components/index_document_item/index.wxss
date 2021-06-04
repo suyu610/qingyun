@@ -2,21 +2,22 @@
 .container {
   width: 90vw;
   height: 9vh;
-  padding:2vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  padding: 2vw;
+  margin: 0 auto;
   vertical-align: top;
   letter-spacing: 1px;
   overflow: hidden;
+  box-sizing: content-box;
 }
+
 .leftBox {
   display: inline-block;
   height: 9vh;
   width: 9vh;
   border-radius: 11px;
-} 
+}
 
-.leftBoxChild{
+.leftBoxChild {
   height: 9vh;
   text-align: center;
   display: table-cell;
@@ -27,25 +28,33 @@
   border-radius: 6px;
 }
 
-.leftBoxChild .type{
+.leftBoxChild .type {
   font-size: 12px;
   padding-bottom: 6px;
   padding-top: 10px;
 }
-.leftBoxChild .downCount{
+
+.leftBoxChild .downCount {
   font-size: 10px;
 }
-.leftBoxChild .downCount text{
+
+.leftBoxChild .downCount text {
   vertical-align: 1px;
   padding-left: 1px;
 }
-.paper{
+
+.paper {
   background-color: #27B1FF;
   color: white;
 }
 
-.note{
+.note {
   background-color: #ffe9a7;
+  color: black;
+}
+
+.strategy {
+  background-color: #FBD8BC;
   color: black;
 }
 
@@ -79,7 +88,7 @@
 }
 
 
-.subInfo {  
+.subInfo {
   position: relative;
   text-align: right;
   float: right;
@@ -96,7 +105,7 @@
   text-align: right;
 }
 
-.subInfo .price{
+.subInfo .price {
   overflow: hidden;
-  font-size: 14px; 
+  font-size: 14px;
 }
