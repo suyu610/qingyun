@@ -11,7 +11,12 @@
     "van-uploader": "@vant/weapp/uploader/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
-    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-circle": "@vant/weapp/circle/index"
+
+
   
   }
 }

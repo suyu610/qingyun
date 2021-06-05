@@ -1,17 +1,22 @@
 <!--pages/public/upload/upload.wxml-->
 <scroll-view class="container bg" scroll-y="{{true}}">
   <view class="preview">
-    <van-uploader preview-size="60px" show-upload="{{false}}" file-list="{{ fileList }}"></van-uploader>
+    <view wx:if="{{fileList.length==0}}" style="width:100%;line-height:50px;text-align:center;color:#888;">
+      <van-icon name="bulb-o" /> <text style="vertical-align:1px">暂未上传文件</text>
+    </view>
+    <van-uploader preview-size="60px" mode="scaleToFit" show-upload="{{false}}" file-list="{{ fileList }}"
+      bind:delete="deleteFile">
+    </van-uploader>
   </view>
   <view class="uploader_view">
-    <van-uploader accept="all">
+    <van-uploader accept="all" bind:after-read="afterRead" sizeType="original" multiple="{{true}}">
       <view class="upload">
         <van-icon name="chat-o" />
         <text style="font-weight:bold">聊天记录中上传</text>
       </view>
     </van-uploader>
 
-    <van-uploader accept="image">
+    <van-uploader accept="image" bind:after-read="afterRead" multiple="{{true}}" sizeType="original">
       <view class="upload">
         <van-icon name="photo-o" />
         <text style="font-weight:bold">相册中上传</text>
@@ -24,9 +29,11 @@
       autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">
     </van-field>
-
-    <van-cell title="分类" title-class="input_label" size="large" is-link></van-cell>
-
+    <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
+      autosize center label="所属课程" input-align="right" placeholder="尽可能写全称嗷" placeholder-style="font-size:14px"
+      type="textarea" border="{{ true }}" maxlength="50">
+    </van-field>
+    <van-cell title="分类" title-class="input_label" size="large" is-link bindtap="onTapShowCategoryPopup" />
     <van-cell-group size="large" center border="{{ false }}">
       <van-field input-align="right" value="{{ message }}" size="large" placeholder="输入数字"
         placeholder-style="font-size:14px" label-class="input_label" label="价格" type="number" border="{{ true }}"
@@ -94,9 +101,34 @@
 
   </view>
   <view class="submit_btn">
-    <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;" bindtap="jump2DocPreview">预览</van-button>
-
+    <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;" bindtap="jump2DocPreview">预览
+    </van-button>
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;">保存</van-button>
-    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black">同意用户须知并上传</van-button>
+    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black" bindtap="submitUpload">
+      同意用户须知并上传</van-button>
   </view>
 </scroll-view>
+
+<van-popup show="{{ showCategoryPopup }}" bind:close="onCloseCategoryPopup" position="bottom"
+  custom-style="height: 80%;text-align:center" round>
+  <van-area area-list="{{ categoryList }}" title="分类" />
+  <van-button custom-style="border-radius:7px;color:white;margin-top:5vh" type="info" size="small">没找到你要的分类?
+  </van-button>
+</van-popup>
+
+<van-popup show="{{ showUploadProgressPopup }}" bind:close="onCloseUploadProgressPopup" position="bottom"
+  custom-style="height: 40%;text-align:center;padding-top:10%" round>
+
+  <van-circle value="{{ uploadProgressValue }}" size="140" stroke-width="10" color="{{ gradientColor }}">
+    <text style="font-weight:bold">{{upload_step_title}}</text>
+    <view style="padding-top:1vh" wx:if="{{upload_step_detail!=''}}">{{upload_step_detail}}
+    </view>
+  </van-circle>
+  <view>
+    <van-button custom-style="border-radius:7px;color:white;margin-top:2vh" type="info" size="small" bindtap="onCloseUploadProgressPopup">
+      {{uploadProgressValue>=100?"好":"终止"}}
+    </van-button>
+  </view>
+
+
+</van-popup>
