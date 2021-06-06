@@ -13,15 +13,16 @@
 
   <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
   <view class="body">
-    <van-tabs  tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
       title-inactive-color="#10101055" swipeable animated bind:change="onChange">
       <van-tab title="笔记 (4)">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{noteList}}" wx:key="index" wx:for-item="item">
-              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}"
-                title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
+              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
+                uploadStatus="{{item.uploadStatus}}"
+                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
                 thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
                 authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
@@ -34,8 +35,8 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{paperList}}" wx:key="index" wx:for-item="item">
-              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}"
-                title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
+              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
+                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
                 thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
                 authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
@@ -48,8 +49,8 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{strategyList}}" wx:key="index" wx:for-item="item">
-              <course_item mode="preview" bindtap="jump2MyUploadDetail" docuType="{{item.docuType}}"
-                title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
+              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
+                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
                 thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
                 authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
@@ -60,3 +61,8 @@
     </van-tabs>
   </view>
 </view>
+
+<van-dialog id="van-dialog" />
+
+<van-action-sheet bind:select="tapActionSheet" cancel-text="取消" bind:cancel="onCloseActionSheet" bind:close="onCloseActionSheet"
+  show="{{ showActionSheet }}" actions="{{ actionSheetActions }}" description="固体物理亲手笔记" />

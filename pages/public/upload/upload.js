@@ -96,9 +96,9 @@ Page({
         this.setData({upload_step_title:"上传完成"})
       }
       this.setData({
-        uploadProgressValue : this.data.uploadProgressValue + 1
+        uploadProgressValue : this.data.uploadProgressValue + 10
       })
-    }, 50);
+    }, 1000);
   },
   onCloseCategoryPopup: function () {
     this.setData({

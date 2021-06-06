@@ -11,8 +11,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    avatar:{},
   },
+
+
+
+// 选择文件
+afterRead: function (event) {
+  this.setData({avatar:event.detail.file})
+  
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
   saveOk:function(){
     Notify({ type: 'success', message: '保存成功' });
 

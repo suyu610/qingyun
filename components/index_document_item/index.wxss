@@ -68,6 +68,10 @@
   padding-left: 10px;
 }
 
+.preview_info{
+  width: 74%;
+}
+
 .info .title {
   font-weight: bold;
   text-overflow: ellipsis;

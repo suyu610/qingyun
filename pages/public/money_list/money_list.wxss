@@ -37,37 +37,37 @@ scroll-view {
   height: 1px;
 }
 
-
-.collapse{
-  border-radius: 10px;
-
-}
- 
 .box-scroll {
   flex: 1;
   height: 1px;
 }
 
-.title{
+.title {
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.subtitle{
+
+.subtitle {
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: bold;
 }
 
-.van-cell-text{
+.van-cell-text {
   display: inline-block;
   padding-right: 10px;
 }
 
-.bottom{
+.bottom {
   padding-top: 3px;
   text-align: center;
   font-size: 14px;
-  color:#969799
+  color: #969799
+}
+
+.value_class {
+  color: #27B1FF!important;
+  font-weight: bold!important;
 }

@@ -46,7 +46,7 @@
           border="{{ true }}" center>
           <view class="tag_cell_value">
             <block wx:for="{{selected_tag_list}}" wx:key="index" wx:for-item="item">
-              <view class="cu-tag bg-cyan ">{{item}}</view>
+              <view class="cu-tag text-black" style="background-color:#ffe9a7;border-radius:3px;font-weight:bold">{{item}}</view>
             </block>
             <van-button bindtap="onTapChooseTag" color="#0CB1FF" slot="button" size="small" type="primary"
               custom-style="border-radius:5px;margin-left:5px!important">
@@ -119,13 +119,13 @@
 <van-popup show="{{ showUploadProgressPopup }}" bind:close="onCloseUploadProgressPopup" position="bottom"
   custom-style="height: 40%;text-align:center;padding-top:10%" round>
 
-  <van-circle value="{{ uploadProgressValue }}" size="140" stroke-width="10" color="{{ gradientColor }}">
+  <van-circle wx:if="{{ showUploadProgressPopup }}" value="{{ uploadProgressValue }}" speed="35" size="140" stroke-width="10" color="{{ gradientColor }}">
     <text style="font-weight:bold">{{upload_step_title}}</text>
     <view style="padding-top:1vh" wx:if="{{upload_step_detail!=''}}">{{upload_step_detail}}
     </view>
   </van-circle>
   <view>
-    <van-button custom-style="border-radius:7px;color:white;margin-top:2vh" type="info" size="small" bindtap="onCloseUploadProgressPopup">
+    <van-button wx:if="{{ showUploadProgressPopup }}" custom-style="border-radius:7px;color:white;margin-top:2vh" type="info" size="small" bindtap="onCloseUploadProgressPopup">
       {{uploadProgressValue>=100?"好":"终止"}}
     </van-button>
   </view>

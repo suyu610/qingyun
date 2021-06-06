@@ -111,6 +111,8 @@ const documentList = [{
     authorName: "臭猪"
   }
 ]
+
+const helpList = []
 import {
   push
 } from '../../utils/router/index.js';
@@ -118,10 +120,15 @@ let app = getApp()
 Page({
   data: {
     documentList: documentList,
-
+    helpList: helpList,
     ////////// 頂部輪播圖 //////////
     adsList: [{
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-1.jpg"
+        "imgUrl": "https://img01.yzcdn.cn/vant/apple-1.jpg",
+        "subTitle": "本周上传资料最多",
+        "mainTitle": "黄鹏宇",
+        "author": "83份",
+        "buttonText": "他的作品",
+        "url":""
       },
       {
         "imgUrl": "https://img01.yzcdn.cn/vant/apple-2.jpg"

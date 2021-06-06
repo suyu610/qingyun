@@ -12,7 +12,8 @@ Component({
     downCount: String,
     authorName:String,
     isHot:Boolean,
-    mode:String
+    mode:String,
+    uploadStatus:String
   },
 
   /**

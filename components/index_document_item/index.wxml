@@ -26,8 +26,9 @@
     </view>
 
   </view>
-  <view class="info">
-    <view class="title">
+  <view class="info {{mode=='preview'?'preview_info':''}}">
+    <view class="title " >
+      <van-tag plain  type="danger" wx:if="{{uploadStatus=='verify'}}">审核中</van-tag>
       <van-icon name="fire" color="#f00" wx:if="{{isHot}}"/> {{title}}
     </view>
     <view class="subTitle">{{subTitle}}</view>
@@ -35,8 +36,7 @@
   </view>
   <view class="subInfo">
     <view class="price_preview" wx:if="{{mode=='preview'}}">赚取: {{price}}</view>
-    <view class="price" wx:else>￥{{price}}</view>
-    
+    <view class="price" wx:else>￥{{price}}</view>    
     <view class="authorName">{{authorName}}</view>
   </view>
 </view>

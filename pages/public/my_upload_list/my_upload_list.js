@@ -3,16 +3,19 @@ import {
   push
 } from '../../../utils/router/index.js';
 
+import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+
 const noteList = [{
     docuType: "note",
     title: "固体物理亲手笔记",
     subTitle: "前五章",
     college: "电子信息学院",
     grade: "大二",
-    isHot: true,
-    price: "10.00",
-    downCount: "91",
-    authorName: "下载:5"
+    isHot: false,
+    price: "0",
+    downCount: "0",
+    authorName: "下载:0",
+    uploadStatus:"verify"
   },
   {
     docuType: "note",
@@ -111,12 +114,82 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showActionSheet: false,
+    actionSheetActions: [{
+        value: 'modify',
+        name: '修改'
+      },
+      {
+        value: 'previewShop',
+        name: '查看商品页面'
+      },
+      {
+        value: 'preview',
+        name: '查看文档'
+      },
+      {
+        value: 'del',
+        name: '暂停发布',
+        color: '#ee0a24'
+      },
+    ],
     noteList: noteList,
     paperList: paperList,
     strategyList: strategyList,
-    height: "95vh"
+    height: "95vh",
+    longtap: false
   },
-  jump2MyUploadDetail: function () {
+  onCloseActionSheet: function () {
+    this.setData({
+      showActionSheet: false
+    })
+  },
+  tapActionSheet: function (e) {
+    if(e.detail.value == "modify"){
+      this.jump2MyUploadModify()
+      return;
+  }
+    if(e.detail.value == "preview"){
+      this.jump2DocPreview()
+      return;
+    }
+
+    if(e.detail.value == "del") {
+      this.confirmUnPublished();
+      return;
+    }   
+
+    if(e.detail.value == "previewShop") {
+      this.jump2Preview();
+      return;
+    }   
+    
+  },
+  jump2Preview:function(){
+    push({name:"upload_preview"})
+  },
+  jump2DocPreview:function(){
+    push({name:"preview_doc"})
+  },
+  // 停止发布 
+  confirmUnPublished: function () {
+    Dialog.confirm({
+        title: '确认暂停发布？',
+        message: '固体物理亲手笔记',
+      })
+      .then(() => {
+        // on confirm
+      })
+      .catch(() => {
+        // on cancel
+      });
+  },
+  onTapCell: function () {
+    this.setData({
+      showActionSheet: true
+    })
+  },
+  jump2MyUploadModify: function () {
     push({
       name: "my_upload_modify"
     })

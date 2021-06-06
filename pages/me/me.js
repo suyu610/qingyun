@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    avatarUrl:"",
   },
   jump2MsgList:function(){
     push({name:"msg_list"})
@@ -39,7 +39,14 @@ Page({
    * 生命周期函数
    */
   onLoad: function (options) {
-    
+    let that = this;
+    wx.request({
+      url: 'http://localhost:6110/hello',
+      success(res){
+        that.setData({avatarUrl:res.data})
+        
+      }
+    })
   },
 
   

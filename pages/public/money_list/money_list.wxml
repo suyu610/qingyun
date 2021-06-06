@@ -11,12 +11,10 @@
         <view class="tab-item help" id="helpView">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" bindscrolltolower="loadMore">
             <block wx:for="{{3}}" wx:key="index" wx:for-item="item">
-              <van-cell title="完成”上传任务“，获得￥5奖励" title-width="75%" value="￥5元"  icon="balance-o"
-                label="2020-07-04 12:00" />
-              <van-cell title="充值" title-width="80%" value="￥50元" icon="balance-o" label="2020-07-04 12:00" />
-              <van-cell title="黄鹏宇购买了你的《高等数学历年试卷》" title-width="80%" value="￥8元" icon="balance-o"
-                label="2020-07-04 12:00" />
-              <van-cell title="匿名购买了你的《高等数学》" title-width="80%" value="￥8元" icon="balance-o" label="2020-07-04 12:00" />
+              <van-cell  value-class="value_class"	title="完成”上传任务“，获得￥5奖励" title-width="75%" value="+5" label="2020-07-04 12:00" />
+              <van-cell  value-class="value_class"	title="充值" title-width="80%" value="+50" label="2020-07-04 12:00" />
+              <van-cell  value-class="value_class"	title="黄鹏宇购买了你的《高等数学历年试卷》" title-width="80%" value="+8" label="2020-07-04 12:00" />
+              <van-cell  value-class="value_class"	title="匿名购买了你的《高等数学》" title-width="80%" value="+8" label="2020-07-04 12:00" />
 
             </block>
             <view class="bottom" hidden="{{hideBottom}}">
@@ -30,20 +28,20 @@
         <view class="tab-item trick">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}">
             <!-- <block wx:for="{{3}}" wx:key="index" wx:for-item="item"> -->
-            <van-cell title-width="80%" value="￥21元" icon="refund-o" label="2020-07-04 12:00">
+            <van-cell value-class="value_class" title-width="80%" value="-21"  label="2020-07-04 12:00">
               <view slot="title">
                 <view class="van-cell-text">提现</view>
                 <van-tag type="danger">处理中</van-tag>
               </view>
             </van-cell>
 
-            <van-cell title-width="80%" value="￥8元" icon="refund-o" label="2020-07-04 12:00">
+            <van-cell value-class="value_class" title-width="80%" value="-8"  label="2020-07-04 12:00">
               <view slot="title">
                 <view class="van-cell-text">提现</view>
                 <van-tag type="success">成功</van-tag>
               </view>
             </van-cell>
-            <van-cell title="购买资料《临床医学学习笔记》" title-width="80%" value="￥20元" icon="refund-o" label="2020-07-04 12:00" />
+            <van-cell value-class="value_class" title="购买资料《临床医学学习笔记》" title-width="80%" value="-20" label="2020-07-04 12:00" />
             <!-- </block> -->
           </scroll-view>
         </view>

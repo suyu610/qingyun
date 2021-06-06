@@ -3,8 +3,8 @@
 <scroll-view class="container bg" scroll-y="{{true}}">
   <view class="main">
     <van-cell title="头像 *" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
-      <van-uploader>
-        <van-image round width="3rem" height="3rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+      <van-uploader accept="image" sizeType="compressed" bind:after-read="afterRead">
+        <van-image round width="3rem" height="3rem" fit="cover" src="{{avatar.url}}" />
       </van-uploader>
     </van-cell>
 

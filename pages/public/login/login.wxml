@@ -6,8 +6,8 @@
     <view>青云知识库。</view>
   </view>
   <view class="sub_title">
-    <text> 本程序仅为青岛大学实名使用 </text> 
-    <van-icon name="question-o" color="#00000088"/>
+    <text> 本程序仅为青岛大学实名使用 </text>
+    <van-icon name="question-o" color="#00000088" />
   </view>
   <view class="login_box">
 
@@ -15,11 +15,11 @@
       <van-tab title="简单认证">
         <view class="login_form">
           <view class="name inputline">
-            <input type="text" placeholder="请输入姓名" placeholder-style=";" />
+            <input type="text" model:value="{{ name }}" placeholder="请输入姓名" placeholder-style=";" />
           </view>
 
           <view class="ssNumber inputline">
-            <input type="text" placeholder="请输入学号" placeholder-style=";" />
+            <input type="text" model:value="{{ ssNumber }}" placeholder="请输入学号" placeholder-style=";" />
           </view>
         </view>
       </van-tab>
@@ -32,10 +32,28 @@
       </van-tab>
     </van-tabs>
     <view class="login_btn">
-      <view class="mark_btn">联系我们</view>
+      <view class="mark_btn">
+        <button open-type="contact">联系我们</button>
+      </view>
       <view class="buy_btn" bindtap="onLoginBtnTap">认证</view>
     </view>
   </view>
 
 
 </view>
+
+<van-toast id="van-toast" />
+<van-popup show="{{ showInputPwdPopup }}" position="bottom" custom-style="height: 30%;" round
+  bind:close="onCloseInputPwdPopup">
+  <view style="padding:5vw;text-align:center">
+    <text style="padding-bottom:5vh;font-size:30rpx;display:block;font-weight:bold">第一次登录，请设置密码</text>
+
+    <van-cell-group border="{{false}}">
+      <van-field model:value="{{ pwd }}" use-button-slot clearable placeholder="请设置初始密码" bind:click-icon="onClickIcon">
+        <van-button slot="button" size="small" color="#27B1FF" round bindtap="onTapInputPwdBtn">
+          确认
+        </van-button>
+      </van-field>
+    </van-cell-group>
+  </view>
+</van-popup>

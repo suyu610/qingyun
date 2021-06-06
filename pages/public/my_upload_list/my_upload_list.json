@@ -5,7 +5,11 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "course_item":"/components/index_document_item/index",
     "van-divider": "@vant/weapp/divider/index",
-    "van-button": "@vant/weapp/button/index"
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+
+
 
 
 

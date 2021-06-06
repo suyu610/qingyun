@@ -3,10 +3,12 @@
     "van-empty": "@vant/weapp/empty/index"
   },
   "pages": [
+    "pages/public/login/login",
     "pages/empty/empty",
-    "pages/public/upload/upload",
+    "pages/public/my_upload_list/my_upload_list", 
+    "pages/public/setting_profile/setting_profile",
     "pages/public/money_list/money_list",
-    "pages/public/my_upload_list/my_upload_list",
+    "pages/public/upload/upload",
     "pages/public/my_upload_modify/my_upload_modify",
     "pages/public/upload_preview/upload_preview",
     "pages/public/star_list/star_list",
@@ -19,12 +21,10 @@
     "pages/document_detail/document_detail",
     "pages/public/preview_doc/preview_doc",
     "pages/public/order_detail/order_detail",
-    "pages/public/setting_profile/setting_profile",
     "pages/public/buy_confirm/buy_confirm",
     "pages/public/profile/profile",
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
-    "pages/public/login/login",
     "pages/public/search/search",
     "pages/public/need_know/need_know"
   ],

@@ -73,7 +73,17 @@ color:#B12341;
   text-align: center;
   display: inline-block;
 }
-
+.mark_btn button{
+  width: 25vw;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  background-color: rgba(39, 177, 255, 100);
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+}
 .buy_btn {
   display: inline-block;
   width: 55vw;

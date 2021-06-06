@@ -7,11 +7,11 @@
         <block wx:for="{{adsList}}" wx:key="index" wx:for-item="item">
           <swiper-item>
             <view class="ads-item" bindtap="jump2Qk">
-              <view class="info">一键搜索青大空教室</view>
-              <view class="title"> 青空教室 </view>
-              <view class="price">素语出品</view>
+              <view class="info">{{item.subTitle}}</view>
+              <view class="title"> {{item.mainTitle}} </view>
+              <view class="price"> {{item.author}}</view>
               <image src="{{item.imgUrl}}" mode="aspectFill"></image>
-              <view class="entry-btn beauty_shadow">进入</view>
+              <view class="entry-btn beauty_shadow">{{item.buttonText}}</view>
             </view>
           </swiper-item>
         </block>
@@ -63,7 +63,7 @@
           <view
             style="display: flex;justify-content: space-between		;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
             <text style="font-weight:bold;line-height:30px">共4门</text>
-            <van-button type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7" size="small" 
+            <van-button type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7" size="small"
               bindtap="jump2OrderList">
               <text style="color:black!important">查看所有</text>
             </van-button>
@@ -89,31 +89,39 @@
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <view
               style="display: flex;justify-content: space-between;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
-              <van-button icon="filter-o" size="small" custom-style="color:black;border-radius:8px" style="padding-right:10px" >筛选</van-button>
-              <van-button icon="plus" type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7" size="small" >
+              <van-button icon="filter-o" size="small" custom-style="color:black;border-radius:8px"
+                style="padding-right:10px">筛选</van-button>
+              <van-button icon="plus" type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7"
+                size="small">
                 <text style="color:black!important">发布求助</text>
               </van-button>
             </view>
-            <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
-              <view class="cu-card article no-card">
-                <view class="cu-item shadow">
-                  <view class="title">
-                    <view class="text-cut">求求大佬们，发发高数笔记，救救孩子吧 </view>
-                  </view>
-                  <view class="content">
-                    <image src="https://cdns.qdu.life/qingyun/images/ad_{{ index % 4 +1 }}.jpg" mode="aspectFill">
-                    </image>
-                    <view class="desc">
-                      <view class="text-content"> 需要高等数学2B的期末复习笔记需要高等数学2B的期末复习笔记...</view>
-                      <view>
-                        <view class="cu-tag bg-blue  sm round">8h以前</view>
-                        <view class="cu-tag light sm round" style="color:black;background-color:#FFE9A7">高等数学</view>
+            <view wx:if="{{helpList.length>0}}">
+              <block wx:for="{{helpList}}" wx:key="index" wx:for-item="item">
+                <view class="cu-card article no-card">
+                  <view class="cu-item shadow">
+                    <view class="title">
+                      <view class="text-cut">求求大佬们，发发高数笔记，救救孩子吧 </view>
+                    </view>
+                    <view class="content">
+                      <image src="https://cdns.qdu.life/qingyun/images/ad_{{ index % 4 +1 }}.jpg" mode="aspectFill">
+                      </image>
+                      <view class="desc">
+                        <view class="text-content"> 需要高等数学2B的期末复习笔记需要高等数学2B的期末复习笔记...</view>
+                        <view>
+                          <view class="cu-tag bg-blue  sm round">8h以前</view>
+                          <view class="cu-tag light sm round" style="color:black;background-color:#FFE9A7">高等数学</view>
+                        </view>
                       </view>
                     </view>
                   </view>
                 </view>
-              </view>
-            </block>
+              </block>
+            </view>
+
+            <view wx:else>
+              <van-empty description="暂无求助信息" />
+            </view>
           </scroll-view>
         </view>
       </van-tab>
