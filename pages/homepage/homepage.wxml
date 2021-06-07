@@ -52,7 +52,7 @@
             <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
               <course_item bindtap="jump2Detail" docuType="{{item.docuType}}" title="{{item.title}}"
                 isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
-                price="{{item.price}}" downCount="{{item.downCount}}" authorName="{{item.authorName}}" />
+                price="{{item.price}}" starCount="{{item.starCount}}" authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
           </scroll-view>
@@ -83,7 +83,7 @@
           </scroll-view>
         </view>
       </van-tab>
-      <van-tab title="求助">
+      <van-tab title="问答">
         <view class="tab-item help" id="helpView">
           <scroll-view style="height:100%" scroll-y="{{true}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
@@ -93,7 +93,7 @@
                 style="padding-right:10px">筛选</van-button>
               <van-button icon="plus" type="primary" custom-style="color:black;border-radius:8px" color="#ffe9a7"
                 size="small">
-                <text style="color:black!important">发布求助</text>
+                <text style="color:black!important">提问</text>
               </van-button>
             </view>
             <view wx:if="{{helpList.length>0}}">

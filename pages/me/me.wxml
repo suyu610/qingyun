@@ -17,33 +17,33 @@
 
   <view class="main_info">
     <view class="remain" bindtap="jump2MoneyList">
-      <view class="count">￥ 120.70</view>
+      <view class="count">￥ {{remainMoney}} </view>
       <view class="info_title">我的钱包</view>
     </view>
     <view class="upload_count" bindtap="jump2MyUploadList">
-      <view class="count">9 份</view>
+      <view class="count">{{uploadCount}} 份</view>
       <view class="info_title ">我上传了</view>
     </view>
     <view class="download_count" bindtap="jump2OrderList">
-      <view class="count">2 份</view>
+      <view class="count">{{boughtCount}} 份</view>
       <view class="info_title">我购买的</view>
     </view>
-    <view class="upload  " bindtap="jump2Upload">
+    <view class="upload neumorphism " bindtap="jump2Upload">
       <van-icon name="fire" color="red" /><text>上传资料</text>
     </view>
   </view>
 
   <view class="setting">
     <van-cell-group title="资料">
-      <van-cell title="收藏" icon="star" is-link value="2" bindtap="jump2StarList" />
-      <van-cell title="我的上传" icon="printer" is-link value="2" bindtap="jump2MyUploadList" />
-      <van-cell title="我的购买" icon="balance-list" is-link value="2" bindtap="jump2OrderList" />
+      <van-cell title="我的收藏" icon="star" is-link value="{{starCount}}" bindtap="jump2StarList" />
+      <van-cell title="我的上传" icon="printer" is-link value="{{uploadCount}}" bindtap="jump2MyUploadList" />
+      <van-cell title="我的购买" icon="balance-list" is-link value="{{boughtCount}}" bindtap="jump2OrderList" />
     </van-cell-group>
     <van-cell-group title="系统">
-      <van-cell icon="chat" is-link value="9" bindtap="jump2MsgList">
+      <van-cell icon="chat" is-link value="{{msgCount}}" bindtap="jump2MsgList">
         <view slot="title">
           <view class="van-cell-text">我的消息</view>
-          <van-tag type="danger">new</van-tag>
+          <van-tag type="danger" wx:if="{{msgCount>0}}">new</van-tag>
         </view>
       </van-cell>
       <van-cell title="反馈建议" icon="comment" is-link>

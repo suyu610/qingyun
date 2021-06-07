@@ -11,7 +11,9 @@ const routes = require('routes.js');
  *     type: 1,
  *   },
  * });
- *
+ * 
+ *   const data = router.extract(options);
+ *   console.log(this.data); // { id: '123', type: 1 }
  */
 router.init({
   routes,

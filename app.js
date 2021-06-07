@@ -22,8 +22,6 @@ const categoryList = {
     260000: '电子信息学院',
     270000: '电子信息学院',
     280000: '电子信息学院',
-
-
   },
   city_list: {
     110100: '全部',
@@ -96,8 +94,8 @@ App({
     wx.cloud.callFunction({
       name: 'getOpenId',
       success(res) {
-        console.log(res.result.openid)
         that.globalData.openid = res.result.openid
+        wx.setStorageSync('openid', res.result.openid)
       }
     });
 
@@ -113,6 +111,11 @@ App({
         }
       }
     })
+
+
+    let token = wx.getStorageSync('token')
+
+    this.globalData.token = token
   },
 
 
@@ -120,6 +123,7 @@ App({
     openid: "",
     token: "",
     ssNumber: "",
+    version:"0.1.3",
     categoryList:categoryList
   }
 })

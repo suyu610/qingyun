@@ -3,8 +3,8 @@
     "van-empty": "@vant/weapp/empty/index"
   },
   "pages": [
-    "pages/public/login/login",
     "pages/empty/empty",
+    "pages/public/login/login",
     "pages/public/my_upload_list/my_upload_list", 
     "pages/public/setting_profile/setting_profile",
     "pages/public/money_list/money_list",

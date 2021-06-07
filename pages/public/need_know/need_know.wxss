@@ -10,3 +10,9 @@
   font-size: 30rpx;
   width: 90vw;
 }
+
+
+.my-text-bold{
+  font-weight:bold;
+  color:#27B1FF;
+}

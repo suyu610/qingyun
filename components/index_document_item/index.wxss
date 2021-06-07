@@ -34,11 +34,11 @@
   padding-top: 10px;
 }
 
-.leftBoxChild .downCount {
+.leftBoxChild .starCount {
   font-size: 10px;
 }
 
-.leftBoxChild .downCount text {
+.leftBoxChild .starCount text {
   vertical-align: 1px;
   padding-left: 1px;
 }
@@ -93,6 +93,7 @@
 
 
 .subInfo {
+  width: 20%;
   position: relative;
   text-align: right;
   float: right;

@@ -9,7 +9,7 @@ Component({
     subTitle: String,
     thirdTitle: String,
     price: String,
-    downCount: String,
+    starCount: String,
     authorName:String,
     isHot:Boolean,
     mode:String,

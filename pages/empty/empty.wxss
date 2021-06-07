@@ -1,15 +1,41 @@
 /* pages/empty/empty.wxss */
-
-.logo{
-  animation: rotate 10s ease-in infinite;
-  animation-delay:.3s;
+page {
+	background-color: #fff;
 }
 
-@keyframes rotate{
-	0%{
-		transform: rotateZ(0deg);/*从0度开始*/
+.logo {
+	animation: rotate 10s ease-in infinite;
+	animation-delay: .3s;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotateZ(0deg);
+		/*从0度开始*/
 	}
-	100%{
-		transform: rotateZ(360deg);/*360度结束*/
+
+	100% {
+		transform: rotateZ(360deg);
+		/*360度结束*/
 	}
+}
+
+.container {
+	height: 100vh;
+	width: 100vw;
+	text-align: center;
+	padding-top: 50vh;
+	color: black;
+
+}
+
+.bg_image {
+	z-index: -1;
+	position: absolute;
+	width: 180px;
+	height: 240px;
+	left: 50%;
+	margin-top: 25vh;
+	margin-left: -90px;
+	text-align: center;
 }

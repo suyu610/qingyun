@@ -10,22 +10,29 @@
 
     <van-cell title="姓名" value="皇甫素素"></van-cell>
     <van-cell title="学号" value="2019205913"></van-cell>
-    <van-cell title="学院" value="电子信息学院"></van-cell>
-    <van-cell title="专业" value="微电子工程"></van-cell>
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" 
-          label-class="input_label"  label="联系方式 *"    input-align="right"
- placeholder="用于收货时联系"  type="textarea" border="{{ true }}"  />
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
+          label="学院" input-align="right" placeholder="用于展示" type="textarea" border="{{ true }}" />
+      </van-cell-group>
+    </view>
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
+          label="专业" input-align="right" placeholder="用于展示" type="textarea" border="{{ true }}" />
+      </van-cell-group>
+    </view>
+    <view class="intro">
+      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
+          label="联系方式 *" input-align="right" placeholder="用于收货时联系" type="textarea" border="{{ true }}" />
       </van-cell-group>
     </view>
 
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" 
-          label-class="input_label"  label="收货地址 *"     input-align="right"
-type="textarea" placeholder="XX校区XXX" border="{{ true }}" 
-           />
+        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
+          label="收货地址 *" input-align="right" type="textarea" placeholder="XX校区XXX" border="{{ true }}" />
       </van-cell-group>
     </view>
 
@@ -47,8 +54,10 @@ type="textarea" placeholder="XX校区XXX" border="{{ true }}"
   </view>
 
   <view class="submit_btn">
-    <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">预览</van-button>
-    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw" bindtap="saveOk">保存</van-button>
+    <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">
+      预览</van-button>
+    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw" bindtap="saveOk">保存
+    </van-button>
 
   </view>
 </scroll-view>

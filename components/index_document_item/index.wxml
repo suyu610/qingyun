@@ -3,25 +3,25 @@
   <view class="leftBox" wx:if="{{mode!='preview'}}">
     <view wx:if="{{docuType=='paper'}}" class="leftBoxChild paper">
       <view class="type">试卷</view>
-      <view class="downCount">
-        <van-icon name="like" />
-        <text>{{downCount}}</text>
+      <view class="starCount">
+        <van-icon name="star" />
+        <text>{{starCount}}</text>
       </view>
     </view>
 
     <view wx:if="{{docuType=='note'}}" class="leftBoxChild note">
       <view class="type">笔记</view>
-      <view class="downCount">
-        <van-icon name="like" />
-        <text>{{downCount}}</text>
+      <view class="starCount">
+        <van-icon name="star" />
+        <text>{{starCount}}</text>
       </view>
     </view>
 
     <view wx:if="{{docuType=='strategy'}}" class="leftBoxChild strategy">
       <view class="type">攻略</view>
-      <view class="downCount">
-        <van-icon name="like" />
-        <text>{{downCount}}</text>
+      <view class="starCount">
+        <van-icon name="star" />
+        <text>{{starCount}}</text>
       </view>
     </view>
 

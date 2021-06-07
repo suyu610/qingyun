@@ -5,21 +5,19 @@
     <text> 欢迎来到，</text>
     <view>青云知识库。</view>
   </view>
-  <view class="sub_title">
-    <text> 本程序仅为青岛大学实名使用 </text>
+  <view class="sub_title" bindtap="jump2NeedKnow">
+    <text> 本程序仅限青岛大学实名使用 </text>
     <van-icon name="question-o" color="#00000088" />
   </view>
-  <view class="login_box">
-
+  <view class="login_box" wx:if="{{!tempHide}}">
     <van-tabs active="{{ active }}" color="#000" bind:change="onChange">
-      <van-tab title="简单认证">
+      <van-tab title="简易登录">
         <view class="login_form">
           <view class="name inputline">
-            <input type="text" model:value="{{ name }}" placeholder="请输入姓名" placeholder-style=";" />
+            <input type="text" bindinput="nameValueChanged" placeholder="请输入姓名 （ 姓名中的 · 可用英文句号.代替" />
           </view>
-
           <view class="ssNumber inputline">
-            <input type="text" model:value="{{ ssNumber }}" placeholder="请输入学号" placeholder-style=";" />
+            <input type="digit" bindinput="ssNumberValueChanged" placeholder="请输入学号" placeholder-style=";" />
           </view>
         </view>
       </van-tab>
@@ -33,23 +31,30 @@
     </van-tabs>
     <view class="login_btn">
       <view class="mark_btn">
-        <button open-type="contact">联系我们</button>
+        <button open-type="contact">需要帮助</button>
       </view>
-      <view class="buy_btn" bindtap="onLoginBtnTap">认证</view>
+      <view class="buy_btn" bindtap="onLoginBtnTap">登录</view>
     </view>
   </view>
-
-
+  <view wx:else style="text-align:center;padding-top:15vh">
+    <van-loading  color="#1989fa" size="36px" vertical>加载中...</van-loading>
+  </view>
 </view>
+<view style="text-align:center;position:absolute;bottom:5vh;width:100vw;font-size:12px;color:grey"
+  bindtap="jump2Homepage">先随便看看（测试数据）</view>
 
 <van-toast id="van-toast" />
 <van-popup show="{{ showInputPwdPopup }}" position="bottom" custom-style="height: 30%;" round
   bind:close="onCloseInputPwdPopup">
   <view style="padding:5vw;text-align:center">
-    <text style="padding-bottom:5vh;font-size:30rpx;display:block;font-weight:bold">第一次登录，请设置密码</text>
-
+    <text
+      style="padding-bottom:2vh;font-size:30rpx;display:block;font-weight:bold">{{isInitLogin?'第一次登录，请设置密码':'非第一次登录，请输入密码'}}</text>
+    <text style="padding-bottom:3vh;font-size:24rpx;display:block;color:grey" wx:if="{{!isInitLogin}}">*
+      若忘记密码，请通过教务或邮箱认证重置密码
+      如有疑问，请联系客服</text>
     <van-cell-group border="{{false}}">
-      <van-field model:value="{{ pwd }}" use-button-slot clearable placeholder="请设置初始密码" bind:click-icon="onClickIcon">
+      <van-field model:value="{{ password }}" use-button-slot clearable placeholder="{{isInitLogin?'请设置初始密码':'请输入密码'}}"
+        bind:click-icon="onClickIcon">
         <van-button slot="button" size="small" color="#27B1FF" round bindtap="onTapInputPwdBtn">
           确认
         </van-button>

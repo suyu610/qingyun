@@ -7,7 +7,7 @@ const documentList = [{
     college: "电子信息学院",
     grade: "大二",
     price: "15.00",
-    downCount: "4",
+    starCount: "4",
     authorName: "黄鹏宇"
   },
   {
@@ -17,7 +17,7 @@ const documentList = [{
     college: "电子信息学院",
     grade: "大二",
     price: "12.00",
-    downCount: "91",
+    starCount: "91",
     authorName: "皇甫素素"
   },
   {
@@ -27,7 +27,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -37,7 +37,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -47,7 +47,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -57,7 +57,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -67,7 +67,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -77,7 +77,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -87,7 +87,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -97,7 +97,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   },
   {
@@ -107,7 +107,7 @@ const documentList = [{
     college: "医学部",
     grade: "所有",
     price: "225.00",
-    downCount: "0",
+    starCount: "0",
     authorName: "臭猪"
   }
 ]
@@ -128,7 +128,7 @@ Page({
         "mainTitle": "黄鹏宇",
         "author": "83份",
         "buttonText": "他的作品",
-        "url":""
+        "url": ""
       },
       {
         "imgUrl": "https://img01.yzcdn.cn/vant/apple-2.jpg"
@@ -219,16 +219,28 @@ Page({
     });
   },
   onLoad: function (options) {
-    wx.setTabBarBadge({
-      index: 3,
-      text: '9',
-    })
+    if (app.globalData.msgList != null) {
+      wx.setTabBarBadge({
+        index: 3,
+        text: app.globalData.initData.msgList.length,
+      })
+    }
     wx.setNavigationBarTitle({
       title: '青云知识库',
     })
+    let documentList = []
+    app.globalData.initData.hotDoc.forEach(element => {
+      element.subTitle = element.introduce
+      documentList.push(element)
+    });
+    this.setData({
+      documentList
+    })
+
+
+
+
+
+
   },
-
-
-
-
 })

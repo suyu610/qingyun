@@ -1,5 +1,5 @@
 <!--pages/public/order_list/order_list.wxml-->
-<scroll-view scroll-y="{{true}}" class="container">
+<scroll-view scroll-y="{{true}}" class="container bg">
   <van-dropdown-menu>
     <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
     <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
@@ -7,7 +7,7 @@
 
   <view class="order_list">
     <block wx:for="{{8}}" wx:key="index">
-      <view class="order">
+      <view class="order" >
         <van-card centered custom-class="order_body" price="10.00"
           thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg" bindtap="jump2DocPreview">
           <view slot="title" >
@@ -18,9 +18,9 @@
             <view>作者：黄鹏宇</view>
           </view>
           <view slot="footer" class="footer" >
-            <van-button size="small" custom-style="border-radius:5px!important;" color="#0CB1FF" plain catchtap="deleteStar">删除
+            <van-button size="small" class="" custom-style="border-radius:5px!important;" color="#0CB1FF" plain catchtap="deleteStar">删除
             </van-button>
-            <van-button size="small" custom-style="border-radius:5px!important" color="#0CB1FF" >购买
+            <van-button size="small" class="" custom-style="border-radius:5px!important" color="#0CB1FF" >购买
             </van-button>
 
           </view>

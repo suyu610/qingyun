@@ -88,6 +88,7 @@ color:#B12341;
   display: inline-block;
   width: 55vw;
   height: 40px;
+  font-weight: bold;
   line-height: 40px;
   border-radius: 5px;
   background-color: rgba(254, 212, 86, 100);

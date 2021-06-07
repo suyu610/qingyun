@@ -1,17 +1,29 @@
 // pages/public/need_know/need_know.js
+import router from '../../../utils/router/index.js';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    type:"",
+    title:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const data = router.extract(options);
+    this.setData({type:data.type})
+    let title = "提现须知"
+
+    if(data.type=="login"){
+      title = "用户须知"
+    }
+
+    this.setData({title})
 
   },
 

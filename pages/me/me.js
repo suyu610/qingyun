@@ -1,6 +1,6 @@
 // pages/me/me.js
 import { push } from '../../utils/router/index.js';
-
+const app = getApp()
 Page({
 
   /**
@@ -8,6 +8,10 @@ Page({
    */
   data: {
     avatarUrl:"",
+    remainMoney:0,
+    boughtCount:0,
+    remainMoney:0,
+    starCount:0
   },
   jump2MsgList:function(){
     push({name:"msg_list"})
@@ -39,17 +43,16 @@ Page({
    * 生命周期函数
    */
   onLoad: function (options) {
-    let that = this;
-    wx.request({
-      url: 'http://localhost:6110/hello',
-      success(res){
-        that.setData({avatarUrl:res.data})
-        
-      }
+    this.setData({
+      boughtCount:app.globalData.initData.userInitDataBO.boughtCount,
+      starCount:app.globalData.initData.userInitDataBO.starCount,
+      remainMoney:app.globalData.initData.userInitDataBO.remainMoney,
+      uploadCount:app.globalData.initData.userInitDataBO.uploadCount, 
+      avatarUrl:app.globalData.initData.userInitDataBO.avatarUrl, 
+      msgCount:app.globalData.initData.msgList==null?0:app.globalData.initData.msgList.length
     })
   },
 
-  
   onReady: function () {
 
   },
