@@ -39,5 +39,6 @@
 </view>
 
 <van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 80%" round>
-  <van-area area-list="{{ areaList }}" title="分类" />
+  <van-area area-list="{{ areaList }}"   columns-placeholder="{{ ['全部', '全部', '全部'] }}"
+title="分类" />
 </van-popup>

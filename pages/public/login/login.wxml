@@ -49,8 +49,8 @@
   <view style="padding:5vw;text-align:center">
     <text
       style="padding-bottom:2vh;font-size:30rpx;display:block;font-weight:bold">{{isInitLogin?'第一次登录，请设置密码':'非第一次登录，请输入密码'}}</text>
-    <text style="padding-bottom:3vh;font-size:24rpx;display:block;color:grey" wx:if="{{!isInitLogin}}">*
-      若忘记密码，请通过教务或邮箱认证重置密码
+    <text style="padding-bottom:3vh;font-size:24rpx;display:block;color:grey" wx:if="{{!isInitLogin}}">
+      *若忘记密码，请通过教务或邮箱认证重置密码
       如有疑问，请联系客服</text>
     <van-cell-group border="{{false}}">
       <van-field model:value="{{ password }}" use-button-slot clearable placeholder="{{isInitLogin?'请设置初始密码':'请输入密码'}}"
