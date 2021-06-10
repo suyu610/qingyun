@@ -1,4 +1,10 @@
 <!--pages/public/upload/upload.wxml-->
+<wxs module="m1">
+  var numberToFix= function (value) {
+  return value.toFixed(2)
+  }
+  module.exports.numberToFix=numberToFix;
+</wxs>
 <scroll-view class="container bg" scroll-y="{{true}}">
   <view class="preview">
     <view wx:if="{{fileList.length==0}}" style="width:100%;line-height:50px;text-align:center;color:#888;">
@@ -24,29 +30,41 @@
     </van-uploader>
   </view>
 
+
   <view class="main ">
-    <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
-      autosize center label="标题" input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px"
+    <van-field input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
+      model:value="{{ upload_doc_title }}" autosize size="large" autosize center label="标题" input-align="right"
+      placeholder="不超过50字" placeholder-style="font-size:14px" type="textarea" border="{{ true }}" maxlength="50">
+    </van-field>
+    <van-field input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
+      bind:focus="courseTitleFocus" bind:blur="courseTitleBlur" model:value="{{ upload_course_title }}" size="large"
+      autosize center label="所属课程" input-align="right" placeholder="尽可能写全称" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">
     </van-field>
-    <van-field custom-style="border-radius: 10px!important" label-class="input_label" value="{{ message }}" size="large"
-      autosize center label="所属课程" input-align="right" placeholder="尽可能写全称嗷" placeholder-style="font-size:14px"
-      type="textarea" border="{{ true }}" maxlength="50">
-    </van-field>
-    <van-cell title="分类" title-class="input_label" size="large" is-link bindtap="onTapShowCategoryPopup" />
+
+    <van-cell title="文档类型" value="{{docType}}" title-class="input_label" size="large" is-link
+      bindtap="onTapShowDocTypeSheet" value-class="cell-value" />
+
+    <van-cell wx:if="{{upload_category.length==0}}" title="分类" value="请选择课程分类" title-class="input_label" size="large"
+      is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
+
+    <van-cell wx:else title="分类" title-width="20%"
+      value="{{upload_category[0].name}} / {{upload_category[1].name}} / {{upload_category[2].name}}"
+      title-class="input_label" size="large" is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
+
     <van-cell-group size="large" center border="{{ false }}">
-      <van-field input-align="right" value="{{ message }}" size="large" placeholder="输入数字"
+      <van-field input-align="right" model:value="{{ upload_doc_price }}" size="large" placeholder="输入数字(0为免费)"
         placeholder-style="font-size:14px" label-class="input_label" label="价格" type="number" border="{{ true }}"
         maxlength="30" />
     </van-cell-group>
 
     <view class="tags">
       <van-cell-group size="large" center border="{{ false }}">
-        <van-cell value="{{ message }}" title-width="30px" size="large" label-class="input_label" label="标签"
-          border="{{ true }}" center>
+        <van-cell title-width="30px" size="large" label-class="input_label" label="标签" border="{{ true }}" center>
           <view class="tag_cell_value">
-            <block wx:for="{{selected_tag_list}}" wx:key="index" wx:for-item="item">
-              <view class="cu-tag text-black" style="background-color:#ffe9a7;border-radius:3px;font-weight:bold">{{item}}</view>
+            <block wx:for="{{upload_tagName_list}}" wx:key="index" wx:for-item="item">
+              <view class="cu-tag text-black" style="background-color:#ffe9a7;border-radius:3px;font-weight:bold">
+                {{item}}</view>
             </block>
             <van-button bindtap="onTapChooseTag" color="#0CB1FF" slot="button" size="small" type="primary"
               custom-style="border-radius:5px;margin-left:5px!important">
@@ -61,11 +79,11 @@
       <view class="cu-dialog" catchtap="noop" style="background-color:transprent">
         <view class="cu-bar " style="border-radius:5px 5px 0 0 ;background-color:white">
           <view class="action text-black" bindtap="hideChooseTagModal">取消</view>
-          <view class="action text-black text-bold" bindtap="confirmChooseTag">确定</view>
+          <view class="action text-black" bindtap="confirmChooseTag">确定</view>
         </view>
-        <view class="grid col-3 padding-bottom-lg padding-top-lg bg-white">
+        <view class="grid col-2 padding-lg bg-white">
           <view wx:for="{{checkbox}}" class="padding-xs" wx:key="index">
-            <button class="cu-btn blue df block {{item.checked?'bg-blue':'line-grey'}}" bindtap="ChooseCheckbox"
+            <button class="cu-btn blue df block {{item.checked?'bg-blue':''}}" bindtap="ChooseCheckbox"
               data-value="{{item.value}}">
               <van-icon color="{{item.checked?'white':'bg-blue'}}" wx:if="{{item.hot}}" name="fire"
                 style="padding-right:2px" />
@@ -78,57 +96,92 @@
 
     <view class="can_preview">
       <van-cell border="{{ true }}" title="可预览页数" title-class="input_label" size="large">
-        <van-stepper value="{{ 0 }}" min="{{0}}" integer />
+        <van-stepper value="{{ upload_doc_previewCount }}" bind:change="onChangePreviewCount" min="{{0}}" integer />
       </van-cell>
     </view>
 
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" label="介绍" placeholder-style="font-size:14px" placeholder="资料的介绍"
-          input-align="right" type="textarea" border="{{ false }}" maxlength="200" show-word-limit autosize />
+        <van-field model:value="{{ upload_doc_introduce }}" input-class="cell-value"
+          custom-style="border-radius: 10px!important" size="large" label-class="input_label" label="介绍"
+          placeholder-style="font-size:14px" placeholder="资料的介绍" input-align="right" type="textarea"
+          border="{{ false }}" maxlength="200" show-word-limit autosize />
       </van-cell-group>
     </view>
   </view>
   <view class="need_know">
     <van-cell wx:for="{{ 1 }}" wx:key="index" custom-style="border-radius: 10px!important" value-class="value-class"
-      clickable data-index="{{ index }}" bind:click="jump2NeedKnow" is-link center>
-      <van-checkbox value="{{ checkedNeedKnow }}" icon-size="35rpx" bind:change="onChangeNeedKown"><text
+      clickable data-index="{{ index }}" catchtap="jump2NeedKnow" is-link center>
+      <van-checkbox value="{{ checkedNeedKnow }}" icon-size="35rpx" catchtap="onChangeNeedKown"><text
           style="font-weight:bold">用户须知</text> </van-checkbox>
-
     </van-cell>
-
-
   </view>
+
   <view class="submit_btn">
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;" bindtap="jump2DocPreview">预览
     </van-button>
     <van-button type="warning" color="#0CB1FF" custom-style="border-radius:5px;">保存</van-button>
-    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black" bindtap="submitUpload">
+    <van-button type="info" color="#ffe9a7" custom-style="border-radius:5px;color:black" bindtap="openSubmitUpload">
       同意用户须知并上传</van-button>
   </view>
 </scroll-view>
 
+
+<van-popup overlay="{{false}}" custom-style="height: 24%;" show="{{courseTitleHasFocus && upload_course_title!=''}}"
+  position="top">
+  <view class="auto-fill">
+    <van-cell-group title="智能推荐">
+      <block wx:for="{{5}}" wx:key="index">
+        <van-cell title="高等数学" value="{{index}}份" is-link size="normal" data-value="高等数学"
+          bindtap="autoFillCourseTitle" />
+      </block>
+    </van-cell-group>
+  </view>
+</van-popup>
 <van-popup show="{{ showCategoryPopup }}" bind:close="onCloseCategoryPopup" position="bottom"
-  custom-style="height: 80%;text-align:center" round>
-  <van-area area-list="{{ categoryList }}" title="分类" />
+  custom-style="height: 60%;text-align:center" round>
+  <van-area area-list="{{ categoryList }}" visible-item-count="{{10}}" title="分类" bind:confirm="confirmCategory" />
   <van-button custom-style="border-radius:7px;color:white;margin-top:5vh" type="info" size="small">没找到你要的分类?
   </van-button>
 </van-popup>
 
-<van-popup show="{{ showUploadProgressPopup }}" bind:close="onCloseUploadProgressPopup" position="bottom"
-  custom-style="height: 40%;text-align:center;padding-top:10%" round>
 
-  <van-circle wx:if="{{ showUploadProgressPopup }}" value="{{ uploadProgressValue }}" speed="35" size="140" stroke-width="10" color="{{ gradientColor }}">
+<van-action-sheet show="{{ showDocTypeSheet }}" actions="{{ docTypeActions }}" bind:close="onCloseDocType"
+  bind:select="onSelectDocType" />
+
+
+
+<van-popup show="{{ showUploadProgressPopup }}" bind:close="onCloseUploadProgressPopup" position="bottom"
+  custom-style="height: {{!isUploading?'30%':'50%'}};text-align:center;padding-top:10%" round>
+  <!-- <view class="test_info" style="text-align:left">
+    <view> 标题:{{upload_doc_title}}</view>
+    <view> 所属课程:{{upload_course_title}}</view>
+    <view> 文档分类:{{upload_doc_type}}</view>
+    <view> 分类:{{upload_categoryId}}</view>
+    <view> 价格: {{upload_doc_price}}</view>
+    <view> 标签:{{upload_tagId_list}}</view>
+    <view> 可预览页数:{{upload_doc_previewCount}}</view>
+    <view> 介绍:{{upload_doc_introduce}}</view>    
+    <view> 附件:{{fileList}}</view>
+  </view> -->
+
+  <van-circle wx:if="{{ isUploading }}" value="{{ uploadProgressValue }}" speed="35" size="140" stroke-width="10"
+    color="{{ gradientColor }}">
     <text style="font-weight:bold">{{upload_step_title}}</text>
     <view style="padding-top:1vh" wx:if="{{upload_step_detail!=''}}">{{upload_step_detail}}
     </view>
   </van-circle>
+
+  <view class="info" style="padding-top:4vh">
+    <text>
+      你当前为<text style="font-weight:bold">{{net_type}}</text>
+      此次上传大概消耗<text style="font-weight:bold">{{m1.numberToFix(totalFileSize/1024/1024)}} MB</text>流量
+    </text>
+  </view>
   <view>
-    <van-button wx:if="{{ showUploadProgressPopup }}" custom-style="border-radius:7px;color:white;margin-top:2vh" type="info" size="small" bindtap="onCloseUploadProgressPopup">
-      {{uploadProgressValue>=100?"好":"终止"}}
+    <van-button wx:if="{{ showUploadProgressPopup }}" custom-style="border-radius:7px;color:white;margin-top:2vh"
+      type="danger" size="normal" bindtap="onUploadConfirmButton">
+      {{isUploading?"停止":"开始上传"}}
     </van-button>
   </view>
-
-
 </van-popup>

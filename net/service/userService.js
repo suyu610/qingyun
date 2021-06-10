@@ -1,39 +1,25 @@
 import httpService from "../httpService";
 
 import {
-  CheckTokenValidateUrl,
   MatchNameAndNumberUrl,
-  LoginBySSNumberAndPwdUrl,
-  GetInitDataUrl
+  LoginByPwdUrl,
+  LoginByTokenUrl,
+  GetDataUrl
 
 } from "../httpConstants";
 
 const app = getApp()
 
-function checkTokenValidate(handleSuccess) {
-  httpService.get(
-    CheckTokenValidateUrl,
-    "",
-    res => {
-      handleSuccess(res.data['data'])
-    },
-    er => {
 
-    });
-}
-
-function checkTokenAndGetInitData(handleSuccess, handleFail, params) {
-  httpService.get(
-    GetInitDataUrl,
+function LoginByToken(handleSuccess, handleFail, params) {
+  httpService.post(
+    LoginByTokenUrl,
     params,
     res => {
       // 将获取的数据保存在globalData里
       handleSuccess(res.data['data'])
       // 1. 刷新token
-      console.log(res.data['data'])
-
       let token = res.data['data']['token']
-
       let initData = res.data['data']
       wx.setStorage({
         key: "initData",
@@ -53,13 +39,12 @@ function checkTokenAndGetInitData(handleSuccess, handleFail, params) {
     });
 }
 
-function loginBySSNumberAndPwd(handleSuccess, handleFailure, params) {
+function LoginByPwd(handleSuccess, handleFailure, params) {
   httpService.post(
-    LoginBySSNumberAndPwdUrl,
+    LoginByPwdUrl,
     params,
     res => {
       handleSuccess(res.data['data'])
-
       let initData = res.data['data']
       let token = res.data['data']['token']
       wx.setStorage({
@@ -92,9 +77,25 @@ function matchNameAndNumber(handleSuccess, handleFailure, params) {
 }
 
 
+function GetData(handleSuccess, handleFailure, params) {
+  httpService.post(
+    GetDataUrl,
+    params,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
+
+
+
+
 module.exports = {
-  checkTokenValidate: checkTokenValidate,
   matchNameAndNumber: matchNameAndNumber,
-  loginBySSNumberAndPwd: loginBySSNumberAndPwd,
-  checkTokenAndGetInitData: checkTokenAndGetInitData
+  LoginByPwd: LoginByPwd,
+  GetData:GetData,
+  LoginByToken: LoginByToken
 }

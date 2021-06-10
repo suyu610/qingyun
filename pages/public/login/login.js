@@ -86,7 +86,7 @@ Page({
       "password": this.data.password,
       "openid": app.globalData.openid
     }
-    UserService.loginBySSNumberAndPwd(this.handleLoginByPwdSuccess,this.handleLoginByPwdFailure, params)
+    UserService.LoginByPwd(this.handleLoginByPwdSuccess,this.handleLoginByPwdFailure, params)
   },
 
   /////////////////// 4. 【成功】处理输入密码的服务端返回 ///////////////////
@@ -94,7 +94,6 @@ Page({
     console.log(e)
     this.jump2Homepage()
     wx.setStorageSync('ssNumber', this.data.ssNumber)
-    
     Toast.success("成功")
   },
 

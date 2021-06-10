@@ -10,7 +10,7 @@
       皇甫素素
     </view>
     <view class="subtitle">
-      电子信息学院
+      {{"未填写学院名"}}
       <view class="stu_number">2019205913</view>
     </view>
   </view>

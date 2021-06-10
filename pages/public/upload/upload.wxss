@@ -29,6 +29,9 @@
 
 }
 
+.cell-value{
+  font-size: 12px!important;
+}
 .main {
   width: 90vw;
   margin: 5vw;
@@ -37,6 +40,8 @@
   border-radius: 10px;
   background-color: #fff;
 }
+
+
 
 .preview {
   width: 90vw;

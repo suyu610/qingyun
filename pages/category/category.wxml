@@ -6,23 +6,28 @@
   </view>
   <view class="action">
     <button class="cu-btn bg-white" style="background-color:transparent;color:white">搜索</button>
-    <button bindtap="showPopup" class="cu-btn" style="background-color:transparent"><van-icon name="filter-o" color="white"/></button>
-  </view>  
+    <button bindtap="showPopup" class="cu-btn" style="background-color:transparent">
+      <van-icon name="filter-o" color="white" />
+    </button>
+  </view>
 </view>
 
-<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh)" scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh)"
+  scroll-with-animation="true" enable-back-to-top="true">
   <block wx:for="{{list}}" wx:key="index">
-    <view class="padding-sm indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
+    <view class="padding-sm indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">
+      {{list[index]}}</view>
     <view class="cu-list menu-avatar no-padding" bindtap="jump2DocList">
       <view class="cu-item" wx:for="{{2}}" wx:key="index" wx:for-index="sub">
         <view class="cu-avatar round text-sm circle">{{index*27}}次</view>
         <view class="content">
           <view class="text-black course_title">高等数学{{list[index]}}
-            <text class="text-abc">{{list[sub]}}</text></view>
+            <text class="text-abc">{{list[sub]}}</text>
+          </view>
           <view class="text-gray text-sm">
             此课有{{sub+2}}份笔记，{{sub+2}}份资料
           </view>
-          
+
         </view>
       </view>
     </view>
@@ -30,7 +35,8 @@
 </scroll-view>
 <view class="indexBar" style="height:calc(100vh - 50px)">
   <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-    <view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
+    <view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur"
+      bindtouchend="setCur">{{list[index]}}</view>
   </view>
 </view>
 <!--选择显示-->
@@ -39,6 +45,5 @@
 </view>
 
 <van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 80%" round>
-  <van-area area-list="{{ areaList }}"   columns-placeholder="{{ ['全部', '全部', '全部'] }}"
-title="分类" />
+  <van-area area-list="{{ categoryList }}" visible-item-count="{{10}}"	 bind:confirm="confirmCategory" title="分类(括号里是资料数)" />
 </van-popup>

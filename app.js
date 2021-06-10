@@ -1,57 +1,7 @@
 // app.js
 const router = require('utils/router/index.js');
-const categoryList = {
 
-  /////////////// 分类 ////////////////
-  province_list: {
-    110000: '全部',
-    120000: '公共课程',
-    130000: '电子信息学院',
-    140000: '电子信息学院',
-    150000: '电子信息学院',
-    160000: '电子信息学院',
-    170000: '电子信息学院',
-    180000: '电子信息学院',
-    190000: '电子信息学院',
-    200000: '电子信息学院',
-    210000: '电子信息学院',
-    220000: '电子信息学院',
-    230000: '电子信息学院',
-    240000: '电子信息学院',
-    250000: '电子信息学院',
-    260000: '电子信息学院',
-    270000: '电子信息学院',
-    280000: '电子信息学院',
-  },
-  city_list: {
-    110100: '全部',
-    120100: '公共课程',
-    130100: '电子信息专业',
-    130200: '微电子专业',
-  },
-  county_list: {
-    110100: '全部',
-    110101: '大一',
-    110102: '大二',
-    110103: '大三',
-    110104: '大四',
-    120100: '全部',
-    120101: '大一',
-    120102: '大二',
-    120103: '大三',
-    120104: '大四',
-    130100: '全部',
-    130101: '大一',
-    130102: '大二',
-    130103: '大三',
-    130104: '大四',
-    130200: '全部',
-    130201: '大一',
-    130202: '大二',
-    130203: '大三',
-    130204: '大四',
-  },
-};
+// 设置全局的分享
 ! function () {
   var PageTmp = Page;
 
@@ -80,7 +30,78 @@ const categoryList = {
   };
 }();
 App({
+
+   // ---------------------------------------------网络状态 
+   networkManage: function () {
+    var that = this;
+    //监听网络状态
+    wx.onNetworkStatusChange(function (res) {
+      console.log(res.networkType)
+
+      console.log(res)
+      if (!res.isConnected) {
+        console.log("123")
+        that.msg('网络似乎不太顺畅');
+      }else{
+        console.log(res)
+      }
+    })
+  },
+  //---------------------------------------------检测小程序版本更新
+  updateManage: function () {
+    var that = this;
+ 
+    var updateManager = wx.getUpdateManager()
+ 
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      if (!res.hasUpdate) {
+ 
+      }
+    })
+    // 监听新版本下载成功
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          } else {
+            that.updateManage();
+          }
+        }
+      })
+    })
+    // 监听新版本下载失败
+    updateManager.onUpdateFailed(function () {
+      app.showModal({
+        content: '新版本更新失败，是否重试？',
+        confirmText: '重试',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      });
+    })
+  },
+
+  
+  
   onLaunch() {
+
+
+
+    this.networkManage(); //调用监听网络状态的方法
+    this.updateManage(); //调用检测小程序版本更新的方法
+   
+   
+    
+  
+    this.globalData.initData =  wx.getStorageSync('initData')
     let that = this
     wx.cloud.init({
       traceUser: true,
@@ -120,6 +141,6 @@ App({
     token: "",
     ssNumber: "",
     version:"0.1.3",
-    categoryList:categoryList
+    categoryList:{}
   }
 })

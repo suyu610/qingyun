@@ -1,6 +1,7 @@
 /* pages/empty/empty.wxss */
 page {
 	background-color: #fff;
+	overflow: hidden;
 }
 
 .logo {

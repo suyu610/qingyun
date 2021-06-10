@@ -14,13 +14,13 @@
 
     2. 由于我们暂时不能对个人转账，点击提现后，请上传你的微信<text class="my-text-bold">收款码</text>，我们会尽快处理。
 
-    3. 每一笔交易，<text class="my-text-bold">微信</text>都会抽取<text
-      class="my-text-bold">1%</text>的手续费，请谅解。
+    3. 每一笔交易，<text class="my-text-bold">微信</text>都会抽取<text class="my-text-bold">1%</text>的手续费，请谅解。
 
     4. 谢谢你的付出，使青大学习氛围更为浓郁。</text>
 
-  <text style="font-size:14px;text-align:justify" user-select wx:if="{{type=='login'}}">1. 本APP由青大学生基于学习目的开发，<text class="my-text-bold">非官方产品</text>。是一个大家共享学习资料的平台，你可以在这发布资料(支持设置金额）。
-    
+  <text wx:if="{{type=='login'}}" style="font-size:14px;text-align:justify" user-select>1. 本APP由青大学生基于学习目的开发，<text
+      class="my-text-bold">非官方产品</text>。是一个大家共享学习资料的平台，你可以在这发布资料(支持设置金额）。
+
     2. 登录逻辑：
     1) 第一次使用时，输入正确的学号和姓名登录后，需要设置初始密码，在使用提现等功能时，你需要验证密码，请牢记。
 
@@ -30,12 +30,32 @@
     3. <text class="my-text-bold">”让世界更美好“ </text>是我们的初衷，无论我们的商业模式今后怎么改变，初心不变。
 
     4. 代码开源，欢迎star，如欲在其他学校搭建本平台，欢迎联系客服。
-    
+
     5. 由 <text class="my-text-bold">®素语网络科技（青岛）有限公司 </text>出品。
-    
+
     前端：https://github.com/suyu610/qingyun
     后端：https://github.com/suyu610/qingyun_server
 
   </text>
 
+
+  <text wx:if="{{type=='upload'}}" style="font-size:14px;text-align:justify" user-select>1. 本APP由青大学生基于学习目的开发，<text
+      class="my-text-bold">非官方产品</text>。是一个大家共享学习资料的平台，你可以在这发布资料(支持设置金额）。
+
+    2. 登录逻辑：
+    1) 第一次使用时，输入正确的学号和姓名登录后，需要设置初始密码，在使用提现等功能时，你需要验证密码，请牢记。
+
+    2) 由于学号+姓名属于非私密信息，所以如果你的身份信息被别人使用，并设置了密码，你可以通过教务认证或青大邮箱认证，修改密码。
+    <van-divider></van-divider>
+
+    3. <text class="my-text-bold">”让世界更美好“ </text>是我们的初衷，无论我们的商业模式今后怎么改变，初心不变。
+
+    4. 代码开源，欢迎star，如欲在其他学校搭建本平台，欢迎联系客服。
+
+    5. 由 <text class="my-text-bold">®素语网络科技（青岛）有限公司 </text>出品。
+
+    前端：https://github.com/suyu610/qingyun
+    后端：https://github.com/suyu610/qingyun_server
+
+  </text>
 </view>

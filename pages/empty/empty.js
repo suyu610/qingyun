@@ -68,25 +68,34 @@ Page({
     // 检查本地是否有学号+token，若有，则发送验证
     // 若无，说明是第一次登录，跳转至登陆页面
     // 若验证不通过，说明token失效，则使用code去换取token
+    let token1 = wx.getStorageSync('tmp')
+    if(token1 ==''){
+      wx.setStorageSync('tmp', "tmp")
+      router.replace({
+        name: "login"
+      })
+      return
+    }
+
     let token = wx.getStorageSync('token')
     let ssNumber = wx.getStorageSync('ssNumber')
     let openid = wx.getStorageSync('openid');
     if (token != '' && ssNumber != '') {
       let params = {
+        "filed":["all"],
         "ssNumber": ssNumber,
         "token": token,
         "openid": openid
       }
-      UserService.checkTokenAndGetInitData(this.handleGetInitDataSuccess, this.handleGetInitDataFail,params)
+      UserService.LoginByToken(this.handleGetInitDataSuccess, this.handleGetInitDataFail,params)
     } else {
-      console.log("没有token或ssNumber")
+       console.log("没有token或ssNumber")
       // 跳转到登陆页面
       router.replace({
         name: "login"
       })
       return;
     }
-
 
   },
 

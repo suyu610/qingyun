@@ -27,6 +27,23 @@ Page({
       show: true
     });
   },
+
+  confirmCategory() {
+    // 发送请求
+    //
+    wx.showLoading({
+      title: '处理中',
+    })
+    setTimeout(() => {
+      wx.hideLoading({
+        success: (res) => {
+
+          this.onClose();
+
+        },
+      })
+    }, 1000);
+  },
   onClose() {
     this.setData({
       show: false
@@ -41,14 +58,12 @@ Page({
       list[i] = String.fromCharCode(65 + i)
     }
 
-    let areaList = {}
-    areaList.province_list = app.globalData.initData.category.collegeMap
-    areaList.city_list = app.globalData.initData.category.majorMap
-    areaList.county_list = app.globalData.initData.category.gradeMap
-
-
+    let categoryList = {}
+    categoryList.province_list = app.globalData.initData.category.collegeMap
+    categoryList.city_list = app.globalData.initData.category.majorMap
+    categoryList.county_list = app.globalData.initData.category.gradeMap
     this.setData({
-      areaList
+      categoryList
     })
 
     this.setData({
@@ -56,6 +71,8 @@ Page({
       listCur: list[0]
     })
   },
+
+
   onReady() {
     let that = this;
     wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
@@ -78,6 +95,8 @@ Page({
   },
 
   setCur(e) {
+    console.log("测试")
+
     this.setData({
       hidden: true,
       listCur: this.data.listCur
@@ -91,6 +110,10 @@ Page({
     //判断选择区域,只有在选择区才会生效
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
+      if(this.data.listCur != that.data.list[num]){
+        console.log("改变")
+        wx.vibrateShort();
+      }
       this.setData({
         listCur: that.data.list[num]
       })
@@ -118,6 +141,7 @@ Page({
     let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
     for (let i = 0; i < list.length; i++) {
       if (scrollY < i + 1) {
+
         that.setData({
           listCur: list[i],
           movableY: i * 20

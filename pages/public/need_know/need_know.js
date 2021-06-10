@@ -23,6 +23,10 @@ Page({
       title = "用户须知"
     }
 
+    if(data.type=="upload"){
+      title = "上传须知"
+    }
+
     this.setData({title})
 
   },

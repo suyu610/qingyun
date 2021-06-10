@@ -14,7 +14,9 @@
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-area": "@vant/weapp/area/index",
     "van-popup": "@vant/weapp/popup/index",
-    "van-circle": "@vant/weapp/circle/index"
+    "van-circle": "@vant/weapp/circle/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+
 
 
   

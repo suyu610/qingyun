@@ -229,18 +229,19 @@ Page({
       title: '青云知识库',
     })
     let documentList = []
+
     app.globalData.initData.hotDoc.forEach(element => {
       element.subTitle = element.introduce
       documentList.push(element)
     });
+    if (app.globalData.hotDoc != null) {
+      app.globalData.hotDoc.forEach(element => {
+        element.subTitle = element.introduce
+        documentList.push(element)
+      });
+    }
     this.setData({
       documentList
     })
-
-
-
-
-
-
   },
 })
