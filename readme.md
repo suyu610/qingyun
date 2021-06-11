@@ -4,11 +4,11 @@
 - 使用的技术栈为：Springboot、微信小程序（[Vant](https://vant-contrib.gitee.io/vant-weapp/#/home "Vant")、[ColorUI](https://www.color-ui.com/ "ColorUI"))、H5、Redis、MySQL
 - 采用腾讯云COS作为网盘，控制读写权限
 
-**欢迎在你的学校搭建此系统，如需帮助，欢迎与我联系 **
+**欢迎在你的学校搭建此系统，如需帮助，欢迎与我联系**
 - QQ 372799030
 - 微信 sususu6110
 
-** 文档地址 **
+**文档地址**
 https://doc.qdu.life/web/#/20?page_id=71
 ## live demo
 - 视频演示
