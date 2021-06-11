@@ -120,7 +120,6 @@ Page({
     });
   },
   jump2Detail: function (e) {
-    console.log(e)
     push({
       name: 'document_detail',
       data: {

@@ -8,22 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
     doc: {},
     // 预览图
-    previewList: [{
-        "id": 0,
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-1.jpg"
-      },
-      {
-        "id": 0,
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-2.jpg"
-      },
-      {
-        "id": 0,
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-3.jpg"
-      },
-    ],
+    previewList: [],
     previewIndicatorDots: true,
     previewAutoplay: false,
     previewInterval: 8000,
@@ -88,7 +75,6 @@ Page({
   },
 
   handleGetDetailSuccess: function (e) {
-    console.log(e)
     this.setData({
       doc: e
     })
@@ -96,57 +82,25 @@ Page({
 
 
     e.files.forEach(function (element) {
-      previewList.push({
-        'id': 0,
-        'imgUrl': element
-      })
+      if (/\.(gif|jpg|jpeg|png|GIF|JPEG|JPG|PNG)$/.test(element)) {
+        previewList.push({
+          'id': 0,
+          'imgUrl': element
+        })
+      }
     })
 
     this.setData({
       previewList
     })
   },
-  /**
-   * 生命周期函数
-   */
+
   onLoad: function (options) {
     const data = router.extract(options);
-    console.log(data.id); // { id: '123', type: 1 }
     DocService.GetDocDetail(this.handleGetDetailSuccess, data.id)
     wx.setNavigationBarTitle({
       title: '资料详情',
     })
   },
 
-  onReady: function () {
-
-  },
-
-
-  onShow: function () {
-
-  },
-
-  onHide: function () {
-
-  },
-
-
-  onUnload: function () {
-
-  },
-
-
-  onPullDownRefresh: function () {
-
-  },
-
-
-  onReachBottom: function () {
-
-  },
-
-  onShareAppMessage: function () {
-
-  }
 })

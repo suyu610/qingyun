@@ -7,11 +7,13 @@ import {
 Page({
   data: {
     hidden: true,
-    areaList: {
+    showCategoryPopup: false,
+    categoryList: {
       province_list: {},
       city_list: {},
       county_list: {},
-    }
+    },
+    back_categoryList:{}
   },
   jump2DocList: function () {
     push({
@@ -22,12 +24,46 @@ Page({
       },
     });
   },
-  showPopup: function () {
+  showCategoryPopup: function () {
     this.setData({
-      show: true
+      showCategoryPopup: true
     });
   },
 
+  onCategorySearchChange(e) {
+    if (e.detail == "") {
+      this.setData({
+        categoryList: this.data.back_categoryList
+      })
+      return
+    }
+
+    let searchCategoryList = {}
+    let new_province_list = {};
+    let new_city_list = this.data.back_categoryList.city_list;
+    let new_county_list = this.data.back_categoryList.county_list;
+
+    for (const [province_key, province_value] of Object.entries(this.data.back_categoryList.province_list)) {
+      if (province_value.indexOf(e.detail) != -1) {
+        new_province_list[province_key] = province_value
+      }
+    }
+
+    searchCategoryList['province_list'] = new_province_list
+    searchCategoryList['city_list'] = new_city_list
+    searchCategoryList['county_list'] = new_county_list
+
+
+    this.setData({
+      categoryList: searchCategoryList
+    })
+
+  },
+  onCloseCategoryPopup() {
+    this.setData({
+      showCategoryPopup: false
+    });
+  },
   confirmCategory() {
     // 发送请求
     //
@@ -44,11 +80,7 @@ Page({
       })
     }, 1000);
   },
-  onClose() {
-    this.setData({
-      show: false
-    });
-  },
+
   onLoad() {
     wx.setNavigationBarTitle({
       title: '课程分类',
@@ -58,7 +90,8 @@ Page({
       list[i] = String.fromCharCode(65 + i)
     }
     this.setData({
-      categoryList:app.globalData.categoryList
+      categoryList: app.globalData.categoryList,
+      back_categoryList:app.globalData.categoryList
     })
 
     this.setData({
@@ -105,7 +138,7 @@ Page({
     //判断选择区域,只有在选择区才会生效
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
-      if(this.data.listCur != that.data.list[num]){
+      if (this.data.listCur != that.data.list[num]) {
         console.log("改变")
         wx.vibrateShort();
       }

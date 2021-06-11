@@ -18,6 +18,14 @@ page {
   align-items: center;
 }
 
+.category-search {
+  position: absolute;
+  bottom: 10px;
+  left: 2.5%;
+  text-align: center;
+  width: 95%;
+}
+
 
 .indexBar .indexBar-box {
   width: 40rpx;

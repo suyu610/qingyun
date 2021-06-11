@@ -180,15 +180,19 @@ Page({
 
   openSubmitUpload: function () {
     // 检测是否必要的信息都填写完毕
+
     //  课程分类
-    
-    
     if(this.data.upload_categoryId == 0){
       wx.showToast({
         icon:'none',
         title: '未填写分类',
       })
       return
+    }
+
+    // 价格检验
+    if(this.data.upload_doc_price >999){
+
     }
 
     if (this.data.checkedNeedKnow == false) {
@@ -334,6 +338,7 @@ Page({
 
 
   onCloseCategoryPopup: function () {
+    console.log("onCloseCategoryPopup")
     this.setData({
       showCategoryPopup: false
     })
@@ -509,13 +514,7 @@ Page({
       title: '上传资料',
     })
 
-    let categoryList = app.globalData.categoryList
-    let back_categoryList = categoryList
 
-    this.setData({
-      categoryList,
-      back_categoryList
-    })
   },
 
   /**
@@ -529,7 +528,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let categoryList;
+    if(app.globalData.categoryList == null){
+      categoryList = wx.getStorageSync('categoryList')
+    }else{
+      categoryList = app.globalData.categoryList
+    }
+    let back_categoryList = categoryList
 
+    this.setData({
+      categoryList,
+      back_categoryList
+    })
   },
 
   /**

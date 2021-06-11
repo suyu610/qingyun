@@ -138,21 +138,20 @@
     </van-cell-group>
   </view>
 </van-popup>
+
+
 <van-popup show="{{ showCategoryPopup }}" bind:close="onCloseCategoryPopup" position="top"
   custom-style="height:55%;text-align:center" round>
-
   <van-area id="CategoryPicker" area-list="{{ categoryList }}" columns-placeholder="{{ ['选择学院', '', ''] }}"
-    visible-item-count="{{6}}" title="分类" bind:confirm="confirmCategory" />
+    visible-item-count="{{6}}" title="分类" bind:confirm="confirmCategory" bind:cancel="onCloseCategoryPopup"/>
   <!-- <van-button custom-style="border-radius:7px;color:white;margin-top:5vh" type="info" size="small">没找到你要的分类?
   </van-button> -->
-  <van-search custom-class="category-search" value="{{ value }}"  hold-keyboard placeholder="搜索学院名" use-action-slot
-    bind:change="onCategorySearchChange" bind:search="onSearch">
-    <view slot="action" bind:tap="onClick">搜索</view>
+  <van-search custom-class="category-search" value="{{ value }}"  hold-keyboard placeholder="搜索学院名" 
+    bind:change="onCategorySearchChange">
   </van-search>
-
 </van-popup>
 
-
+<!--  类型 -->
 <van-action-sheet show="{{ showDocTypeSheet }}" actions="{{ docTypeActions }}" bind:close="onCloseDocType"
   bind:select="onSelectDocType" />
 

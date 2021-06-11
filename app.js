@@ -129,9 +129,7 @@ App({
       }
     })
 
-
     let token = wx.getStorageSync('token')
-
     this.globalData.token = token
   },
 
@@ -141,6 +139,6 @@ App({
     token: "",
     ssNumber: "",
     version:"0.1.3",
-    categoryList:{}
+    categoryList:null
   }
 })
