@@ -12,14 +12,16 @@
 https://doc.qdu.life/web/#/20?page_id=71
 ## live demo
 - 视频演示
-https://www.bilibili.com/video/BV1e64y1k7hZ/
+  
+  https://www.bilibili.com/video/BV1e64y1k7hZ/
 
 - web端
-https://book.qdu.life
+  
+  https://book.qdu.life
 
 - 小程序
-![](http://doc.qdu.life/server/index.php?s=/api/attachment/visitFile/sign/6c006029fa4b9f995ea174c7cf2ffe7f)
-
+  
+  <img src="http://doc.qdu.life/server/index.php?s=/api/attachment/visitFile/sign/6c006029fa4b9f995ea174c7cf2ffe7f"  height = "500px" width="500px" alt="" align=center />
 ## 代码库
 前端：https://github.com/suyu610/qingyun
 后端：https://github.com/suyu610/qingyun_server
