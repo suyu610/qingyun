@@ -13,7 +13,7 @@ Page({
       city_list: {},
       county_list: {},
     },
-    back_categoryList:{}
+    back_categoryList: {}
   },
   jump2DocList: function () {
     push({
@@ -66,13 +66,17 @@ Page({
   },
   confirmCategory() {
     // 发送请求
-    //
+
+
     wx.showLoading({
       title: '处理中',
     })
     setTimeout(() => {
       wx.hideLoading({
         success: (res) => {
+          this.setData({
+            showCategoryPopup: false
+          })
 
           this.onClose();
 
@@ -91,7 +95,7 @@ Page({
     }
     this.setData({
       categoryList: app.globalData.categoryList,
-      back_categoryList:app.globalData.categoryList
+      back_categoryList: app.globalData.categoryList
     })
 
     this.setData({

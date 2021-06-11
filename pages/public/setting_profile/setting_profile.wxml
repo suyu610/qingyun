@@ -25,7 +25,7 @@
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
         <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
-          label="联系方式 *" input-align="right" placeholder="用于收货时联系" type="textarea" border="{{ true }}" />
+          label="联系方式 *" input-align="right" placeholder="用于收货时联系，不会展示" type="textarea" border="{{ true }}" />
       </van-cell-group>
     </view>
 

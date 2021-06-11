@@ -45,17 +45,16 @@
 </view>
 
 <van-popup show="{{ show }}" bind:close="onClose" position="top" custom-style="height: 80%" round>
-  <van-area area-list="{{ categoryList }}" visible-item-count="{{8}}"	 bind:confirm="confirmCategory" title="分类(括号里是资料数)" />
+  <van-area area-list="{{ categoryList }}" visible-item-count="{{8}}" bind:confirm="confirmCategory"
+    title="分类(括号里是资料数)" />
 </van-popup>
 
 
 <van-popup show="{{ showCategoryPopup }}" bind:close="onCloseCategoryPopup" position="top"
-  custom-style="height:55%;text-align:center" round>
+  custom-style="padding-top:45px;height:55%;text-align:center" round>
   <van-area id="CategoryPicker" area-list="{{ categoryList }}" columns-placeholder="{{ ['选择学院', '', ''] }}"
     visible-item-count="{{5}}" title="分类" bind:confirm="confirmCategory" />
-  <van-search custom-class="category-search" value="{{ value }}"  hold-keyboard placeholder="搜索学院名" use-action-slot
+  <van-search custom-class="category-search" value="{{ value }}" hold-keyboard placeholder="搜索学院名" use-action-slot
     bind:change="onCategorySearchChange" bind:search="onSearch">
-    <view slot="action" bind:tap="onClick">搜索</view>
   </van-search>
-
 </van-popup>

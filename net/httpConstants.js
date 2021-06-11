@@ -1,5 +1,5 @@
-export const Host = 'https://api.book.uutrack.cn/v1/';
-// export const Host = 'http://localhost:6110/v1/';  
+// export const Host = 'https://api.book.uutrack.cn/v1/';
+export const Host = 'http://localhost:6110/v1/';  
 // export const Host = 'http://192.168.43.192:6110/v1/'
 
 ////////////

@@ -104,7 +104,7 @@ Page({
     upload_doc_title: "",
     upload_course_title: "",
     upload_doc_type: 1,
-    upload_doc_price: 0,
+    upload_doc_price: "",
     upload_file_name: "",
     upload_doc_introduce: "",
 
