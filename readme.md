@@ -14,7 +14,7 @@
 5. 内置商城，进行商业化探索
 
 ### 技术栈
-Springboot、微信小程序（[Vant](https://vant-contrib.gitee.io/vant-weapp/#/home "Vant")、[ColorUI](https://www.color-ui.com/ "ColorUI"))、H5、Redis、MySQL
+Springboot、微信小程序（[Vant](https://vant-contrib.gitee.io/vant-weapp/#/home "Vant")、[ColorUI](https://www.color-ui.com/ "ColorUI"))、H5、Redis、MySQL、
 采用腾讯云COS作为网盘，控制读写权限
 
 ## 联系我
