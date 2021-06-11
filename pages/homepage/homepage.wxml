@@ -50,7 +50,7 @@
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
-              <course_item bindtap="jump2Detail" docuType="{{item.docuType}}" title="{{item.title}}"
+              <course_item bindtap="jump2Detail" data-id="{{item.id}}" docuType="{{item.docuType}}" title="{{item.title}}"
                 isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
                 price="{{item.price}}" starCount="{{item.starCount}}" authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>

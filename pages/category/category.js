@@ -57,13 +57,8 @@ Page({
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)
     }
-
-    let categoryList = {}
-    categoryList.province_list = app.globalData.initData.category.collegeMap
-    categoryList.city_list = app.globalData.initData.category.majorMap
-    categoryList.county_list = app.globalData.initData.category.gradeMap
     this.setData({
-      categoryList
+      categoryList:app.globalData.categoryList
     })
 
     this.setData({

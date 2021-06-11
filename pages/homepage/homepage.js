@@ -1,125 +1,16 @@
 // pages/homepage/homepage.js
-const documentList = [{
-    docuType: "paper",
-    title: "高数历年试卷",
-    subTitle: "2017-2020年",
-    isHot: true,
-    college: "电子信息学院",
-    grade: "大二",
-    price: "15.00",
-    starCount: "4",
-    authorName: "黄鹏宇"
-  },
-  {
-    docuType: "note",
-    title: "固体物理亲手笔记",
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    starCount: "91",
-    authorName: "皇甫素素"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "paper",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "paper",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "paper",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "paper",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "paper",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    starCount: "0",
-    authorName: "臭猪"
-  }
-]
-
 const helpList = []
+
+
+import UserService from '../../net/service/userService.js'
+
 import {
   push
 } from '../../utils/router/index.js';
 let app = getApp()
 Page({
   data: {
-    documentList: documentList,
+    documentList: [],
     helpList: helpList,
     ////////// 頂部輪播圖 //////////
     adsList: [{
@@ -162,26 +53,45 @@ Page({
       showSearch: false
     })
   },
+
+
+  handleGetInitDataSuccess: function (e) {
+
+    let documentList = [];
+    e.hotDoc.forEach(element => {
+      element.subTitle = element.introduce
+      documentList.push(element)
+    });
+
+    this.setData({documentList})
+
+    wx.hideLoading({
+      success: (res) => {
+        wx.showToast({
+          title: '刷新成功',
+          duration: 500,
+        })
+        this.setData({
+          triggered: false
+        })
+      },
+    })
+  },
+
+  // 下拉刷新
   onScrollRefresh: function () {
-    console.log("刷新")
+    UserService.GetData(this.handleGetInitDataSuccess, this.handleGetInitDataFail, {
+      fields: "hotDoc"
+    })
+
+ 
+
+
     wx.vibrateShort()
-    let that = this;
     wx.showLoading({
       title: '刷新中',
     })
-    setTimeout(() => {
-      wx.hideLoading({
-        success: (res) => {
-          wx.showToast({
-            title: '刷新成功',
-            duration: 500,
-          })
-          this.setData({
-            triggered: false
-          })
-        },
-      })
-    }, 1000);
+
   },
   // 跳转小程序
   jump2Qk: function () {
@@ -209,15 +119,29 @@ Page({
       name: 'preview_doc',
     });
   },
-  jump2Detail: function () {
+  jump2Detail: function (e) {
+    console.log(e)
     push({
       name: 'document_detail',
       data: {
-        id: '123',
+        id: e.currentTarget.dataset.id,
         type: 1,
       },
     });
   },
+
+  onShow: function () {
+    let documentList = []
+
+    app.globalData.hotDoc.forEach(element => {
+      element.subTitle = element.introduce
+      documentList.push(element)
+    });
+    this.setData({
+      documentList
+    })
+  },
+
   onLoad: function (options) {
     if (app.globalData.msgList != null) {
       wx.setTabBarBadge({
@@ -228,20 +152,9 @@ Page({
     wx.setNavigationBarTitle({
       title: '青云知识库',
     })
-    let documentList = []
 
-    app.globalData.initData.hotDoc.forEach(element => {
-      element.subTitle = element.introduce
-      documentList.push(element)
-    });
-    if (app.globalData.hotDoc != null) {
-      app.globalData.hotDoc.forEach(element => {
-        element.subTitle = element.introduce
-        documentList.push(element)
-      });
-    }
-    this.setData({
-      documentList
-    })
+
+
+
   },
 })

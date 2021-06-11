@@ -2,12 +2,14 @@
 let app = getApp()
 import UploadService from '../../../net/service/uploadService.js'
 import UserService from '../../../net/service/userService.js'
+const {
+  uploadFile
+} = require("../../../utils/tencentCOSUpload")
 
 let uploadTimer
 import {
   push
 } from '../../../utils/router/index.js';
-
 Page({
 
   /**
@@ -39,8 +41,9 @@ Page({
     net_type: "",
     isUploading: false,
     upload_step_title: "上传图片",
-    upload_step_detail: "1 / 5",
+    upload_step_detail: "",
     categoryList: {},
+    back_categoryList: {},
     checkbox: [{
       value: 0,
       name: '自制',
@@ -95,14 +98,19 @@ Page({
 
     /////////// 要上传的数据 ////////////////
     // 分类的id
-    upload_categoryId: 100101,
+    upload_categoryId: 0,
     upload_tagId_list: [],
-    upload_doc_previewCount: 4,
-    upload_doc_title: "课程的标题课程的标题课程的标题课程的标题",
-    upload_course_title: "高等数学",
+    upload_doc_previewCount: 0,
+    upload_doc_title: "",
+    upload_course_title: "",
     upload_doc_type: 1,
-    upload_doc_price: 12,
-    upload_doc_introduce: "课程介绍,巴拉巴拉巴拉吧",
+    upload_doc_price: 0,
+    upload_file_name: "",
+    upload_doc_introduce: "",
+
+    /////// 控制上传
+    upload_file_count: 0,
+    upload_file_current_size: 0,
   },
 
   onCloseDocType: function () {
@@ -154,15 +162,35 @@ Page({
   },
 
   handleUploadInfoSuccess: function (e) {
-    console.log(e)
+    this.setData({
+      uploadProgressValue:100,
+      upload_file_count: this.data.upload_file_count + 1,
+      upload_step_title: "上传完成",
+      upload_step_detail: this.data.fileList.length + " / " + this.data.fileList.length,
+      // showUploadProgressPopup: false
+    })
 
+    UserService.GetData(this.handleGetInitDataSuccess, this.handleGetInitDataFail, {
+      fields: "hotDoc"
+    })
   },
   handleUploadInfoFail: function (e) {
     console.log(e)
-
   },
 
   openSubmitUpload: function () {
+    // 检测是否必要的信息都填写完毕
+    //  课程分类
+    
+    
+    if(this.data.upload_categoryId == 0){
+      wx.showToast({
+        icon:'none',
+        title: '未填写分类',
+      })
+      return
+    }
+
     if (this.data.checkedNeedKnow == false) {
       wx.showToast({
         icon: 'none',
@@ -186,9 +214,38 @@ Page({
       showUploadProgressPopup: true
     })
   },
-  
+
+  onCategorySearchChange(e) {
+    if (e.detail == "") {
+      this.setData({
+        categoryList: this.data.back_categoryList
+      })
+      return
+    }
+
+    let searchCategoryList = {}
+    let new_province_list = {};
+    let new_city_list = this.data.back_categoryList.city_list;
+    let new_county_list = this.data.back_categoryList.county_list;
+
+    for (const [province_key, province_value] of Object.entries(this.data.back_categoryList.province_list)) {
+      if (province_value.indexOf(e.detail) != -1) {
+        new_province_list[province_key] = province_value
+      }
+    }
+
+    searchCategoryList['province_list'] = new_province_list
+    searchCategoryList['city_list'] = new_city_list
+    searchCategoryList['county_list'] = new_county_list
+
+
+    this.setData({
+      categoryList: searchCategoryList
+    })
+
+  },
   // 上传完毕后，回到上一页
-  handleGetInitDataSuccess:function(e){
+  handleGetInitDataSuccess: function (e) {
     app.globalData.hotDoc = e;
     wx.showToast({
       title: '感谢耐心等待',
@@ -198,23 +255,66 @@ Page({
       wx.navigateBack({
         delta: 0,
       })
-    }, 1000);     
+    }, 1000);
   },
+
+  ////////////////////////////////// 这里控制上传  //////////////////////////////////
+
+  uploadController: function (e) {
+    //{progress: 24, totalBytesSent: 65536, totalBytesExpectedToSend: 270822}
+    // 控制圆环
+    if (e.progress % 2 == 0) {
+      this.setData({
+        uploadProgressValue: parseInt((this.data.upload_file_current_size + e.totalBytesSent / this.data.totalFileSize) * 100)
+      })
+    }
+  },
+
   ///////////////// 开始上传
   onUploadConfirmButton: function () {
     if (this.data.isUploading) {
       // 停止
       clearInterval(uploadTimer);
-
       this.setData({
-        upload_step_detail: "1 / 5",
+        upload_step_detail: "0 / " + this.data.fileList.length,
         uploadProgressValue: 0,
         isUploading: false,
       })
     } else {
       this.setData({
+        upload_step_detail: "1 / " + this.data.fileList.length,
         isUploading: true,
       })
+      uploadFile(this.data.fileList[this.data.upload_file_count].url, this.uploadController, this.uploadFileSuccess)
+    }
+  },
+
+  uploadFileSuccess: function (fileName) {
+    let upload_file_name = this.data.upload_file_name;
+    if (upload_file_name == "") {
+      upload_file_name = fileName
+    } else {
+      upload_file_name = upload_file_name + ";" + fileName
+    }
+
+    this.setData({
+      upload_file_name
+    })
+
+    //  单个文件上传完毕
+    if (this.data.upload_file_count < this.data.fileList.length - 1) {
+      let upload_file_count = this.data.upload_file_count + 1
+      this.setData({
+        upload_step_detail: this.data.upload_file_count + 1 + " / " + this.data.fileList.length,
+        upload_file_count,
+      })
+      // 开始上传下一个
+      uploadFile(this.data.fileList[this.data.upload_file_count].url, this.uploadController, this.uploadFileSuccess)
+      return
+    }
+
+    // 所有文件上传完毕
+    if (this.data.upload_file_count == this.data.fileList.length - 1) {
       let params = {
         upload_categoryId: this.data.upload_categoryId,
         upload_tagId_list: this.data.upload_tagId_list,
@@ -223,54 +323,16 @@ Page({
         upload_course_title: this.data.upload_course_title,
         upload_doc_type: this.data.upload_doc_type,
         upload_doc_price: this.data.upload_doc_price,
-        upload_doc_introduce: this.data.upload_doc_introduce
+        upload_doc_introduce: this.data.upload_doc_introduce,
+        upload_file_name: upload_file_name
       }
-      UploadService.uploadInfo(this.handleUploadInfoSuccess, this.handleUploadInfoFail, params);
-      uploadTimer = setInterval(() => {
-        if (this.data.uploadProgressValue == 20) {
-          this.setData({
-            upload_step_detail: "2 / 5"
-          })
-        }
-        if (this.data.uploadProgressValue == 30) {
-          this.setData({
-            upload_step_detail: "3 / 5"
-          })
-        }
-        if (this.data.uploadProgressValue == 40) {
-          this.setData({
-            upload_step_detail: "4 / 5"
-          })
-        }
-        if (this.data.uploadProgressValue == 50) {
-          this.setData({
-            upload_step_detail: "5 / 5"
-          })
-        }
-        if (this.data.uploadProgressValue == 60) {
-          this.setData({
-            upload_step_title: "上传资料中",
-            upload_step_detail: ""
-          })
-        }
-        if (this.data.uploadProgressValue == 100) {
 
-          this.setData({
-            upload_step_title: "上传完成",
-            showUploadProgressPopup:false
-          })
-          let params={
-            fields:"hotDoc"
-          }
-          UserService.GetData(this.handleGetInitDataSuccess, this.handleGetInitDataFail,params)
-      
-        }
-        this.setData({
-          uploadProgressValue: this.data.uploadProgressValue + 10
-        })
-      }, 500);
+      // 上传资料
+      UploadService.uploadInfo(this.handleUploadInfoSuccess, this.handleUploadInfoFail, params);
     }
   },
+
+
   onCloseCategoryPopup: function () {
     this.setData({
       showCategoryPopup: false
@@ -447,12 +509,12 @@ Page({
       title: '上传资料',
     })
 
-    let categoryList = {}
-    categoryList.province_list = app.globalData.initData.category.collegeMap
-    categoryList.city_list = app.globalData.initData.category.majorMap
-    categoryList.county_list = app.globalData.initData.category.gradeMap
+    let categoryList = app.globalData.categoryList
+    let back_categoryList = categoryList
+
     this.setData({
-      categoryList
+      categoryList,
+      back_categoryList
     })
   },
 

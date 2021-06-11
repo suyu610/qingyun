@@ -41,7 +41,13 @@
   background-color: #fff;
 }
 
-
+.category-search{
+  position: absolute;
+  bottom: 10px;
+  left:2.5%;
+text-align: center;
+  width: 95%;
+}
 
 .preview {
   width: 90vw;

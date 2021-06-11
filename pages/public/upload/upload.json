@@ -15,7 +15,9 @@
     "van-area": "@vant/weapp/area/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-circle": "@vant/weapp/circle/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index"
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-search": "@vant/weapp/search/index"
+
 
 
 

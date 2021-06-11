@@ -7,7 +7,7 @@ export const Host = 'https://api.book.uutrack.cn/v1/';
 ///////////
 
 export const UploadInfoUrl = 'file/upload';
-export const UploadFilesUrl = 'file/matchNameAndNumber';
+export const GetUploadFileSignUrl = 'file/getUploadFileSign';
 
 ////////////
 /// 用户 ///
@@ -17,3 +17,10 @@ export const MatchNameAndNumberUrl = 'user/matchNameAndNumber';
 export const LoginByPwdUrl = 'user/loginByPwd';
 export const GetDataUrl = 'user/getData'
 export const LoginByTokenUrl = 'user/loginByToken';
+
+////////////
+/// 文档 ///
+///////////
+
+export const GetDocDetailUrl = 'file/detail/'
+

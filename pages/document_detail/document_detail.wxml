@@ -1,7 +1,7 @@
 <!--pages/document_detail/document_detail.wxml-->
 <view class="container">
   <!-- 文档预览图 -->
-  <view class="preview">
+  <view class="preview" wx:if="{{previewList.length != 0}}">
     <swiper indicator-dots="{{previewIndicatorDots}}" indicator-active-color="#fff" indicator-color="#ffffff55"
       circular="{{true}}" autoplay="{{previewAutoplay}}" interval="{{previewInterval}}" duration="{{previewDuration}}">
       <block wx:for="{{previewList}}" wx:key="index" wx:for-item="item">
@@ -12,12 +12,17 @@
         </swiper-item>
       </block>
     </swiper>
-
   </view>
+
+  <view class="preview" wx:else style="background-color:white">
+    <van-empty image="error" description="暂无预览图">
+    </van-empty>
+  </view>
+
   <!-- 文档详情 -->
   <view class="doc_info">
     <view class="first_line">
-      <text class="title">高等数学纸质版笔记</text>
+      <text class="title">{{doc.title}}</text>
       <view style="display:block">
         <view class="support">
           <van-icon name="checked" />
@@ -31,9 +36,9 @@
     </view>
 
     <view class="price_info">
-      <view class="price">￥ 5.00</view>
+      <view class="price">￥ {{doc.price}}.00</view>
       <view class="buy_count">1280人已购买</view>
-      <view class="mark_count">8.8w人已收藏</view>
+      <view class="mark_count">{{doc.starCount}}w人已收藏</view>
     </view>
 
     <view class="category">
@@ -49,7 +54,7 @@
       </view>
       <view class="upload_time">2020/5/26</view>
     </view> -->
-    <view class="doc_desc">资料介绍：巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
+    <view class="doc_desc">资料介绍：{{doc.introduce}}
       <van-icon name="arrow-down" />
     </view>
     <view class="buttons">
@@ -69,7 +74,7 @@
   <view class="upload_info">
     <view class="title">上传者介绍</view>
     <view class="template">
-      <text class="name" bindtap="jump2Profile">皇甫素素</text>，电子信息学院大二。
+      <text class="name" bindtap="jump2Profile">{{doc.authorName}}</text>，电子信息学院大二。
       年级排名 1 / 235，多次获得一等奖学金。
       多次参加互联网+比赛，获得国家级金牌。
     </view>

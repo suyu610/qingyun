@@ -1,5 +1,5 @@
 import httpService from "../httpService";
-
+import {parseInitData} from "../../utils/dataParseUtil.js"
 import {
   MatchNameAndNumberUrl,
   LoginByPwdUrl,
@@ -21,6 +21,7 @@ function LoginByToken(handleSuccess, handleFail, params) {
       // 1. 刷新token
       let token = res.data['data']['token']
       let initData = res.data['data']
+
       wx.setStorage({
         key: "initData",
         data: initData
@@ -30,9 +31,10 @@ function LoginByToken(handleSuccess, handleFail, params) {
         key: "token",
         data: token
       })
-      app.globalData.initData = initData
-      app.globalData.token = token
 
+      parseInitData(initData)
+      app.globalData.token = token
+      console.log(app.globalData)
     },
     er => {
       handleFail(er.data['msg'])
@@ -56,6 +58,8 @@ function LoginByPwd(handleSuccess, handleFailure, params) {
         key: "token",
         data: token
       })
+
+      parseInitData(res.data['data'])
       app.globalData.initData = initData
       app.globalData.token = token
     },
@@ -83,6 +87,7 @@ function GetData(handleSuccess, handleFailure, params) {
     params,
     res => {
       handleSuccess(res.data['data'])
+      parseInitData(res.data['data'])
     },
     er => {
       handleFailure(er.data['msg'])

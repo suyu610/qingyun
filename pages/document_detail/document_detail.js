@@ -1,7 +1,6 @@
 // pages/document_detail/document_detail.js
-import {
-  push
-} from '../../utils/router/index.js';
+import router from '../../utils/router/index.js';
+import DocService from '../../net/service/docService.js'
 
 Page({
 
@@ -9,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    doc: {},
     // 预览图
     previewList: [{
         "id": 0,
@@ -29,13 +30,15 @@ Page({
     previewDuration: 1000,
 
   },
-  jump2BuyConfirm:function(){
-    push({name:"buy_confirm"})
+  jump2BuyConfirm: function () {
+    router.push({
+      name: "buy_confirm"
+    })
   },
 
 
   jump2Profile: function () {
-    push({
+    router.push({
       name: 'profile',
       data: {
         id: '123',
@@ -45,7 +48,7 @@ Page({
   },
 
   jump2Chat: function () {
-    push({
+    router.push({
       name: 'chat',
       data: {
         id: '123',
@@ -83,10 +86,33 @@ Page({
       }
     })
   },
+
+  handleGetDetailSuccess: function (e) {
+    console.log(e)
+    this.setData({
+      doc: e
+    })
+    let previewList = []
+
+
+    e.files.forEach(function (element) {
+      previewList.push({
+        'id': 0,
+        'imgUrl': element
+      })
+    })
+
+    this.setData({
+      previewList
+    })
+  },
   /**
    * 生命周期函数
    */
   onLoad: function (options) {
+    const data = router.extract(options);
+    console.log(data.id); // { id: '123', type: 1 }
+    DocService.GetDocDetail(this.handleGetDetailSuccess, data.id)
     wx.setNavigationBarTitle({
       title: '资料详情',
     })
