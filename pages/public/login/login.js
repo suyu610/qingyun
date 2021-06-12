@@ -84,6 +84,7 @@ Page({
       "name": this.data.name,
       "ssNumber": this.data.ssNumber,
       "password": this.data.password,
+      "needCategory":1,
       "openid": app.globalData.openid
     }
     UserService.LoginByPwd(this.handleLoginByPwdSuccess,this.handleLoginByPwdFailure, params)

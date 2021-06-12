@@ -23,7 +23,7 @@
   line-height: 40px;
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 26%;
 }
 
 .buy_btn {

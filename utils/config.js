@@ -1,9 +1,9 @@
 
 import {
-    Host
+  GetUploadSignUrl
   } from "../net/httpConstants";
 module.exports = {
-    stsUrl: Host+'/file/getUploadFileSign',
+    stsUrl: GetUploadSignUrl,
     Bucket: 'qingyun-file-1254798469',
     Region: 'ap-beijing',
 };

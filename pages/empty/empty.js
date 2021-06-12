@@ -79,13 +79,10 @@ Page({
 
     let token = wx.getStorageSync('token')
     let ssNumber = wx.getStorageSync('ssNumber')
-    let openid = wx.getStorageSync('openid');
     if (token != '' && ssNumber != '') {
       let params = {
-        "filed":["all"],
-        "ssNumber": ssNumber,
+        "needCategory":0,
         "token": token,
-        "openid": openid
       }
       UserService.LoginByToken(this.handleGetInitDataSuccess, this.handleGetInitDataFail,params)
     } else {

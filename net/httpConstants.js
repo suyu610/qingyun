@@ -1,13 +1,13 @@
-// export const Host = 'https://api.book.uutrack.cn/v1/';
-export const Host = 'http://localhost:6110/v1/';  
+export const Host = 'https://api.book.uutrack.cn/v1/';
+// export const Host = 'http://localhost:6110/v1/';  
 // export const Host = 'http://192.168.43.192:6110/v1/'
 
 ////////////
 /// 上传 ///
 ///////////
 
-export const UploadInfoUrl = 'file/upload';
-export const GetUploadFileSignUrl = 'file/getUploadFileSign';
+export const UploadInfoUrl = 'doc/upload';
+export const GetUploadFileSignUrl = 'doc/getUploadFileSign';
 
 ////////////
 /// 用户 ///
@@ -22,5 +22,6 @@ export const LoginByTokenUrl = 'user/loginByToken';
 /// 文档 ///
 ///////////
 
-export const GetDocDetailUrl = 'file/detail/'
+export const GetDocDetailUrl = 'doc/detail'
+export const GetUploadSignUrl = 'doc/getUploadFileSign'
 

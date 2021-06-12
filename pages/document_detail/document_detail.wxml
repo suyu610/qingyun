@@ -7,7 +7,7 @@
       <block wx:for="{{previewList}}" wx:key="index" wx:for-item="item">
         <swiper-item bindtap='topic_preview' data-id='{{item.id}}' data-url='{{item.imgUrl}}'>
           <view class="mask"></view>
-          <text>样张</text>
+          <text>样张清晰度不高</text>
           <image src="{{item.imgUrl}}" mode="aspectFill"></image>
         </swiper-item>
       </block>
@@ -37,8 +37,8 @@
 
     <view class="price_info">
       <view class="price">￥ {{doc.price}}.00</view>
-      <view class="buy_count">1280人已购买</view>
-      <view class="mark_count">{{doc.starCount}}w人已收藏</view>
+      <view class="buy_count">{{doc.boughtCount}}人购买</view>
+      <view class="mark_count">{{doc.starCount}}人收藏</view>
     </view>
 
     <view class="category">
@@ -54,9 +54,7 @@
       </view>
       <view class="upload_time">2020/5/26</view>
     </view> -->
-    <view class="doc_desc">资料介绍：{{doc.introduce}}
-      <van-icon name="arrow-down" />
-    </view>
+    <view class="doc_desc">资料介绍：{{doc.introduce}}</view>
     <view class="buttons">
       <view class="btns">
         <view class="mark_btn">
@@ -74,96 +72,74 @@
   <view class="upload_info">
     <view class="title">上传者介绍</view>
     <view class="template">
-      <text class="name" bindtap="jump2Profile">{{doc.authorName}}</text>，电子信息学院大二。
-      年级排名 1 / 235，多次获得一等奖学金。
-      多次参加互联网+比赛，获得国家级金牌。
+      <text class="name" bindtap="jump2Profile">{{doc.authorName}}</text>，{{doc.uploaderScholarIntroduce}}
     </view>
     <van-divider hairline />
-    <view class="motto">> 我的名字就是我资料质量的保证。</view>
+    <view class="motto">> {{doc.uploaderIntroduce}}</view>
   </view>
   <!-- 相关推荐 -->
   <view class="related_info">
     <view class="title">相关推荐</view>
     <view class="grid">
       <scroll-view scroll-x="true" style="white-space: nowrap;">
-        <view class="related_doc">
-          <view class="doc_img"></view>
-          <view class="doc_title">线性代数</view>
-        </view>
-        <view class="related_doc">
-          <view class="doc_img"></view>
-          <view class="doc_title">计算机操作系统</view>
-        </view>
-        <view class="related_doc">
-          <view class="doc_img"></view>
-          <view class="doc_title">C语言程序设计</view>
-        </view>
-        <view class="related_doc">
-          <view class="doc_img"></view>
-          <view class="doc_title">概率论与数理统计</view>
-        </view>
+        <block wx:for="{{docRelatedItemList}}" wx:for-item="item" wx:key="index">
+          <view class="related_doc" bindtap="jump2DocDetail" data-id="{{item.id}}">
+            <view class="doc_img">
+              <text wx:if="{{item.previewImageUrl==null}}" style="color:white;font-weight:bold">暂无预览图</text>
+              <image wx:else src="{{item.previewImageUrl}}" style="width:100%;height:100%"></image>
+            </view>
+            <view class="doc_title">{{item.title}}</view>
+          </view>
+
+        </block>
       </scroll-view>
     </view>
   </view>
   <!-- 评论 -->
   <view class="comment">
-    <view class="title">评论 (3) </view>
-    <view class="all">全部评论</view>
-    <view class="cu-list menu-avatar comment">
-      <view class="cu-item">
-        <view class="cu-avatar round" style="background-image:url(http://api.btstu.cn/sjtx/api.php?lx=c1);"></view>
-        <view class="content">
-          <view class="text-grey">柯基</view>
-          <view class="text-gray text-content text-sm">
-            资料很不错，孩子很喜欢，敏感肌也能使用
+    <view class="title">评论 ({{commentItemList.length}}) </view>
+    <view class="all"></view>
+    <!-- <view class="all">全部评论</view> -->
+
+    <view wx:if="{{commentItemList.length != 0}}" class="cu-list menu-avatar comment">
+      <block wx:for="{{commentItemList}}" wx:key="index" wx:for-item="item">
+        <view class="cu-item">
+          <view wx:if="{{item.avatarUrl != null}}" class="cu-avatar round"
+            style="background-image:url({{item.avatarUrl}});"></view>
+          <view wx:else class="cu-avatar round" style="background-image:url(http://api.btstu.cn/sjtx/api.php?lx=c1);">
           </view>
-          <view class="bg-gray padding-sm radius margin-top-sm  text-sm">
+          <view class="content">
+            <view class="text-grey">{{item.authorName}}</view>
+            <view class="text-gray text-content text-sm">
+              {{item.content}}
+            </view>
+            <!-- 主人的回复 -->
+            <!-- <view class="bg-gray padding-sm radius margin-top-sm  text-sm">
             <view class="flex">
               <view>主人：</view>
               <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
             </view>
-          </view>
-          <view class="margin-top-sm flex justify-between">
-            <view class="text-gray text-sm">2021年05月31日</view>
-            <view>
-              <text class="cuIcon-appreciatefill text-gray"></text>
+          </view> -->
+            <view class="margin-top-sm flex justify-between">
+              <view class="text-gray text-sm">{{item.createTime}}</view>
+              <view>
+                <text wx:if="{{item.liked}}"
+                  class="cuIcon-appreciatefill text-red text-sm padding-sm">{{item.likeCount}}</text>
+                <text wx:else class="cuIcon-appreciatefill text-gray text-sm padding-sm">{{item.likeCount}}</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar round" style="background-image:url(http://api.btstu.cn/sjtx/api.php?lx=1);"></view>
-        <view class="content">
-          <view class="text-grey">大素🐕</view>
-          <view class="text-gray text-content text-sm">
-            质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。
-          </view>
-          <view class="margin-top-sm flex justify-between">
-            <view class="text-gray text-sm">2021年05月31日</view>
-            <view>
-              <text class="cuIcon-appreciatefill text-red"></text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="cu-item">
-        <view class="cu-avatar round" style="background-image:url(http://api.btstu.cn/sjtx/api.php);"></view>
-        <view class="content">
-          <view class="text-grey">包子</view>
-          <view class="text-gray text-content text-sm">
-            经常网购，总有大量的包裹收，有很多的评语要写！ 但是，总是写评语花掉了我大量的时间和精力！ 所以在一段时间里，我总是不去评价或者随便写写！ 但是，我又总是觉得好像有点对不住那些辛苦工作的卖家客服、仓管、老板。
-            于是我写下了一小段话，给我觉得能拿到我五星好评的卖家的宝贝评价里面以示感谢和尊敬！ 宝贝是性价比很高的，我每次都会先试用再评价的，虽然宝贝不一定是最好的，但在同等的价位里面绝对是表现最棒的。
-          </view>
-          <view class="margin-top-sm flex justify-between">
-            <view class="text-gray text-sm">2021年05月31日</view>
-            <view>
-              <text class="cuIcon-appreciatefill text-red"></text>
-            </view>
-          </view>
-        </view>
-      </view>
+      </block>
+
+
+
     </view>
+    <view wx:else style="text-align:center">
+      <van-empty image="error" description="暂无评论"></van-empty>
+    </view>
+
   </view>
 </view>
 <!-- 评论的输入框 -->
-<input_comment></input_comment>
+<input_comment starCount="{{doc.starCount}}"></input_comment>

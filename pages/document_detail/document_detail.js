@@ -11,11 +11,23 @@ Page({
     doc: {},
     // 预览图
     previewList: [],
+    docRelatedItemList: [],
+    commentItemList: [],
     previewIndicatorDots: true,
     previewAutoplay: false,
     previewInterval: 8000,
     previewDuration: 1000,
 
+  },
+
+  jump2DocDetail: function (e) {
+    router.push({
+      name: 'document_detail',
+      data: {
+        id: e.currentTarget.dataset.id,
+        type: 1,
+      },
+    });
   },
   jump2BuyConfirm: function () {
     router.push({
@@ -79,19 +91,19 @@ Page({
       doc: e
     })
     let previewList = []
-
-
     e.files.forEach(function (element) {
       if (/\.(gif|jpg|jpeg|png|GIF|JPEG|JPG|PNG)$/.test(element)) {
         previewList.push({
           'id': 0,
-          'imgUrl': element
+          'imgUrl': element + "/preview_image"
         })
       }
     })
 
     this.setData({
-      previewList
+      previewList,
+      docRelatedItemList: e.docRelatedItemList,
+      commentItemList: e.commentItemList
     })
   },
 

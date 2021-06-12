@@ -68,7 +68,7 @@
   padding-left: 10px;
 }
 
-.preview_info{
+.preview_info {
   width: 74%;
 }
 
@@ -83,6 +83,9 @@
 
 .info .subTitle {
   color: #938E8E;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 12px;
 }
 
@@ -115,7 +118,7 @@
   font-size: 14px;
 }
 
-.subInfo .price_preview{
+.subInfo .price_preview {
   font-weight: bold;
   vertical-align: bottom;
   font-size: 12px;

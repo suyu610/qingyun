@@ -8,6 +8,7 @@ Component({
    */
   properties: {
     mode: String,
+    starCount:Number,
   },
 
   /**
