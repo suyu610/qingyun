@@ -80,16 +80,23 @@ Page({
     docType: "笔记",
     docTypeIndex: 0,
     docTypeActions: [{
+        value: 1,
         name: '笔记',
       },
       {
+        value: 2,
+
         name: '试卷',
         subname: '此类请注意版权问题,',
       },
       {
+        value: 3,
+
         name: '攻略',
       },
       {
+        value: 4,
+
         name: '其他',
       },
     ],
@@ -100,14 +107,14 @@ Page({
     // 分类的id
     upload_categoryId: 0,
     upload_tagId_list: [],
-    upload_doc_previewCount: 0,
+    upload_doc_previewCount: 1,
     upload_doc_title: "",
     upload_course_title: "",
     upload_doc_type: 1,
     upload_doc_price: "",
     upload_file_name: "",
     upload_doc_introduce: "",
-
+    upload_doc_file_dir: "",
     /////// 控制上传
     upload_file_count: 0,
     upload_file_current_size: 0,
@@ -123,7 +130,7 @@ Page({
       showDocTypeSheet: false,
       docType: e.detail.name,
       // 找选中该的文档类型的索引值
-      upload_doc_type: ["笔记", "试卷", "攻略", "其他"].findIndex(i => i == e.detail.name)
+      upload_doc_type: ["", "笔记", "试卷", "攻略", "其他"].findIndex(i => i == e.detail.name)
     })
   },
   onTapShowDocTypeSheet: function () {
@@ -136,16 +143,18 @@ Page({
       showCategoryPopup: true
     })
   },
-  autoFillCourseTitle: function (e) {
 
+  // 自动填充所属课程，暂时没做这个
+  autoFillCourseTitle: function (e) {
     this.setData({
       upload_course_title: e.currentTarget.dataset.value
     })
     console.log(e.currentTarget.dataset.value)
   },
+
   courseTitleFocus: function () {
     this.setData({
-      courseTitleHasFocus: true
+      courseTitleHasFocus: false
     })
   },
   courseTitleBlur: function () {
@@ -163,7 +172,7 @@ Page({
 
   handleUploadInfoSuccess: function (e) {
     this.setData({
-      uploadProgressValue:100,
+      uploadProgressValue: 100,
       upload_file_count: this.data.upload_file_count + 1,
       upload_step_title: "上传完成",
       upload_step_detail: this.data.fileList.length + " / " + this.data.fileList.length,
@@ -180,19 +189,66 @@ Page({
 
   openSubmitUpload: function () {
     // 检测是否必要的信息都填写完毕
+    // 标题不能为空
+    if (this.data.upload_doc_title == "") {
+      wx.showToast({
+        icon: 'none',
+        title: '标题不能为空',
+      })
+      return
+    }
+
+
+    // 课程名不能为空
+    if (this.data.upload_course_title == "") {
+      wx.showToast({
+        icon: 'none',
+        title: '课程名不能为空',
+      })
+      return
+    }
+
+    // 课程名必须以汉字开头
+
+    var re = new RegExp("^[\u4e00-\u9fa5]");
+
+    if (!re.test(this.data.upload_course_title)) {
+      wx.showToast({
+        icon: 'none',
+        title: '课程名须以汉字开头',
+      })
+      return
+    }
 
     //  课程分类
-    if(this.data.upload_categoryId == 0){
+    if (this.data.upload_categoryId == 0) {
       wx.showToast({
-        icon:'none',
+        icon: 'none',
         title: '未填写分类',
       })
       return
     }
 
+    console.log(this.data.upload_doc_price)
+    if (this.data.upload_doc_price == "") {
+      this.setData({
+        upload_doc_price: 0
+      })
+    }
+    if (this.data.fileList.length == 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '未上传文件',
+      })
+      return
+    }
     // 价格检验
-    if(this.data.upload_doc_price >999){
-
+    if (this.data.upload_doc_price > 999) {
+      wx.showToast({
+        icon: 'none',
+        title: '价格要小于999',
+      })
+      return
     }
 
     if (this.data.checkedNeedKnow == false) {
@@ -211,7 +267,6 @@ Page({
         that.setData({
           net_type: networkType
         })
-
       }
     })
     this.setData({
@@ -219,6 +274,7 @@ Page({
     })
   },
 
+  // 搜索分类
   onCategorySearchChange(e) {
     if (e.detail == "") {
       this.setData({
@@ -226,7 +282,6 @@ Page({
       })
       return
     }
-
     let searchCategoryList = {}
     let new_province_list = {};
     let new_city_list = this.data.back_categoryList.city_list;
@@ -276,6 +331,7 @@ Page({
 
   ///////////////// 开始上传
   onUploadConfirmButton: function () {
+    console.log("开始上传")
     if (this.data.isUploading) {
       // 停止
       clearInterval(uploadTimer);
@@ -293,16 +349,18 @@ Page({
     }
   },
 
-  uploadFileSuccess: function (fileName) {
+  uploadFileSuccess: function (fileName, path) {
     let upload_file_name = this.data.upload_file_name;
+    let upload_doc_file_dir = path
     if (upload_file_name == "") {
       upload_file_name = fileName
     } else {
       upload_file_name = upload_file_name + ";" + fileName
-    }
 
+    }
     this.setData({
-      upload_file_name
+      upload_file_name,
+      upload_doc_file_dir
     })
 
     //  单个文件上传完毕
@@ -328,7 +386,8 @@ Page({
         upload_doc_type: this.data.upload_doc_type,
         upload_doc_price: this.data.upload_doc_price,
         upload_doc_introduce: this.data.upload_doc_introduce,
-        upload_file_name: upload_file_name
+        upload_file_name: upload_file_name,
+        upload_doc_file_dir: this.data.upload_doc_file_dir
       }
 
       // 上传资料
@@ -529,9 +588,9 @@ Page({
    */
   onShow: function () {
     let categoryList;
-    if(app.globalData.categoryList == null){
+    if (app.globalData.categoryList == null) {
       categoryList = wx.getStorageSync('categoryList')
-    }else{
+    } else {
       categoryList = app.globalData.categoryList
     }
     let back_categoryList = categoryList

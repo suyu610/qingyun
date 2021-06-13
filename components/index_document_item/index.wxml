@@ -36,7 +36,7 @@
   </view>
   <view class="subInfo">
     <view class="price_preview" wx:if="{{mode=='preview'}}">赚取: {{price}}</view>
-    <view class="price" wx:else>￥{{price}}</view>    
+    <view class="price {{price==0?'text-red':''}}" wx:else>{{price==0?"免费":'￥'+price}}</view>
     <view class="authorName">{{authorName}}</view>
   </view>
 </view>

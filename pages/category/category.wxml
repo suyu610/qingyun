@@ -14,20 +14,20 @@
 
 <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh)"
   scroll-with-animation="true" enable-back-to-top="true">
-  <block wx:for="{{list}}" wx:key="index">
-    <view class="padding-sm indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">
-      {{list[index]}}</view>
-    <view class="cu-list menu-avatar no-padding" bindtap="jump2DocList">
-      <view class="cu-item" wx:for="{{2}}" wx:key="index" wx:for-index="sub">
+  <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
+    <view class="padding-sm indexItem-{{index}}" id="indexes-{{item.key}}" data-index="{{item.key}}">
+      {{item.key}}</view>
+    <view class="cu-list menu-avatar no-padding" bindtap="jump2DocList" >
+      <view class="cu-item" wx:for="{{item.value}}" wx:key="index">
         <view class="cu-avatar round text-sm circle">{{index*27}}次</view>
         <view class="content">
-          <view class="text-black course_title">高等数学{{list[index]}}
+          {{item}}
+          <view class="text-black course_title">{{courseList[index]}}
             <text class="text-abc">{{list[sub]}}</text>
           </view>
           <view class="text-gray text-sm">
             此课有{{sub+2}}份笔记，{{sub+2}}份资料
           </view>
-
         </view>
       </view>
     </view>
@@ -36,7 +36,7 @@
 <view class="indexBar" style="height:calc(100vh - 50px)">
   <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
     <view class="indexBar-item" wx:for="{{list}}" wx:key="index" id="{{index}}" bindtouchstart="getCur"
-      bindtouchend="setCur">{{list[index]}}</view>
+      bindtouchend="setCur"> {{item.key}}</view>
   </view>
 </view>
 <!--选择显示-->

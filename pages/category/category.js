@@ -3,6 +3,8 @@ import {
   push
 } from '../../utils/router/index.js';
 
+import cateService from '../../net/service/cateService.js'
+
 
 Page({
   data: {
@@ -13,6 +15,7 @@ Page({
       city_list: {},
       county_list: {},
     },
+    courseList: [],
     back_categoryList: {}
   },
   jump2DocList: function () {
@@ -84,24 +87,41 @@ Page({
       })
     }, 1000);
   },
+  handleGetAllCourse: function (e) {
+    let list = [];
+    for (const [key, value] of Object.entries(e)) {
+      if (value.length != 0) {
+        list.push({
+          "key": key,
+          "value": value
+        })
+      }
+    }
+    this.setData({
+      courseList: e,
+      list: list,
+      listCur: list[0].key
+    })
+    console.log(e)
+  },
+
+  handleGetAllCourseFail: function (e) {
+    console.log(e)
+  },
 
   onLoad() {
     wx.setNavigationBarTitle({
       title: '课程分类',
     })
-    let list = [];
-    for (let i = 0; i < 26; i++) {
-      list[i] = String.fromCharCode(65 + i)
-    }
     this.setData({
       categoryList: app.globalData.categoryList,
       back_categoryList: app.globalData.categoryList
     })
+  },
 
-    this.setData({
-      list: list,
-      listCur: list[0]
-    })
+  onShow() {
+    cateService.getAllCourse(this.handleGetAllCourse, this.handleGetAllCourseFail);
+
   },
 
 
@@ -122,13 +142,11 @@ Page({
   getCur(e) {
     this.setData({
       hidden: false,
-      listCur: this.data.list[e.target.id],
+      listCur: this.data.list[e.target.id].key,
     })
   },
 
   setCur(e) {
-    console.log("测试")
-
     this.setData({
       hidden: true,
       listCur: this.data.listCur
@@ -142,12 +160,15 @@ Page({
     //判断选择区域,只有在选择区才会生效
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
+      console.log(num)
+      if(num>that.data.list.length-1){
+        return;
+      }
       if (this.data.listCur != that.data.list[num]) {
-        console.log("改变")
         wx.vibrateShort();
       }
       this.setData({
-        listCur: that.data.list[num]
+        listCur: that.data.list[num].key
       })
     };
   },
@@ -173,9 +194,8 @@ Page({
     let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
     for (let i = 0; i < list.length; i++) {
       if (scrollY < i + 1) {
-
         that.setData({
-          listCur: list[i],
+          listCur: list[i].key,
           movableY: i * 20
         })
         return false

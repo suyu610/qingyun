@@ -37,7 +37,7 @@
       input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px" type="textarea" border="{{ true }}"
       maxlength="50">
     </van-field>
-    <van-field input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
+    <van-field required input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
       bind:focus="courseTitleFocus" bind:blur="courseTitleBlur" model:value="{{ upload_course_title }}" size="large"
       autosize center label="所属课程" input-align="right" placeholder="尽可能写全称" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">
@@ -46,10 +46,10 @@
     <van-cell title="文档类型" value="{{docType}}" title-class="input_label" size="large" is-link
       bindtap="onTapShowDocTypeSheet" value-class="cell-value" />
 
-    <van-cell wx:if="{{upload_category.length==0}}" title="分类" value="请选择课程分类" title-class="input_label" size="large"
+    <van-cell required wx:if="{{upload_category.length==0}}" title="分类" value="请选择课程分类" title-class="input_label" size="large"
       is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
 
-    <van-cell wx:else title="分类" title-width="20%"
+    <van-cell required wx:else title="分类" title-width="20%"
       value="{{upload_category[0].name}} / {{upload_category[1].name}} / {{upload_category[2].name}}"
       title-class="input_label" size="large" is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
 
@@ -97,7 +97,7 @@
 
     <view class="can_preview">
       <van-cell border="{{ true }}" title="可预览页数" title-class="input_label" size="large">
-        <van-stepper value="{{ upload_doc_previewCount }}" bind:change="onChangePreviewCount" min="{{0}}" integer />
+        <van-stepper value="{{ upload_doc_previewCount }}" bind:change="onChangePreviewCount" min="{{1}}" integer />
       </van-cell>
     </view>
 

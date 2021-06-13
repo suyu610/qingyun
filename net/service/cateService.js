@@ -1,16 +1,15 @@
 import httpService from "../httpService";
 
 import {
-  UploadInfoUrl,
-  GetUploadFileSignUrl
+  GetAllCourseUrl,
 } from "../httpConstants";
 
 const app = getApp()
 
-function uploadInfo(handleSuccess, handleFailure, params) {
-  httpService.post(
-    UploadInfoUrl,
-    params,
+function getAllCourse(handleSuccess, handleFailure) {
+  httpService.get(
+    GetAllCourseUrl,
+    "",
     res => {
       handleSuccess(res.data['data'])
     },
@@ -20,5 +19,5 @@ function uploadInfo(handleSuccess, handleFailure, params) {
 }
 
 module.exports = {
-  uploadInfo: uploadInfo,
+  getAllCourse: getAllCourse,
 }

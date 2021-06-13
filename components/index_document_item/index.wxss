@@ -93,7 +93,10 @@
   color: #938E8E;
   font-size: 12px;
 }
-
+.text-red{
+  color: red;
+  font-weight: bold;
+}
 
 .subInfo {
   width: 20%;

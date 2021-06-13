@@ -24,9 +24,9 @@
     <view class="first_line">
       <text class="title">{{doc.title}}</text>
       <view style="display:block">
-        <view class="support">
-          <van-icon name="checked" />
-          <text>支持答疑</text>
+        <view class="notsupport">
+          <van-icon name="clear" />
+          <text>不可下载</text>
         </view>
         <view class="support">
           <van-icon name="checked" />
@@ -81,7 +81,7 @@
   <view class="related_info">
     <view class="title">相关推荐</view>
     <view class="grid">
-      <scroll-view scroll-x="true" style="white-space: nowrap;">
+      <scroll-view wx:if="{{docRelatedItemList.length>0}}" scroll-x="true" style="white-space: nowrap;">
         <block wx:for="{{docRelatedItemList}}" wx:for-item="item" wx:key="index">
           <view class="related_doc" bindtap="jump2DocDetail" data-id="{{item.id}}">
             <view class="doc_img">
@@ -90,9 +90,9 @@
             </view>
             <view class="doc_title">{{item.title}}</view>
           </view>
-
         </block>
       </scroll-view>
+      <view wx:else style="padding-bottom:20px;color: #999999;">暂无相关推荐</view>
     </view>
   </view>
   <!-- 评论 -->
