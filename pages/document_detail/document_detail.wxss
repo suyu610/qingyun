@@ -31,13 +31,13 @@ page {
 .preview swiper swiper-item text {
   position: absolute;
   z-index: 2;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   width: 100%;
   line-height: 274px;
   color: #fff;
   font-weight: bold;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
 
 
 }
@@ -97,6 +97,8 @@ page {
 .category{
   padding-top: 10px;
   font-size: 12px;
+  color: #999999;
+
 }
 .category :not(:last-child)::after {
   content: "|";
@@ -171,7 +173,6 @@ page {
 
 .doc_desc {
   padding-top: 10px;
-  color: #999999;
   text-align: justify;
   font-size: 14px;
 }
@@ -195,7 +196,10 @@ page {
   text-align: center;
   display: inline-block;
 }
-
+.loading{
+  line-height: 35px;
+  margin-top:10px;
+}
 .buy_btn {
   display: inline-block;
   width: 55vw;

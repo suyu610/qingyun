@@ -2,18 +2,22 @@
 
 <scroll-view class="container" scroll-y="{{true}}">
   <view class="header">
-    <van-icon name="arrow-left" size="20px" style="left:10px;position:absolute" bindtap="backTo"/>
+    <van-icon name="arrow-left" size="20px" style="left:10px;position:absolute" bindtap="backTo" />
     <view class="avatar">
-      <image mode="aspectFill" src="https://cdns.qdu.life/logo.png"></image>
+      <image mode="aspectFill" src="{{profile.avatarUrl==null?'https://cdns.qdu.life/logo.png':profile.avatarUrl}}">
+      </image>
     </view>
     <view class="name">
-      <text>皇甫素素</text>
-      <van-icon name="like-o" color="white" size="14px"/>
-      <text style="font-size:14px"> 14</text>
+      <text>{{profile.name}}</text>
+      <van-icon name="like-o" color="white" size="14px" />
+      <text style="font-size:14px"> {{profile.likeCount}}</text>
+      <van-icon name="star-o" color="white" size="14px" />
+      <text style="font-size:14px"> {{profile.starCount}}</text>
     </view>
     <view class="tags">
-      <view class="tag">学霸</view>
-      <view class="tag">牛逼</view>
+      <block wx:for="{{profile.tagList}}" wx:key="index" wx:for-item="item">
+        <view class="tag">{{item.content}}</view>
+      </block>
       <view class="tag">+</view>
     </view>
   </view>
@@ -21,19 +25,20 @@
   <view class="main_info">
     <view class="basic">
       <view class="title">基本信息</view>
-      <text class="content">电子信息学院 微电子工程 2019级</text>
+      <text class="content">{{profile.college!=null?profile.college:"未知学院"}}
+        {{profile.major!=null?profile.major:"未知专业"}} {{profile.grade}}级</text>
     </view>
     <view class="honor">
       <view class="title">学习荣誉</view>
-      <text class="content">2020年 排名 1、235\n多次获得一等奖学金</text>
+      <text class="content">{{profile.scholarIntroduce}}</text>
     </view>
     <view class="intro">
       <view class="title">介绍</view>
-      <text class="content">我的名字是我资料质量的保证</text>
+      <text class="content">{{profile.introduce}}</text>
     </view>
     <view class="medal">
       <view class="medal-title">青云荣誉
-        <van-icon name="arrow" />
+        <!-- <van-icon name="arrow" /> -->
       </view>
       <view class="medal-content">
         <viwe class="medal_detail_parent">
@@ -57,18 +62,18 @@
     <view class="col_title">
       <view>
         <text class="title_text">他的资料</text>
-        <text class="count">共5门</text>
+        <text class="count">共{{profile.docList.length}}门</text>
       </view>
-      <van-icon name="arrow" />
+      <!-- <van-icon name="arrow" /> -->
 
     </view>
     <view class="doc_grid">
-      <van-grid column-num="2" square border="{{false}}">
-        <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
-          <van-grid-item use-slot>
+      <van-grid column-num="2" clickable square border="{{false}}">
+        <block wx:for="{{docList}}" wx:key="index" wx:for-item="item">
+          <van-grid-item use-slot clickable bind:click="jump2DocDetail" data-id="{{item.id}}">
             <image style="width: 100%; height: 80%;border-radius:10px;background-color:lightgrey"
-              src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
-            <view style="padding-top:10px;font-size:12px;text-align:left;width:100%">高等数学笔记 / 第{{index+1}}章</view>
+              src="{{item.previewImageUrl}}" />
+            <view style="padding-top:10px;font-size:12px;text-align:left;width:100%">{{item.title}}</view>
           </van-grid-item>
         </block>
       </van-grid>

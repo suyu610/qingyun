@@ -1,8 +1,9 @@
-<!--pages/public/setting/setting.wxml-->
-<!--pages/public/upload/upload.wxml-->
+<!--pages/public/setting_profile/setting_profile.wxml-->
+<van-notice-bar mode="closeable" wrapable left-icon="volume-o" scrollable="{{ false }}" text="广告词和学习荣誉须经过内容审核" />
+
 <scroll-view class="container bg" scroll-y="{{true}}">
   <view class="main">
-    <van-cell required title="头像" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
+    <van-cell title="头像" custom-style="border-radius: 10px!important" title-class="input_label" size="large" center>
       <van-uploader accept="image" sizeType="compressed" bind:after-read="afterRead">
         <van-image round width="3rem" height="3rem" fit="cover" src="{{avatar.url}}" />
       </van-uploader>
@@ -10,45 +11,44 @@
 
     <van-cell title="姓名" value="皇甫素素"></van-cell>
     <van-cell title="学号" value="2019205913"></van-cell>
+
+
+    <van-cell wx:if="{{!upload_majorId}}" title="学院 / 专业" title-class="input_label" size="large" is-link
+      bindtap="onTapShowMajorPopup" value-class="cell-value">
+      <text style="font-size:24rpx">用于展示</text>
+    </van-cell>
+
+    <van-cell wx:else title="学院 / 专业" title-width="20%" value="{{upload_major[0].name}} / {{upload_major[1].name}}"
+      title-class="input_label" size="large" is-link bindtap="onTapShowMajorPopup" value-class="cell-value" />
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
-          label="学院" input-align="right" placeholder="用于展示" type="textarea" border="{{ true }}" />
-      </van-cell-group>
-    </view>
-    <view class="intro">
-      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
-          label="专业" input-align="right" placeholder="用于展示" type="textarea" border="{{ true }}" />
-      </van-cell-group>
-    </view>
-    <view class="intro">
-      <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field required value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
-          label="联系方式" input-align="right" placeholder="用于收货时联系，不会展示" type="textarea" border="{{ true }}" />
+        <van-field input-class="cell-value" model:value="{{ upload_tel }}" custom-style="border-radius: 10px!important"
+          label-class="input_label" label="联系方式" input-align="right" placeholder="用于收货时联系，不会展示" type="textarea"
+          border="{{ true }}" />
       </van-cell-group>
     </view>
 
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field required value="{{ message }}" custom-style="border-radius: 10px!important" label-class="input_label"
-          label="收货地址" input-align="right" type="textarea" placeholder="XX校区XXX" border="{{ true }}" />
+        <van-field input-class="cell-value" model:value="{{ upload_address }}"
+          custom-style="border-radius: 10px!important" label-class="input_label" label="收货地址" input-align="right"
+          type="textarea" placeholder="XX校区XXX" border="{{ true }}" />
       </van-cell-group>
     </view>
 
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" required custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" icon="edit" label="广告词" type="textarea" border="{{ true }}" maxlength="200"
-          show-word-limit autosize />
+        <van-field input-class="cell-value" model:value="{{ upload_introduce }}"
+          custom-style="border-radius: 10px!important;font-size:12px" size="large" label-class="input_label" icon="edit"
+          label="广告词" type="textarea" border="{{ true }}" maxlength="200" show-word-limit autosize />
       </van-cell-group>
     </view>
 
     <view class="intro">
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
-        <van-field value="{{ message }}" required custom-style="border-radius: 10px!important" size="large"
-          label-class="input_label" icon="edit" label="学习荣誉" type="textarea" border="{{ false }}" maxlength="200"
-          show-word-limit autosize />
+        <van-field input-class="cell-value" model:value="{{ upload_scholar_introducec }}"
+          custom-style="border-radius: 10px!important" size="large" label-class="input_label" icon="edit" label="学习荣誉"
+          type="textarea" border="{{ false }}" maxlength="200" show-word-limit autosize />
       </van-cell-group>
     </view>
   </view>
@@ -56,10 +56,23 @@
   <view class="submit_btn">
     <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">
       预览</van-button>
-    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw" bindtap="saveOk">保存
+    <van-button class="neumorphism" color="#0CB1FF" custom-style="border-radius:5px;width:40vw" bindtap="saveOk">提交
     </van-button>
 
   </view>
 </scroll-view>
 
 <van-notify id="van-notify" />
+
+
+<van-popup show="{{ showMajorPopup }}" bind:close="onCloseMajorPopup" position="top"
+  custom-style="height:55%;text-align:center" round>
+  <van-area id="MajorPicker" area-list="{{ majorList }}" columns-placeholder="{{ ['请选择学院', '', ''] }}"
+    visible-item-count="{{6}}" title="学院 / 专业" columns-num="2" bind:confirm="confirmMajor"
+    bind:cancel="onCloseMajorPopup" />
+  <!-- <van-button custom-style="border-radius:7px;color:white;margin-top:5vh" type="info" size="small">没找到你要的分类?
+  </van-button> -->
+  <van-search custom-class="major-search" value="{{ value }}" hold-keyboard placeholder="搜索学院名"
+    bind:change="onMajorSearchChange">
+  </van-search>
+</van-popup>

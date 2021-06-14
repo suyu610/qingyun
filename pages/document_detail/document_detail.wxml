@@ -7,7 +7,7 @@
       <block wx:for="{{previewList}}" wx:key="index" wx:for-item="item">
         <swiper-item bindtap='topic_preview' data-id='{{item.id}}' data-url='{{item.imgUrl}}'>
           <view class="mask"></view>
-          <text>样张清晰度不高</text>
+          <text>样张清晰度低</text>
           <image src="{{item.imgUrl}}" mode="aspectFill"></image>
         </swiper-item>
       </block>
@@ -32,6 +32,10 @@
           <van-icon name="checked" />
           <text>纸质版</text>
         </view>
+        <view class="support">
+          <van-icon name="checked" />
+          <text>电子版</text>
+        </view>
       </view>
     </view>
 
@@ -42,11 +46,11 @@
     </view>
 
     <view class="category">
-      <view class="college">电子信息学院</view>
-      <view class="major">微电子工程</view>
-      <view class="grade">大二</view>
+      <view class="college">{{doc.college}}</view>
+      <!-- <view class="major">微电子工程</view> -->
+      <view class="grade">{{doc.grade}}</view>
     </view>
-
+    <view class="doc_desc">资料介绍：{{doc.introduce}}</view>
     <!-- <view class="tagAndTime">
       <view class="tags">
         <view class="tag">关键词</view>
@@ -54,16 +58,16 @@
       </view>
       <view class="upload_time">2020/5/26</view>
     </view> -->
-    <view class="doc_desc">资料介绍：{{doc.introduce}}</view>
     <view class="buttons">
-      <view class="btns">
+      <view class="btns" bindtap="onTapStar">
         <view class="mark_btn">
-          <van-icon name="star-o" />
-          <text style="margin-left: 5px;vertical-align: 1px;">收藏</text>
+          <van-loading type="spinner" wx:if="{{loadingStar}}" size="20px" custom-class="loading" />
+          <van-icon wx:if="{{!loadingStar}}" name="{{isStared?'star':'star-o'}}" />
+          <text wx:if="{{!loadingStar}}" style="margin-left: 5px;vertical-align: 1px;">{{isStared?"取消收藏":"收藏"}}</text>
         </view>
         <view class="buy_btn" bindtap="jump2BuyConfirm">
           <van-icon name="cart-o" />
-          <text style="margin-left: 5px;vertical-align: 1px;">购买</text>
+          <text style="margin-left: 5px;vertical-align: 1px;">{{isBought?"查看文档":"购买"}}</text>
         </view>
       </view>
     </view>

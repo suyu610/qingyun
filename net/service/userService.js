@@ -1,11 +1,16 @@
 import httpService from "../httpService";
-import {parseInitData} from "../../utils/dataParseUtil.js"
+
+import {
+  parseInitData
+} from "../../utils/dataParseUtil.js"
+
 import {
   MatchNameAndNumberUrl,
   LoginByPwdUrl,
   LoginByTokenUrl,
-  GetDataUrl
-
+  GetDataUrl,
+  GetProfileBySsNumberUrl,
+  ModifyProfileUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -80,6 +85,17 @@ function matchNameAndNumber(handleSuccess, handleFailure, params) {
     });
 }
 
+function modifyProfile(handleSuccess, handleFailure, params) {
+  httpService.post(
+    ModifyProfileUrl,
+    params,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
 
 function GetData(handleSuccess, handleFailure, params) {
   httpService.post(
@@ -95,12 +111,29 @@ function GetData(handleSuccess, handleFailure, params) {
 }
 
 
+function GetProfileBySsNumber(handleSuccess, handleFailure, ssNumber) {
+  httpService.get(
+    GetProfileBySsNumberUrl+"/"+ssNumber,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
+
+
+
 
 
 
 module.exports = {
-  matchNameAndNumber: matchNameAndNumber,
-  LoginByPwd: LoginByPwd,
-  GetData:GetData,
-  LoginByToken: LoginByToken
+  matchNameAndNumber,
+  LoginByPwd,
+  GetData,
+  LoginByToken,
+  GetProfileBySsNumber,
+  modifyProfile
 }

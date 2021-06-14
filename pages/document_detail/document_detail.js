@@ -9,6 +9,8 @@ Page({
    */
   data: {
     doc: {},
+    loadingStar: false,
+    loadingBought: false,
     // 预览图
     previewList: [],
     docRelatedItemList: [],
@@ -85,7 +87,21 @@ Page({
       }
     })
   },
+  //  点击收藏按钮
+  onTapStar() {
+    this.setData({
+      loadingStar: true
+    })
 
+    setTimeout(() => {
+      this.setData({
+        isStared: !this.data.isStared,
+        loadingStar: false
+      })
+    }, 800);
+    console.log("1")
+
+  },
   handleGetDetailSuccess: function (e) {
     this.setData({
       doc: e
@@ -102,6 +118,7 @@ Page({
 
     this.setData({
       previewList,
+      isStared: e.isStared,
       docRelatedItemList: e.docRelatedItemList,
       commentItemList: e.commentItemList
     })

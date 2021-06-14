@@ -1,10 +1,13 @@
 // pages/public/self_profile/self_profile.js
-Page({
+import router from '../../../utils/router/index.js';
+import UserService from '../../../net/service/userService.js'
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
+    profile:{},
 
   },
   backTo: function () {
@@ -12,11 +15,48 @@ Page({
       delta: 0,
     })
   },
+  jump2DocDetail(e){
+    router.push({
+      name: 'document_detail',
+      data: {
+        id: e.currentTarget.dataset.id,
+        type: 1,
+      },
+    });
+  },
+  handleGetProfileBySsNumberSuccess:function(e){
+    e.grade =  e.ssNumber.slice(0,4)
+    let docList = []
+
+    e.docList.forEach(function (element) {
+      if (/\.(gif|jpg|jpeg|png|GIF|JPEG|JPG|PNG)$/.test(element.previewImageUrl)) {
+        docList.push({
+          'id': element.id,
+          'previewImageUrl': element.previewImageUrl + "/preview_image",
+          'title':element.title,
+          'docuType':element.ducuType
+        })
+      }
+    })
+
+
+    this.setData({profile:e,docList})
+    console.log(e)
+  },
+
+  handleGetProfileBySsNumberFail:function(e){
+    console.log(e)
+    wx.showToast({
+      title: '系统错误',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const data = router.extract(options);
+    UserService.GetProfileBySsNumber(this.handleGetProfileBySsNumberSuccess,this.handleGetProfileBySsNumberFail, 2019205913)
   },
 
   /**

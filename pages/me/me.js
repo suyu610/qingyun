@@ -49,6 +49,8 @@ Page({
       remainMoney:app.globalData.initData.userInitDataBO.remainMoney,
       uploadCount:app.globalData.initData.userInitDataBO.uploadCount, 
       avatarUrl:app.globalData.initData.userInitDataBO.avatarUrl, 
+      college:app.globalData.initData.userInitDataBO.collegeName,
+      ssNumber:app.globalData.ssNumber,
       msgCount:app.globalData.initData.msgList==null?0:app.globalData.initData.msgList.length
     })
   },

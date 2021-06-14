@@ -17,9 +17,9 @@
   width: 44vw;
   background-color: #fff;
   border-radius: 10px;
-  height: 80px;
+  height: 64px;
   display: inline-block;
-  line-height: 80px;
+  line-height: 64px;
   text-align: center;
   font-size: 14px;
   box-shadow: #efefefe6 1px 5px 20px 0px;
@@ -28,7 +28,6 @@
 .upload text {
   padding-left: 5px;
   vertical-align: 1px;
-
 }
 
 .cell-value {

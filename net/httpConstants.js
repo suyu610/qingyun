@@ -15,8 +15,10 @@ export const GetUploadFileSignUrl = 'doc/getUploadFileSign';
 
 export const MatchNameAndNumberUrl = 'user/matchNameAndNumber';
 export const LoginByPwdUrl = 'user/loginByPwd';
-export const GetDataUrl = 'user/getData'
+export const GetDataUrl = 'user/getData';
 export const LoginByTokenUrl = 'user/loginByToken';
+export const GetProfileBySsNumberUrl = 'user/profile'
+export const ModifyProfileUrl = 'user/profile'
 
 ////////////
 /// 文档 ///

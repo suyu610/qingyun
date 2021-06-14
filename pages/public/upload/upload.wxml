@@ -6,7 +6,7 @@
   module.exports.numberToFix=numberToFix;
 </wxs>
 <scroll-view class="container bg" scroll-y="{{true}}">
-  <view class="preview">
+  <view class="preview" wx:if="{{fileList.length!=0}}">
     <view wx:if="{{fileList.length==0}}" style="width:100%;line-height:50px;text-align:center;color:#888;">
       <van-icon name="bulb-o" /> <text style="vertical-align:1px">暂未上传文件</text>
     </view>
@@ -32,12 +32,12 @@
 
 
   <view class="main ">
-    <van-field required clearable input-class="cell-value" custom-style="border-radius: 10px!important"
+    <van-field clearable input-class="cell-value" custom-style="border-radius: 10px!important"
       label-class="input_label" model:value="{{ upload_doc_title }}" autosize size="large" autosize center label="标题"
       input-align="right" placeholder="不超过50字" placeholder-style="font-size:14px" type="textarea" border="{{ true }}"
       maxlength="50">
     </van-field>
-    <van-field required input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
+    <van-field input-class="cell-value" custom-style="border-radius: 10px!important" label-class="input_label"
       bind:focus="courseTitleFocus" bind:blur="courseTitleBlur" model:value="{{ upload_course_title }}" size="large"
       autosize center label="所属课程" input-align="right" placeholder="尽可能写全称" placeholder-style="font-size:14px"
       type="textarea" border="{{ true }}" maxlength="50">
@@ -46,10 +46,10 @@
     <van-cell title="文档类型" value="{{docType}}" title-class="input_label" size="large" is-link
       bindtap="onTapShowDocTypeSheet" value-class="cell-value" />
 
-    <van-cell required wx:if="{{upload_category.length==0}}" title="分类" value="请选择课程分类" title-class="input_label" size="large"
-      is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
+    <van-cell wx:if="{{upload_category.length==0}}" title="分类" value="请选择课程分类" title-class="input_label"
+      size="large" is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
 
-    <van-cell required wx:else title="分类" title-width="20%"
+    <van-cell wx:else title="分类" title-width="20%"
       value="{{upload_category[0].name}} / {{upload_category[1].name}} / {{upload_category[2].name}}"
       title-class="input_label" size="large" is-link bindtap="onTapShowCategoryPopup" value-class="cell-value" />
 
@@ -93,6 +93,13 @@
           </view>
         </view>
       </view>
+    </view>
+
+    <view class="cu-form-group">
+      <view class="title input_label ">可否下载 
+        <van-icon name="question-o" />
+      </view>
+      <switch class="blue sm" checked></switch>
     </view>
 
     <view class="can_preview">

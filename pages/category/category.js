@@ -120,8 +120,16 @@ Page({
   },
 
   onShow() {
-    cateService.getAllCourse(this.handleGetAllCourse, this.handleGetAllCourseFail);
-
+    if (this.data.categoryList == null || this.data.categoryList.province_list == null) {
+      app.globalData.categoryList = wx.getStorageSync('categoryList')
+    }
+    if (this.data.courseList.length == 0) {
+      cateService.getAllCourse(this.handleGetAllCourse, this.handleGetAllCourseFail);
+    }
+    this.setData({
+      categoryList: app.globalData.categoryList,
+      back_categoryList: app.globalData.categoryList
+    })
   },
 
 
@@ -161,7 +169,7 @@ Page({
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
       console.log(num)
-      if(num>that.data.list.length-1){
+      if (num > that.data.list.length - 1) {
         return;
       }
       if (this.data.listCur != that.data.list[num]) {
