@@ -5,30 +5,32 @@
     <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
   </van-dropdown-menu>
 
-  <view class="order_list">
-    <block wx:for="{{8}}" wx:key="index">
-      <view class="order" >
-        <van-card centered custom-class="order_body" price="10.00"
-          thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg" bindtap="jump2DocPreview">
-          <view slot="title" >
-            <view class="order_id">[ 试卷 ]</view>
-            <view class="order_title">高等数学历年试卷</view>
+  <view wx:if="{{docList.length != 0}}" class="order_list">
+    <block wx:for="{{docList}}" wx:key="index" wx:for-item="item">
+      <view class="order">
+        <van-card centered custom-class="order_body" price="{{item.price}}" data-id="{{item.id}}"
+          thumb=" {{item.previewImgUrl+'/preview_image'}}" bindtap="jump2DocDetail">
+          <view slot="title">
+            <view class="order_id">{{item.typeName}}</view>
+            <view class="order_title">{{item.title}}</view>
           </view>
           <view slot="desc" class="order_desc">
-            <view>作者：黄鹏宇</view>
+            <view>作者 {{item.authorName}}</view>
           </view>
-          <view slot="footer" class="footer" >
-            <van-button size="small" class="" custom-style="border-radius:5px!important;" color="#0CB1FF" plain catchtap="deleteStar">删除
+          <view slot="footer" class="footer">
+            <van-button size="small" class="" data-id="{{item.id}}" custom-style="border-radius:5px!important;"
+              color="#0CB1FF" plain catchtap="unStar">取消收藏
             </van-button>
-            <van-button size="small" class="" custom-style="border-radius:5px!important" color="#0CB1FF" >购买
+            <van-button size="small" class="" custom-style="border-radius:5px!important" color="#0CB1FF">购买
             </van-button>
-
           </view>
         </van-card>
       </view>
     </block>
   </view>
+
+  <view wx:else>
+    <van-empty description="收藏夹为空" />
+  </view>
 </scroll-view>
-
-
-<van-dialog id="van-dialog"/>
+<van-dialog id="van-dialog" />

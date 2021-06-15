@@ -59,8 +59,8 @@
       <view class="upload_time">2020/5/26</view>
     </view> -->
     <view class="buttons">
-      <view class="btns" bindtap="onTapStar">
-        <view class="mark_btn">
+      <view class="btns">
+        <view class="mark_btn" bindtap="onTapStar" data-id="{{doc.id}}">
           <van-loading type="spinner" wx:if="{{loadingStar}}" size="20px" custom-class="loading" />
           <van-icon wx:if="{{!loadingStar}}" name="{{isStared?'star':'star-o'}}" />
           <text wx:if="{{!loadingStar}}" style="margin-left: 5px;vertical-align: 1px;">{{isStared?"取消收藏":"收藏"}}</text>

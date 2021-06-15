@@ -11,6 +11,8 @@ Page({
     doc: {},
     loadingStar: false,
     loadingBought: false,
+    isStared:false,
+    isBought:false,
     // 预览图
     previewList: [],
     docRelatedItemList: [],
@@ -87,24 +89,40 @@ Page({
       }
     })
   },
-  //  点击收藏按钮
-  onTapStar() {
-    this.setData({
-      loadingStar: true
+
+  handleStarSuccess(e) {
+    wx.showToast({
+      title: e,
     })
 
-    setTimeout(() => {
-      this.setData({
-        isStared: !this.data.isStared,
-        loadingStar: false
-      })
-    }, 800);
+    this.setData({
+      isStared: !this.data.isStared,
+      loadingStar: false
+    })
+  },
+
+  //  点击收藏按钮
+  onTapStar(e) {
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      loadingStar: true,
+
+    })
+    // 判断收藏状态
+    // 如果是已收藏，则为取消
+    if (this.data.isStared) {
+      DocService.UnStar(this.handleStarSuccess, id)
+    } else {
+      DocService.Star(this.handleStarSuccess, id)
+    }
     console.log("1")
 
   },
   handleGetDetailSuccess: function (e) {
     this.setData({
-      doc: e
+      doc: e,
+      isStared:e.stared,
+      isBought:e.bought
     })
     let previewList = []
     e.files.forEach(function (element) {
@@ -118,7 +136,7 @@ Page({
 
     this.setData({
       previewList,
-      isStared: e.isStared,
+      isStared: e.stared,
       docRelatedItemList: e.docRelatedItemList,
       commentItemList: e.commentItemList
     })

@@ -1,9 +1,9 @@
 // pages/public/order_list/order_list.js
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
-import {
-  push
-} from '../../../utils/router/index.js';
+import
+router from '../../../utils/router/index.js';
+import DocService from '../../../net/service/docService.js'
 
 Page({
   data: {
@@ -38,8 +38,23 @@ Page({
     ],
     value1: 0,
     value2: 'a',
+    docList: [],
   },
 
+  handleUnStarSuccess:function(e){
+    DocService.GetStarDoc(this.handleGetSuccess)
+    wx.showToast({
+      title: e,
+    })
+  },
+
+  unStar(e){
+
+
+    let id = e.currentTarget.dataset.id
+    DocService.UnStar(this.handleUnStarSuccess,id)
+    console.log()
+  },
   addComment: function () {
     Dialog.confirm({
         title: '高等数学历年试卷',
@@ -53,16 +68,21 @@ Page({
         // on cancel
       });
   },
-  jump2DocPreview: function () {
-    push({
-      name: "document_detail"
-    })
+
+  jump2DocDetail(e) {
+    router.push({
+      name: 'document_detail',
+      data: {
+        id: e.currentTarget.dataset.id,
+        type: 1,
+      },
+    });
   },
   deleteStar: function () {
     Dialog.confirm({
-      title: '确定删除吗?',
-      message: '高等数学'
-    })
+        title: '确定删除吗?',
+        message: '高等数学'
+      })
       .then(() => {
         wx.showToast({
           title: '删除成功',
@@ -70,7 +90,16 @@ Page({
       })
       .catch(() => {
         // on cancel
-      });  },
+      });
+  },
+
+  handleGetSuccess: function (e) {
+    this.setData({
+      docList:e
+    })
+    console.log(e)
+  },
+
   onLoad: function () {
     wx.setNavigationBarTitle({
       title: '收藏清单',
@@ -78,5 +107,9 @@ Page({
   },
   onShareAppMessage: function () {
 
+  },
+
+  onShow: function () {
+    DocService.GetStarDoc(this.handleGetSuccess)
   }
 })

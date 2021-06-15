@@ -58,7 +58,6 @@ const paperList = [{
   {
     docuType: "paper",
     title: "固体物理试卷",    isHot: true,
-
     subTitle: "前五章",
     college: "电子信息学院",
     grade: "大二",

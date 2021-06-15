@@ -26,6 +26,10 @@ export const ModifyProfileUrl = 'user/profile'
 
 export const GetDocDetailUrl = 'doc/detail'
 export const GetUploadSignUrl = 'doc/getUploadFileSign'
+export const GetDocStarUrl = 'doc/getStarDoc'
+export const UnStarUrl = 'doc/unStar'
+export const StarUrl = 'doc/star'
+
 
 ////////////
 /// 分类 ///

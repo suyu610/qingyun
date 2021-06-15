@@ -6,7 +6,9 @@
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-field": "@vant/weapp/field/index",
-    "van-divider": "@vant/weapp/divider/index"
+    "van-divider": "@vant/weapp/divider/index",
+    "van-empty": "@vant/weapp/empty/index"
+
 
 
 
