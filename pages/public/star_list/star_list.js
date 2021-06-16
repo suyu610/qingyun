@@ -28,12 +28,8 @@ Page({
         value: 'a'
       },
       {
-        text: '从新到旧',
+        text: '价格排序',
         value: 'b'
-      },
-      {
-        text: '销量排序',
-        value: 'c'
       },
     ],
     value1: 0,
@@ -41,20 +37,19 @@ Page({
     docList: [],
   },
 
-  handleUnStarSuccess:function(e){
+  handleUnStarSuccess: function (e) {
     DocService.GetStarDoc(this.handleGetSuccess)
     wx.showToast({
       title: e,
     })
   },
 
-  unStar(e){
-
-
+  unStar(e) {
     let id = e.currentTarget.dataset.id
-    DocService.UnStar(this.handleUnStarSuccess,id)
+    DocService.UnStar(this.handleUnStarSuccess, id)
     console.log()
   },
+
   addComment: function () {
     Dialog.confirm({
         title: '高等数学历年试卷',
@@ -78,15 +73,14 @@ Page({
       },
     });
   },
-  deleteStar: function () {
+
+  deleteStar: function (e) {
     Dialog.confirm({
-        title: '确定删除吗?',
-        message: '高等数学'
+        title: '取消收藏吗?',
+        message: ''
       })
       .then(() => {
-        wx.showToast({
-          title: '删除成功',
-        })
+        this.unStar(e)
       })
       .catch(() => {
         // on cancel
@@ -95,7 +89,7 @@ Page({
 
   handleGetSuccess: function (e) {
     this.setData({
-      docList:e
+      docList: e
     })
     console.log(e)
   },

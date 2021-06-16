@@ -22,11 +22,11 @@
     </view>
     <view class="upload_count" bindtap="jump2MyUploadList">
       <view class="count">{{uploadCount}} 份</view>
-      <view class="info_title ">我上传了</view>
+      <view class="info_title ">我的上传</view>
     </view>
     <view class="download_count" bindtap="jump2OrderList">
       <view class="count">{{boughtCount}} 份</view>
-      <view class="info_title">我购买的</view>
+      <view class="info_title">我的购买</view>
     </view>
     <view class="upload neumorphism " bindtap="jump2Upload">
       <van-icon name="fire" color="red" /><text>上传资料</text>
@@ -35,9 +35,9 @@
 
   <view class="setting">
     <van-cell-group title="资料">
-      <van-cell title="我的收藏" icon="star" is-link value="{{starCount}}" bindtap="jump2StarList" />
-      <van-cell title="我的上传" icon="printer" is-link value="{{uploadCount}}" bindtap="jump2MyUploadList" />
-      <van-cell title="我的购买" icon="balance-list" is-link value="{{boughtCount}}" bindtap="jump2OrderList" />
+      <van-cell title="我的收藏" icon="star" is-link  bindtap="jump2StarList" />
+      <van-cell title="我的上传" icon="printer" is-link  bindtap="jump2MyUploadList" />
+      <van-cell title="我的购买" icon="balance-list" is-link  bindtap="jump2OrderList" />
     </van-cell-group>
     <van-cell-group title="系统">
       <van-cell icon="chat" is-link value="{{msgCount}}" bindtap="jump2MsgList">

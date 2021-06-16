@@ -6,17 +6,17 @@
   </van-dropdown-menu>
 
   <view class="order_list">
-    <block wx:for="{{8}}" wx:key="index">
+    <block wx:for="{{orderList}}" wx:key="index" wx:for-item="item">
       <view class="order">
-        <van-card centered custom-class="order_body" price="10.00" tag="已完成"
-          thumb=" https://cdns.qdu.life/qingyun/images/ad_1.jpg">
+        <van-card centered custom-class="order_body" price="10.00" tag="{{item.status==0?'送货中':'已完成'}}"
+          thumb="{{item.previewImgUrl}}">
           <view slot="title">
-            <view class="order_id">订单号:20200708</view>
-            <view class="order_title">高等数学历年试卷</view>
+            <view class="order_id">订单号:{{item.orderId}}</view>
+            <view class="order_title">{{item.title}}</view>
           </view>
           <view slot="desc" class="order_desc">
-            <view>作者：黄鹏宇</view>
-            <view>2020-06-03 12:24</view>
+            <view>作者：{{item.authorName}}</view>
+            <view>{{item.boughtDate}}</view>
           </view>
           <view slot="footer" class="footer">
             <van-button size="small" custom-style="border-radius:5px!important;color:black"

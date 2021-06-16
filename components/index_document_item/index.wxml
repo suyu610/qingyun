@@ -1,6 +1,7 @@
 <!--components/test/test.wxml-->
 <view class="container">
-  <view class="leftBox" wx:if="{{mode!='preview'}}">
+  <view class="leftBox" wx:if="{{mode!='preview'}}"
+    style="background:url({{previewImgUrl}}) no-repeat; background-size: 9vh 9vh;">
     <view wx:if="{{docuType=='paper'}}" class="leftBoxChild paper">
       <view class="type">试卷</view>
       <view class="starCount">
@@ -27,9 +28,9 @@
 
   </view>
   <view class="info {{mode=='preview'?'preview_info':''}}">
-    <view class="title " >
-      <van-tag plain  type="danger" wx:if="{{uploadStatus=='verify'}}">审核中</van-tag>
-      <van-icon name="fire" color="#f00" wx:if="{{isHot}}"/> {{title}}
+    <view class="title ">
+      <van-tag plain type="danger" wx:if="{{uploadStatus=='0'}}">审核中</van-tag>
+      <van-icon name="fire" color="#f00" wx:if="{{isHot}}" /> {{title}}
     </view>
     <view class="subTitle">{{subTitle}}</view>
     <view class="thirdTitle">{{thirdTitle}}</view>

@@ -51,6 +51,7 @@ Page({
       avatarUrl:app.globalData.initData.userInitDataBO.avatarUrl, 
       college:app.globalData.initData.userInitDataBO.collegeName,
       ssNumber:app.globalData.ssNumber,
+      name:app.globalData.initData.userInitDataBO.name,
       msgCount:app.globalData.initData.msgList==null?0:app.globalData.initData.msgList.length
     })
   },

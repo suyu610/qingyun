@@ -19,7 +19,7 @@
           </view>
           <view slot="footer" class="footer">
             <van-button size="small" class="" data-id="{{item.id}}" custom-style="border-radius:5px!important;"
-              color="#0CB1FF" plain catchtap="unStar">取消收藏
+              color="#0CB1FF" plain catchtap="deleteStar">取消收藏
             </van-button>
             <van-button size="small" class="" custom-style="border-radius:5px!important" color="#0CB1FF">购买
             </van-button>

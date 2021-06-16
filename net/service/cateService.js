@@ -19,5 +19,5 @@ function getAllCourse(handleSuccess, handleFailure) {
 }
 
 module.exports = {
-  getAllCourse: getAllCourse,
+  getAllCourse,
 }

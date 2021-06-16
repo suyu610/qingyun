@@ -2,7 +2,7 @@
 <view scroll-y="{{true}}" class="container">
   <view class="cu-bar bg-white padding-lg">
     <view class="action sub-title">
-      <text class="text-lg text-bold text-black">共帮助到<text class="text-red text-bold"> 7 </text>位同学
+      <text class="text-lg text-bold text-black">共帮助到<text class="text-red text-bold"> {{downCount}} </text>位同学
         谢谢你</text>
       <text class="bg-blue" style="width:2.8rem"></text>
       <!-- last-child选择器-->
@@ -15,44 +15,46 @@
   <view class="body">
     <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
       title-inactive-color="#10101055" swipeable animated bind:change="onChange">
-      <van-tab title="笔记 (4)">
+      <van-tab title="笔记 ({{noteList.length}})">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
-            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onPullDownRefresh">
             <block wx:for="{{noteList}}" wx:key="index" wx:for-item="item">
               <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                uploadStatus="{{item.uploadStatus}}"
-                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
-                thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
-                authorName="{{item.authorName}}" />
+                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+                subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
+                price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
+                authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
           </scroll-view>
         </view>
       </van-tab>
-      <van-tab title="试卷 (3)">
+      <van-tab title="试卷 ({{paperList.length}})">
         <view class="tab-item help" id="helpView">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{paperList}}" wx:key="index" wx:for-item="item">
               <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
-                thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
-                authorName="{{item.authorName}}" />
+                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+                subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
+                price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
+                authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
           </scroll-view>
         </view>
       </van-tab>
-      <van-tab title="攻略 (2)">
+      <van-tab title="攻略 ({{strategyList.length}})">
         <view class="tab-item trick">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{strategyList}}" wx:key="index" wx:for-item="item">
               <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                docuType="{{item.docuType}}" title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
-                thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" downCount="{{item.downCount}}"
-                authorName="{{item.authorName}}" />
+                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+                subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
+                price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
+                authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
           </scroll-view>
@@ -64,5 +66,6 @@
 
 <van-dialog id="van-dialog" />
 
-<van-action-sheet bind:select="tapActionSheet" cancel-text="取消" bind:cancel="onCloseActionSheet" bind:close="onCloseActionSheet"
-  show="{{ showActionSheet }}" actions="{{ actionSheetActions }}" description="固体物理亲手笔记" />
+<van-action-sheet bind:select="tapActionSheet" cancel-text="取消" bind:cancel="onCloseActionSheet"
+  bind:close="onCloseActionSheet" show="{{ showActionSheet }}" actions="{{ actionSheetActions }}"
+  description="固体物理亲手笔记" />

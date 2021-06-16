@@ -7,15 +7,13 @@ import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
 
 import UserService from '../../../net/service/userService.js'
 
-
-
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    address_mode: true,
     avatar: {},
     showMajorPopup: false,
     majorList: {},
@@ -25,13 +23,13 @@ Page({
     }, {
       name: "微电子工程"
     }],
-    upload_majorId: 1100,
-    upload_major_name:"",
-    upload_college_name:"",
-    upload_tel: 13073706946,
-    upload_address: "中心校区 博学楼",
-    upload_introduce: "好好好",
-    upload_scholar_introduce: "大一 1/235"
+    upload_majorId: 1101,
+    upload_major_name: "",
+    upload_college_name: "",
+    upload_tel: "",
+    upload_address: "",
+    upload_introduce: "",
+    upload_scholar_introduce: ""
 
   },
 
@@ -40,8 +38,8 @@ Page({
     this.setData({
       upload_major: e.detail.values,
       showMajorPopup: false,
-      upload_college_name:e.detail.values[0].name,
-      upload_major_name:e.detail.values[1].name
+      upload_college_name: e.detail.values[0].name,
+      upload_major_name: e.detail.values[1].name
     })
   },
   // 搜索分类
@@ -101,20 +99,20 @@ Page({
   handleModifyProfileFail(e) {
     console.log(e)
     wx.showToast({
-      icon:'none',
+      icon: 'none',
       title: e,
     })
   },
 
   saveOk: function () {
     let params = {
-      avatarUrl:this.data.avatarUrl,
-      upload_major_name:this.data.upload_major_name,
-      upload_college_name:this.data.upload_college_name,
-      upload_tel:this.data.upload_tel,
-      upload_address:this.data.upload_address,
-      upload_introduce:this.data.upload_introduce,
-      upload_scholar_introduce:this.data.upload_scholar_introduce
+      avatarUrl: this.data.avatarUrl,
+      upload_major_name: this.data.upload_major_name,
+      upload_college_name: this.data.upload_college_name,
+      upload_tel: this.data.upload_tel,
+      upload_address: this.data.upload_address,
+      upload_introduce: this.data.upload_introduce,
+      upload_scholar_introduce: this.data.upload_scholar_introduce
     }
     UserService.modifyProfile(this.handleModifyProfileSuccess, this.handleModifyProfileFail, params)
   },
@@ -142,11 +140,34 @@ Page({
   onReady: function () {
 
   },
+  handleGetSuccess: function (e) {
+    this.setData({
+      upload_address: e.address,
+      upload_tel: e.contact,
+      avatar:{url:e.avatarUrl},
+      upload_introduce: e.introduce,
+      upload_scholar_introduce: e.scholarIntroduce,
+      name:e.name,
+      ssNumber:e.ssNumber,
+      upload_major: [{
+        name: e.collegeName,
+      }, {
+        name: e.majorName,
+      }],
+    })
+  },
+
+  handleGetFail: function (e) {
+    console.log(e)
+  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("onShow")
+    // 发一次获取个人资料的请求
+    UserService.GetSelfProfile(this.handleGetSuccess, this.handleGetFail)
     let majorList;
     if (app.globalData.categoryList == null) {
       majorList = wx.getStorageSync('categoryList')

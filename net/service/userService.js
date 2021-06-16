@@ -10,7 +10,8 @@ import {
   LoginByTokenUrl,
   GetDataUrl,
   GetProfileBySsNumberUrl,
-  ModifyProfileUrl
+  ModifyProfileUrl,
+  GetSelfProfileUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -123,9 +124,19 @@ function GetProfileBySsNumber(handleSuccess, handleFailure, ssNumber) {
     });
 }
 
+function GetSelfProfile(handleSuccess, handleFailure) {
+  httpService.get(
+    GetSelfProfileUrl,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+      parseInitData(res.data['data'])
 
-
-
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
 
 
 
@@ -135,5 +146,6 @@ module.exports = {
   GetData,
   LoginByToken,
   GetProfileBySsNumber,
-  modifyProfile
+  modifyProfile,
+  GetSelfProfile
 }

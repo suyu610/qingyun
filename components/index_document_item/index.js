@@ -13,7 +13,8 @@ Component({
     authorName:String,
     isHot:Boolean,
     mode:String,
-    uploadStatus:String
+    uploadStatus:String,
+    previewImgUrl:String
   },
 
   /**

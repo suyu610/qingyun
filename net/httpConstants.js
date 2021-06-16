@@ -19,6 +19,8 @@ export const GetDataUrl = 'user/getData';
 export const LoginByTokenUrl = 'user/loginByToken';
 export const GetProfileBySsNumberUrl = 'user/profile'
 export const ModifyProfileUrl = 'user/profile'
+export const GetSelfProfileUrl = 'user/profile/me'
+
 
 ////////////
 /// 文档 ///
@@ -29,6 +31,7 @@ export const GetUploadSignUrl = 'doc/getUploadFileSign'
 export const GetDocStarUrl = 'doc/getStarDoc'
 export const UnStarUrl = 'doc/unStar'
 export const StarUrl = 'doc/star'
+export const GetMyUploadDocUrl = 'doc/me'
 
 
 ////////////
@@ -37,3 +40,10 @@ export const StarUrl = 'doc/star'
 
 export const GetAllCourseUrl = 'cate/getAllCourse'
 
+
+////////////
+/// 订单 ///
+///////////
+
+export const CheckHasBoughtUrl = 'order/hasBought'
+export const GetAllOrdersUrl = 'order/allBought'

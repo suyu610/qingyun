@@ -6,6 +6,7 @@ function parseInitData(data){
   // console.log(data.userInitDataBO)
   if(data.userInitDataBO!=null){
     app.globalData.userInitDataBO = data.userInitDataBO
+    app.globalData.ssNumber = data.userInitDataBO.ssNumber
   }
 
   if(data.category!=null){
@@ -27,13 +28,7 @@ function parseInitData(data){
   }
   if(data.adList!=null){
     app.globalData.adList = data.adList
-
   }
-
-
-
-
-
 }
 
 

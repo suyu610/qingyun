@@ -4,110 +4,11 @@ import {
 } from '../../../utils/router/index.js';
 
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import DocService from '../../../net/service/docService.js'
 
-const noteList = [{
-    docuType: "note",
-    title: "固体物理亲手笔记",
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    isHot: false,
-    price: "0",
-    downCount: "0",
-    authorName: "下载:0",
-    uploadStatus:"verify"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "下载:5"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    isHot: true,
-
-    authorName: "下载:6"
-  }, {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "下载:1500"
-  }
-]
-const paperList = [{
-    docuType: "paper",
-    title: "高数历年试卷",
-    subTitle: "2017-2020年",
-    isHot: true,
-    college: "电子信息学院",
-    grade: "大二",
-    price: "15.00",
-    downCount: "4",
-    authorName: "下载:1500"
-  },
-  {
-    docuType: "paper",
-    title: "固体物理试卷",
-    isHot: true,
-
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    downCount: "91",
-    authorName: "下载:150"
-  },
-  {
-    docuType: "paper",
-    isHot: true,
-
-    title: "临床医学试卷",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "下载:15"
-  }
-]
-const strategyList = [{
-    docuType: "strategy",
-    title: "高数应试攻略",
-    subTitle: "",
-    isHot: true,
-    college: "电子信息学院",
-    grade: "大二",
-    price: "15.00",
-    downCount: "4",
-    authorName: "下载:777"
-  },
-  {
-    docuType: "strategy",
-    title: "固体物理应试攻略",
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    isHot: true,
-    downCount: "91",
-    authorName: "下载:999"
-  },
-]
+const noteList = []
+const paperList = []
+const strategyList = []
 Page({
 
   /**
@@ -133,9 +34,9 @@ Page({
         color: '#ee0a24'
       },
     ],
-    noteList: noteList,
-    paperList: paperList,
-    strategyList: strategyList,
+    noteList: [],
+    paperList: [],
+    strategyList: [],
     height: "95vh",
     longtap: false
   },
@@ -145,31 +46,35 @@ Page({
     })
   },
   tapActionSheet: function (e) {
-    if(e.detail.value == "modify"){
+    if (e.detail.value == "modify") {
       this.jump2MyUploadModify()
       return;
-  }
-    if(e.detail.value == "preview"){
+    }
+    if (e.detail.value == "preview") {
       this.jump2DocPreview()
       return;
     }
 
-    if(e.detail.value == "del") {
+    if (e.detail.value == "del") {
       this.confirmUnPublished();
       return;
-    }   
+    }
 
-    if(e.detail.value == "previewShop") {
+    if (e.detail.value == "previewShop") {
       this.jump2Preview();
       return;
-    }   
-    
+    }
+
   },
-  jump2Preview:function(){
-    push({name:"upload_preview"})
+  jump2Preview: function () {
+    push({
+      name: "upload_preview"
+    })
   },
-  jump2DocPreview:function(){
-    push({name:"preview_doc"})
+  jump2DocPreview: function () {
+    push({
+      name: "preview_doc"
+    })
   },
   // 停止发布 
   confirmUnPublished: function () {
@@ -213,7 +118,6 @@ Page({
         that.setData({
           height: res.windowHeight - 64 - 44 - 10 + "px"
         })
-        console.log(res.windowHeight)
       }
     })
   },
@@ -225,10 +129,51 @@ Page({
 
   },
 
+  getListSuccess: function (e) {
+
+    // docuType: "note",
+    // title: "固体物理亲手笔记",
+    // subTitle: "前五章",
+    // college: "电子信息学院",
+    // grade: "大二",
+    // isHot: false,
+    // price: "0",
+    // downCount: "0",
+    // authorName: "下载:0",
+    // uploadStatus: "verify"
+    let downCount = 0
+    let noteList = []
+    let paperList = []
+    let strategyList = []
+    e.forEach(element => {
+      downCount = downCount + element.downCount
+      if (element.typeName == "笔记") {
+        noteList.push(element)
+      }
+      if (element.typeName == "试卷") {
+        paperList.push(element)
+      }
+      if (element.typeName == "攻略") {
+        strategyList.push(element)
+      }
+    });
+
+    this.setData({
+      noteList,
+      paperList,
+      strategyList,
+      downCount,
+      triggered: false
+    })
+    // 分类
+
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    DocService.GetMyUploadDoc(this.getListSuccess, this.getListFail)
 
   },
 
@@ -250,6 +195,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showToast({
+      title: '刷新成功',
+    })
+    DocService.GetMyUploadDoc(this.getListSuccess, this.getListFail)
 
   },
 

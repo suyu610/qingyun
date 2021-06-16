@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wx-server-sdk": "~2.4.0",
-    "tcb-router": "latest"
+    "request-promise": "^4.2.6",
+    "tcb-router": "latest",
+    "wx-server-sdk": "~2.4.0"
   },
   "devDependencies": {
     "tenpay": "^2.1.18"

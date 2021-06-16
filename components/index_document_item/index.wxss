@@ -14,10 +14,13 @@
   display: inline-block;
   height: 9vh;
   width: 9vh;
-  border-radius: 11px;
+  border-radius: 13px;
+
 }
 
 .leftBoxChild {
+  /* box-shadow: 3px 2px #6f6f6f; */
+
   height: 9vh;
   text-align: center;
   display: table-cell;
@@ -25,7 +28,7 @@
   width: 9vh;
   box-sizing: border-box;
   font-size: 12px;
-  border-radius: 6px;
+  border-radius: 13px;
 }
 
 .leftBoxChild .type {
@@ -45,17 +48,24 @@
 
 .paper {
   background-color: #27B1FF;
+  /* background-color: #00000066; */
   color: white;
+  font-weight: bold;
 }
 
 .note {
   background-color: #ffe9a7;
+  /* background-color: #00000066; */
   color: black;
+  font-weight: bold;
+
 }
 
 .strategy {
   background-color: #FBD8BC;
+  /* background-color: #00000066; */
   color: black;
+  font-weight: bold;
 }
 
 .info {
@@ -93,7 +103,8 @@
   color: #938E8E;
   font-size: 12px;
 }
-.text-red{
+
+.text-red {
   color: red;
   font-weight: bold;
 }

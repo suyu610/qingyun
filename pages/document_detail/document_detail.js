@@ -34,8 +34,25 @@ Page({
     });
   },
   jump2BuyConfirm: function () {
+    // 如果是已经购买，则跳转查看文档
+    if(this.data.doc.bought){
+      router.push({
+        name: "preview_doc",
+        data: {
+          id: this.data.doc.id,
+        },
+      })
+      return;
+    }
     router.push({
-      name: "buy_confirm"
+      name: "buy_confirm",
+      data: {
+        id: this.data.doc.id,
+        price:this.data.doc.price,
+        authorName:this.data.doc.authorName,
+        introduce:this.data.doc.introduce,
+        title:this.data.doc.title
+      },
     })
   },
 

@@ -8,8 +8,8 @@
       </view>
       <view class="info">
         <view class="name">黄鹏宇</view>
-        <view class="tel">17685837371</view>
-        <view class="address_info">浮山校区泓园3号楼</view>
+        <view class="tel">{{tel}}</view>
+        <view class="address_info">{{address}}</view>
       </view>
     </view>
     <van-icon name="arrow" color="#afacac" />
@@ -17,11 +17,11 @@
   <view class="goods">
     <view class="goods_body">
       <view class="info">
-        <view class="info_title">高等数学期末试卷</view>
-        <view class="sub_title">2014-2020年</view>
-        <view class="author">作者：黄鹏宇</view>
+        <view class="info_title">{{title}}</view>
+        <view class="sub_title">{{introduce}}</view>
+        <view class="author">作者：{{authorName}}</view>
       </view>
-      <view class="price">￥10</view>
+      <view class="price">￥{{price}}</view>
     </view>
 
 
@@ -51,7 +51,7 @@
 <van-dialog id="van-dialog" />
 
 
-<van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="pay" tip="{{ true }}">
+<van-submit-bar price="{{ price*100 }}" button-text="提交订单" bind:submit="pay" tip="{{ true }}">
   <van-tag type="primary">标签</van-tag>
   <view slot="tip">您暂未填写收货地址 <text>填写地址</text></view>
 </van-submit-bar>

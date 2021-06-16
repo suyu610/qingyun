@@ -1,10 +1,11 @@
 import httpService from "../httpService";
 
 import {
+  GetMyUploadDocUrl,
   GetDocDetailUrl,
   GetDocStarUrl,
   UnStarUrl,
-  StarUrl
+  StarUrl,
 
 } from "../httpConstants";
 
@@ -65,11 +66,27 @@ function Star(handleSuccess, id) {
     });
 }
 
+function GetMyUploadDoc(handleSuccess) {
+  httpService.get(
+    GetMyUploadDocUrl,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      wx.showToast({
+        icon:'error',
+        title: "未知错误",
+      })
+    });
+}
 
 
 module.exports = {
+  GetMyUploadDoc,
   GetDocDetail,
   GetStarDoc,
   UnStar,
-  Star
+  Star,
+  
 }

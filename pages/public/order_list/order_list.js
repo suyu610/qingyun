@@ -1,6 +1,7 @@
 // pages/public/order_list/order_list.js
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
-
+import OrderService from '../../../net/service/orderService.js'
+import util from '../../../utils/util.js'
 import {
   push
 } from '../../../utils/router/index.js';
@@ -38,10 +39,10 @@ Page({
 
   },
 
-  addComment:function(){
+  addComment: function () {
     Dialog.confirm({
-      title: '高等数学历年试卷',
-    })
+        title: '高等数学历年试卷',
+      })
       .then(() => {
         wx.showToast({
           title: '评论成功',
@@ -51,14 +52,28 @@ Page({
         // on cancel
       });
   },
-
-  onLoad:function(){
+  getOrdersSuccess: function (e) {
+    let orderList = []
+    e.forEach(element => {
+      element.boughtDate = util.timeFormatSeconds(element.boughtDate)
+      orderList.push(element)
+      console.log()
+    });
+    this.setData({orderList})
+    console.log(e)
+  },
+  onShow: function () {
+    OrderService.GetAllOrders(this.getOrdersSuccess, this.getOrdersFail)
+  },
+  onLoad: function () {
     wx.setNavigationBarTitle({
       title: '我的知识库',
     })
   },
-  jump2PreviewDoc:function(){
-    push({name:"preview_doc"})
+  jump2PreviewDoc: function () {
+    push({
+      name: "preview_doc"
+    })
   },
   onShareAppMessage: function () {
 

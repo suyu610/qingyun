@@ -20,5 +20,5 @@ function uploadInfo(handleSuccess, handleFailure, params) {
 }
 
 module.exports = {
-  uploadInfo: uploadInfo,
+  uploadInfo,
 }
