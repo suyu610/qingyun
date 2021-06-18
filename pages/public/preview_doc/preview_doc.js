@@ -1,4 +1,6 @@
 // pages/public/preview_doc/preview_doc.js
+import router from '../../../utils/router/index.js';
+const app = getApp()
 Page({
 
   /**
@@ -12,20 +14,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.downloadFile({
-    //   // 示例 url，并非真实存在
-    //   url: 'https://file.qdu.life/showdoc_1619460258423008176.pdf',
-    //   success: function (res) {
-    //     const filePath = res.tempFilePath
-    //     wx.openDocument({
-    //       filePath: filePath,
-    //       success: function (res) {
-    //         console.log('打开文档成功')
-    //       }
-    //     })
-    //   }
-    // })
-    
+    const data = router.extract(options);
+    let docId = 137;
+    if (data != null) {
+      docId = data.id;
+    }
+    this.setData({
+      url: "https://book.qdu.life/doc_detail.html?id=" + docId + "&token=" + app.globalData.token
+    })
+
   },
 
   /**

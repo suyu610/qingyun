@@ -1,5 +1,5 @@
 <!--pages/public/order/order.wxml-->
-<view class="cu-bar search fixed" style="padding-bottom:2vh">
+<view class=" cu-bar search fixed" style="padding-bottom:2vh">
   <view class="search-form " style="background-color:#fff;border-radius:6px">
     <text class="cuIcon-search"></text>
     <input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
@@ -17,7 +17,7 @@
   <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
     <view class="padding-sm indexItem-{{index}}" id="indexes-{{item.key}}" data-index="{{item.key}}">
       {{item.key}}</view>
-    <view class="cu-list menu-avatar no-padding" bindtap="jump2DocList" >
+    <view class="cu-list menu-avatar no-padding" bindtap="jump2DocList">
       <view class="cu-item" wx:for="{{item.value}}" wx:key="index">
         <view class="cu-avatar round text-sm circle">{{index*27}}次</view>
         <view class="content">

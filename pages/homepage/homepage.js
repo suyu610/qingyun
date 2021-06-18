@@ -14,19 +14,20 @@ Page({
     helpList: helpList,
     ////////// 頂部輪播圖 //////////
     adsList: [{
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-1.jpg",
-        "subTitle": "本周上传资料最多",
-        "mainTitle": "黄鹏宇",
-        "author": "83份",
-        "buttonText": "他的作品",
+        "imgUrl": "https://file.qdu.life/showdoc_16194609902142511621.png",
+        // "author": "一键搜索青大空教室",
+        "mainTitle": "青空教室",
+        "subTitle": "点击进入",
         "url": ""
       },
       {
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-2.jpg"
-      },
-      {
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-3.jpg"
-      },
+        "imgUrl": "https://cdns.qdu.life/qingyun/images/medal3.png",
+        "subTitle": "本周最受欢迎",
+        "mainTitle": "黄鹏宇~",
+        // "author": "83份",
+        // "buttonText": "他的作品",
+        "url": ""
+      }
     ],
     adsIndicatorDots: true,
     adsAutoplay: false,
@@ -63,7 +64,9 @@ Page({
       documentList.push(element)
     });
 
-    this.setData({documentList})
+    this.setData({
+      documentList
+    })
 
     wx.hideLoading({
       success: (res) => {
@@ -84,7 +87,7 @@ Page({
       fields: "hotDoc"
     })
 
- 
+
 
 
     wx.vibrateShort()
@@ -114,9 +117,13 @@ Page({
     });
   },
 
-  jump2DocPreview: function () {
+  jump2DocPreview: function (e) {
+    let id = e.currentTarget.dataset.id
     push({
       name: 'preview_doc',
+      data: {
+        id
+      }
     });
   },
   jump2Detail: function (e) {
@@ -131,13 +138,17 @@ Page({
 
   onShow: function () {
     let documentList = []
+    let boughtList = app.globalData.boughtDocList;
 
     app.globalData.hotDoc.forEach(element => {
       element.subTitle = element.introduce
       documentList.push(element)
     });
+
+
     this.setData({
-      documentList
+      documentList,
+      boughtList
     })
   },
 

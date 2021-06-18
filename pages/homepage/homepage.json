@@ -3,7 +3,7 @@
     "van-search": "@vant/weapp/search/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
-    "course_item":"/components/index_document_item/index",
+    "course_item": "/components/index_document_item/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-sticky": "@vant/weapp/sticky/index",
@@ -17,6 +17,7 @@
     "van-empty": "@vant/weapp/empty/index"
 
 
-  
-  }
+
+  },
+  "navigationStyle": "custom"
 }

@@ -29,6 +29,10 @@ function parseInitData(data){
   if(data.adList!=null){
     app.globalData.adList = data.adList
   }
+
+  if(data.userInitDataBO!=null && data.userInitDataBO.boughtDocList!=null){
+    app.globalData.boughtDocList = data.userInitDataBO.boughtDocList
+  }
 }
 
 

@@ -1,13 +1,16 @@
 <!--pages/public/msg_detail/msg_detail.wxml-->
 <view class="container bg">
-  <view class="title">系统通知</view>
-  <view class="time">2021/6/4 0:29</view>
-
-  <view class="content">我们已收到你的订单，将尽快与你协商送货时间与地点。</view>
-  <view class="from">-- 青云官方</view>
-
+  <view class="title">{{msg.title}}</view>
+  <view class="time">{{msg.createDate}}</view>
+  <view class="main neumorphism">
+    <view class="content">{{msg.content}}</view>
+  </view>
   <view class="submit_btn">
-    <van-button type="warning" size="small" custom-style="border-radius:5px;">删除</van-button>
-    <van-button type="warning" size="small" color="#0CB1FF" custom-style="border-radius:5px;">知道了</van-button>
+    <van-button type="warning" size="normal"
+      custom-style="border-radius:5px;    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;">
+      删除</van-button>
+    <van-button type="warning" size="normal" color="#0CB1FF"
+      custom-style="    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;border-radius:5px;">
+      知道了</van-button>
   </view>
 </view>

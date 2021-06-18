@@ -138,7 +138,7 @@ App({
     openid: "",
     token: "",
     ssNumber: "",
-    version:"0.1.3",
+    version:"0.8.5",
     categoryList:null
   }
 })

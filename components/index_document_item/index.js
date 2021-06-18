@@ -14,7 +14,10 @@ Component({
     isHot:Boolean,
     mode:String,
     uploadStatus:String,
-    previewImgUrl:String
+    previewImgUrl:String,
+    selfMode:Boolean,
+    verifyStatus:String,
+    publishedStatus:String
   },
 
   /**

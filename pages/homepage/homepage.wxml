@@ -1,6 +1,6 @@
 <!--pages/homepage/homepage.wxml-->
 <view class="container">
-  <view class="header">
+  <view class="header bg">
     <view class="ads">
       <swiper indicator-dots="{{adsIndicatorDots}}" indicator-active-color="#fff" indicator-color="#ffffff55"
         circular="{{true}}" autoplay="{{adsAutoplay}}" interval="{{adsInterval}}" duration="{{adsDuration}}">
@@ -10,7 +10,7 @@
               <view class="info">{{item.subTitle}}</view>
               <view class="title"> {{item.mainTitle}} </view>
               <view class="price"> {{item.author}}</view>
-              <image src="{{item.imgUrl}}" mode="aspectFill"></image>
+              <image src="{{item.imgUrl}}" mode="aspectFit" style="opacity:0.9"></image>
               <view class="entry-btn beauty_shadow">{{item.buttonText}}</view>
             </view>
           </swiper-item>
@@ -41,18 +41,19 @@
 
   </view>
   <view class="body" wx:else>
-    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+    <van-tabs  tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
       title-inactive-color="#10101055" swipeable animated bind:change="onChange">
 
-      <van-tab title="热门">
+      <van-tab title="🔥 热门">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{documentList}}" wx:key="index" wx:for-item="item">
-            
-              <course_item bindtap="jump2Detail" data-id="{{item.id}}" docuType="{{item.docuType}}" title="{{item.title}}"
-                isHot="{{item.isHot}}" subTitle="{{item.subTitle}}" thirdTitle="{{item.college}}\t \t{{item.grade}}"
-                price="{{item.price}}" starCount="{{item.starCount}}" authorName="{{item.authorName}}" />
+
+              <course_item class="" bindtap="jump2Detail" data-id="{{item.id}}" docuType="{{item.docuType}}"
+                title="{{item.title}}" isHot="{{item.isHot}}" subTitle="{{item.subTitle}}"
+                thirdTitle="{{item.college}}\t \t{{item.grade}}" price="{{item.price}}" starCount="{{item.starCount}}"
+                authorName="{{item.authorName}}" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
           </scroll-view>
@@ -71,12 +72,12 @@
 
           <scroll-view scroll-y="{{true}}">
             <van-grid column-num="3" square border="{{false}}">
-              <block wx:for="{{4}}" wx:key="index" wx:for-item="item">
-                <van-grid-item use-slot bindtap="jump2DocPreview">
-                  <image mode="aspectFill"
-                    style="width: 100%; height: 100%;border-radius:5px;background-color:lightgrey"
-                    src="https://cdns.qdu.life/qingyun/images/ad_{{ index + 1 }}.jpg" />
-                  <view style="padding-top:10px;font-size:12px;width:100%;text-align:left">高等数学试卷</view>
+              <block wx:for="{{boughtList}}" wx:key="index" wx:for-item="item">
+                <van-grid-item use-slot bindtap="jump2DocPreview" data-id="{{item.docId}}">
+                  <image mode="aspectFit"
+                    style="width: 100%; height: 100%;border-radius:5px;background-color:#27B1FF"
+                    src="{{item.previewImgUrl}}" />
+                  <view style="padding-top:10px;font-size:12px;width:100%;text-align:center">{{item.title}}</view>
                 </van-grid-item>
               </block>
             </van-grid>

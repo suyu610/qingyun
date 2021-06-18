@@ -30,7 +30,7 @@ Page({
       },
       {
         value: 'del',
-        name: '暂停发布',
+        name: '切换发布状态',
         color: '#ee0a24'
       },
     ],
@@ -38,8 +38,10 @@ Page({
     paperList: [],
     strategyList: [],
     height: "95vh",
-    longtap: false
+    longtap: false,
+    currentTapDocId: 0
   },
+
   onCloseActionSheet: function () {
     this.setData({
       showActionSheet: false
@@ -73,24 +75,47 @@ Page({
   },
   jump2DocPreview: function () {
     push({
-      name: "preview_doc"
+      name: "preview_doc",
+      data: {
+        id:this.data.currentTapDocId
+      }
     })
+  },
+
+  handleToggleSuccess: function (e) {
+    if (e) {
+      wx.showToast({
+        title: '修改成功',
+      })
+    } else {
+      wx.showToast({
+        title: '修改失败',
+      })
+    }
+
+    // 重新获取文档数据
+    DocService.GetMyUploadDoc(this.getListSuccess, this.getListFail)
+
   },
   // 停止发布 
   confirmUnPublished: function () {
+    let docId = this.data.currentTapDocId;
     Dialog.confirm({
-        title: '确认暂停发布？',
+        title: '确认切换公开状态？',
         message: '固体物理亲手笔记',
       })
       .then(() => {
-        // on confirm
+        DocService.TogglePublishedDoc(this.handleToggleSuccess, docId)
       })
       .catch(() => {
         // on cancel
       });
   },
-  onTapCell: function () {
+
+  onTapCell: function (e) {
+
     this.setData({
+      currentTapDocId: e.currentTarget.dataset.id,
       showActionSheet: true
     })
   },
@@ -105,6 +130,7 @@ Page({
       name: "upload"
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -122,25 +148,7 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   getListSuccess: function (e) {
-
-    // docuType: "note",
-    // title: "固体物理亲手笔记",
-    // subTitle: "前五章",
-    // college: "电子信息学院",
-    // grade: "大二",
-    // isHot: false,
-    // price: "0",
-    // downCount: "0",
-    // authorName: "下载:0",
-    // uploadStatus: "verify"
     let downCount = 0
     let noteList = []
     let paperList = []
@@ -174,21 +182,6 @@ Page({
    */
   onShow: function () {
     DocService.GetMyUploadDoc(this.getListSuccess, this.getListFail)
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
   },
 
   /**
@@ -199,15 +192,8 @@ Page({
       title: '刷新成功',
     })
     DocService.GetMyUploadDoc(this.getListSuccess, this.getListFail)
-
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
 
   /**
    * 用户点击右上角分享

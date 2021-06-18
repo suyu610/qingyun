@@ -20,8 +20,8 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onPullDownRefresh">
             <block wx:for="{{noteList}}" wx:key="index" wx:for-item="item">
-              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+              <course_item selfMode="true" verifyStatus="{{item.hasVerify?'审核通过':'审核中'}}" publishedStatus="{{item.published?'公开':'私密'}}" data-id="{{item.id}}" mode="preview" bindtap="onTapCell"
+                docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
                 subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
                 price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
                 authorName="下载： {{item.downCount}} 次" />
@@ -35,8 +35,8 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{paperList}}" wx:key="index" wx:for-item="item">
-              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+              <course_item selfMode="true" verifyStatus="{{item.hasVerify?'审核通过':'审核中'}}" publishedStatus="{{item.published?'公开':'私密'}}" data-id="{{item.id}}" mode="preview" bindtap="onTapCell"
+                docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
                 subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
                 price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
                 authorName="下载： {{item.downCount}} 次" />
@@ -50,8 +50,8 @@
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
             <block wx:for="{{strategyList}}" wx:key="index" wx:for-item="item">
-              <course_item bindlongtap="confirmUnPublished" mode="preview" bindtap="onTapCell"
-                uploadStatus="{{item.status}}" docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
+              <course_item selfMode="true" verifyStatus="{{item.hasVerify?'审核通过':'审核中'}}" publishedStatus="{{item.published?'公开':'私密'}}" data-id="{{item.id}}" mode="preview" bindtap="onTapCell"
+                docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
                 subTitle="{{item.introduce}}" thirdTitle="{{item.collegeName}}\t \t{{item.gradeName}}"
                 price="{{item.price * item.downCount}} 元" downCount="{{item.downCount}}"
                 authorName="下载： {{item.downCount}} 次" />

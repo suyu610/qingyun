@@ -6,14 +6,15 @@ view {
 .header {
   overflow: hidden;
   width: 100vw;
-  height: 30vh;
+  height: 26vh;
   background-color: #27B1FF;
   position: relative;
+  padding-top: 8vh;
 }
 
 
 .header .ads {
-  height: 65%;
+  height: 60%;
   top: 0;
 
 }
@@ -27,8 +28,10 @@ view {
 .ads-item {
   height: 100%;
   position: relative;
-  padding: 5vw;
+  /* padding: 5vw; */
   width: 85vw;
+  margin:0 auto;
+  padding-top: 4vw;
 }
 
 .header .ads-item .info {
@@ -40,13 +43,13 @@ view {
   color: #ffffff;
   font-weight: bold;
   padding-top: 10px;
-  font-size: 45rpx;
+  font-size: 50rpx;
 }
 
 .header .ads-item .price {
   color: #ffffff;
   font-weight: bold;
-  font-size: 35rpx;
+  font-size: 30rpx;
   display: inline-block;
   padding-top: 10px;
 
@@ -58,9 +61,8 @@ view {
   font-size: 28rpx;
   display: inline-block;
   /* background-color: #ffe9a7; */
-  border-bottom: #ffe9a7 2px solid;
+  /* border-bottom: #ffe9a7 2px solid; */
   padding-left: 5px;
-  margin-top: -7px;
   vertical-align: middle;
   padding-right: 5px;
   font-weight: bold;
@@ -69,9 +71,9 @@ view {
 .header .ads-item image {
   position: absolute;
   right: 0px;
-  top: 5vw;
+  top: 2vw;
   border-radius: 10px;
-  width: 20vw;
+  width: 14vw;
   height: 22vw;
 }
 

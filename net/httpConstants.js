@@ -32,6 +32,7 @@ export const GetDocStarUrl = 'doc/getStarDoc'
 export const UnStarUrl = 'doc/unStar'
 export const StarUrl = 'doc/star'
 export const GetMyUploadDocUrl = 'doc/me'
+export const TogglePublishedDocUrl = 'doc/togglePublised'
 
 
 ////////////

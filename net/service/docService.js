@@ -1,6 +1,7 @@
 import httpService from "../httpService";
 
 import {
+  TogglePublishedDocUrl,
   GetMyUploadDocUrl,
   GetDocDetailUrl,
   GetDocStarUrl,
@@ -34,6 +35,22 @@ function GetStarDoc(handleSuccess) {
       handleFailure(er.data['msg'])
     });
 }
+
+
+function TogglePublishedDoc(handleSuccess,docId) {
+  httpService.get(
+    TogglePublishedDocUrl + "/" + docId,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      wx.showToast({
+        title: (er.data['msg']),
+      })
+    });
+}
+
 
 
 function UnStar(handleSuccess, id) {
@@ -82,7 +99,11 @@ function GetMyUploadDoc(handleSuccess) {
 }
 
 
+
+
+
 module.exports = {
+  TogglePublishedDoc,
   GetMyUploadDoc,
   GetDocDetail,
   GetStarDoc,

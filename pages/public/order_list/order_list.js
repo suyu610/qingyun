@@ -56,6 +56,7 @@ Page({
     let orderList = []
     e.forEach(element => {
       element.boughtDate = util.timeFormatSeconds(element.boughtDate)
+      element.orderId = element.orderId.substring(10)
       orderList.push(element)
       console.log()
     });
@@ -70,9 +71,11 @@ Page({
       title: '我的知识库',
     })
   },
-  jump2PreviewDoc: function () {
+  jump2PreviewDoc: function (e) {
+    let id = e.currentTarget.dataset.id
     push({
-      name: "preview_doc"
+      name: "preview_doc",
+      data:{id}
     })
   },
   onShareAppMessage: function () {

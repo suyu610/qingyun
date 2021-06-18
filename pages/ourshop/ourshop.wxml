@@ -1,6 +1,6 @@
 <!--pages/homepage/homepage.wxml-->
 <view class="container">
-  <view class="header">
+  <view class="header bg">
     <view class="ads">
       <swiper indicator-dots="{{adsIndicatorDots}}" indicator-active-color="#fff" indicator-color="#ffffff99"
         circular="{{true}}" autoplay="{{adsAutoplay}}" interval="{{adsInterval}}" duration="{{adsDuration}}">

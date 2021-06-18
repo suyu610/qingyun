@@ -40,7 +40,7 @@
     </view>
 
     <view class="price_info">
-      <view class="price">￥ {{doc.price}}.00</view>
+      <view class="price">￥ {{doc.price}}</view>
       <view class="buy_count">{{doc.boughtCount}}人购买</view>
       <view class="mark_count">{{doc.starCount}}人收藏</view>
     </view>

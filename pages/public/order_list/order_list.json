@@ -7,10 +7,5 @@
     "van-dialog": "@vant/weapp/dialog/index",
     "van-field": "@vant/weapp/field/index",
     "van-divider": "@vant/weapp/divider/index"
-
-
-
-
-
   }
 }

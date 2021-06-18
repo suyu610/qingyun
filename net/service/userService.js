@@ -24,6 +24,7 @@ function LoginByToken(handleSuccess, handleFail, params) {
     res => {
       // 将获取的数据保存在globalData里
       handleSuccess(res.data['data'])
+      console.log(res.data['data'])
       // 1. 刷新token
       let token = res.data['data']['token']
       let initData = res.data['data']
@@ -40,7 +41,6 @@ function LoginByToken(handleSuccess, handleFail, params) {
 
       parseInitData(initData)
       app.globalData.token = token
-      console.log(app.globalData)
     },
     er => {
       handleFail(er.data['msg'])
@@ -114,7 +114,7 @@ function GetData(handleSuccess, handleFailure, params) {
 
 function GetProfileBySsNumber(handleSuccess, handleFailure, ssNumber) {
   httpService.get(
-    GetProfileBySsNumberUrl+"/"+ssNumber,
+    GetProfileBySsNumberUrl + "/" + ssNumber,
     "",
     res => {
       handleSuccess(res.data['data'])

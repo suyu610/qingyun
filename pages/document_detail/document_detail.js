@@ -11,8 +11,8 @@ Page({
     doc: {},
     loadingStar: false,
     loadingBought: false,
-    isStared:false,
-    isBought:false,
+    isStared: false,
+    isBought: false,
     // 预览图
     previewList: [],
     docRelatedItemList: [],
@@ -35,7 +35,7 @@ Page({
   },
   jump2BuyConfirm: function () {
     // 如果是已经购买，则跳转查看文档
-    if(this.data.doc.bought){
+    if (this.data.doc.bought) {
       router.push({
         name: "preview_doc",
         data: {
@@ -48,10 +48,10 @@ Page({
       name: "buy_confirm",
       data: {
         id: this.data.doc.id,
-        price:this.data.doc.price,
-        authorName:this.data.doc.authorName,
-        introduce:this.data.doc.introduce,
-        title:this.data.doc.title
+        price: this.data.doc.price,
+        authorName: this.data.doc.authorName,
+        introduce: this.data.doc.introduce,
+        title: this.data.doc.title
       },
     })
   },
@@ -136,10 +136,17 @@ Page({
 
   },
   handleGetDetailSuccess: function (e) {
+    var str = e.price + "";
+    if (str.indexOf(".") == -1) {
+      // 整数
+      e.price = e.price +".00" 
+    }
+
+
     this.setData({
       doc: e,
-      isStared:e.stared,
-      isBought:e.bought
+      isStared: e.stared,
+      isBought: e.bought
     })
     let previewList = []
     e.files.forEach(function (element) {

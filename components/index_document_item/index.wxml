@@ -1,16 +1,16 @@
 <!--components/test/test.wxml-->
 <view class="container">
-  <view class="leftBox" wx:if="{{mode!='preview'}}"
+  <view class=" leftBox" wx:if="{{mode!='preview'}}"
     style="background:url({{previewImgUrl}}) no-repeat; background-size: 9vh 9vh;">
-    <view wx:if="{{docuType=='paper'}}" class="leftBoxChild paper">
-      <view class="type">试卷</view>
+    <view wx:if="{{docuType=='paper'}}" class="bg leftBoxChild paper">
+      <view class="type ">试卷</view>
       <view class="starCount">
         <van-icon name="star" />
         <text>{{starCount}}</text>
       </view>
     </view>
 
-    <view wx:if="{{docuType=='note'}}" class="leftBoxChild note">
+    <view wx:if="{{docuType=='note'}}" class="bg leftBoxChild note">
       <view class="type">笔记</view>
       <view class="starCount">
         <van-icon name="star" />
@@ -18,7 +18,7 @@
       </view>
     </view>
 
-    <view wx:if="{{docuType=='strategy'}}" class="leftBoxChild strategy">
+    <view wx:if="{{docuType=='strategy'}}" class="bg leftBoxChild strategy">
       <view class="type">攻略</view>
       <view class="starCount">
         <van-icon name="star" />
@@ -29,7 +29,9 @@
   </view>
   <view class="info {{mode=='preview'?'preview_info':''}}">
     <view class="title ">
-      <van-tag plain type="danger" wx:if="{{uploadStatus=='0'}}">审核中</van-tag>
+      <van-tag plain type="{{verifyStatus=='审核中'? 'danger':'success'}}" wx:if="{{selfMode}}">{{verifyStatus}}</van-tag>
+      <van-tag plain type="{{publishedStatus=='私密'? 'danger':'success'}} " wx:if="{{selfMode}}"
+        style="padding-left:5px">{{publishedStatus}}</van-tag>
       <van-icon name="fire" color="#f00" wx:if="{{isHot}}" /> {{title}}
     </view>
     <view class="subTitle">{{subTitle}}</view>

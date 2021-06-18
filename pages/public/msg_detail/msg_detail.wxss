@@ -1,5 +1,7 @@
 /* pages/public/msg_detail/msg_detail.wxss */
-
+page{
+  background-color: #f7f6f6;
+}
 .container {
   text-align: center;
   margin: 0 auto;
@@ -11,16 +13,21 @@
   font-size: 36rpx;
   font-weight: bold;
   padding-bottom: 4px;
-  padding-top: 30vh;
+  padding-top: 10vh;
 
 }
 .time{
   font-size: 24rpx;
 
 }
+
+.main{
+  margin: 5vw;
+  padding:5vw;
+  border-radius: 10px;
+}
 .content{
   text-align: justify;
-  padding-top: 30px;
 }
 
 .from {
