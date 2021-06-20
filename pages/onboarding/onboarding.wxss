@@ -58,6 +58,7 @@ swiper {
   border-radius: 10rpx;
   width: 300rpx;
   color:#000;
+  border: 1px solid #000;
   /* box-shadow: 0 2px 2px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12); */
   font-size: 14px;
   font-weight: bold;

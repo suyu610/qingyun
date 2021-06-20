@@ -1,7 +1,7 @@
 <view class="wrap ">
   <swiper current="{{currentSwiper}}" bindchange="swiperChange">
     <swiper-item class="swiper-items bg">
-      <image class="swiper-image" mode="aspectFit" src="/icons/QY_LOGO_white.png"></image>
+      <image class="swiper-image" mode="aspectFit" src="https://cdns.qdu.life/qingyun/images/QY_LOGO_white-min.png"></image>
       <view class="swiper-text">
         <!-- <view class="swiper-text-subtitle" style="color:grey;padding-bottom:10px">青云知识库</view> -->
         <view class="swiper-text-subtitle" style="color:grey;padding-bottom:10px">青云知识库</view>
@@ -10,7 +10,7 @@
       </view>
     </swiper-item>
     <swiper-item class="swiper-items bg">
-      <image class="swiper-image swiper-image-no" mode="aspectFit" src="/icons/boarding_2.png"></image>
+      <image class="swiper-image swiper-image-no" mode="aspectFit" src="https://cdns.qdu.life/qingyun/images/boarding_2-min.png"></image>
       <view class="swiper-text">
         <view class="swiper-text-title">资料生产者</view>
         <van-divider dashed />
