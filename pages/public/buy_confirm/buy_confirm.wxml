@@ -7,9 +7,9 @@
         <van-icon name="location-o" />
       </view>
       <view class="info">
-        <view class="name">黄鹏宇</view>
-        <view class="tel">{{tel}}</view>
-        <view class="address_info">{{address}}</view>
+        <view class="name">{{name}}</view>
+        <view class="tel">{{tel==null?"未填写联系方式":tel}}</view>
+        <view class="address_info">{{address==null?"未填写地址":address}}</view>
       </view>
     </view>
     <van-icon name="arrow" color="#afacac" />

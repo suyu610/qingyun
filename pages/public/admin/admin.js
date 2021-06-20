@@ -1,4 +1,4 @@
-// pages/public/order_detail/order_detail.js
+// pages/public/admin/admin.js
 Page({
 
   /**

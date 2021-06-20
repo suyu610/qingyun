@@ -3,13 +3,12 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #F8F8F8;
+  background-color: #fff;
   box-sizing: content-box;
 }
 
 .msg {  
   box-shadow: #efefefe6 1px 5px 20px 0px;
-
   background-color: #fff;
   border-radius: 7px;
   width: 90vw;

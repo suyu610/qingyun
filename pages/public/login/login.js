@@ -148,6 +148,17 @@ Page({
     })
   },
 
+    //以游客模式，跳转到首页
+    jump2TouristHomepage: function () {
+      this.setData({
+        token: "tourist"
+      })
+      wx.setStorageSync('token', "tourist")
+      router.relaunch({
+        name: "homepage"
+      })
+    },
+
   /////////////////  隐藏密码弹窗   /////////////////////
   onCloseInputPwdPopup: function () {
     this.setData({

@@ -5,13 +5,13 @@
       <van-icon name="star-o" />
       <text>{{starCount}}</text>
     </view>
-    <view class="share" bindtap="onTapshareBtn">
+    <button class="share" open-type="share" >
       <van-icon name="share-o" />
       <text>分享</text>
-    </view>
+    </button>
   </view>
   <view class='buy_btn' bindtap="jump2BuyConfirm">
-    <text>{{mode=="preview"?"返回":"购买"}}</text>
+    <text>{{isIos?"无法购买":mode=="preview"?"返回":"购买"}}</text>
   </view>
 </view>
 

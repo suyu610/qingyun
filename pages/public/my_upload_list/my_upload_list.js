@@ -17,8 +17,8 @@ Page({
   data: {
     showActionSheet: false,
     actionSheetActions: [{
-        value: 'modify',
-        name: '修改'
+        value: 'analysis',
+        name: '查看数据'
       },
       {
         value: 'previewShop',
@@ -48,8 +48,8 @@ Page({
     })
   },
   tapActionSheet: function (e) {
-    if (e.detail.value == "modify") {
-      this.jump2MyUploadModify()
+    if (e.detail.value == "analysis") {
+      this.jump2DocAnalysis()
       return;
     }
     if (e.detail.value == "preview") {
@@ -77,7 +77,7 @@ Page({
     push({
       name: "preview_doc",
       data: {
-        id:this.data.currentTapDocId
+        id: this.data.currentTapDocId
       }
     })
   },
@@ -119,9 +119,12 @@ Page({
       showActionSheet: true
     })
   },
-  jump2MyUploadModify: function () {
+  jump2DocAnalysis: function () {
     push({
-      name: "my_upload_modify"
+      name: "doc_analysis",
+      data: {
+        id: this.data.currentTapDocId
+      }
     })
   },
 

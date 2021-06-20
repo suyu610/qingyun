@@ -2,6 +2,7 @@
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import OrderService from '../../../net/service/orderService.js'
 import router from '../../../utils/router/index.js';
+import UserService from '../../../net/service/userService.js'
 
 let app = getApp()
 const beforeClose = (action) => new Promise((resolve) => {
@@ -27,9 +28,9 @@ Page({
   data: {
     imageURL: "https://cdns.qdu.life/qingyun/images/ad_1.jpg",
     docId: 0,
-    comment:"",
-    address:"",
-    tel:"",
+    comment: "",
+    address: "",
+    tel: "",
   },
 
   jump2SettingProfile: function () {
@@ -39,6 +40,7 @@ Page({
   },
 
   pay_success: function () {
+    wx.hideLoading()
     Dialog.confirm({
       title: '支付成功',
       message: '可在订单页查看文档\n网页地址为 book.qdu.life',
@@ -67,10 +69,28 @@ Page({
       return;
     }
     if (this.data.price <= 0) {
-      wx.showToast({
-        title: '购买成功',
-        icon: 'none',
-        duration: 4000
+      wx.cloud.callFunction({
+        name: 'payment',
+        data: {
+          $url: 'addorder',
+          address: that.data.address,
+          out_trade_no: app.globalData.ssNumber + timestamp,
+          ssNumber: app.globalData.ssNumber,
+          courseId: that.data.docId, //课程_id
+          coursePrice: that.data.price, //课程价格
+          courseTitle: that.data.title, //课程标题
+          createTime: timestamp, //生成时间
+          timestamp: timestamp, //时间戳
+        },
+        success(e) {
+          // 添加成功
+          if (e.result.result.data) {
+            that.pay_success()
+          }
+        },
+        fail(e) {
+          console.log(e)
+        }
       })
     } else {
       // 没有购买过
@@ -85,7 +105,6 @@ Page({
           timestamp: timestamp,
         },
         success(res) {
-          console.log(res)
           wx.hideLoading()
           // 订单生成成功，进行支付环节
           var payData = res.result.result;
@@ -104,9 +123,9 @@ Page({
                 name: 'payment',
                 data: {
                   $url: 'addorder',
-                  address:that.data.address,
-                  out_trade_no:app.globalData.ssNumber+timestamp,
-                  ssNumber:app.globalData.ssNumber,
+                  address: that.data.address,
+                  out_trade_no: app.globalData.ssNumber + timestamp,
+                  ssNumber: app.globalData.ssNumber,
                   courseId: that.data.docId, //课程_id
                   coursePrice: that.data.price, //课程价格
                   courseTitle: that.data.title, //课程标题
@@ -116,12 +135,16 @@ Page({
                 },
                 success(e) {
                   // 添加成功
-                  if(e.result.result.data){
+                  if (e.result.result.data) {
                     that.pay_success()
                   }
                 },
-                fail(e){
-                  console.log(e)
+                fail(e) {
+                  wx.showToast({
+                    icon: 'none',
+                    title: e,
+                  })
+                  // console.log(e)
                 }
               })
             },
@@ -184,11 +207,20 @@ Page({
   onReady: function () {
 
   },
-
+  handleGetSuccess: function (e) {
+    console.log(e)
+    this.setData({
+      name:e.name,
+      address:e.address,
+      tel: e.contact
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 获取下用户信息
+    UserService.GetSelfProfile(this.handleGetSuccess, this.handleGetFail)
 
   },
 

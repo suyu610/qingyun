@@ -11,7 +11,8 @@ import {
   GetDataUrl,
   GetProfileBySsNumberUrl,
   ModifyProfileUrl,
-  GetSelfProfileUrl
+  GetSelfProfileUrl,
+  AddCommentUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -111,7 +112,6 @@ function GetData(handleSuccess, handleFailure, params) {
     });
 }
 
-
 function GetProfileBySsNumber(handleSuccess, handleFailure, ssNumber) {
   httpService.get(
     GetProfileBySsNumberUrl + "/" + ssNumber,
@@ -138,6 +138,17 @@ function GetSelfProfile(handleSuccess, handleFailure) {
     });
 }
 
+function AddComment(handleSuccess, handleFailure, params) {
+  httpService.post(
+    AddCommentUrl,
+    params,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
 
 
 module.exports = {
@@ -147,5 +158,6 @@ module.exports = {
   LoginByToken,
   GetProfileBySsNumber,
   modifyProfile,
-  GetSelfProfile
+  GetSelfProfile,
+  AddComment
 }

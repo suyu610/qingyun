@@ -20,7 +20,7 @@ export const LoginByTokenUrl = 'user/loginByToken';
 export const GetProfileBySsNumberUrl = 'user/profile'
 export const ModifyProfileUrl = 'user/profile'
 export const GetSelfProfileUrl = 'user/profile/me'
-
+export const AddCommentUrl = 'comment/new'
 
 ////////////
 /// 文档 ///
@@ -33,6 +33,7 @@ export const UnStarUrl = 'doc/unStar'
 export const StarUrl = 'doc/star'
 export const GetMyUploadDocUrl = 'doc/me'
 export const TogglePublishedDocUrl = 'doc/togglePublised'
+export const SearchDocUrl = 'search/key'
 
 
 ////////////
@@ -40,6 +41,8 @@ export const TogglePublishedDocUrl = 'doc/togglePublised'
 ///////////
 
 export const GetAllCourseUrl = 'cate/getAllCourse'
+export const GetCourseListByCourseNameUrl = 'cate/getDocListByCourseName'
+
 
 
 ////////////
@@ -48,3 +51,5 @@ export const GetAllCourseUrl = 'cate/getAllCourse'
 
 export const CheckHasBoughtUrl = 'order/hasBought'
 export const GetAllOrdersUrl = 'order/allBought'
+export const GetMoneyRecordUrl = 'order/moneyRecord'
+

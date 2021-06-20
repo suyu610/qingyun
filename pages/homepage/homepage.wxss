@@ -67,6 +67,9 @@ view {
   padding-right: 5px;
   font-weight: bold;
 }
+.search_view{
+  height: 50vh;
+}
 
 .header .ads-item image {
   position: absolute;

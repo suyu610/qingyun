@@ -8,7 +8,13 @@ Component({
    */
   properties: {
     mode: String,
-    starCount:Number,
+    starCount: Number,
+    docId: Number,
+    price: Number,
+    authorName: String,
+    introduce: String,
+    title: String,
+    isIos:Boolean
   },
 
   /**
@@ -51,23 +57,41 @@ Component({
    */
   methods: {
     onTapshareBtn: function () {
-      this.setData({
-        showShare: true
-      })
+      
+      // this.setData({
+      //   showShare: true
+      // })
     },
+
     onShareClose() {
       this.setData({
         showShare: false
       });
     },
+
     jump2BuyConfirm: function () {
+      if(this.properties.isIos){
+        wx.showToast({
+          icon:'none',
+          title: '不支持iOS购买',
+        })
+        return
+      }
+      // 预览模式
       if (this.properties.mode == "preview") {
         wx.navigateBack({
           delta: 0,
         })
       } else {
         push({
-          name: "buy_confirm"
+          name: "buy_confirm",
+          data: {
+            id: this.data.docId,
+            price: this.data.price,
+            authorName: this.data.authorName,
+            introduce: this.data.introduce,
+            title: this.data.title
+          }
         })
       }
     },

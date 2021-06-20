@@ -62,6 +62,13 @@
   display: inline-block;
   color: #000;
   padding-left: 7vw;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+}
+
+.share::after {
+  border: none;
 }
 
 .share text {

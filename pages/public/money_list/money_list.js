@@ -3,6 +3,10 @@ import {
   push
 } from '../../../utils/router/index.js';
 
+import util from '../../../utils/util.js'
+
+import OrderService from '../../../net/service/orderService.js'
+
 Page({
 
   /**
@@ -22,31 +26,22 @@ Page({
     currentPage: 1, // 当前页数  默认是1
     activeNames: [],
     toView: "",
+    orderReqVOList:[],
+    orderSoldResVOList:[],
+    withDrawVOList:[],
+    remainMoney:0
 
   },
 
   jump2NeedKnow: function () {
-    console.log("123")
     push({
-      name: "my_upload_modify"
+      name: "need_know",
+      data: {
+        type: 'withdraw',
+      },
     })
   },
 
-  onChange(event) {
-    let toView;
-    if (event.detail.length > 0) {
-      toView = "need_know"
-    } else {
-      toView = "body"
-    }
-    setTimeout(() => {
-      this.setData({
-        toView,
-        activeNames: event.detail,
-      });
-    }, 100);
-
-  },
 
   // 点击提现按钮
   onSubmit: function () {
@@ -54,9 +49,13 @@ Page({
   },
 
   onTapWithdrawBtn: function () {
-    this.setData({
-      showCheckPwdPopup: true
+    wx.showToast({
+      icon:"none",
+      title: '提现功能正在开发中',
     })
+    // this.setData({
+    //   showCheckPwdPopup: true
+    // })
   },
 
   hideCheckPwdPopup: function () {
@@ -121,18 +120,7 @@ Page({
 
   getData: function () {
     var self = this;
-    var pageIndex = self.data.currentPage;
-    wx.request({
-      url: 'https://route.showapi.com/582-2',
-      data: {
-        showapi_appid: '19297',
-        showapi_sign: 'cf606a68a01f45d196b0061a1046b5b3',
-        page: pageIndex
-      },
-      fail: function () {
-        console.log("???")
-      }
-    })
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -157,7 +145,8 @@ Page({
       }
     })
   },
-  shouldCheckPwd:function(){
+
+  shouldCheckPwd: function () {
     this.checkPwd()
   },
   /**
@@ -167,11 +156,39 @@ Page({
 
   },
 
+  getMoneyRecordSuccess:function(e){
+    e.orderReqVOList.forEach(element => {
+      element.boughtDate = util.timeFormatSeconds(element.boughtDate)
+      console.log(e)
+    })
+
+    e.orderSoldResVOList.forEach(element => {
+      element.createTime = util.timeFormatSeconds(element.createTime)
+    })
+
+    this.setData({
+      orderReqVOList:e.orderReqVOList,
+      orderSoldResVOList:e.orderSoldResVOList,
+      withDrawVOList:e.withDrawVOList,
+      remainMoney:e.remainMoney
+    })
+    console.log(e)
+  },
+  getMoneyRecordFail:function(e){
+    if(e==null){
+      e = "系统错误，请稍后再试"
+    }
+
+    wx.showToast({
+      title: e,
+    })
+
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    OrderService.GetMoneyRecord(this.getMoneyRecordSuccess, this.getMoneyRecordFail)
   },
 
   /**

@@ -1,0 +1,93 @@
+swiper {
+  /*这个是绝对布局*/
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+
+}
+
+.swiper-image {
+  top: 20%;
+  position: fixed;
+  width: 34vw;
+  margin: 0 33vw;
+}
+
+.swiper-image-no{
+  width: 100vw;
+  margin: 0;
+
+}
+.bg{
+  opacity: 0.9;
+}
+.swiper-text {
+  position: fixed;
+  display: block;
+  width: 100%;
+  padding: 8vw;
+  height: 100%;
+  top: 50%;
+  text-align: center;
+  font-size: 24px;
+  /* 保留换行 */
+  white-space: pre-wrap
+}
+
+.swiper-text-title {
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.swiper-text-subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button-img {
+  /*这个是绝对布局*/
+  /* background-color: #27B1FF; */
+  position: fixed;
+  left: 225rpx;
+  bottom: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  width: 300rpx;
+  color:#000;
+  /* box-shadow: 0 2px 2px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12); */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dots {
+  width: 168rpx;
+  text-align: center;
+  align-self: center;
+  height: 30rpx;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 582rpx;
+  bottom: 20rpx;
+
+}
+
+/*未选中时的小圆点样式 */
+.dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  background-color: white;
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+
+/*选中以后的小圆点样式  */
+.active {
+  background-color: #000;
+}

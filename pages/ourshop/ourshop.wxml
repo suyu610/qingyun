@@ -19,12 +19,12 @@
     </view>
   </view>
   <view class="body">
-    <van-tabs tab-active-class="tab-active"	active="{{ active }}" line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055"
-      swipeable animated bind:change="onChange">
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+      title-inactive-color="#10101055" swipeable animated>
       <van-tab title="教材">
         <view class="tab-item hot">
           <van-empty image="network" description="暂未上架教材" />
-<!-- 
+          <!-- 
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
           </scroll-view> -->
@@ -33,7 +33,7 @@
       <van-tab title="周边">
         <view class="tab-item help" id="helpView">
           <van-empty image="error" description="暂无周边产品" />
-<!-- 
+          <!-- 
           <scroll-view style="height:100%" scroll-y="{{true}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">            
           </scroll-view> -->

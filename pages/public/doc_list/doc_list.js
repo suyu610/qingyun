@@ -1,122 +1,73 @@
 // pages/public/doc_list/doc_list.js
-import {
-  push
-} from '../../../utils/router/index.js';
+import router from '../../../utils/router/index.js';
 
-const noteList = [{
-    docuType: "note",
-    title: "固体物理亲手笔记",
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    downCount: "91",
-    authorName: "皇甫素素"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "臭猪"
-  },
-  {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",    isHot: true,
-
-    authorName: "臭猪"
-  }, {
-    docuType: "note",
-    title: "临床医学医学英语笔记+高口笔记-打印版",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "臭猪"
-  }
-]
-const paperList = [{
-    docuType: "paper",
-    title: "高数历年试卷",
-    subTitle: "2017-2020年",
-    isHot: true,
-    college: "电子信息学院",
-    grade: "大二",
-    price: "15.00",
-    downCount: "4",
-    authorName: "黄鹏宇"
-  },
-  {
-    docuType: "paper",
-    title: "固体物理试卷",    isHot: true,
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    downCount: "91",
-    authorName: "皇甫素素"
-  },
-  {
-    docuType: "paper",    isHot: true,
-
-    title: "临床医学试卷",
-    subTitle: "3000词",
-    college: "医学部",
-    grade: "所有",
-    price: "225.00",
-    downCount: "0",
-    authorName: "臭猪"
-  }
-]
-const strategyList = [{
-    docuType: "strategy",
-    title: "高数应试攻略",
-    subTitle: "",
-    isHot: true,
-    college: "电子信息学院",
-    grade: "大二",
-    price: "15.00",
-    downCount: "4",
-    authorName: "黄鹏宇"
-  },
-  {
-    docuType: "strategy",
-    title: "固体物理应试攻略",
-    subTitle: "前五章",
-    college: "电子信息学院",
-    grade: "大二",
-    price: "12.00",
-    downCount: "91",
-    authorName: "皇甫素素"
-  },
-]
+import CateService from '../../../net/service/cateService.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    noteList: noteList,
-    paperList: paperList,
-    strategyList: strategyList,
+    noteList: [],
+    paperList: [],
+    strategyList: [],
+    courseName: "",
+    totalCount: 0,
     height: "95vh"
   },
-  jump2Detail:function(){
-    push({name:"document_detail"})
+  jump2Detail: function (e) {
+    let id = e.currentTarget.dataset.id
+    router.push({
+      name: "document_detail",
+      data:{id:id}
+    })
+  },
+
+  handleGetSuccess:function(e){
+    let downCount = 0
+    let noteList = []
+    let paperList = []
+    let strategyList = []
+    e.forEach(element => {
+      downCount = downCount + element.downCount
+      if (element.docuType == "note") {
+        noteList.push(element)
+      }
+      if (element.docuType == "paper") {
+        paperList.push(element)
+      }
+      if (element.docuType == "strategy") {
+        strategyList.push(element)
+      }
+    });
+
+    this.setData({
+      noteList,
+      paperList,
+      strategyList,
+      downCount,
+      triggered: false
+    })
+  },
+
+  handleGetFail:function(e){
+    wx.showToast({
+      title: e,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const data = router.extract(options);
+    let courseName = data.courseName
+
+    this.setData({
+      courseName
+    })
+
+    CateService.GetCourseListByCourseName(this.handleGetSuccess, this.handleGetFail, courseName)
+
     let that = this
     wx.getSystemInfo({
       success(res) {
@@ -126,6 +77,8 @@ Page({
         console.log(res.windowHeight)
       }
     })
+
+
   },
 
   /**
@@ -138,9 +91,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏

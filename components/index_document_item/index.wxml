@@ -29,7 +29,7 @@
   </view>
   <view class="info {{mode=='preview'?'preview_info':''}}">
     <view class="title ">
-      <van-tag plain type="{{verifyStatus=='审核中'? 'danger':'success'}}" wx:if="{{selfMode}}">{{verifyStatus}}</van-tag>
+      <van-tag plain type="{{verifyStatus=='审核中'? 'danger':'success'}}" wx:if="{{selfMode&&verifyStatus=='审核中'}}">{{verifyStatus}}</van-tag>
       <van-tag plain type="{{publishedStatus=='私密'? 'danger':'success'}} " wx:if="{{selfMode}}"
         style="padding-left:5px">{{publishedStatus}}</van-tag>
       <van-icon name="fire" color="#f00" wx:if="{{isHot}}" /> {{title}}

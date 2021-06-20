@@ -56,7 +56,8 @@ Page({
    */
   onLoad: function (options) {
     const data = router.extract(options);
-    UserService.GetProfileBySsNumber(this.handleGetProfileBySsNumberSuccess,this.handleGetProfileBySsNumberFail, 2019205913)
+    
+    UserService.GetProfileBySsNumber(this.handleGetProfileBySsNumberSuccess,this.handleGetProfileBySsNumberFail, data.ssNumber)
   },
 
   /**

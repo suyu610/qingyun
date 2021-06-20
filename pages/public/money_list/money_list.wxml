@@ -1,6 +1,5 @@
 <!--pages/public/doc_list/doc_list.wxml-->
-<van-notice-bar mode="link" left-icon="volume-o" scrollable="{{ false }}" text="提现须知"
-  url="/pages/public/need_know/need_know" />
+<van-notice-bar bindtap="jump2NeedKnow" mode="link" left-icon="volume-o" scrollable="{{ false }}" text="提现功能暂不可用!!!!" />
 
 <scroll-view scroll-y="{{true}}" class="container bg" scroll-into-view="{{toView}}" scroll-with-animation>
   <view class="body" id="body">
@@ -10,12 +9,9 @@
       <van-tab title="收入">
         <view class="tab-item help" id="helpView">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" bindscrolltolower="loadMore">
-            <block wx:for="{{3}}" wx:key="index" wx:for-item="item">
-              <van-cell  value-class="value_class"	title="完成”上传任务“，获得￥5奖励" title-width="75%" value="+5" label="2020-07-04 12:00" />
-              <van-cell  value-class="value_class"	title="充值" title-width="80%" value="+50" label="2020-07-04 12:00" />
-              <van-cell  value-class="value_class"	title="黄鹏宇购买了你的《高等数学历年试卷》" title-width="80%" value="+8" label="2020-07-04 12:00" />
-              <van-cell  value-class="value_class"	title="匿名购买了你的《高等数学》" title-width="80%" value="+8" label="2020-07-04 12:00" />
-
+            <block wx:for="{{orderSoldResVOList}}" wx:key="index" wx:for-item="order">
+              <van-cell value-class="value_class" title="{{order.buyerName}}购买了你的《{{order.title}}》" title-width="80%"
+                value="+{{order.price}}" label="{{order.createTime}}" />
             </block>
             <view class="bottom" hidden="{{hideBottom}}">
               <view>{{loadMoreData}}</view>
@@ -27,22 +23,26 @@
       <van-tab title="支出">
         <view class="tab-item trick">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}">
-            <!-- <block wx:for="{{3}}" wx:key="index" wx:for-item="item"> -->
-            <van-cell value-class="value_class" title-width="80%" value="-21"  label="2020-07-04 12:00">
-              <view slot="title">
-                <view class="van-cell-text">提现</view>
-                <van-tag type="danger">处理中</van-tag>
-              </view>
-            </van-cell>
+            <block wx:for="{{withDrawVOList}}" wx:key="index" wx:for-item="item">
+              <van-cell value-class="value_class" title-width="80%" value="-21" label="2020-07-04 12:00">
+                <view slot="title">
+                  <view class="van-cell-text">提现</view>
+                  <van-tag type="danger">处理中</van-tag>
+                </view>
+              </van-cell>
+            </block>
 
-            <van-cell value-class="value_class" title-width="80%" value="-8"  label="2020-07-04 12:00">
-              <view slot="title">
-                <view class="van-cell-text">提现</view>
-                <van-tag type="success">成功</van-tag>
-              </view>
-            </van-cell>
-            <van-cell value-class="value_class" title="购买资料《临床医学学习笔记》" title-width="80%" value="-20" label="2020-07-04 12:00" />
-            <!-- </block> -->
+            <block wx:for="{{orderSoldResVOList}}" wx:key="index" wx:for-item="order">
+              <van-cell value-class="value_class" title-width="80%" value="-{{order.price}}"
+                label="{{order.createTime}}">
+                <view slot="title">
+                  <view class="van-cell-text">购买资料《{{order.title}}》</view>
+                  <van-tag type="success">微信支付</van-tag>
+
+                </view>
+              </van-cell>
+            </block>
+
           </scroll-view>
         </view>
       </van-tab>
@@ -50,14 +50,12 @@
   </view>
 </scroll-view>
 <van-uploader wx:if="{{checkPwdRight}}" accept="image" capture="album" use-before-read bind:before-read="beforeRead">
-  <van-submit-bar price="{{ 5000 }}" label="可提现： " button-text="提现" bind:submit="onSubmit" tip>
-
+  <van-submit-bar price="{{ remainMoney }}" label="可提现： " button-text="提现" bind:submit="onSubmit" tip>
     <view slot="tip" bindtap="onTapWithdrawBtn">请上传你的微信收款码</view>
-
   </van-submit-bar>
 </van-uploader>
 
-<van-submit-bar wx:else price="{{ 5000 }}" disabled label="可提现：" button-text="提现" bindtap="onTapWithdrawBtn">
+<van-submit-bar wx:else price="{{ remainMoney }}" disabled label="可提现：" button-text="提现" bindtap="onTapWithdrawBtn">
   <view>
     <van-button slot="button" size="small" plain type="danger" bindtap="onTapWithdrawBtn" round>
       校验密码

@@ -19,8 +19,9 @@
             <view>{{item.boughtDate}}</view>
           </view>
           <view slot="footer" class="footer">
-            <van-button size="small" custom-style="border-radius:5px!important;color:black"
-              color="#ffe9a7;font-weight:bold" bindtap="addComment">评论</van-button>
+            <van-button data-id="{{item.docId}}" data-title="{{item.title}}" size="small"
+              custom-style="border-radius:5px!important;color:black" color="#ffe9a7;font-weight:bold"
+              bindtap="addComment">评论</van-button>
             <van-button data-id="{{item.docId}}" size="small" custom-style="border-radius:5px!important" color="#27B1FF"
               bindtap="jump2PreviewDoc">查看电子版</van-button>
           </view>
@@ -30,9 +31,12 @@
   </view>
 </scroll-view>
 
-<van-dialog use-slot id="van-dialog">
+<van-dialog use-slot id="van-dialog" closeOnClickOverlay="{{true}}">
+  <view style="margin:10px">
+    <text style="font-size:12px;color:grey">1. 会调用腾讯内容安全接口自动检测评论内容
+      2. 每小时会排查一次用户评论，请注意言论得体</text>
+  </view>
   <van-divider dashed hairline custom-style="margin-top:10px;margin-bottom:10px" />
-
-  <van-field value="{{ message }}" label="评论" type="textarea" autosize border="{{ false }}" />
-
+  <van-field model:value="{{comment}}" title-width="30px" left-icon="edit" type="textarea" autosize
+    border="{{ false }}" />
 </van-dialog>

@@ -1,6 +1,8 @@
 // pages/public/order_list/order_list.js
 import Dialog from '../../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import OrderService from '../../../net/service/orderService.js'
+import UserService from '../../../net/service/userService.js'
+
 import util from '../../../utils/util.js'
 import {
   push
@@ -8,6 +10,7 @@ import {
 
 Page({
   data: {
+    comment: "",
     option1: [{
         text: '全部订单',
         value: 0
@@ -39,14 +42,81 @@ Page({
 
   },
 
-  addComment: function () {
-    Dialog.confirm({
-        title: '高等数学历年试卷',
+  addCommentSuccess: function (e) {
+    console.log(e)
+    if (e) {
+      wx.showToast({
+        title: '评论成功',
       })
-      .then(() => {
-        wx.showToast({
-          title: '评论成功',
+      this.setData({
+        comment: ""
+      })
+      wx.hideLoading()
+
+    }else{
+      wx.hideLoading()
+      wx.showToast({
+        title: '未知错误',
+      })
+    }
+  },
+  addCommentFail: function (e) {
+    wx.hideLoading()
+    wx.showToast({
+      title: '未知错误',
+    })
+  },
+  // 调用腾讯云函数
+  contentFilter: function (id, title) {
+    console.log(id)
+    console.log(this.data.comment)
+    wx.cloud.callFunction({
+      name: 'contentFilter',
+      data: {
+        content: this.data.comment //传入文本内容
+      }
+    }).then(ckres => {
+      console.log(ckres)
+      //审核通过
+      if (ckres.result.errCode == 0) {
+        let params = {
+          docId: id,
+          content: this.data.comment
+        }
+        console.log("?")
+        UserService.AddComment(this.addCommentSuccess, this.addCommentFail, params)
+
+      } else if (ckres.result.errCode == 44004) {
+        wx.hideLoading()
+
+        wx.showModal({
+          title: '留言失败',
+          content: '内容为空',
+          showCancel: false
         })
+      } else {
+        wx.hideLoading()
+
+        wx.showModal({
+          title: '留言失败',
+          content: '检测到敏感词,请注意言论',
+          showCancel: false
+        })
+      }
+    })
+  },
+  addComment: function (e) {
+    let id = e.currentTarget.dataset.id
+    let title = e.currentTarget.dataset.title
+    Dialog.confirm({
+        closeOnClickOverlay: true,
+        title: title,
+      })
+      .then((e) => {
+        wx.showLoading({
+          title: '内容检查中',
+        })
+        this.contentFilter(id, title)
       })
       .catch(() => {
         // on cancel
@@ -58,10 +128,10 @@ Page({
       element.boughtDate = util.timeFormatSeconds(element.boughtDate)
       element.orderId = element.orderId.substring(10)
       orderList.push(element)
-      console.log()
     });
-    this.setData({orderList})
-    console.log(e)
+    this.setData({
+      orderList
+    })
   },
   onShow: function () {
     OrderService.GetAllOrders(this.getOrdersSuccess, this.getOrdersFail)
@@ -75,7 +145,9 @@ Page({
     let id = e.currentTarget.dataset.id
     push({
       name: "preview_doc",
-      data:{id}
+      data: {
+        id
+      }
     })
   },
   onShareAppMessage: function () {

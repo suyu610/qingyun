@@ -5,6 +5,7 @@ import {
   GetMyUploadDocUrl,
   GetDocDetailUrl,
   GetDocStarUrl,
+  SearchDocUrl,
   UnStarUrl,
   StarUrl,
 
@@ -18,11 +19,13 @@ function GetDocDetail(handleSuccess, params) {
       handleSuccess(res.data['data'])
     },
     er => {
-      handleFailure(er.data['msg'])
+      console.log(er)
+      wx.showToast({
+        icon:"none",
+        title: "有问题，请稍后重试",
+      })
     });
 }
-
-
 
 function GetStarDoc(handleSuccess) {
   httpService.get(
@@ -99,6 +102,20 @@ function GetMyUploadDoc(handleSuccess) {
 }
 
 
+function SearchDoc(handleSuccess,keyword) {
+  httpService.get(
+    SearchDocUrl+"/"+keyword,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      wx.showToast({
+        icon:'error',
+        title: "未知错误",
+      })
+    });
+}
 
 
 
@@ -107,6 +124,7 @@ module.exports = {
   GetMyUploadDoc,
   GetDocDetail,
   GetStarDoc,
+  SearchDoc,
   UnStar,
   Star,
   

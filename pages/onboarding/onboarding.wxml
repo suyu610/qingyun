@@ -1,0 +1,67 @@
+<view class="wrap ">
+  <swiper current="{{currentSwiper}}" bindchange="swiperChange">
+    <swiper-item class="swiper-items bg">
+      <image class="swiper-image" mode="aspectFit" src="/icons/QY_LOGO_white.png"></image>
+      <view class="swiper-text">
+        <!-- <view class="swiper-text-subtitle" style="color:grey;padding-bottom:10px">青云知识库</view> -->
+        <view class="swiper-text-subtitle" style="color:grey;padding-bottom:10px">青云知识库</view>
+        <view class="swiper-text-title" style="font-size:26px">笔记分享互助平台</view>
+
+      </view>
+    </swiper-item>
+    <swiper-item class="swiper-items bg">
+      <image class="swiper-image swiper-image-no" mode="aspectFit" src="/icons/boarding_2.png"></image>
+      <view class="swiper-text">
+        <view class="swiper-text-title">资料生产者</view>
+        <van-divider dashed />
+        <view class="swiper-text-subtitle">
+          <van-icon name="edit" /> 以教促学，高效学习。
+        </view>
+        <view class="swiper-text-subtitle">
+          <van-icon name="balance-o" /> 知识付费，保持动力。
+        </view>
+        <view class="swiper-text-subtitle">
+          <van-icon name="clock-o" /> 沉淀我们的青大记忆。
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item class="swiper-items bg">
+      <image class="swiper-image" mode="aspectFit" src="https://cdns.qdu.life/class/onboarding_2.png"></image>
+      <view class="swiper-text">
+        <view class="swiper-text-title">学习者</view>
+        <van-divider dashed />
+        <view class="swiper-text-subtitle">
+          <van-icon name="cross" /> 互联网资料良莠不齐。
+        </view>
+        <view class="swiper-text-subtitle">
+          <van-icon name="cross" /> 打印店资料过时陈旧。
+        </view>
+        <view class="swiper-text-subtitle">
+          <van-icon name="gem-o" /> 青云精选，保障你的学习体验。
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item class="swiper-items bg">
+      <image class="swiper-image" mode="aspectFit" src="https://cdns.qdu.life/class/onboarding_last.png"></image>
+      <view class="swiper-text">
+
+        <view class="swiper-text-title" style="color:lightgrey">在这</view>
+        <view class="swiper-text-title">\n分享与收获\n高质量的学霸笔记\n\n\n</view>
+        <view class="swiper-text-subtitle" style="color:lightgrey">祝我们竢实扬华，青云万里</view>
+      </view>
+      <button class="button-img neumorphism"  bindtap="start">冲呀，青大人</button>
+    </swiper-item>
+
+  </swiper>
+
+  <view class="dots">
+    <block wx:for="{{imgs}}" wx:key="index">
+      <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+    </block>
+  </view>
+
+  <view class="swiper-text-subtitle" style="width:100vw;font-weight:normal;color:grey;position:fixed;text-align:center;font-size:12px;bottom:30px;  opacity: 0.5;">
+  <text>素语网络科技(青岛)有限公司\n</text>
+    倾心为你呈现</view>
+
+</view>

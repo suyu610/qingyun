@@ -3,6 +3,7 @@ const helpList = []
 
 
 import UserService from '../../net/service/userService.js'
+import DocService from '../../net/service/docService.js'
 
 import {
   push
@@ -49,6 +50,26 @@ Page({
     })
   },
 
+  handleSearchSuccess: function (e) {
+    this.setData({
+      searchResultList: e
+    })
+    wx.hideLoading()
+  },
+
+  onTapSearchBtn: function (e) {
+    if(e.detail==""){
+      wx.showToast({
+        icon:'none',
+        title: '关键词不能为空',
+      })
+      return
+    }
+    wx.showLoading({
+      title: '正在搜索中',
+    })
+    DocService.SearchDoc(this.handleSearchSuccess, e.detail)
+  },
   onTapCancelSearch: function () {
     this.setData({
       showSearch: false
@@ -57,7 +78,6 @@ Page({
 
 
   handleGetInitDataSuccess: function (e) {
-
     let documentList = [];
     e.hotDoc.forEach(element => {
       element.subTitle = element.introduce

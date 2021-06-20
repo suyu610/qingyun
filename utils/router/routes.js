@@ -71,3 +71,15 @@ export const upload_preview = {
 export const need_know = { 
   path:'/pages/public/need_know/need_know'
 }
+
+export const doc_analysis = { 
+  path:'/pages/public/doc_analysis/doc_analysis'
+}
+
+export const admin = { 
+  path:'/pages/public/admin/admin'
+}
+
+export const onboarding = { 
+  path:'/pages/onboarding/onboarding'
+}

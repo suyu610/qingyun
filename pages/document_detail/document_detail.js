@@ -1,7 +1,7 @@
 // pages/document_detail/document_detail.js
 import router from '../../utils/router/index.js';
 import DocService from '../../net/service/docService.js'
-
+import util from '../../utils/util.js';
 Page({
 
   /**
@@ -34,6 +34,13 @@ Page({
     });
   },
   jump2BuyConfirm: function () {
+    if(this.data.isIos){
+      wx.showToast({
+        icon:'none',
+        title: '不支持iOS购买',
+      })
+      return;
+    }
     // 如果是已经购买，则跳转查看文档
     if (this.data.doc.bought) {
       router.push({
@@ -61,8 +68,7 @@ Page({
     router.push({
       name: 'profile',
       data: {
-        id: '123',
-        type: 1,
+        ssNumber: this.data.doc.ssNumber,
       },
     });
   },
@@ -106,14 +112,35 @@ Page({
       }
     })
   },
+  onShow: function () {
+    try {
+      var res = wx.getSystemInfoSync()
+      console.log(res.platform)
+      if (res.platform == "ios") {
+        this.setData({
+          isIos:true
+        })
+      }
+    } catch (e) {
 
+      // Do something when catch error
+
+    }
+  },
   handleStarSuccess(e) {
     wx.showToast({
       title: e,
     })
+    let doc = this.data.doc
 
+    if (this.data.isStared) {
+      doc.starCount--
+    } else {
+      doc.starCount++
+    }
     this.setData({
       isStared: !this.data.isStared,
+      doc,
       loadingStar: false
     })
   },
@@ -121,9 +148,9 @@ Page({
   //  点击收藏按钮
   onTapStar(e) {
     let id = e.currentTarget.dataset.id
+
     this.setData({
       loadingStar: true,
-
     })
     // 判断收藏状态
     // 如果是已收藏，则为取消
@@ -132,22 +159,15 @@ Page({
     } else {
       DocService.Star(this.handleStarSuccess, id)
     }
-    console.log("1")
-
   },
   handleGetDetailSuccess: function (e) {
     var str = e.price + "";
     if (str.indexOf(".") == -1) {
       // 整数
-      e.price = e.price +".00" 
+      e.price = e.price + ".00"
     }
 
 
-    this.setData({
-      doc: e,
-      isStared: e.stared,
-      isBought: e.bought
-    })
     let previewList = []
     e.files.forEach(function (element) {
       if (/\.(gif|jpg|jpeg|png|GIF|JPEG|JPG|PNG)$/.test(element)) {
@@ -157,8 +177,13 @@ Page({
         })
       }
     })
-
+    e.commentItemList.forEach(function (element) {
+      element.createTime = util.timeFormatSeconds(element.createTime)
+    })
     this.setData({
+      doc: e,
+      isStared: e.stared,
+      isBought: e.bought,
       previewList,
       isStared: e.stared,
       docRelatedItemList: e.docRelatedItemList,

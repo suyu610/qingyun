@@ -7,7 +7,7 @@
     </view>
     <view class="title">
       <van-icon name="edit" color="white" size="14" />
-      {{name}}
+      {{token=='tourist'?'点击退出':name}}
     </view>
     <view class="subtitle">
       {{college}}
@@ -17,7 +17,7 @@
 
   <view class="main_info">
     <view class="remain" bindtap="jump2MoneyList">
-      <view class="count">￥ {{remainMoney}} </view>
+      <view class="count">￥ {{remainMoney/100}} 元</view>
       <view class="info_title">我的钱包</view>
     </view>
     <view class="upload_count" bindtap="jump2MyUploadList">
@@ -40,6 +40,8 @@
       <van-cell title="我的购买" icon="balance-list" is-link  bindtap="jump2OrderList" />
     </van-cell-group>
     <van-cell-group title="系统">
+      <van-cell wx:if="{{isAdmin}}" title="管理入口" icon="manager" bindtap="jump2Admin" is-link />
+
       <van-cell icon="chat" is-link value="{{msgCount}}" bindtap="jump2MsgList">
         <view slot="title">
           <view class="van-cell-text">我的消息</view>
@@ -52,7 +54,7 @@
       <van-cell title="在线客服" icon="wechat" is-link>
         <button class="contact_btn" open-type="contact" />
       </van-cell>
-      <van-cell title="关于青云" icon="gem" is-link />
+      <van-cell title="关于我们" icon="gem" is-link />
     </van-cell-group>
   </view>
 </scroll-view>

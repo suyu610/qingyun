@@ -105,23 +105,58 @@ Page({
   },
 
   saveOk: function () {
-    let params = {
-      avatarUrl: this.data.avatarUrl,
-      upload_major_name: this.data.upload_major_name,
-      upload_college_name: this.data.upload_college_name,
-      upload_tel: this.data.upload_tel,
-      upload_address: this.data.upload_address,
-      upload_introduce: this.data.upload_introduce,
-      upload_scholar_introduce: this.data.upload_scholar_introduce
-    }
-    UserService.modifyProfile(this.handleModifyProfileSuccess, this.handleModifyProfileFail, params)
+    wx.showLoading({
+      title: '正在内容检测',
+    })
+
+    // 用腾讯云的内容检测
+    wx.cloud.callFunction({
+      name: 'contentFilter',
+      data: {
+        content: this.data.upload_introduce + this.data.upload_scholar_introduce //传入文本内容
+      }
+    }).then(ckres => {
+      wx.hideLoading()
+      //审核通过
+      if (ckres.result.errCode == 0) {
+        let params = {
+          avatarUrl: this.data.avatarUrl,
+          upload_major_name: this.data.upload_major_name,
+          upload_college_name: this.data.upload_college_name,
+          upload_tel: this.data.upload_tel,
+          upload_address: this.data.upload_address,
+          upload_introduce: this.data.upload_introduce,
+          upload_scholar_introduce: this.data.upload_scholar_introduce
+        }
+        
+        UserService.modifyProfile(this.handleModifyProfileSuccess, this.handleModifyProfileFail, params)
+      } else if (ckres.result.errCode == 44004) {
+        wx.hideLoading()
+
+        wx.showModal({
+          title: '修改失败',
+          content: '内容为空',
+          showCancel: false
+        })
+      } else {
+        wx.hideLoading()
+
+        wx.showModal({
+          title: '修改失败',
+          content: '检测到敏感词,请注意言论',
+          showCancel: false
+        })
+      }
+    })
+
   },
   jump2Profile: function () {
     push({
       name: 'profile',
       data: {
-        id: '123',
-        type: 1,
+        ssNumber: this.data.ssNumber,
+        upload_introduce: this.data.upload_introduce,
+        upload_scholar_introduce: this.data.upload_introduce
       },
     });
   },
@@ -144,11 +179,13 @@ Page({
     this.setData({
       upload_address: e.address,
       upload_tel: e.contact,
-      avatar:{url:e.avatarUrl},
+      avatar: {
+        url: e.avatarUrl
+      },
       upload_introduce: e.introduce,
       upload_scholar_introduce: e.scholarIntroduce,
-      name:e.name,
-      ssNumber:e.ssNumber,
+      name: e.name,
+      ssNumber: e.ssNumber,
       upload_major: [{
         name: e.collegeName,
       }, {

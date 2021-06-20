@@ -1,5 +1,5 @@
 <!--pages/public/setting_profile/setting_profile.wxml-->
-<van-notice-bar mode="closeable" wrapable left-icon="volume-o" scrollable="{{ false }}" text="广告词和学习荣誉须经过内容审核" />
+<van-notice-bar mode="closeable" wrapable left-icon="volume-o" scrollable="{{ false }}" text="介绍和学习荣誉内容须经过AI审核" />
 
 <scroll-view class="container bg" scroll-y="{{true}}">
   <view class="main">
@@ -37,7 +37,7 @@
       <van-cell-group border="{{ false }}" size="large" center custom-style="border-radius: 10px!important">
         <van-field input-class="cell-value" model:value="{{ upload_introduce }}"
           custom-style="border-radius: 10px!important;font-size:12px" size="large" label-class="input_label" icon="edit"
-          label="广告词" type="textarea" border="{{ true }}" maxlength="200" show-word-limit autosize />
+          label="资料的推广语" type="textarea" border="{{ true }}" maxlength="200" show-word-limit autosize />
       </van-cell-group>
     </view>
 
@@ -49,7 +49,6 @@
       </van-cell-group>
     </view>
   </view>
-
   <view class="submit_btn">
     <van-button class="neumorphism" color="#4fc7ff" custom-style="border-radius:5px;width:20vw" bindtap="jump2Profile">
       预览</van-button>

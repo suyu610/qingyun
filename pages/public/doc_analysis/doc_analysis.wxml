@@ -1,0 +1,13 @@
+<!-- mark:chart -->
+<view class="bg">
+
+  <view class="cu-bar padding-lg">
+    <view class="action sub-title">
+      <text class="text-lg title text-bold text-black">正在开发中</text>
+      <text class="bg-blue" style="width:8.0rem"></text>
+    </view>
+    <text style="font-weigth:bold">总下载 200 \n 总收藏 500</text>
+  </view>
+
+  <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchcanvas"></canvas>
+</view>

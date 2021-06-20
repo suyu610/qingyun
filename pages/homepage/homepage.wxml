@@ -18,32 +18,27 @@
       </swiper>
     </view>
     <view class="search-body">
-      <van-search bind:focus="onSearchTap" custom-class="search" value="{{ value }}" background="#27B1FF"
+      <van-search bind:focus="onSearchTap" custom-class="search" value="{{ value }}" background="#27B1FF" bind:search="onTapSearchBtn"
         use-action-slot placeholder="请输入搜索关键词">
         <view slot="action" bind:tap="onTapCancelSearch" style="color:white" wx:if="{{showSearch}}">取消</view>
       </van-search>
     </view>
   </view>
   <!-- 搜索页面 -->
-  <view class="search_view" wx:if="{{showSearch}}" class="body ">
-    <scroll-view scroll-y="{{true}}" style="height:100%">
-      <van-cell-group title="试卷 (10)">
-        <block wx:for="{{10}}" wx:key="index" wx:index="index">
-          <van-cell title="试卷标题 - {{index}}" value="黄霸霸" border="{{false}}" is-link />
+  <view class="search_view body" wx:if="{{showSearch}}" style="">
+    <scroll-view scroll-y="{{true}}" style="height:100%;">
+      <van-cell-group wx:if="{{searchResultList.length>0}}" title="搜索结果">
+        <block wx:for="{{searchResultList}}" wx:key="index" wx:for-item="searchItem">
+          <van-cell bindtap="jump2Detail" data-id="{{searchItem.docId}}" center title="{{searchItem.title}}" value="作者：{{searchItem.authorName}}" label="课程：{{searchItem.courseName}}"
+            border="{{false}}" is-link />
         </block>
       </van-cell-group>
-      <van-cell-group title="笔记 (5)">
-        <block wx:for="{{5}}" wx:key="index" wx:index="index">
-          <van-cell title="笔记标题 - {{index}}" value="皇小狗" border="{{false}}" is-link />
-        </block>
-      </van-cell-group>
+      <van-empty wx:else image="search" description="搜索结果为空" />
     </scroll-view>
-
   </view>
   <view class="body" wx:else>
-    <van-tabs  tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
+    <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
       title-inactive-color="#10101055" swipeable animated bind:change="onChange">
-
       <van-tab title="🔥 热门">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:100%" refresher-threshold="{{100}}" refresher-enabled
@@ -74,8 +69,7 @@
             <van-grid column-num="3" square border="{{false}}">
               <block wx:for="{{boughtList}}" wx:key="index" wx:for-item="item">
                 <van-grid-item use-slot bindtap="jump2DocPreview" data-id="{{item.docId}}">
-                  <image mode="aspectFit"
-                    style="width: 100%; height: 100%;border-radius:5px;background-color:#27B1FF"
+                  <image mode="aspectFit" style="width: 100%; height: 100%;border-radius:5px;background-color:#27B1FF"
                     src="{{item.previewImgUrl}}" />
                   <view style="padding-top:10px;font-size:12px;width:100%;text-align:center">{{item.title}}</view>
                 </van-grid-item>
@@ -88,7 +82,7 @@
         <view class="tab-item help" id="helpView">
           <scroll-view style="height:100%" scroll-y="{{true}}" refresher-threshold="{{100}}" refresher-enabled
             refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
-            <view
+            <view wx:if="{{false}}"
               style="display: flex;justify-content: space-between;padding-right:30rpx;padding-left:30rpx;background-color:transparent">
               <van-button icon="filter-o" size="small" custom-style="color:black;border-radius:8px"
                 style="padding-right:10px">筛选</van-button>
@@ -119,9 +113,8 @@
                 </view>
               </block>
             </view>
-
             <view wx:else>
-              <van-empty description="暂无求助信息" />
+              <van-empty description="暂未开通问答模块" />
             </view>
           </scroll-view>
         </view>

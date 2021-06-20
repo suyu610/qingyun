@@ -14,7 +14,7 @@
   <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
   <view class="body">
     <van-tabs tab-active-class="tab-active" active="{{ active }}" line-height="0" title-active-color="#27B1FF"
-      title-inactive-color="#10101055" swipeable animated bind:change="onChange">
+      title-inactive-color="#10101055" swipeable animated>
       <van-tab title="笔记 ({{noteList.length}})">
         <view class="tab-item hot">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
@@ -27,13 +27,15 @@
                 authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
+            <van-empty wx:if="{{noteList.length==0}}" description="没有上传笔记哦" />
+
           </scroll-view>
         </view>
       </van-tab>
       <van-tab title="试卷 ({{paperList.length}})">
         <view class="tab-item help" id="helpView">
           <scroll-view scroll-y="{{true}}" style="height:{{height}}" refresher-threshold="{{100}}" refresher-enabled
-            refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh">
+            refresher-triggered="{{triggered}}" bindrefresherrefresh="onPullDownRefresh">
             <block wx:for="{{paperList}}" wx:key="index" wx:for-item="item">
               <course_item selfMode="true" verifyStatus="{{item.hasVerify?'审核通过':'审核中'}}" publishedStatus="{{item.published?'公开':'私密'}}" data-id="{{item.id}}" mode="preview" bindtap="onTapCell"
                 docuType="note" title="{{item.title}}" isHot="{{item.hot}}"
@@ -42,6 +44,8 @@
                 authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
+            <van-empty wx:if="{{paperList.length==0}}" description="没有上传试卷哦" />
+
           </scroll-view>
         </view>
       </van-tab>
@@ -57,6 +61,7 @@
                 authorName="下载： {{item.downCount}} 次" />
               <van-divider dashed customStyle="margin-top:1px;margin-bottom:1px"></van-divider>
             </block>
+            <van-empty wx:if="{{strategyList.length==0}}" description="没有上传攻略哦" />
           </scroll-view>
         </view>
       </van-tab>

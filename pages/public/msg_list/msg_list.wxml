@@ -1,6 +1,6 @@
 <!--pages/public/msg_list/msg_list.wxml-->
 <scroll-view scroll-y="{{true}}" class="container bg">
-  <block wx:for="{{4}}" wx:key="index">
+  <block wx:for="{{0}}" wx:key="index">
     <view class="msg" bindtap="jump2MsgDetail">
       <view class="msg_avatar">
         <van-image width="10vw" height="10vw" round src="https://cdns.qdu.life/logo.png" />
@@ -15,4 +15,6 @@
       </view>
     </view>
   </block>
+
+  <van-empty description="消息功能正在开发中"></van-empty>
 </scroll-view>

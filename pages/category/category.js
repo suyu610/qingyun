@@ -18,11 +18,12 @@ Page({
     courseList: [],
     back_categoryList: {}
   },
-  jump2DocList: function () {
+  jump2DocList: function (e) {
+    let courseName = e.currentTarget.dataset.coursename.value[0]
     push({
       name: 'doc_list',
       data: {
-        id: '123',
+        courseName,
         type: 1,
       },
     });
@@ -102,11 +103,12 @@ Page({
       list: list,
       listCur: list[0].key
     })
-    console.log(e)
   },
 
   handleGetAllCourseFail: function (e) {
-    console.log(e)
+    wx.showToast({
+      title: e,
+    })
   },
 
   onLoad() {
@@ -168,7 +170,6 @@ Page({
     //判断选择区域,只有在选择区才会生效
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
-      console.log(num)
       if (num > that.data.list.length - 1) {
         return;
       }

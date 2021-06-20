@@ -28,8 +28,8 @@
           <van-icon name="clear" />
           <text>不可下载</text>
         </view>
-        <view class="support">
-          <van-icon name="checked" />
+        <view class="notsupport">
+          <van-icon name="clear" />
           <text>纸质版</text>
         </view>
         <view class="support">
@@ -67,7 +67,7 @@
         </view>
         <view class="buy_btn" bindtap="jump2BuyConfirm">
           <van-icon name="cart-o" />
-          <text style="margin-left: 5px;vertical-align: 1px;">{{isBought?"查看文档":"购买"}}</text>
+          <text style="margin-left: 5px;vertical-align: 1px;">{{isIos?"无法购买":isBought?"查看文档":"购买"}}</text>
         </view>
       </view>
     </view>
@@ -146,4 +146,5 @@
   </view>
 </view>
 <!-- 评论的输入框 -->
-<input_comment starCount="{{doc.starCount}}"></input_comment>
+<input_comment docId="{{doc.id}}" isIos="{{isIos}}" price="{{doc.price}}" authorName="{{doc.authorName}}"
+  introduce="{{doc.introduce}}" title="{{doc.title}}" starCount="{{doc.starCount}}"></input_comment>

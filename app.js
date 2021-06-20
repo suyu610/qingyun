@@ -4,7 +4,6 @@ const router = require('utils/router/index.js');
 // 设置全局的分享
 ! function () {
   var PageTmp = Page;
-
   Page = function (pageConfig) {
     // 设置全局默认分享
     pageConfig = Object.assign({
@@ -25,7 +24,6 @@ const router = require('utils/router/index.js');
         }
       }
     }, pageConfig);
-
     PageTmp(pageConfig);
   };
 }();
@@ -36,9 +34,6 @@ App({
     var that = this;
     //监听网络状态
     wx.onNetworkStatusChange(function (res) {
-      console.log(res.networkType)
-
-      console.log(res)
       if (!res.isConnected) {
         console.log("123")
         that.msg('网络似乎不太顺畅');
@@ -49,14 +44,11 @@ App({
   },
   //---------------------------------------------检测小程序版本更新
   updateManage: function () {
-    var that = this;
- 
+    var that = this; 
     var updateManager = wx.getUpdateManager()
- 
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
       if (!res.hasUpdate) {
- 
       }
     })
     // 监听新版本下载成功
@@ -89,24 +81,15 @@ App({
     })
   },
 
-  
-  
   onLaunch() {
-
-
-
     this.networkManage(); //调用监听网络状态的方法
-    this.updateManage(); //调用检测小程序版本更新的方法
-   
-   
+    this.updateManage(); //调用检测小程序版本更新的方法   
     
-  
     this.globalData.initData =  wx.getStorageSync('initData')
     let that = this
     wx.cloud.init({
       traceUser: true,
     });
-
     // 获取openid
     wx.cloud.callFunction({
       name: 'getOpenId',
@@ -138,7 +121,7 @@ App({
     openid: "",
     token: "",
     ssNumber: "",
-    version:"0.8.5",
+    version:"1.0.1",
     categoryList:null
   }
 })

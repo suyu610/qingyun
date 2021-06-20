@@ -1,0 +1,19 @@
+.canvas {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  bottom: 10px;
+}
+.info{
+  padding-top: 30%;
+}
+.title{
+  font-size: 48rpx;
+  font-weight: bold;
+  text-align: center;
+}
+.starCount,
+.downCount{  
+  font-size: 30rpx;
+  text-align: center;
+}
