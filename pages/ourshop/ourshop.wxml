@@ -41,7 +41,9 @@
       </van-tab>
       <van-tab title="优选资料">
         <view class="tab-item trick">
-          <van-empty image="search" description="暂无优选资料" />
+          <van-empty image="search" description="皇甫素素今天哼了8次" />
+          <view style="width:100vw;text-align:center">
+          <van-button plain round icon="fire" type="danger" size="small">+1</van-button></view>
           <!-- <scroll-view scroll-y="{{true}}">
             <van-grid column-num="2" square border="{{false}}">
               <block wx:for="{{4}}" wx:key="index" wx:for-item="item">

@@ -83,3 +83,9 @@ export const admin = {
 export const onboarding = { 
   path:'/pages/onboarding/onboarding'
 }
+
+
+export const webview = { 
+  path:'/pages/public/webview/webview'
+}
+

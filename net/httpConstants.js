@@ -53,3 +53,11 @@ export const CheckHasBoughtUrl = 'order/hasBought'
 export const GetAllOrdersUrl = 'order/allBought'
 export const GetMoneyRecordUrl = 'order/moneyRecord'
 
+
+////////////
+/// 公告 ///
+///////////
+
+export const GetDialogUrl = 'dialog/new'
+
+

@@ -28,7 +28,8 @@
     "pages/homepage/homepage",
     "pages/ourshop/ourshop",
     "pages/public/search/search",
-    "pages/public/need_know/need_know"
+    "pages/public/need_know/need_know",
+    "pages/public/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",

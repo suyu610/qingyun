@@ -4,6 +4,9 @@ const helpList = []
 
 import UserService from '../../net/service/userService.js'
 import DocService from '../../net/service/docService.js'
+import DialogService from '../../net/service/dialogService.js'
+
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 import {
   push
@@ -50,6 +53,23 @@ Page({
     })
   },
 
+  // 复制群号
+  onDialogClose: function () {
+    wx.setClipboardData({
+      data: "744080689",
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
+  },
+
+
   handleSearchSuccess: function (e) {
     this.setData({
       searchResultList: e
@@ -58,9 +78,9 @@ Page({
   },
 
   onTapSearchBtn: function (e) {
-    if(e.detail==""){
+    if (e.detail == "") {
       wx.showToast({
-        icon:'none',
+        icon: 'none',
         title: '关键词不能为空',
       })
       return
@@ -76,6 +96,23 @@ Page({
     })
   },
 
+  compare: function (prop) {
+    return function (obj1, obj2) {
+      var val1 = obj1[prop];
+      var val2 = obj2[prop];
+      if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+        val1 = Number(val1);
+        val2 = Number(val2);
+      }
+      if (val1 > val2) {
+        return -1;
+      } else if (val1 < val2) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  },
 
   handleGetInitDataSuccess: function (e) {
     let documentList = [];
@@ -83,7 +120,8 @@ Page({
       element.subTitle = element.introduce
       documentList.push(element)
     });
-
+    documentList.sort(this.compare("starCount"));
+    console.log(documentList)
     this.setData({
       documentList
     })
@@ -165,7 +203,7 @@ Page({
       documentList.push(element)
     });
 
-
+    documentList.sort(this.compare("starCount"));
     this.setData({
       documentList,
       boughtList
@@ -173,6 +211,7 @@ Page({
   },
 
   onLoad: function (options) {
+    DialogService.getDialog(this.handleDialogSuccess)
     if (app.globalData.msgList != null) {
       wx.setTabBarBadge({
         index: 3,
@@ -186,5 +225,36 @@ Page({
 
 
 
+  },
+
+  // 先比较本地存储的id和dialogId
+  handleDialogSuccess(data) {
+    let localDialogId = wx.getStorageSync('dialogId')
+    // 这样就不显示
+    if (localDialogId != "" && localDialogId >= data.dialogId) {
+      return;
+    } else {
+      this.setData({
+        dialog: data
+      })
+      Dialog.confirm({
+        title: this.data.dialog.title,
+        message: this.data.dialog.content.replace(/\\n/g, "\n"),
+        customStyle: "white-space:pre-wrap",
+        messageAlign: 'left',
+        confirmButtonText: '不再提示',
+        cancelButtonText: '复制群号',
+        closeOnClickOverlay: false,
+        transition: 'fade',
+      }).then(() => {
+        // on confirm
+        wx.setStorageSync('dialogId', data.dialogId)
+        // console.log("存储")
+      }).catch(() => {
+        // console.log("取消")
+        wx.setStorageSync('dialogId', data.dialogId)
+        this.onDialogClose()
+      });
+    }
   },
 })

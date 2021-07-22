@@ -22,7 +22,6 @@ Page({
     this.setData({
       url: "https://book.qdu.life/doc_detail.html?id=" + docId + "&token=" + app.globalData.token
     })
-
   },
 
   /**

@@ -18,8 +18,8 @@
       </swiper>
     </view>
     <view class="search-body">
-      <van-search bind:focus="onSearchTap" custom-class="search" value="{{ value }}" background="#27B1FF" bind:search="onTapSearchBtn"
-        use-action-slot placeholder="请输入搜索关键词">
+      <van-search bind:focus="onSearchTap" custom-class="search" value="{{ value }}" background="#27B1FF"
+        bind:search="onTapSearchBtn" use-action-slot placeholder="请输入搜索关键词">
         <view slot="action" bind:tap="onTapCancelSearch" style="color:white" wx:if="{{showSearch}}">取消</view>
       </van-search>
     </view>
@@ -29,8 +29,8 @@
     <scroll-view scroll-y="{{true}}" style="height:100%;">
       <van-cell-group wx:if="{{searchResultList.length>0}}" title="搜索结果">
         <block wx:for="{{searchResultList}}" wx:key="index" wx:for-item="searchItem">
-          <van-cell bindtap="jump2Detail" data-id="{{searchItem.docId}}" center title="{{searchItem.title}}" value="作者：{{searchItem.authorName}}" label="课程：{{searchItem.courseName}}"
-            border="{{false}}" is-link />
+          <van-cell bindtap="jump2Detail" data-id="{{searchItem.docId}}" center title="{{searchItem.title}}"
+            value="作者：{{searchItem.authorName}}" label="课程：{{searchItem.courseName}}" border="{{false}}" is-link />
         </block>
       </van-cell-group>
       <van-empty wx:else image="search" description="搜索结果为空" />
@@ -122,4 +122,8 @@
 
     </van-tabs>
   </view>
+
 </view>
+
+<van-dialog id="van-dialog" bind:confirm="onDialogConfirm">
+</van-dialog>

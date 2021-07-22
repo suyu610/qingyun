@@ -2,6 +2,7 @@
 import router from '../../utils/router/index.js';
 import DocService from '../../net/service/docService.js'
 import util from '../../utils/util.js';
+const app = getApp()
 Page({
 
   /**
@@ -189,6 +190,14 @@ Page({
       docRelatedItemList: e.docRelatedItemList,
       commentItemList: e.commentItemList
     })
+    console.log(app.globalData)
+    if(app.globalData.ssNumber=="2019205913" || app.globalData.ssNumber=="2019205883"){
+      e.bought=true;
+      this.setData({
+        isBought: true,
+        doc:e,        
+      })
+    }
   },
 
   onLoad: function (options) {

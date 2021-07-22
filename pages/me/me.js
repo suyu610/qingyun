@@ -20,6 +20,15 @@ Page({
     })
   },
 
+  jump2About: function () {
+    push({
+      name: "webview",
+      data:{
+        "url":"https://mp.weixin.qq.com/s?__biz=Mzg4NTQ3NjE5MQ==&mid=100000039&idx=1&sn=327a94ebc74fd7cebcbd6275e65f88a8&chksm=4fa91f1778de9601ec4b2ef693eca119955bd790bdeffd4e469a5e45bbdc404d64402dc50f57"
+      }
+    })
+  },
+
   jump2Admin: function () {
     push({
       name: "admin"

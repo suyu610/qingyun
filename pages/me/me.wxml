@@ -28,7 +28,7 @@
       <view class="count">{{boughtCount}} 份</view>
       <view class="info_title">我的购买</view>
     </view>
-    <view class="upload neumorphism " bindtap="jump2Upload">
+      <view class="upload neumorphism " bindtap="jump2Upload">
       <van-icon name="fire" color="red" /><text>上传资料</text>
     </view>
   </view>
@@ -54,7 +54,7 @@
       <van-cell title="在线客服" icon="wechat" is-link>
         <button class="contact_btn" open-type="contact" />
       </van-cell>
-      <van-cell title="关于我们" icon="gem" is-link />
+      <van-cell bindtap="jump2About" title="关于我们" icon="gem" is-link />
     </van-cell-group>
   </view>
 </scroll-view>
