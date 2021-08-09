@@ -18,8 +18,8 @@ image {
 .introduce {
   padding: 30rpx;
   padding-bottom: 0;
-
   border-radius: 20rpx;
+  /* border: 2px solid #F4F9FD; */
   background-color: #fff;
 }
 
@@ -27,13 +27,6 @@ image {
   padding: 0;
 }
 
-.neumorphism:active {
-  box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0.249),
-    -4px -4px 5px 0px rgba(255, 255, 255, 0.349),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.055),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.034);
-
-}
 
 .center .function .cu-item {
   border-radius: 20rpx;
@@ -50,7 +43,7 @@ image {
 }
 
 .title {
-  color: #909090;
+  color: #909090!important;
   text-align: left;
   font-size: 24rpx;
 
@@ -116,10 +109,10 @@ image {
 
 
 .canvas {
-  width: 100vw;
+  width: 98%;
   height: 30vh;
   text-align: center;
-  margin-left: 10vw;
+  margin-left: 2vw;
 }
 
 .info_pic {
@@ -127,5 +120,5 @@ image {
 }
 
 .text-bold {
-  color: #2B2B2B !important;
+  color: #2B2B2B ;
 }

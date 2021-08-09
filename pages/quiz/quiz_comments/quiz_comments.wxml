@@ -1,0 +1,43 @@
+<!-- 评分 -->
+
+
+<!-- 评论 -->
+<view class="comment">
+  <view class="title">评论 ({{commentItemList.length}}) </view>
+  <view class="all"></view>
+  <view class="all">写评论</view>
+  <view wx:if="{{commentItemList.length != 0}}" class="cu-list menu-avatar comment">
+    <block wx:for="{{commentItemList}}" wx:key="index" wx:for-item="item">
+      <view class="cu-item">
+        <view wx:if="{{item.avatarUrl != null}}" class="cu-avatar round"
+          style="background-image:url({{item.avatarUrl}});"></view>
+        <view wx:else class="cu-avatar round" style="background-image:url(http://api.btstu.cn/sjtx/api.php?lx=c1);">
+        </view>
+        <view class="content">
+          <view class="text-grey">{{item.authorName}}</view>
+          <view class="text-gray text-content text-sm">
+            {{item.content}}
+          </view>
+          <!-- 主人的回复 -->
+          <view class="bg-gray padding-sm radius margin-top-sm  text-sm">
+            <view class="flex">
+              <view>主人：</view>
+              <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
+            </view>
+          </view>
+          <view class="margin-top-sm flex justify-between">
+            <view class="text-gray text-sm">{{item.createTime}}</view>
+            <view>
+              <text wx:if="{{item.liked}}"
+                class="cuIcon-appreciatefill text-red text-sm padding-sm">{{item.likeCount}}</text>
+              <text wx:else class="cuIcon-appreciatefill text-gray text-sm padding-sm">{{item.likeCount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else style="text-align:center">
+    <van-empty image="error" description="暂无评论"></van-empty>
+  </view>
+</view>
