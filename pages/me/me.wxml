@@ -28,8 +28,11 @@
       <view class="count">{{boughtCount}} 份</view>
       <view class="info_title">我的购买</view>
     </view>
-      <view class="upload neumorphism " bindtap="jump2Upload">
+      <view class="upload-doc neumorphism " bindtap="jump2Upload">
       <van-icon name="fire" color="red" /><text>上传资料</text>
+    </view>
+    <view class="upload-quiz neumorphism " bindtap="jump2Upload">
+      <van-icon name="fire" color="red" /><text>创建试卷</text>
     </view>
   </view>
 

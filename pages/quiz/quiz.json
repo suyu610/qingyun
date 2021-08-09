@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "course_item": "/components/index_document_item/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "quiz_progress_bar": "/components/quiz_progress_bar/quiz_progress_bar"
+  }
+}

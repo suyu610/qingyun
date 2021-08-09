@@ -10,6 +10,14 @@ export const homepage = {
   path:'/pages/homepage/homepage'
 }
 
+export const quiz = { 
+  path:'/pages/quiz/quiz'
+}
+
+export const quiz_detail_unsub = { 
+  path:'/pages/quiz/quiz_detail_unsub/quiz_detail_unsub'
+}
+
 export const login = { 
   path:'/pages/public/login/login'
 }
@@ -34,6 +42,7 @@ export const buy_confirm = {
 export const order_list = { 
   path:'/pages/public/order_list/order_list'
 }
+
 
 
 export const preview_doc = { 

@@ -1,9 +1,11 @@
 {
   "usingComponents": {
-    "van-empty": "@vant/weapp/empty/index"
+    "van-empty": "@vant/weapp/empty/index",
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "pages": [
     "pages/empty/empty",
+    "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
     "pages/public/order_list/order_list",
     "pages/onboarding/onboarding",
     "pages/public/admin/admin",
@@ -26,10 +28,12 @@
     "pages/document_detail/document_detail",
     "pages/public/buy_confirm/buy_confirm",
     "pages/homepage/homepage",
-    "pages/ourshop/ourshop",
+    "pages/quiz/quiz",
     "pages/public/search/search",
     "pages/public/need_know/need_know",
-    "pages/public/webview/webview"
+    "pages/public/webview/webview",
+    "pages/more/more",
+    "pages/quiz/quiz_detail_sub/quiz_detail_sub"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -53,9 +57,14 @@
         "selectedIconPath": "/icons/category/logo_sl.png"
       },
       {
-        "pagePath": "pages/ourshop/ourshop",
-        "iconPath": "/icons/ourshop/logo_un.png",
-        "selectedIconPath": "/icons/ourshop/logo_sl.png"
+        "pagePath": "pages/quiz/quiz",
+        "iconPath": "/icons/quiz/logo_un.png",
+        "selectedIconPath": "/icons/quiz/logo_sl.png"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "/icons/more/logo_un.png",
+        "selectedIconPath": "/icons/more/logo_sl.png"
       },
       {
         "pagePath": "pages/me/me",

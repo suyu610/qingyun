@@ -1,0 +1,185 @@
+<!--pages/homepage/homepage.wxml-->
+
+
+<view class="container">
+
+  <view class="header bg">
+    <view class="ads">
+      <!-- <swiper indicator-dots="{{adsIndicatorDots}}" indicator-active-color="#fff" indicator-color="#ffffff99"
+        circular="{{true}}" autoplay="{{adsAutoplay}}" interval="{{adsInterval}}" duration="{{adsDuration}}">
+        <block wx:for="{{adsList}}" wx:key="index" wx:for-item="item">
+          <swiper-item>
+            <view class="ads-item" bindtap="jump2Qk">
+              <view class="info">一键搜索青大空教室</view>
+              <view class="title"> 青空教室 </view>
+              <view class="price">素语出品</view>
+              <image src="{{item.imgUrl}}" mode="aspectFill"></image>
+              <view class="entry-btn beauty_shadow">进入</view>
+            </view>
+          </swiper-item>
+          <swiper-item>        
+          </swiper-item>
+        </block>
+      </swiper> -->
+
+      <view class="title">
+        <view class="flex">
+          <view class="title-left">上次做题</view>
+          <van-icon name="arrow" style="line-height:19px" />
+        </view>
+        <text class="quiz-title" style="text-align:center;disply:inline-block">计算机二级-C语言</text>
+      </view>
+
+      <view class="function">
+        <view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}" style="background-color: transparent;">
+          <view class="cu-item" wx:for="{{iconList}}" wx:key="index" wx:if="{{index<gridCol*2}}">
+            <view class="cuIcon-{{item.icon}} text-{{item.color}}" bindtap="jump2Answer">
+              <view class="cu-tag {{item.icon!='warn'? 'bg-yellow':'bg-red'}} badge" wx:if="{{item.badge!=0}}">
+                <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+              </view>
+            </view>
+            <text style="color:white">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="body">
+    <van-tabs tab-class="tab-class" tab-active-class="tab-active text-black" color="#FFE9A7" active="{{ active }}"
+      line-height="4" title-inactive-color="#aaa" swipeable animated>
+      <van-tab class="text-black" title="我的题库">
+        <view class="bg tab-item hot">
+          <!-- <block wx:for="{{4}}" wx:key="index" wx:for-index="idx" > -->
+          <quiz_progress_bar title="计算机二级 - C语言" progress="{{5}}" done_num="{{5}}" total_num="{{67}}">
+          </quiz_progress_bar>
+          <quiz_progress_bar title="CET4单词" progress="{{20}}" done_num="{{17}}" total_num="{{88}}"></quiz_progress_bar>
+          <quiz_progress_bar title="固体物理" progress="{{88}}" done_num="{{9}}" total_num="{{12}}"></quiz_progress_bar>
+          <quiz_progress_bar title="信号与系统" progress="{{3}}" done_num="{{35}}" total_num="{{500}}"></quiz_progress_bar>
+          <!-- </block> -->
+        </view>
+      </van-tab>
+      <!-- <van-tab class="text-black" title="我的卡片">
+        <view class="tab-item hot">
+        </view>
+      </van-tab> -->
+      <van-tab title="所有题库">
+        <view class="tab-item help" id="helpView">
+          <van-search value="{{ value }}" shape="round" background="#fff" placeholder="请输入搜索关键词" />
+          <!-- <van-empty image="error" description="暂无周边产品" /> -->
+          <view class="VerticalBox">
+            <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}"
+              style="height:calc(95vh - 375rpx)">
+              <view class="cu-item {{index==TabCur?'text-blue text-bold cur':''}}" wx:for="{{list}}" wx:key="index"
+                bindtap='tabSelect' data-id="{{index}}">
+                {{item.name}}
+              </view>
+            </scroll-view>
+            <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(95vh - 375rpx)"
+              scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+              <view class="padding-top padding-lr" wx:for="{{list}}" wx:key="index" id="main-{{index}}">
+                <view class='cu-bar solid-bottom bg-white'>
+                  <view class='action'>
+                    <text class='cuIcon-title text-blue'></text> {{item.name}}
+                  </view>
+                </view>
+                <view class="cu-list menu-avatar">
+                  <view class="cu-item" bindtap="jump2Detail">
+                    <view class="bg cu-avatar round  xs bg-pink" style="font-size:24rpx">计
+                      <view class="cu-tag badge sm bg-yellow"></view>
+                    </view>
+                    <view class="content">
+                      <view class="text-black">
+                        <text class="text-bold text-cut">计算机二级C语言</text>
+                        <view class="cu-tag round bg-blue sm">青云出品</view>
+                      </view>
+                      <view class="text-gray text-sm flex">
+                        <text class="text-cut">选择、填空、改错</text>
+                      </view>
+                    </view>
+                    <view class="action">
+                      <view class="text-grey text-xs">黄鹏宇</view>
+                      <view class="cu-tag text-grey text-xs bg-white sm">5人</view>
+                    </view>
+                  </view>
+
+                  <view class="cu-item" bindtap="jump2Detail">
+                    <view class="bg cu-avatar round xs bg-yellow" style="font-size:24rpx">研
+                    </view>
+                    <view class="content">
+                      <view class="text-black">
+                        <text class="text-bold text-cut">信号与系统</text>
+                        <view class="cu-tag round bg-blue sm">已添加</view>
+                        <view class="cu-tag round bg-blue sm">精品</view>
+                      </view>
+                      <view class="text-gray text-sm flex">
+                        <text class="text-cut">概念选择题、判断题
+                        </text>
+                      </view>
+                    </view>
+                    <view class="action">
+                      <view class="text-grey text-xs">皇甫素素</view>
+                      <view class="cu-tag text-grey text-xs bg-white sm">43人</view>
+                    </view>
+                  </view>
+                  <view class="cu-item" bindtap="jump2Detail">
+                    <view class="bg cu-avatar round  xs bg-yellow" style="font-size:20rpx">期末
+                      <!-- <view class="cu-tag badge bg-yellow">99+</view> -->
+                    </view>
+                    <view class="content">
+                      <view class="text-black">
+                        <text class="text-bold text-cut">固体物理</text>
+                      </view>
+                      <view class="text-gray text-sm flex">
+                        <text class="text-cut">基本概念的选择题</text>
+                      </view>
+                    </view>
+                    <view class="action">
+                      <view class="text-grey text-xs">刘鹏</view>
+                      <view class="cu-tag text-grey text-xs bg-white sm">999+人</view>
+                    </view>
+                  </view>
+                  <view class="cu-item" bindtap="jump2Detail">
+                    <view class="bg cu-avatar round  xs bg-blue" style="font-size:24rpx">英
+                      <!-- <view class="cu-tag badge bg-yellow">99+</view> -->
+                    </view>
+                    <view class="content">
+                      <view class="text-black">
+                        <text class="text-cut text-bold">CET4单词</text>
+                        <!-- <view class="cu-tag round bg-blue sm">断开连接...</view> -->
+                      </view>
+                      <view class="text-gray text-sm flex">
+                        <text class="text-cut"> 4800个单词</text>
+                      </view>
+                    </view>
+                    <view class="action">
+                      <view class="text-grey text-xs">黄璞</view>
+                      <view class="cu-tag text-grey text-xs bg-white sm">7人</view>
+                    </view>
+                  </view>
+                  <view class="cu-item" bindtap="jump2Detail">
+                    <view class="bg cu-avatar round  xs bg-yellow" style="font-size:20rpx">期末
+                      <view class="cu-tag badge bg-yellow"></view>
+                    </view>
+                    <view class="content">
+                      <view class="text-black">
+                        <text class="text-cut text-bold">高等数学概念</text>
+                      </view>
+                      <view class="text-gray text-sm flex">
+                        <text class="text-cut">从历年试卷中选取出来的</text>
+                      </view>
+                    </view>
+                    <view class="action">
+                      <view class="text-grey text-xs">20:20</view>
+                      <view class="cu-tag text-grey text-xs bg-white sm">15人</view>
+                    </view>
+                  </view>
+                </view>
+
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

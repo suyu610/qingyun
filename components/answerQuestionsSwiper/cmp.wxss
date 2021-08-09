@@ -1,0 +1,8 @@
+.wrap{
+    height: calc(100vh);
+    background-color: #28b1fc;
+    /* background-color: #226dfa; */
+}
+.scroll-view{
+    height: calc(100vh - 100rpx);
+}

@@ -29,27 +29,26 @@ const router = require('utils/router/index.js');
 }();
 App({
 
-   // ---------------------------------------------网络状态 
-   networkManage: function () {
+  // ---------------------------------------------网络状态 
+  networkManage: function () {
     var that = this;
     //监听网络状态
     wx.onNetworkStatusChange(function (res) {
       if (!res.isConnected) {
         console.log("123")
         that.msg('网络似乎不太顺畅');
-      }else{
+      } else {
         console.log(res)
       }
     })
   },
   //---------------------------------------------检测小程序版本更新
   updateManage: function () {
-    var that = this; 
+    var that = this;
     var updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      if (!res.hasUpdate) {
-      }
+      if (!res.hasUpdate) {}
     })
     // 监听新版本下载成功
     updateManager.onUpdateReady(function () {
@@ -84,8 +83,8 @@ App({
   onLaunch() {
     this.networkManage(); //调用监听网络状态的方法
     this.updateManage(); //调用检测小程序版本更新的方法   
-    
-    this.globalData.initData =  wx.getStorageSync('initData')
+
+    this.globalData.initData = wx.getStorageSync('initData')
     let that = this
     wx.cloud.init({
       traceUser: true,
@@ -118,10 +117,19 @@ App({
 
 
   globalData: {
-    openid: "",
+    debug: false,
+    // debugRouter:"homepage",
+    userInfo: {
+      userId: null, // 用户唯一id
+      name: null, // 微信名称
+      gender: 0, // 性别：0未知、1男、2女
+      photoUrl: null, // 头像url地址
+      address: "全国", // 用户定位地址精确到市，默认为全国
+      isSuper: false, // 该用户是否为超级用户，如果是的话就有回复和删除留言的能力
+    },
     token: "",
     ssNumber: "",
-    version:"1.0.1",
-    categoryList:null
+    version: "1.0.1",
+    categoryList: null
   }
 })

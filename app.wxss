@@ -6,10 +6,10 @@
 
 /* 新拟态 */
 .neumorphism {
-  box-shadow: -7px -7px 20px 0px #fff9,
-    -4px -4px 5px 0px #fff9,
-    7px 7px 20px 0px #0002,
-    4px 4px 5px 0px #0001;
+  box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0.249),
+    -4px -4px 5px 0px rgba(255, 255, 255, 0.349),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.055),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.034);
 }
 
 .neumorphismin,
@@ -43,6 +43,40 @@
   background-color: transparent;
 }
 
+.text-blue {
+  color: #27B1FF !important;
+}
+
+.text-black {
+  color: #081f40 !important;
+}
+.bg-pink{
+  background-color: #FBD8BC!important;
+  color:black!important;
+}
+.bg-yellow {
+  background-color: #ffe9a7!important;
+  color: black !important;
+}
+
+bg-transparent {
+  background-color: transparent!important;
+  color: black !important;
+}
+
+.bg-green {
+  background-color: #44d7b6!important;
+  color: white !important;
+}
+
+.bg-purple {
+  background-color: #2f3478!important;
+  color: white !important;
+}
+
+.bg-blue {
+  background-color: #27B1FF!important;
+}
 
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";

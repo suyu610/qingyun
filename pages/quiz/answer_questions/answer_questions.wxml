@@ -1,0 +1,9 @@
+<!-- 广告组件 -->
+<!-- <view class="advertising-box">
+    <ad unit-id="adunit-c86ad9f677369e1a" ad-type="video" ad-theme="white"></ad>
+</view> -->
+<f-answerQuestionsSwiper  
+    topicArr="{{ topicArr }}" 
+    sumObj="{{ sumObj }}" 
+    bindonchangesumobj="changeSumObj"
+/>

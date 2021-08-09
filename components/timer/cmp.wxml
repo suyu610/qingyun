@@ -1,0 +1,8 @@
+<text>{{ floor.getMin(date) }} : {{ date % 60 < 10 ? '0' + date % 60 : date % 60 }}</text>
+
+<wxs module="floor">
+var getMin = function(date){
+    return Math.floor( date / 60 ) < 10 ? '0' + Math.floor( date / 60 ) : Math.floor( date / 60 );
+}
+module.exports.getMin = getMin;
+</wxs>

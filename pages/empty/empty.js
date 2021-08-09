@@ -14,7 +14,7 @@ Page({
     // 检测token是否有效
     setTimeout(() => {
       router.relaunch({
-        name: "homepage"
+        name: "quiz"
       })
     }, 800);
   },
@@ -44,6 +44,7 @@ Page({
     ///////////// 这里是debug用的 ///////////////////// 
     if (app.globalData.debug) {
       console.log("empty.js: debug模式")
+      console.log(app.globalData.debugRouter)
       router.replace({
         name: app.globalData.debugRouter
       });

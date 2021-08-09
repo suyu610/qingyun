@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "f-topicBox": "/components/topicBox/cmp",
+        "f-numBox": "/components/numBox/cmp"
+    }
+}
