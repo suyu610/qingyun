@@ -50,11 +50,10 @@
       <van-tab class="text-black" title="我的题库">
         <view class="bg tab-item hot">
           <!-- <block wx:for="{{4}}" wx:key="index" wx:for-index="idx" > -->
-          <quiz_progress_bar title="计算机二级 - C语言" progress="{{5}}" done_num="{{5}}" total_num="{{67}}">
-          </quiz_progress_bar>
-          <quiz_progress_bar title="CET4单词" progress="{{20}}" done_num="{{17}}" total_num="{{88}}"></quiz_progress_bar>
-          <quiz_progress_bar title="固体物理" progress="{{88}}" done_num="{{9}}" total_num="{{12}}"></quiz_progress_bar>
-          <quiz_progress_bar title="信号与系统" progress="{{3}}" done_num="{{35}}" total_num="{{500}}"></quiz_progress_bar>
+          <quiz_progress_bar bindtap="jump2Detail_sub" title="计算机二级 - C语言" progress="{{5}}" done_num="{{5}}" total_num="{{67}}"></quiz_progress_bar>
+          <quiz_progress_bar bindtap="jump2Detail_sub" title="CET4单词" progress="{{20}}" done_num="{{17}}" total_num="{{88}}"></quiz_progress_bar>
+          <quiz_progress_bar bindtap="jump2Detail_sub" title="固体物理" progress="{{88}}" done_num="{{9}}" total_num="{{12}}"></quiz_progress_bar>
+          <quiz_progress_bar bindtap="jump2Detail_sub" title="信号与系统" progress="{{3}}" done_num="{{35}}" total_num="{{500}}"></quiz_progress_bar>
           <!-- </block> -->
         </view>
       </van-tab>
@@ -83,7 +82,7 @@
                   </view>
                 </view>
                 <view class="cu-list menu-avatar">
-                  <view class="cu-item" bindtap="jump2Detail">
+                  <view class="cu-item" bindtap="jump2Detail_unsub">
                     <view class="bg cu-avatar round  xs bg-pink" style="font-size:24rpx">计
                       <view class="cu-tag badge sm bg-yellow"></view>
                     </view>
@@ -102,7 +101,7 @@
                     </view>
                   </view>
 
-                  <view class="cu-item" bindtap="jump2Detail">
+                  <view class="cu-item" bindtap="jump2Detail_unsub">
                     <view class="bg cu-avatar round xs bg-yellow" style="font-size:24rpx">研
                     </view>
                     <view class="content">
@@ -121,7 +120,7 @@
                       <view class="cu-tag text-grey text-xs bg-white sm">43人</view>
                     </view>
                   </view>
-                  <view class="cu-item" bindtap="jump2Detail">
+                  <view class="cu-item" bindtap="jump2Detail_unsub">
                     <view class="bg cu-avatar round  xs bg-yellow" style="font-size:20rpx">期末
                       <!-- <view class="cu-tag badge bg-yellow">99+</view> -->
                     </view>
@@ -138,7 +137,7 @@
                       <view class="cu-tag text-grey text-xs bg-white sm">999+人</view>
                     </view>
                   </view>
-                  <view class="cu-item" bindtap="jump2Detail">
+                  <view class="cu-item" bindtap="jump2Detail_unsub">
                     <view class="bg cu-avatar round  xs bg-blue" style="font-size:24rpx">英
                       <!-- <view class="cu-tag badge bg-yellow">99+</view> -->
                     </view>
@@ -156,7 +155,7 @@
                       <view class="cu-tag text-grey text-xs bg-white sm">7人</view>
                     </view>
                   </view>
-                  <view class="cu-item" bindtap="jump2Detail">
+                  <view class="cu-item" bindtap="jump2Detail_unsub">
                     <view class="bg cu-avatar round  xs bg-yellow" style="font-size:20rpx">期末
                       <view class="cu-tag badge bg-yellow"></view>
                     </view>

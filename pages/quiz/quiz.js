@@ -33,22 +33,7 @@ Page({
     VerticalNavTop: 0,
     list: [],
     load: true,
-    ////////// 頂部輪播圖 //////////
-    adsList: [{
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-1.jpg"
-      },
-      {
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-2.jpg"
-      },
-      {
-        "imgUrl": "https://img01.yzcdn.cn/vant/apple-3.jpg"
-      },
-    ],
-    adsIndicatorDots: true,
-    adsAutoplay: false,
-    adsInterval: 8000,
-    adsDuration: 1000,
-    //////////////////////////////////////
+  
     /////////// 热门   //////////////////
     triggered: false,
 
@@ -170,9 +155,18 @@ Page({
       }
     })
   },
-  jump2Detail: function () {
+  jump2Detail_unsub: function () {
     push({
       name: 'quiz_detail_unsub',
+      data: {
+        id: '123',
+        type: 1,
+      },
+    });
+  },
+  jump2Detail_sub: function () {
+    push({
+      name: 'quiz_detail_sub',
       data: {
         id: '123',
         type: 1,

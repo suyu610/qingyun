@@ -136,5 +136,5 @@
 </view>
 <view class="add_btn">
   <button class="block text-bold add-btn bg-blue">
-    <text class="cuIcon-add text-white"></text> <text class="text-sm text-white">添加至我的题库</text> </button>
+    <text class="cuIcon-add text-white"></text> <text class="text-sm text-white"> 添加至我的题库</text> </button>
 </view>

@@ -5,6 +5,7 @@
   },
   "pages": [
     "pages/empty/empty",
+    "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
     "pages/public/order_list/order_list",
     "pages/onboarding/onboarding",
@@ -32,8 +33,7 @@
     "pages/public/search/search",
     "pages/public/need_know/need_know",
     "pages/public/webview/webview",
-    "pages/more/more",
-    "pages/quiz/quiz_detail_sub/quiz_detail_sub"
+    "pages/more/more"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -18,6 +18,11 @@ export const quiz_detail_unsub = {
   path:'/pages/quiz/quiz_detail_unsub/quiz_detail_unsub'
 }
 
+export const quiz_detail_sub = { 
+  path:'/pages/quiz/quiz_detail_sub/quiz_detail_sub'
+}
+
+
 export const login = { 
   path:'/pages/public/login/login'
 }
