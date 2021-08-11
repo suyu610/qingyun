@@ -21,6 +21,10 @@ export const quiz_detail_unsub = {
 export const quiz_detail_sub = { 
   path:'/pages/quiz/quiz_detail_sub/quiz_detail_sub'
 }
+export const quiz_answer_questions = { 
+  path:'/pages/quiz/quiz_answer_questions/quiz_answer_questions'
+}
+
 
 
 export const login = { 
@@ -47,8 +51,6 @@ export const buy_confirm = {
 export const order_list = { 
   path:'/pages/public/order_list/order_list'
 }
-
-
 
 export const preview_doc = { 
   path:'/pages/public/preview_doc/preview_doc'

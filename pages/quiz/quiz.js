@@ -33,7 +33,7 @@ Page({
     VerticalNavTop: 0,
     list: [],
     load: true,
-  
+
     /////////// 热门   //////////////////
     triggered: false,
 
@@ -78,9 +78,20 @@ Page({
     })
   },
   jump2Answer(e) {
-    wx.navigateTo({
-      url: 'answerQuestions/answerQuestions',
+    push({
+      name: 'quiz_answer_questions',
+      data: {
+        id: '123',
+        type: 1,
+      },
     })
+  },
+  jumpRoute(e){
+    switch(e.currentTarget.dataset.index){
+      case 0:
+        this.jump2Answer();
+        break;
+    }
   },
   tabSelect(e) {
     this.setData({

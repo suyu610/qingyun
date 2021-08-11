@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-      "f-timer": "/components/timer/cmp"
-  }
-}

@@ -143,7 +143,7 @@
               <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
             </view>
           </view>
-          <text style="font-size: 26rpx;color:black" class="{{item.icon=='order'||item.icon=='text'? 'text-bold':''}}">{{item.name}}</text>
+          <text style="font-size: 26rpx;color:black">{{item.name}}</text>
         </view>
       </view>
     </view>

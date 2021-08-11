@@ -1,0 +1,130 @@
+.container {
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+swiper {
+  height: 100%;
+}
+
+
+.title {
+  width: 100%;
+}
+
+.title .ques_title,
+.title .ques_type {
+  height: 50rpx;
+  line-height: 50rpx;
+  display: inline;
+}
+
+.title .ques_title {
+  font-weight: bold;
+}
+
+.title .ques_type {
+  padding: 9rpx;
+  color: white;
+  font-size: 20rpx;
+  background-color: #28b1fc;
+  margin-right: 10rpx;
+  border-radius: 5rpx;
+}
+.audio_slider{
+  width: 90%;
+  margin: 0 auto;
+}
+.title .ques_img {
+  text-align: center;
+}
+
+.title .ques_voice {
+  padding-top: 20rpx;
+
+}
+
+.title .progress_seconds {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  font-weight: bold;
+}
+
+.title .progress_control {
+  display: flex;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+
+
+
+.options {
+  padding-top: 30rpx;
+}
+
+.options .option {
+  margin-top: 50rpx;
+}
+
+.options .input_class {
+  padding-top: 30rpx !important;
+}
+
+.options .option .option_title {
+  width: 50rpx;
+  height: 50rpx;
+  border: 1px solid #c5c1c1;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 30rpx;
+}
+
+.options .option_multi .option_title {
+  border-radius: 15%;
+}
+
+.options .option .option_body {
+  display: inline;
+  font-weight: bold;
+}
+
+.footer {
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-top: 1px solid #fff4fa;
+}
+
+.footer .answer_btn {
+  text-align: center;
+}
+
+.footer .star .star_num {
+  color: black;
+}
+
+.footer .do_num .done,
+.footer .do_num .undone,
+.footer .all_ques,
+.footer .star {
+  display: flex;
+  justify-content: center;
+}
+
+.footer .do_num {
+  display: flex;
+  justify-content: space-around;
+}
+
+van-icon {
+  padding-right: 10rpx;
+}

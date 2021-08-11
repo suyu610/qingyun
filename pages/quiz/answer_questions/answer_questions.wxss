@@ -1,8 +1,0 @@
-.advertising-box{
-    position: fixed;
-    z-index: -1;
-    bottom: 100rpx; 
-    width: calc(100% - 42rpx);
-    margin: 0 20rpx;
-    border-radius: 10rpx;
-}
