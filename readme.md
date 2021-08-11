@@ -1,4 +1,4 @@
-  <img src="http://doc.qdu.life/server/index.php?s=/api/attachment/visitFile/sign/c702aef7cafcdec028c09b4ba423824c" alt="" align=center />
+  <img src="https://file.qdu.life/showdoc_16287048832095811891.png" alt="" align=center />
 
 ## 关于青云知识库
 一个微信小程序，用于学生之间资料共享。
