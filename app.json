@@ -4,8 +4,8 @@
     "cu-custom": "/colorui/components/cu-custom"
   },
   "pages": [
-    "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/empty/empty",
+    "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/quiz/quiz_comments/quiz_comments",
     "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",

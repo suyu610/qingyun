@@ -1,110 +1,152 @@
 <wxs module="tools" src="../../../utils/numbertofix.wxs"></wxs>
 
-<view class="bg container">
-  <view class="remain_time" wx:if="{{test.type=='test' }}">29:19</view>
-
-  <swiper bindchange="changeQuestion">
+<view class="container">
+  <view class="remain_time" wx:if="{{test.type=='test'}}">29:19</view>
+  <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper" bindtransition="bindtransition"
+    bindanimationfinish="bindanimationfinish">
     <block wx:for="{{ques_list}}" wx:key="index">
       <swiper-item>
-        <view class="title">
-          <view class="ques_type">{{item.type}}</view>
-          <view class="ques_title">{{item.title}}</view>
-          <view class="ques_img" wx:if="{{item.img !='' && item.img!=null}}">
-            <image mode="aspectFit" src="{{item.img}}"></image>
-          </view>
-          <view class="ques_voice" wx:if="{{item.audio !='' && item.audio!=null}}">
-            <van-slider custom-class="audio_slider" value="{{audio_progress}}" bind:drag-start="ondragAudioProgStart"
-              bind:drag-end="ondragAudioProgEnd" bind:change="onChangeAudioProgress" bar-height="4px"
-              active-color="#28b1fc" />
-
-            <view class="progress_seconds">
-              <view class="current_audio_progress">{{tools.s_to_hs(current_audio_progress)}}</view>
-              <view class="progress_control">
-                <van-icon wx:if="{{audio_paused}}" name="play-circle-o" size="28" bindtap="togglePlay" />
-                <van-icon wx:else name="pause-circle-o" size="28" bindtap="togglePlay" />
-                <van-icon name="stop-circle-o" size="28" bindtap="stopPlay" />
-              </view>
-              <view class="total_audio_progress">{{tools.s_to_hs(total_audio_progress)}}</view>
+        <view style="padding:20px;box-sizing:border-box">
+          <!-- 题目部分 -->
+          <view class="title">
+            <view class="ques_type">{{item.type}}</view>
+            <view class="ques_title"><text>{{item.title}}</text></view>
+            <view class="ques_img" wx:if="{{item.img[0] !='' && item.img[0]!=null}}" bindtap="previewImage"
+              data-src="{{item.img[0]}}">
+              <image mode="widthFix" src="{{item.img[0]}}"></image>
             </view>
-
-
+            <view class="ques_voice" wx:if="{{item.audio !='' && item.audio!=null}}">
+              <van-slider custom-class="audio_slider" value="{{audio_progress}}" bind:drag-start="ondragAudioProgStart"
+                bind:drag-end="ondragAudioProgEnd" bind:change="onChangeAudioProgress" bar-height="4px"
+                active-color="#28b1fc" />
+              <view class="progress_seconds">
+                <view class="current_audio_progress">{{tools.s_to_hs(current_audio_progress)}}</view>
+                <view class="progress_control">
+                  <van-icon wx:if="{{audio_paused}}" name="play-circle-o" size="28" bindtap="togglePlay" />
+                  <van-icon wx:else name="pause-circle-o" size="28" bindtap="togglePlay" />
+                  <van-icon name="stop-circle-o" size="28" bindtap="stopPlay" />
+                </view>
+                <view class="total_audio_progress">{{tools.s_to_hs(total_audio_progress)}}</view>
+              </view>
+            </view>
           </view>
 
+          <!-- 选项部分 -->
+          <view class="options {{istransition?'transition':''}}" wx:if="{{item.type=='单选题'}}">
+            <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
+              <van-transition name="fade-up" show="{{ !istransition }}" duration="{{ { enter: 100*index } }}">
+                <view class="option" bindtap="tapSingleOption" data-index="{{index}}">
+                  <view class="option_title bg-{{recorder[cur_ques_index].colors[index]}}">
+                    {{tools.number2Alpha(index)}}</view>
+                  <view class="option_body">{{option_item}}</view>
+                  <view class="answer_right"
+                    wx:if="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer==index}}">
+                  </view>
+                </view>
+              </van-transition>
+            </block>
+          </view>
+
+          <view class="options {{istransition?'transition':''}}" wx:if="{{item.type=='多选题'}}">
+            <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
+              <van-transition name="fade-up" show="{{ !istransition }}" duration="{{ { enter: 100*index } }}">
+                <view class="option option_multi" bindtap="tapMultiOption" data-index="{{index}}">
+                  <view class="option_title bg-{{recorder[cur_ques_index].colors[index]}}">{{tools.number2Alpha(index)}}
+                  </view>
+                  <view class="option_body">{{option_item}}</view>
+                  <view class="answer_right"
+                    wx:if="{{recorder[cur_ques_index].has_done && tools.contain(ques_list[cur_ques_index].answer,index)}}">
+                  </view>
+                </view>
+              </van-transition>
+            </block>
+          </view>
+
+          <view class="options" wx:if="{{item.type=='填空题'}}">
+            <van-cell-group>
+              <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
+                <van-field bind:change="textInputChange" data-index="{{index}}" clearable
+                  label="{{'第 '+tools.increment(index)+' 空'}}" placeholder="请在此作答" />
+              </block>
+            </van-cell-group>
+          </view>
+
+          <view class="options" wx:if="{{item.type=='简答题'}}">
+            <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
+              <van-field clearable left-icon="bulb-o" autosize center value="{{ value }}" placeholder="请在此作答"
+                border="{{ true }}" bind:change="onChange" />
+            </block>
+          </view>
+          <view class="confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
+            <view style="position: fixed;width:  90vw;text-align: center;bottom: 20vh;">
+              <van-button custom-style="margin-top:20px;border-radius:20rpx" slot="button" size="normal"
+                color="#28b1fc">
+                确认答案
+              </van-button>
+            </view>
+          </view>
         </view>
-        <view class="options" wx:if="{{item.type=='单选题'}}">
-          <view class="option">
-            <view class="option_title">A</view>
-            <view class="option_body">应收账款</view>
-          </view>
-          <view class="option">
-            <view class="option_title">B</view>
-            <view class="option_body">应收票据</view>
-          </view>
-          <view class="option">
-            <view class="option_title">C</view>
-            <view class="option_body">准备持有至到期的债权投资</view>
-          </view>
-          <view class="option">
-            <view class="option_title">D</view>
-            <view class="option_body">债务的豁免</view>
-          </view>
-        </view>
-
-        <view class="options" wx:if="{{item.type=='多选题'}}">
-          <view class="option option_multi">
-            <view class="option_title">A</view>
-            <view class="option_body">应收账款</view>
-          </view>
-          <view class="option option_multi">
-            <view class="option_title">B</view>
-            <view class="option_body">应收票据</view>
-          </view>
-          <view class="option option_multi">
-            <view class="option_title">C</view>
-            <view class="option_body">准备持有至到期的债权投资</view>
-          </view>
-          <view class="option option_multi">
-            <view class="option_title">D</view>
-            <view class="option_body">债务的豁免</view>
-          </view>
-          <view style="position: absolute;width: 100%;text-align: center;padding-top: 183rpx;">
-            <van-button custom-style="margin-top:20px" slot="button" size="normal" round color="#28b1fc">
-              确认答案
-            </van-button>
-          </view>
-        </view>
-        <view class="options" wx:if="{{item.type=='填空题'}}">
-          <van-cell-group>
-            <van-field value="{{ username }}" clearable label="第1空" placeholder="请在此作答" bind:click-icon="onClickIcon" />
-            <van-field value="{{ username }}" clearable label="第2空" placeholder="请在此作答" bind:click-icon="onClickIcon" />
-          </van-cell-group>
-
-
-          <view style="position: absolute;width: 100%;text-align: center;padding-top: 183rpx;">
-            <van-button custom-style="margin-top:20px" slot="button" size="normal" round color="#28b1fc">
-              确认答案
-            </van-button>
-          </view>
-
-        </view>
-        <view class="options" wx:if="{{item.type=='简答题'}}">
-          <van-field clearable left-icon="bulb-o" autosize center value="{{ value }}" placeholder="请在此作答"
-            border="{{ true }}" bind:change="onChange" use-button-slot>
-            <van-button slot="button" size="small" color="#28b1fc">
-              确认答案
-            </van-button>
-          </van-field>
-        </view>
-        <view class="confirm" wx:if="{{item.type!='单选'}}"></view>
       </swiper-item>
     </block>
   </swiper>
+
+
+  <van-transition name="slide-right" show="{{ques_list[cur_ques_index].type=='单选题' }}">
+    <view class="quick_opera">
+      <block wx:for="{{ques_list[cur_ques_index].options}}" wx:key="index" wx:for-item="option_item">
+        <view class="opera" bindtap="tapSingleOption" data-index="{{index}}">
+          {{tools.number2Alpha(index)}}
+        </view>
+      </block>
+    </view>
+  </van-transition>
+
+  <van-transition name="slide-right" show="{{ques_list[cur_ques_index].type=='多选题' }}">
+    <view class="quick_opera">
+      <block wx:for="{{ques_list[cur_ques_index].options}}" wx:key="index" wx:for-item="option_item">
+        <view class="opera" bindtap="tapMultiOption" data-index="{{index}}">
+          {{tools.number2Alpha(index)}}
+        </view>
+      </block>
+    </view>
+  </van-transition>
 </view>
 
-<view class="footer">
 
+
+
+<view class="footer">
   <van-row>
+    <van-col span="6">
+      <view class="do_num">
+        <view class="done">
+          <van-icon name="checked" color="#28b1fc" />
+          <view class="undone_num">{{tools.hasCompeteNum(recorder)}}</view>
+        </view>
+        <view class="undone">
+          <van-icon name="warning-o" />
+          <view class="undone_num">{{recorder.length-tools.hasCompeteNum(recorder)}}</view>
+        </view>
+      </view>
+    </van-col>
+
+
     <van-col span="4">
+      <view class="all_ques" bindtap="onShowQuestionList">
+        <van-icon name="apps-o" />
+        <view class="all_num">{{cur_ques_index+1}} / {{ques_list.length}}</view>
+      </view>
+    </van-col>
+
+    <van-col span="6">
+      <view class="star" bindtap="starQuestion">
+        <van-icon name="star-o" wx:if="{{!ques_list[cur_ques_index].has_star}}" />
+        <van-icon name="star" wx:else color="#28B1FC" />
+        <view class="star_num">{{ques_list[cur_ques_index].star_num}}</view>
+      </view>
+    </van-col>
+
+    <van-col span="6">
       <view class="answer_btn" wx:if="{{paper.type == 'test'}}">
         交卷
       </view>
@@ -112,42 +154,39 @@
       <view class="answer_btn" wx:else bindtap="showAnswer">
         解析 </view>
     </van-col>
-    <van-col span="8">
-      <view class="star">
-        <van-icon name="star-o" />
-        <view class="star_num">12</view>
-      </view>
-    </van-col>
-    <van-col span="6">
-      <view class="do_num">
-        <view class="done">
-          <van-icon name="checked" color="#28b1fc" />
-          <view class="undone_num">9</view>
-        </view>
-        <view class="undone">
-          <van-icon name="warning-o" />
-          <view class="undone_num">18</view>
-        </view>
-      </view>
 
-    </van-col>
-    <van-col span="6">
-      <view class="all_ques" bindtap="onShowQuestionList">
-        <van-icon name="apps-o" />
-        <view class="all_num">{{cur_ques_index+1}} / {{ques_list.length}}</view>
+    <van-col span="2">
+      <view style="line-height:105rpx">
+        <van-icon name="setting-o" />
       </view>
     </van-col>
+
   </van-row>
 
 </view>
 <!-- 题目列表 -->
 <van-popup show="{{ show_ques_list }}" bind:close="onCloseQuestionList" position="bottom" closeable round
   custom-style="height: 40%;">
-  <view class="ques_list">123</view>
+  <van-divider contentPosition="center">题目列表</van-divider>
+  <view class="ques_list">
+    <van-grid column-num="6" border="{{false}}">
+      <block wx:for="{{ques_list}}" wx:key="index">
+        <van-grid-item use-slot bindtap="jump2QuestionIndex" data-index="{{index}}">
+          <view class="ques_list_index_title {{recorder[index].has_done?'bg-blue':''}} ">
+            {{index+1}}</view>
+        </van-grid-item>
+      </block>
+    </van-grid>
+  </view>
 </van-popup>
 
 <!-- 解答 -->
-<van-popup show="{{ show_answer }}" bind:close="onCloseAnswer" closeable position="bottom" round
+<van-popup show="{{ show_answer_page }}" bind:close="onCloseAnswer" closeable position="bottom" round
   custom-style="height: 65%;">
-  <view class="answer"></view>
+  <view class="answer">
+    {{ques_list[cur_ques_index].answer}}
+  </view>
 </van-popup>
+
+<!-- 提醒操作 -->
+<van-notify id="van-notify" />

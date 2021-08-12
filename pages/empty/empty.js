@@ -14,7 +14,7 @@ Page({
     // 检测token是否有效
     setTimeout(() => {
       router.relaunch({
-        name: "quiz"
+        name: "homepage"
       })
     }, 800);
   },

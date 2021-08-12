@@ -24,8 +24,46 @@ var s_to_hs = function (s) {
   return h + ':' + s;
 }
 
+/*
+ * 数字加1
+ */
+
+var increment = function (index) {
+  return Number(index) + 1;
+}
+
+/*
+ *  数组中包含某元素，顺序不敏感
+ */
+var contain = function (arr, arg) {
+  return arr.indexOf(arg) > -1;
+}
+
+/*
+ *  将数字转为对应的字母
+ */
+var number2Alpha = function (num) {
+  alphaList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  return alphaList[num];
+}
+
+var hasCompeteNum = function (arr) {
+  var num = 0;
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].has_done) {
+      num++
+    }
+  }
+
+  return num;
+}
 
 module.exports = {
   bar: bar,
-  s_to_hs: s_to_hs
+  hasCompeteNum: hasCompeteNum,
+  number2Alpha: number2Alpha,
+  s_to_hs: s_to_hs,
+  contain: contain,
+  increment: increment
 };

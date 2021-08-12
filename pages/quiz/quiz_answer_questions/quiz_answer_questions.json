@@ -7,7 +7,14 @@
     "van-field": "@vant/weapp/field/index",
     "van-button": "@vant/weapp/button/index",
     "van-progress": "@vant/weapp/progress/index",
-    "van-slider": "@vant/weapp/slider/index"
+    "van-slider": "@vant/weapp/slider/index",
+    "van-notify": "@vant/weapp/notify/index",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index"
+  
+
   },
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black"

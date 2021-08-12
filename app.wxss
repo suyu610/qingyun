@@ -65,7 +65,7 @@ bg-transparent {
 }
 
 .bg-green {
-  background-color: #44d7b6!important;
+  background-color: #44D6B6!important;
   color: white !important;
 }
 
