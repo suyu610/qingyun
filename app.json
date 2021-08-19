@@ -4,10 +4,11 @@
     "cu-custom": "/colorui/components/cu-custom"
   },
   "pages": [
+    "pages/public/temp/temp",
+    "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/empty/empty",
     "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/quiz/quiz_comments/quiz_comments",
-    "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
     "pages/public/order_list/order_list",
     "pages/onboarding/onboarding",

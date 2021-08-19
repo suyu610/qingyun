@@ -15,11 +15,62 @@ Page({
     // swiper正在滑动
     istransition: false,
     // 用户的做题记录
-    recorder: [],
+    recorder: [{
+      id: 0,
+      time_cost: 0,
+      correct: false,
+      has_done: false,
+      colors: [],
+      user_mark: [],
+    }],
     // 试卷本体
     ques_list: [{
+        id: '5',
+        value: 6,
+        type: "填空题",
+        title: "请在下方输入皇甫素素；猪；头",
+        options: ["", "", ""],
+        answer: ["皇甫素素", "猪", "头"],
+        star_num: 10,
+        has_star: false,
+        explain: {
+          source: "",
+          body: "巴拉巴拉巴小魔仙",
+          user_name: "黄鹏宇",
+          user_id: "2019205913",
+          create_time: "2021年8月14日23:12:38",
+          view_count: 14,
+          is_star: false,
+        },
+        other_explain: [{
+          explain_id: 2,
+          body: "巴拉巴拉巴小魔仙",
+          user_name: "黄鹏宇",
+          user_id: "2019205913",
+          create_time: "2021年8月14日23:12:38",
+          view_count: 14,
+          is_star: false,
+        }, {
+          explain_id: 1,
+          body: "巴拉巴拉巴小魔仙",
+          user_name: "皇甫素素",
+          user_id: "2019205913",
+          create_time: "2021年8月14日23:12:38",
+          view_count: 14,
+          is_star: false,
+        }],
+        user_explain: {
+          explain_id: 1,
+          body: "巴拉巴拉巴小魔仙",
+          create_time: "2021年8月14日23:12:38",
+          view_count: 0,
+          is_public: false,
+        }
+      },
+      {
         id: 1,
         type: "单选题",
+        value: 2,
         title: "请编写函数fun，其功能是：\n计算并输出下列多项式的值。\n例如在主函数中从键盘为n输入50后，\n输出为S=1.718282。\n注意：要求n的值大于1但不大于100之间。",
         img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
         options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
@@ -30,6 +81,7 @@ Page({
       {
         id: '2',
         type: "单选题",
+        value: 2,
         title: "听下面一段对话，回答第1至4题。",
         audio: "https://api.uomg.com/api/rand.music?sort=%E7%83%AD%E6%AD%8C%E6%A6%9C",
         options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
@@ -40,6 +92,7 @@ Page({
       {
         id: '3',
         type: "简答题",
+        value: 8,
         title: "请编写函数fun，其功能是：计算并输出3 到n 之间所有素数的平方根之和。 例如，若主函数从键盘给n 输入100 后，则输出为sum=148.874270。 注意：n 的值要大于2 但不大于100。",
         img: "",
         options: ["", ""],
@@ -50,36 +103,37 @@ Page({
       {
         id: '4',
         type: "多选题",
+        value: 3,
         title: "企业取得收入的货币形式，包括现金、存款、（）等。",
         options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
         answer: [1, 2, 3],
         star_num: 3,
         has_star: false,
       },
-      {
-        id: '5',
-        type: "填空题",
-        title: "请在下方输入皇甫素素；猪；头",
-        options: ["", "", ""],
-        answer: ["皇甫素素", "猪", "头"],
-        star_num: 10,
-        has_star: false,
-      },
+
       {
         id: '6',
+        value: 2,
         type: "单选题",
         title: "企业取得收入的货币形式，包括现金、存款、（）等。",
         options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
         answer: [1],
+        answer_detail: '',
         star_num: 6,
         has_star: false,
       }
     ],
 
     paper: {
-      type: "order"
+      type: "order",
+      //评判标准，优，良，及格
+      scoreLine: {
+        'A': 90,
+        'B': 80,
+        'C': 60
+      }
     },
-
+    answer_page_index: 0,
     cur_ques_index: 0,
     audio_progress: 0,
     audio_paused: true,
@@ -87,6 +141,36 @@ Page({
     show_answer_page: false,
     show_ques_list: false,
     tmp_transition_index: 0,
+    answer_book: false,
+  },
+
+
+  starExplain() {
+    let ques_list = this.data.ques_list;
+    let cur_ques_index = this.data.cur_ques_index;
+    ques_list[cur_ques_index].explain.is_star = !ques_list[cur_ques_index].explain.is_star;
+
+    this.setData({
+      ques_list
+    })
+  },
+
+
+  starOthersExplain(e) {
+    let index = e.currentTarget.dataset.index
+    let ques_list = this.data.ques_list;
+    let cur_ques_index = this.data.cur_ques_index;
+    ques_list[cur_ques_index].other_explain[index].is_star = !ques_list[cur_ques_index].other_explain[index].is_star;
+
+    this.setData({
+      ques_list
+    })
+  },
+
+  answerPageChanged(e) {
+    this.setData({
+      answer_page_index: e.detail.name
+    })
   },
   starQuestion(e) {
     let index = this.data.cur_ques_index;
@@ -102,6 +186,7 @@ Page({
       ques_list
     })
   },
+
   bindtransition(e) {
     if (!flag_transition) {
       flag_transition = true
@@ -115,7 +200,7 @@ Page({
     }
   },
 
-  // 跳转问题
+  // 问题跳转
   jump2QuestionIndex(e) {
     this.setData({
       cur_ques_index: e.currentTarget.dataset.index,
@@ -133,6 +218,7 @@ Page({
   },
 
   bindChangeSwiper(e) {
+    console.log("bindChangeSwiper");
     this.setData({
       tmp_transition_index: e.detail.current,
       audio_progress: 0,
@@ -143,13 +229,20 @@ Page({
   },
 
   bindanimationfinish() {
-    console.log("停止切换")
     this.setData({
-      istransition: false,
-      cur_ques_index: this.data.tmp_transition_index
+      istransition: false
     })
+    
     flag_transition = false;
-    this.changeQuestion();
+
+    // 如果实际发生了页面切换，才进行下面逻辑
+    if (this.data.cur_ques_index != this.data.tmp_transition_index) {
+      console.log("停止切换")
+      this.setData({
+        cur_ques_index: this.data.tmp_transition_index,
+      })
+      this.changeQuestion();
+    }
   },
 
   showNotify(right) {
@@ -157,7 +250,7 @@ Page({
       Notify({
         message: '正确',
         color: '#fff',
-        background: '#28b1fc',
+        background: '#6FCF97',
         duration: 700,
       });
     } else {
@@ -188,11 +281,14 @@ Page({
     // 比较答案的正确性
     if (this.isArrEqual(ques_list[cur_ques_index].answer, recorder[cur_ques_index].user_mark)) {
       this.showNotify(true)
+      recorder[cur_ques_index].correct = true;
     } else {
       this.showNotify(false)
+      recorder[cur_ques_index].correct = false;
+
     }
 
-    recorder[this.data.cur_ques_index].has_done = true;
+    recorder[cur_ques_index].has_done = true;
     this.setData({
       recorder
     })
@@ -252,23 +348,21 @@ Page({
   tapSingleOption: function (e) {
     let that = this
     let recorder = this.data.recorder;
-    let clickOptionIndex = e.currentTarget.dataset.index
+    let cur_ques_index = this.data.cur_ques_index;
+    let clickOptionIndex = e.currentTarget.dataset.index;
     if (this.data.paper.type != 'test') {
-      if (recorder[this.data.cur_ques_index].has_done) {
+      if (recorder[cur_ques_index].has_done) {
         return;
       }
-      recorder[this.data.cur_ques_index].has_done = true;
-      recorder[this.data.cur_ques_index].colors[clickOptionIndex] = 'blue'
-      let rightAnswer = this.data.ques_list[this.data.cur_ques_index].answer.toString()
+      recorder[cur_ques_index].has_done = true;
+      recorder[cur_ques_index].colors[clickOptionIndex] = 'blue'
+      let rightAnswer = this.data.ques_list[cur_ques_index].answer.toString()
       if (clickOptionIndex == rightAnswer) {
         this.showNotify(true)
+        recorder[cur_ques_index].correct = true;
       } else {
         this.showNotify(false)
-        // setTimeout(function () {
-        //   that.setData({
-        //     show_answer_page: true
-        //   })
-        // }, 500);
+        recorder[cur_ques_index].correct = false;
       }
 
 
@@ -421,7 +515,8 @@ Page({
 
   onCloseAnswer: function () {
     this.setData({
-      show_answer_page: false
+      show_answer_page: false,
+      answer_page_index: 0,
     })
   },
   /**
@@ -445,6 +540,7 @@ Page({
       let tmp = {
         id: element.id,
         has_done: false,
+        correct: false,
         colors: colors,
         user_mark: user_mark,
         time_cost: 0,
@@ -455,49 +551,6 @@ Page({
     this.setData({
       recorder
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-    innerAudioContext.destroy()
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**

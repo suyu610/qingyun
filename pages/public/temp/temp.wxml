@@ -1,0 +1,13 @@
+<!--pages/public/temp/temp.wxml-->
+<view>
+  <view bindtap="focusInput">{{cValue}}</view>
+  <view>{{answer.mean_cn}}</view>
+  <view>{{answer.mean_en}}</view>
+  <view>{{answer.sentence}}</view>
+  <image src="http://ali.bczcdn.com/r/{{answer.image_file}}"></image>
+  <custom-keyboard bind:inputValugeChanged="inputValugeChanged" bind:star="kbd_star" bind:showAnswer="kbd_showAnswer"
+    bind:voice="kbd_voice" hideKeyboard="hideKeyBoard" showKeyboard="{{showKeyboard}}"></custom-keyboard>
+  <button bindlongpress="startRecorder" bindtouchend="stopRecorder">{{isSpeaking?'停止':'录音'}}</button>
+  <button bindtap="play_recorder">播放</button>
+</view>
+<van-toast id="van-toast" />

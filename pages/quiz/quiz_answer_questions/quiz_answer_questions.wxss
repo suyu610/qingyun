@@ -2,18 +2,22 @@
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
-  background: transparent url(https://cdns.qdu.life/img/chat_bg_8.png) no-repeat fixed center;
+  background: transparent url(https://cdns.qdu.life/img/chat_bg_9.png) no-repeat fixed center;
   background-size: 100vw 100vh;
+}
+
+.test {
+  box-sizing: border-box !important;
+  height: 100%;
 }
 
 swiper {
   height: 100%;
 }
 
-
-.title {
+/* .title {
   width: 100%;
-}
+} */
 
 .title .ques_title,
 .title .ques_type {
@@ -46,14 +50,14 @@ swiper {
 }
 
 .title .ques_voice {
-  padding-top: 20rpx;
+  padding-top: 40rpx;
 
 }
 
 .title .progress_seconds {
   display: flex;
   justify-content: space-between;
-  padding-top: 20rpx;
+  padding-top: 30rpx;
   font-weight: bold;
 }
 
@@ -88,12 +92,17 @@ swiper {
 }
 
 .ques_list_index_title {
-  border: 1px solid #000;
-  font-weight: bold;
+  border: 1px solid #b79696;
+  color: #b79696;
+}
+
+.bg-red {
+  background-color: red !important;
+  color: white;
+  border: 1px solid red;
 }
 
 .bg-blue,
-.bg-red,
 .bg-yellow {
   text-align: center;
   border-radius: 50%;
@@ -144,8 +153,8 @@ swiper {
 }
 
 .footer .answer_btn {
-  text-align: center;
-  text-decoration: underline;
+  text-align: left;
+  /* text-decoration: underline; */
 }
 
 .footer .star .star_num {
@@ -155,12 +164,9 @@ swiper {
 .footer .do_num .done,
 .footer .do_num .undone,
 .footer .all_ques,
-.footer .star{
+.footer .star {
   display: flex;
   justify-content: center;
-}
-.footer .setting{
-  
 }
 
 .footer .do_num {
@@ -185,10 +191,110 @@ van-icon {
   width: 100%;
   text-align: center;
   margin-top: 33rpx;
-  color:lightgrey;
+  color: lightgrey;
   border-radius: 10rpx;
   border: 1px solid lightgrey;
   height: 64rpx;
   line-height: 64rpx;
   display: block;
+}
+
+
+
+.tab-active {
+  font-weight: bold !important;
+}
+
+.answer_page {
+  padding: 30rpx;
+  padding-top: 20rpx;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  height: 50vh;
+}
+
+.answer_page .answer,
+.answer_page .others,
+.answer_page .mine {
+  height: 40vh;
+}
+
+z .answer_page .answer .answer_detail {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 20rpx;
+}
+
+.answer_page .answer .answer_detail .body {
+  padding-top: 30rpx;
+  /* color: #28B1FC; */
+  font-weight: bold;
+  text-align: center;
+  font-size: 34rpx;
+}
+
+.answer_page .answer .description .author {
+  text-align: right;
+}
+
+.answer_page .others:first-child {
+  padding-top: 30rpx;
+}
+
+.answer_page .others .comment .body view {
+  display: inline;
+}
+
+.answer_page .mine .info,
+.answer_page .answer .info,
+.answer_page .others .comment .info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15rpx;
+  color: lightgrey;
+}
+
+.answer_page .mine van-icon,
+.answer_page .answer van-icon,
+.answer_page .others van-icon {
+  top: 1px;
+  position: relative;
+}
+
+.answer_page .eye {
+  padding-left: 20rpx;
+}
+
+.answer_page .mine .eye {
+  padding-right: 20rpx;
+}
+
+.answer_page .book-blue {
+  color: #28B1FC;
+  font-weight: bold;
+}
+
+.answer_page .book-grey {
+  color: lightgrey;
+}
+
+.answer_page .others .comment .body .author {
+  /* color: #28B1FC; */
+  font-weight: bold;
+  padding-right: 20rpx;
+}
+
+.answer_page .btns {
+  width: 92%;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 20px;
+}
+
+.answer_page .answer_btn {
+  color: #fff;
+  background-color: #28B1FC;
+  border-radius: 20rpx;
+  font-weight: bold;
+  text-align: center;
 }

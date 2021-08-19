@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "custom-keyboard": "/components/keyboard/keyboard",
+    "van-toast": "@vant/weapp/toast/index"
+
+  }
+}
