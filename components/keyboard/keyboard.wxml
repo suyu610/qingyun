@@ -1,5 +1,5 @@
 <block>
-  <view class="keybord {{showKeyboard?'':'keybord-hidden'}}" style="background-color:{{isSpeaking?'white':''}}">
+  <view class="keybord {{showKeyboard?'':'keybord-hidden'}}" style="background-color:{{isSpeaking?'#e6e4e47d':''}}">
     <view wx:if="{{!isSpeaking}}" class="fle" style=" height: 40px; justify-content: space-between;">
       <view class='key_contrl mar_4'>
         <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-yellow-hover"
@@ -77,24 +77,22 @@
     </view>
 
     <view wx:if="{{isSpeaking}}" class="fle"
-      style="line-height:{{keyboardHeight}}px!important;height:{{keyboardHeight}}px!important;padding:40rpx">
-      <van-transition show="{{ isSpeaking }}"
-        custom-style="padding-top:10%;line-height:100%;height:200rpx;width:100vw;display:block;text-align:center">
-        <image wx:if="{{isSpeaking && !isSpeakEditing}}" mode="heightFix"
-          src="icons/recorder_{{recorder_img_index}}.png"
-          style="box-sizing: content-box;height:100rpx;opacity:0.8;border:2px solid #cec2c2;padding:30rpx;border-radius:50%">
-        </image>
+      style="display:block;height:{{keyboardHeight}}px!important;padding:40rpx;padding-top:72rpx;text-align:center">
+      <image wx:if="{{isSpeaking && !isSpeakEditing}}" mode="heightFix" src="icons/recorder_{{recorder_img_index}}.png"
+        style="box-sizing:content-box;height:100rpx;width:100rpx;opacity:0.8;border:2px solid #cec2c2;padding:30rpx;border-radius:50%;">
+      </image>
 
-        <image wx:if="{{isSpeakEditing}}" bindtap="playAudio" mode="heightFix"
-          src="{{!isPlaying?' icons/play.png':' icons/pause.png'}}"
-          style="box-sizing: content-box;height:100rpx;padding:30rpx;border-radius:50%">
-        </image>
-      </van-transition>
+      <image wx:if="{{isSpeakEditing}}" bindtap="playAudio" mode="heightFix"
+        src="{{!isPlaying?' icons/play.png':' icons/pause.png'}}"
+        style="box-sizing:content-box;height:100rpx;width:100rpx;padding:30rpx;border-radius:50%;">
+      </image>
+
+      <view style="font-size:34rpx;font-weight:bold;padding-top:10rpx">1：24</view>
     </view>
 
     <view class="fle" style="height: 40px; margin-bottom:10rpx; justify-content: space-between; ">
       <view class='key_contrl mar_4' style="width: 25%;">
-        <view class='box' hover-start-time="10" hover-stay-time="50" hover-class="box-hover"
+        <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-hover"
           catchtap="leftdownButtonTap" style="{{isSpeakEditing?'background-color:#ffe9a7':''}}">
           <span>
             <van-icon name="{{isSpeakEditing?'cross':'back-top'}}" />
@@ -113,10 +111,12 @@
       <view class='key_contrl mar_4' style="width: 25%;">
         <view class='box' hover-start-time="10" hover-stay-time="50" hover-class="box-hover" catchtap="rightDownKeyTap"
           catchlongpress="startRecorder" bindtouchend="stopRecorder"
-          style="{{isSpeakEditing?'background-color:#27B1FF!important;color:white':''}}">
+          style="background-color:#27B1FF!important;color:white">
+
+          <!-- style="{{isSpeakEditing?'background-color:#27B1FF!important;color:white':'#27B1FF'}}"> -->
           <span>
             <van-icon
-              name="{{!isSpeakEditing?'https://cdns.qdu.life/icons/mic.png':'https://cdns.qdu.life/icons/mic_white.png'}}"
+              name="{{!isSpeakEditing?'https://cdns.qdu.life/icons/mic_white.png':'https://cdns.qdu.life/icons/mic_white.png'}}"
               size="18" />
           </span>
         </view>
