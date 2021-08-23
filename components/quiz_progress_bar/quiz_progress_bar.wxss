@@ -33,9 +33,10 @@
   line-height: 8vh;
   font-size: 34rpx;
   font-weight: bold;
-  width: 32%;
-  text-align: right;
-  padding-right: 10px;
+  width: 24%;
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 10rpx;
 }
 
 .status view {

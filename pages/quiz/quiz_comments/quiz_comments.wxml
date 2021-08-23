@@ -1,11 +1,60 @@
 <!-- 评分 -->
-
-
+<view class="cu-bar bg-white" style="padding-top:30rpx">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text class="text-lg text-bold">评分</text>
+  </view>
+  <view class="action">
+    <button style="color: white;" disabled="{{isRating}}" class="cu-btn bg-blue  text-sm" bindtap="toggleRating"
+      data-target="gridModal">{{showRating?'提交评分':isRating?'已评分':'点击评分'}}</button>
+  </view>
+</view>
+<view wx:if="{{showRating}}" class="rate" style="padding:30rpx">
+  <van-row>
+    <van-col span="10">题目完整度</van-col>
+    <van-col span="14">
+      <van-rate value="{{ value }}" bind:change="onChange" />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="10">解答准确度</van-col>
+    <van-col span="14">
+      <van-rate value="{{ value }}" bind:change="onChange" />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="10">通俗易懂</van-col>
+    <van-col span="14">
+      <van-rate value="{{ value }}" bind:change="onChange" />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="10">解答完整度</van-col>
+    <van-col span="14">
+      <van-rate value="{{ value }}" bind:change="onChange" />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="10">分类合理</van-col>
+    <van-col span="14">
+      <van-rate value="{{ value }}" bind:change="onChange" />
+    </van-col>
+  </van-row>
+</view>
+<view wx:else class="info_pic">
+  <canvas canvas-id="radarCanvas" disable-scroll="true" class="canvas"></canvas>
+</view>
 <!-- 评论 -->
 <view class="comment">
-  <view class="title">评论 ({{commentItemList.length}}) </view>
-  <view class="all"></view>
-  <view class="all">写评论</view>
+  <view class="cu-bar bg-white">
+    <view class="action">
+      <text class="cuIcon-titles text-blue"></text>
+      <text class="text-lg text-bold">所有评论 ({{commentItemList.length}}) </text>
+    </view>
+
+    <text class="cuIcon-add text-grey text-sm text-bold" style="padding-right:30rpx">评论</text>
+  </view>
+
   <view wx:if="{{commentItemList.length != 0}}" class="cu-list menu-avatar comment">
     <block wx:for="{{commentItemList}}" wx:key="index" wx:for-item="item">
       <view class="cu-item">

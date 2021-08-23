@@ -5,6 +5,7 @@ page {
 }
 
 .container {
+  box-sizing: border-box;
   padding: 30rpx;
   background-color: #F5F5F5;
   padding-top: 10rpx;
@@ -14,12 +15,17 @@ image {
   box-sizing: content-box !important;
 }
 
-.center,
+
+
 .introduce {
+  transition: .5s;
+  /* height: 250rpx; */
+  width: 690rpx;
+  /* position: absolute; */
   padding: 30rpx;
-  padding-bottom: 0;
-  border-radius: 20rpx;
-  /* border: 2px solid #F4F9FD; */
+  margin-top: 30rpx;
+  /* bottom: 30rpx; */
+  border-radius: 30rpx;
   background-color: #fff;
 }
 
@@ -27,27 +33,50 @@ image {
   padding: 0;
 }
 
-
 .center .function .cu-item {
   border-radius: 20rpx;
 }
 
-.info_pic,
-.center {
+.info_pic {
   margin-top: 40rpx;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
 }
 
-.introduce .title {
+.center {
+  background: #27B0FF;
+  color: white;
+  margin-left: -30rpx;
+  width: 100vw;
+  margin-top: 0rpx;
+  position: absolute;
+  top: 0;
+  height: 332rpx;
+}
+
+
+
+.tab-active {
+  font-weight: bold !important;
+  /* color: black !important; */
+}
+
+.basic-introduce{
   padding-bottom: 20rpx;
 }
 
+.default_normal-date {
+  color: grey !important;
+}
+
+.todo-dot-bottom {
+  font-weight: bold !important;
+}
+
+
 .title {
-  color: #909090!important;
+  color: #909090 !important;
   text-align: left;
   font-size: 24rpx;
-
-  /* font-weight: bold; */
 }
 
 .add-btn {
@@ -79,7 +108,8 @@ image {
 }
 
 .author_name {
-  text-align: center;
+  text-align: left;
+  /* font-weight: bold; */
 }
 
 .arrow {
@@ -103,14 +133,15 @@ image {
 }
 
 .info_pic {
-  padding-top: 30rpx;
+  padding-top: 15rpx;
   padding-bottom: 0rpx;
+  line-height: 724rpx;
+  height: 724rpx;
 }
-
 
 .canvas {
   width: 98%;
-  height: 30vh;
+  height: 724rpx;
   text-align: center;
   margin-left: 2vw;
 }
@@ -120,5 +151,5 @@ image {
 }
 
 .text-bold {
-  color: #2B2B2B ;
+  color: #2B2B2B;
 }

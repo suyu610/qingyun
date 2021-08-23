@@ -132,8 +132,8 @@
   <view class="info_pic">
     <canvas canvas-id="radarCanvas" disable-scroll="true" class="canvas"></canvas>
   </view>
-
 </view>
+
 <view class="add_btn">
   <button class="block text-bold add-btn bg-blue">
     <text class="cuIcon-add text-white"></text> <text class="text-sm text-white"> 添加至我的题库</text> </button>

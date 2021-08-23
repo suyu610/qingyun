@@ -69,7 +69,7 @@ Component({
 
     attached: function () {
       // 获取本地配置
-      var kbdConf_capital = this.get('kbdConf_capital', true)
+      var kbdConf_capital = this.get('kbdConf_capital', false)
       var kbdConf_vibrate = this.get('kbdConf_vibrate', true)
       console.log(kbdConf_capital)
       this.setData({

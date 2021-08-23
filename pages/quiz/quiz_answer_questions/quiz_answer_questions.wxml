@@ -80,6 +80,12 @@
                 border="{{ true }}" bind:change="onChange" />
             </block>
           </view>
+
+          <view class="options" wx:if="{{item.type=='单词默写题'}}">
+            <van-field clearable left-icon="bulb-o" autosize center disabled value="{{ value }}" placeholder="请在此作答"
+              border="{{ true }}" bind:click-input="showKeyBoard"/>
+          </view>
+
           <view class="confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
             <view style="position: fixed;width:  90vw;text-align: center;bottom: 20vh;">
               <van-button disabled="{{recorder[cur_ques_index].has_done}}"
@@ -112,6 +118,9 @@
       </block>
     </view>
   </van-transition>
+
+
+
 </view>
 
 
@@ -332,3 +341,6 @@
 
 <!-- 提醒操作 -->
 <van-notify id="van-notify" />
+
+<custom-keyboard bind:inputValugeChanged="textInputChange" bind:star="kbd_star" bind:showAnswer="kbd_showAnswer"
+    bind:voice="kbd_voice" hideKeyboard="hideKeyBoard" showKeyboard="{{keyboardShow}}"></custom-keyboard>

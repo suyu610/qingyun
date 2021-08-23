@@ -12,6 +12,14 @@
     "van-grid-item": "@vant/weapp/grid-item/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-progress": "@vant/weapp/progress/index",
-    "quiz_progress_bar": "/components/quiz_progress_bar/quiz_progress_bar"
+    "quiz_progress_bar": "/components/quiz_progress_bar/quiz_progress_bar",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-divider": "@vant/weapp/divider/index"  
+
+
   }
 }

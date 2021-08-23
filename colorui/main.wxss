@@ -7,11 +7,11 @@ page {
 	/* 标准色 */
 	--red: #e54d42;
 	--orange: #f37b1d;
-	--yellow: #fbbd08;
+	--yellow: #ffe9a7;
 	--olive: #8dc63f;
 	--green: #39b54a;
 	--cyan: #1cbbb4;
-	--blue: #0081ff;
+	--blue: #27B1FF;
 	--purple: #6739b6;
 	--mauve: #9c26b0;
 	--pink: #e03997;

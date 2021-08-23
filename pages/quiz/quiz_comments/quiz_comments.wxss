@@ -1,1 +1,17 @@
 /* pages/quiz/quiz_comments/quiz_comments.wxss */
+
+.rate,
+.info_pic {
+  width: 90vw;
+  text-align: left;
+  margin: 0 auto;
+  height: 400rpx;
+  font-weight: bold;
+
+}
+
+.canvas {
+  margin: 0 auto;
+  height: 400rpx;
+  width: 100%;
+}

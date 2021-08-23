@@ -1,0 +1,68 @@
+<wxs module="color" src="../../../utils/color.wxs" />
+
+<view class="" style="box-sizing:border-box">
+  <view class="top">
+    <view class="cu-bar search bg-white">
+
+      <view class="bg cu-avatar round xs text-black"
+        style="font-size:24rpx;background-color:{{color.score2color(quiz.score)}}!important">
+        {{quiz.score}}
+      </view>
+
+      <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="搜索题目、知识点、章节" confirm-type="search"></input>
+      </view>
+      <view class="action">
+        <text class="cuIcon-info lg text-gray"></text>
+      </view>
+    </view>
+  </view>
+  <view class="quiz_list">
+    <van-collapse border="{{false}}" accordion value="{{ chapterActiveNames }}" bind:change="onChangeChapter">
+      <block wx:for="{{quiz.chapter}}" wx:for-item="chapter" wx:key="index">
+        <van-collapse-item value="{{chapter.done_num}}/{{chapter.total_num}}"
+          label="{{chapter.description}}" name="{{chapter.id}}">
+          <view slot="title" class="title" style="font-weight:bold">
+            {{chapter.title}}
+          </view>
+          <block wx:for="{{chapter.idea}}" wx:for-item="idea" wx:key="index">
+            <van-cell icon="bulb-o" border="{{false}}" custom-class="quiz_cell" title="{{idea.title}}" right-icon="edit"
+              use-label-slot>
+              <view slot="label" class="cell_label">
+                <view>做对:{{idea.right_num}}</view>
+                <view>做错:{{idea.err_num}}</view>
+                <view>未答:{{idea.undo_num}}</view>
+              </view>
+              <van-icon slot="right-icon" name="edit" class="custom-icon" color="blue" />
+            </van-cell>
+          </block>
+
+        </van-collapse-item>
+      </block>
+
+    </van-collapse>
+  </view>
+  <view class="bottom">
+    <view class="cu-bar bg-white tabbar border shop">
+      <view class="action">
+        <view class="cuIcon-upstage">
+          <view class="cu-tag badge bg-yellow">{{quiz.idea_num}}</view>
+        </view>
+        知识点
+      </view>
+      <view class="action">
+        <view class="cuIcon-ticket">
+          <view class="cu-tag badge  bg-yellow">{{quiz.total_num}}</view>
+        </view>
+        题目
+      </view>
+      <view class="action">
+        <view class=" cuIcon-comment"></view> 评论
+      </view>
+      <view class="btn-group">
+        <button class="cu-btn bg-blue round ">加入题库</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -10,7 +10,7 @@ const router = require('utils/router/index.js');
       onShareAppMessage: function () {
         return {
           title: '青云知识库',
-          imageUrl: "https://cdns.qdu.life/qingyun/images/share_1.png",
+          imageUrl: "https://cdns.qdu.life/qingyun/images/share_3.png",
           path: '/pages/empty/empty',
         };
       }

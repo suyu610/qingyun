@@ -1,0 +1,9 @@
+var score2color = function (score) {
+  var colorList = ['#F9EFEF', '#F3E8D0', '#FAE4B3bb', '#FDDC94bb', '#FFE9A7']
+
+  return colorList[parseInt(score)]
+}
+
+module.exports = {
+  score2color:score2color
+};

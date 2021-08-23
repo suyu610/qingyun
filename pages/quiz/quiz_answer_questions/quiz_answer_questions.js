@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    keyboardShow: false,
     // swiper正在滑动
     istransition: false,
     // 用户的做题记录
@@ -25,6 +26,28 @@ Page({
     }],
     // 试卷本体
     ques_list: [{
+        id: 0,
+        type: "单词默写题",
+        value: 2,
+        title: "abandon",
+        options: [''],
+        img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
+        answer: ['abandon'],
+        star_num: 10,
+        has_star: false,
+      },
+      {
+        id: 0,
+        type: "单词选择题",
+        value: 2,
+        title: "abandon",
+        options: [''],
+        img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
+        answer: [1],
+        star_num: 10,
+        has_star: false,
+      },
+      {
         id: '5',
         value: 6,
         type: "填空题",
@@ -78,6 +101,7 @@ Page({
         star_num: 10,
         has_star: false,
       },
+
       {
         id: '2',
         type: "单选题",
@@ -142,6 +166,20 @@ Page({
     show_ques_list: false,
     tmp_transition_index: 0,
     answer_book: false,
+  },
+
+
+  // 键盘相关
+  showKeyBoard: function () {
+    this.setData({
+      keyboardShow: true
+    })
+  },
+
+  inputValugeChanged: function (e) {
+    this.setData({
+      value: e.detail.join("")
+    })
   },
 
 
@@ -232,7 +270,7 @@ Page({
     this.setData({
       istransition: false
     })
-    
+
     flag_transition = false;
 
     // 如果实际发生了页面切换，才进行下面逻辑
@@ -262,14 +300,13 @@ Page({
     }
   },
 
-  // 判断顺序不敏感的两个数组是否相等
+  // 判断顺序不敏感的两个数组是否相等?
   isArrEqual: function (arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((ele) => arr2.includes(ele));
   },
 
   // 点击确认答案
   tapConfirmAnswer: function () {
-
     let ques_list = this.data.ques_list;
     let cur_ques_index = this.data.cur_ques_index;
     let recorder = this.data.recorder;
@@ -277,6 +314,8 @@ Page({
     if (recorder[this.data.cur_ques_index].has_done) {
       return;
     }
+    console.log(ques_list[cur_ques_index].answer)
+    console.log(recorder[cur_ques_index].user_mark)
 
     // 比较答案的正确性
     if (this.isArrEqual(ques_list[cur_ques_index].answer, recorder[cur_ques_index].user_mark)) {
@@ -285,7 +324,6 @@ Page({
     } else {
       this.showNotify(false)
       recorder[cur_ques_index].correct = false;
-
     }
 
     recorder[cur_ques_index].has_done = true;
@@ -300,11 +338,16 @@ Page({
     let text = e.detail
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
-    recorder[cur_ques_index].user_mark[index] = text
+    if (index == null) {
+      index = 0
+      this.setData({
+        value: text.join('')
+      })
+    }
+    recorder[cur_ques_index].user_mark[index] = text.join('')
     this.setData({
       recorder
     })
-
   },
 
   // 点击多选题 
@@ -533,6 +576,8 @@ Page({
           user_mark.push('')
         })
       }
+
+
       element.options.forEach(e => {
         colors.push('white')
       })

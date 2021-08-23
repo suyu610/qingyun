@@ -5,94 +5,79 @@ import {
 const app = getApp()
 Page({
   data: {
-    iconList: [{
+    showSelectDefaulQuizPopup: false,
+    default_quiz: {},
+    icon_list: [{
       icon: 'order',
       color: 'white',
-      badge: 120,
-      name: '顺序答题'
+      badge: 0,
+      name: '做题模式',
+      router: 'quiz_answer_questions'
     }, {
       icon: 'text',
       color: 'white',
       badge: 0,
-      name: '模拟测试'
+      name: '考试模式'
     }, {
       icon: 'warn',
       color: 'white',
-      badge: 12,
-      name: '错题本'
+      badge: 0,
+      name: '错题本',
+      router: 'quiz_list_err'
     }, {
       icon: 'favor',
       color: 'white',
-      badge: 22,
-      name: '收藏本'
+      badge: 0,
+      name: '收藏本',
+      router: 'quiz_list_star'
     }],
     gridCol: 4,
     skin: false,
     TabCur: 0,
     MainCur: 0,
     VerticalNavTop: 0,
-    list: [],
+    all_quiz_list: [],
     load: true,
-
-    /////////// 热门   //////////////////
-    triggered: false,
-
-    /////////// 卡片 ///////////////////
-
-    cardCur: 0,
-    swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-    }, {
-      id: 1,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
-    }, {
-      id: 2,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-    }, {
-      id: 3,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-    }, {
-      id: 4,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-    }, {
-      id: 5,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-    }, {
-      id: 6,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }],
-
-
+    self_quiz_list: [],
   },
-  cardSwiper(e) {
+
+
+  onClickDefaultQuiz(event) {
+    let
+      default_id = event.currentTarget.dataset.name;
+    let default_quiz;
+    this.data.self_quiz_list.forEach(e => {
+      if (e.id == default_id) {
+        default_quiz = e;
+        return
+      }
+    })
+
+    wx.showToast({
+      title: '修改成功',
+      duration: 800,
+    })
     this.setData({
-      cardCur: e.detail.current
+      default_quiz,
+      showSelectDefaulQuizPopup: false,
+    });
+  },
+
+
+  onToggleSelectDefaulQuizPopup: function () {
+    this.setData({
+      showSelectDefaulQuizPopup: !this.data.showSelectDefaulQuizPopup
     })
   },
-  jump2Answer(e) {
+
+  jumpRoute(e) {
+    let router = e.currentTarget.dataset.router
     push({
-      name: 'quiz_answer_questions',
-      data: {
-        id: '123',
-        type: 1,
-      },
+      name: router
     })
+
   },
-  jumpRoute(e){
-    switch(e.currentTarget.dataset.index){
-      case 0:
-        this.jump2Answer();
-        break;
-    }
-  },
+
   tabSelect(e) {
     this.setData({
       TabCur: e.currentTarget.dataset.id,
@@ -100,32 +85,34 @@ Page({
       VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })
   },
+
+  // 滚动
   VerticalMain(e) {
     let that = this;
-    let list = this.data.list;
+    let all_quiz_list = this.data.all_quiz_list;
     let tabHeight = 0;
     if (this.data.load) {
-      for (let i = 0; i < list.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + list[i].id);
+      for (let i = 0; i < all_quiz_list.length; i++) {
+        let view = wx.createSelectorQuery().select("#main-" + all_quiz_list[i].id);
         view.fields({
           size: true
         }, data => {
-          list[i].top = tabHeight;
+          all_quiz_list[i].top = tabHeight;
           tabHeight = tabHeight + data.height;
-          list[i].bottom = tabHeight;
+          all_quiz_list[i].bottom = tabHeight;
         }).exec();
       }
       that.setData({
         load: false,
-        list: list
+        all_quiz_list: all_quiz_list
       })
     }
     let scrollTop = e.detail.scrollTop + 20;
-    for (let i = 0; i < list.length; i++) {
-      if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
+    for (let i = 0; i < all_quiz_list.length; i++) {
+      if (scrollTop > all_quiz_list[i].top && scrollTop < all_quiz_list[i].bottom) {
         that.setData({
-          VerticalNavTop: (list[i].id - 1) * 50,
-          TabCur: list[i].id
+          VerticalNavTop: (all_quiz_list[i].id - 1) * 50,
+          TabCur: all_quiz_list[i].id
         })
         return false
       }
@@ -186,36 +173,157 @@ Page({
   },
 
   onLoad: function (options) {
+
+    let icon_list = this.data.icon_list;
+    let default_quiz;
+
     wx.setNavigationBarTitle({
       title: '',
     })
-
 
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
-    let list = [{}];
-    for (let i = 0; i < 7; i++) {
-      list[i] = {};
-      list[i].name = String.fromCharCode(65 + i);
-      list[i].id = i;
-    }
 
-    list[0].name = "热门"
+    // 传来的
+    let all_quiz_list = [{
+      name: '热门',
+      id: 0,
+      quizzes: [{
+        id: 1,
+        title: '信号与系统',
+        type: '证',
+        description: '选择题，填空题，改错题',
+        tags: ['青云官方'],
+        score: 4.8,
+        author: '青云',
+        add_num: 13
+      }, {
+        id: 2,
+        title: '教师资格证',
+        type: '证',
+        description: '选择题，填空题，改错题',
+        tags: ['是猪'],
+        score: 3.0,
+        author: '皇甫素素',
+        add_num: 13
+      }, {
+        id: 3,
+        title: 'CET6乱序版',
+        type: '证',
+        description: '选择题，填空题，改错题',
+        tags: ['New'],
+        score: 1.3,
+        author: '刘鹏',
+        add_num: 13
+      }]
+    }, {
+      name: '考证',
+      id: 1,
+      quizzes: [{
+        id: 4,
+        title: '计算机二级C语言',
+        type: '证',
+        description: '选择题，填空题，改错题',
+        tags: ['New'],
+        score: 2.5,
+        author: '黄璞',
+        add_num: 27
+      }, ]
+    }, {
+      name: '考研',
+      id: 2
+    }, {
+      name: '公共课',
+      id: 3
+    }, {
+      name: '理科',
+      id: 4
+    }, {
+      name: '工科',
+      id: 5,
+      quizzes: [{
+        id: 0,
+        title: '固体物理',
+        type: '证',
+        description: '选择题，填空题，改错题',
+        tags: ['青云官方'],
+        score: 0.1,
+        author: '黄鹏宇',
+        add_num: 13
+      }, ]
+    }, {
+      name: '文科',
+      id: 6
+    }, {
+      name: '艺术类',
+      id: 7
+    }]
 
-    this.setData({
-      list: list,
-      listCur: list[0]
+    // 传来的
+    let self_quiz_list = [{
+      id: 1,
+      title: '计算机二级',
+      is_default: false,
+      done_num: 10,
+      total_num: 100,
+      star_num: 22,
+      err_num: 12
+    }, {
+      id: 2,
+      title: 'CET-6乱序版',
+      is_default: false,
+      done_num: 27,
+      total_num: 1080,
+      star_num: 22,
+      err_num: 12
+    }, {
+      id: 3,
+      title: '固体物理',
+      is_default: true,
+      done_num: 100,
+      total_num: 341,
+      star_num: 22,
+      err_num: 12
+    }, {
+      id: 4,
+      title: '教师资格证',
+      is_default: false,
+      done_num: 78,
+      total_num: 90,
+      star_num: 22,
+      err_num: 12
+    }]
+
+    // 设置上次做题的题库
+    self_quiz_list.forEach(quiz => {
+      if (quiz.is_default) {
+        default_quiz = quiz;
+        return
+      }
     })
 
+    if (default_quiz != null) {
+      icon_list[0].badge = default_quiz.total_num - default_quiz.done_num
+      icon_list[2].badge = default_quiz.err_num
+      icon_list[3].badge = default_quiz.star_num
+    } else {
+      console.log("无做题记录")
+    }
 
+
+    this.setData({
+      all_quiz_list,
+      default_quiz,
+      icon_list,
+      listCur: all_quiz_list[0],
+      self_quiz_list,
+    })
   },
 
   onReady: function () {
     wx.hideLoading()
-
-
   },
 
   onShow: function () {

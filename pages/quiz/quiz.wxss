@@ -40,8 +40,7 @@ view {
 }
 
 .header .title text {
-  font-weight: bold;
-  font-size: 34rpx;
+  /* font-size: 34rpx; */
 }
 
 .header .function .box {
@@ -58,8 +57,9 @@ view {
   width: 100%;
   margin: 0 auto;
   padding-top: 20rpx;
-
+  color:white;
 }
+
 
 .header .progress-bar {
   width: 90%;
@@ -186,7 +186,7 @@ view {
 }
 
 .VerticalNav.nav {
-  width: 150rpx;
+  width: 180rpx;
   white-space: initial;
 }
 
@@ -198,6 +198,7 @@ view {
   border: none;
   height: 50px;
   position: relative;
+  font-size: 24rpx;
   color: #081f40;
 }
 

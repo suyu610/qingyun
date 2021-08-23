@@ -3,9 +3,17 @@
     "van-image": "@vant/weapp/image/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index"
+    "van-col": "@vant/weapp/col/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "calendar": "../../../components/calendar/index",
+    "van-transition": "@vant/weapp/transition/index"
+
+
+
   },
-  "navigationBarBackgroundColor": "#F5F5F5",
-  "navigationBarTextStyle": "black"
+  "navigationBarBackgroundColor": "#27B0FF",
+  "navigationBarTextStyle": "white"
 
 }

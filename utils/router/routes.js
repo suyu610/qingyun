@@ -25,7 +25,19 @@ export const quiz_answer_questions = {
   path:'/pages/quiz/quiz_answer_questions/quiz_answer_questions'
 }
 
+export const quiz_ques_list = { 
+  path:'/pages/quiz/quiz_ques_list/quiz_ques_list'
+}
+export const quiz_list_err = { 
+  path:'/pages/quiz/quiz_list_err/quiz_list_err'
+}
+export const quiz_list_star = { 
+  path:'/pages/quiz/quiz_list_star/quiz_list_star'
+}
 
+export const quiz_card = { 
+  path:'/pages/quiz/quiz_card/quiz_card'
+}
 
 export const login = { 
   path:'/pages/public/login/login'

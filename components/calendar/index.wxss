@@ -132,7 +132,7 @@
     width: 150%;
     height: 32rpx;
     font-size: 20rpx;
-    line-height: 32rpx;
+    line-height: 36rpx;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

@@ -18,7 +18,8 @@
     "van-empty": "@vant/weapp/empty/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index"
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "custom-keyboard": "/components/keyboard/keyboard"
   },
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black"
