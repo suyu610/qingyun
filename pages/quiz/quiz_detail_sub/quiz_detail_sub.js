@@ -105,12 +105,15 @@ Page({
         icon: 'warn',
         color: '#27B1FF',
         badge: 12,
-        name: '错题本'
+        name: '错题本',
+        router:"quiz_list_err"
       }, {
         icon: 'favor',
         color: '#27B1FF',
         badge: 22,
-        name: '收藏本'
+        name: '收藏本',
+        router:"quiz_list_star"
+
       }, {
         icon: 'list',
         color: '#27B1FF',

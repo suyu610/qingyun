@@ -1,7 +1,8 @@
 // pages/public/temp/temp.js
 const word_audio = wx.createInnerAudioContext({});
 const recorderManager = wx.getRecorderManager()
-
+const app = getApp();
+let richText = null; //富文本编辑器实例
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 Page({
@@ -13,9 +14,15 @@ Page({
     cValue: 'a',
     showKeyboard: true,
     answer: {},
-    isSpeaking: false
+    isSpeaking: false,
+    placeholder: '开始编辑吧...',
   },
 
+  // 编辑器初始化完成时触发，可以获取组件实例
+  onEditorReady() {
+    console.log('[onEditorReady callback]')
+    richText = this.selectComponent('#richText'); //获取组件实例
+  },
   hideKeyBoard: function () {
     this.setData({
       showKeyboard: false
@@ -24,6 +31,16 @@ Page({
 
   kbd_star: function (e) {
     console.log(e.detail)
+  }, //保存，获取编辑器内容
+  getEditorContent(res) {
+    let {
+      value
+    } = res.detail;
+    wx.showToast({
+      title: '获取编辑器内容成功',
+      icon: 'none',
+    })
+    console.log('[getEditorContent callback]=>', value)
   },
 
   kbd_showAnswer: function () {
@@ -68,6 +85,22 @@ Page({
     console.log(e)
     this.setData({
       showKeyboard: true
+    })
+  },
+
+  //插入图片
+  insertImageEvent() {
+    wx.chooseImage({
+      count: 1,
+      success: res => {
+        let path = res.tempFilePaths[0];
+        //调用子组件方法，图片应先上传再插入，不然预览时无法查看图片。
+        richText.insertImageMethod(path).then(res => {
+          console.log('[insert image success callback]=>', res)
+        }).catch(res => {
+          console.log('[insert image fail callback]=>', res)
+        });
+      }
     })
   },
 

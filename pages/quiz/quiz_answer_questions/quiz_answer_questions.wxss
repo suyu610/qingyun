@@ -2,8 +2,9 @@
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
-  background: transparent url(https://cdns.qdu.life/img/chat_bg_9.png) no-repeat fixed center;
+  background: white url(https://cdns.qdu.life/img/chat_bg_9.png) no-repeat fixed center;
   background-size: 100vw 100vh;
+  overflow: hidden;
 }
 
 .test {
@@ -297,4 +298,11 @@ z .answer_page .answer .answer_detail {
   border-radius: 20rpx;
   font-weight: bold;
   text-align: center;
+}
+
+.wrapper {
+  position: absolute;
+  bottom: 0;
+  height: 70vh;
+  width: 100vw;
 }

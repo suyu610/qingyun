@@ -20,7 +20,7 @@ Component({
       type: Array,
       value: ['English', 'Numbers']
     },
-    showKeyboard: {
+    showKeyBoard: {
       type: Boolean
     }
   },
@@ -37,7 +37,6 @@ Component({
     longDelTimer: null,
     inputValue: [''],
     keybordIndex: 0,
-
     settingShow: false,
     keyboardHeight: 200, //键盘的高度
     recorder_img_index: 0,
@@ -65,6 +64,15 @@ Component({
   lifetimes: {
     ready: function () {
       this.queryMultipleNodes();
+      // this.watch(this, {
+      //   showKeyBoard: function (newVal) {
+      //     if (newVal) {
+      //       this.showKeyBoard()
+      //     } else {
+      //       this.hideKeyBoard()
+      //     }
+      //   }
+      // })
     },
 
     attached: function () {
@@ -109,6 +117,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    setValue: function (e) {
+      if (e == null) {
+        this.setData({
+          inputValue: [],
+          keybordIndex: 0
+        })
+      } else {
+        this.setData({
+          inputValue: e.split(''),
+          keybordIndex: e.length
+        })
+      }
+
+    },
     // 播放录音
     playAudio: function () {
       let that = this;
@@ -307,7 +329,10 @@ Component({
 
     startRecorder: function () {
       console.log("开始录音");
-      recorderManager.start();
+      recorderManager.start({
+        sampleRate:16000,
+        format:'wav',
+      });
 
       wx.vibrateShort({
         type: 'light',
@@ -321,6 +346,7 @@ Component({
 
 
     stopRecorder: function () {
+      console.log("停止录音")
       recorderManager.stop(); //先停止录音
 
       // 如果正处于编辑模式，就不要响应
@@ -353,43 +379,49 @@ Component({
             audioRecordUrl: tempFilePath
           })
 
-          // wx.uploadFile({
-          //   url: '"https://book.qdu.life"', //上传服务器的地址
-          //   filePath: tempFilePath, //临时路径
-          //   name: 'file',
-          //   header: {
-          //     contentType: "multipart/form-data", //按需求增加
-          //   },
-          //   formData: null,
-          //   success: function (res) {
-          //     console.log("上传成功")
-          //     wx.hideLoading();
-          //     that.setData({
-          //       bofangurl: tempFilePath
-          //     })
-          //   },
-          //   fail: function (err) {
-          //     wx.hideLoading();
-          //     console.log(err.errMsg);//上传失败
-          //   }
-          // });
+          wx.uploadFile({
+            url: 'http://localhost:6110/v1/word/upload_voice', //上传服务器的地址
+            filePath: tempFilePath, //临时路径
+            name: 'file',
+            header: {
+              contentType: "multipart/form-data", //按需求增加
+            },
+            formData: null,
+            success: function (res) {
+              console.log("上传成功")
+              wx.hideLoading();
+              that.setData({
+                bofangurl: tempFilePath
+              })
+            },
+            fail: function (err) {
+              wx.hideLoading();
+              console.log(err.errMsg);//上传失败
+            }
+          });
         }
       });
     },
-    showKeyboard() {
-      this.setData({
-        showKeyboard: true,
-        settingShow: false
-      })
+
+
+    showKeyBoard() {
+      if (!this.data.showKeyBoard) {
+        this.setData({
+          showKeyBoard: true,
+          settingShow: false
+        })
+      }
     },
 
-    hideKeyBoard() {
-      this.setData({
-        settingShow: false,
-        showKeyboard: false
-      })
 
-      this.triggerEvent('hideKeyboard', true)
+    hideKeyBoard() {
+      if (this.data.showKeyBoard) {
+        this.setData({
+          showKeyBoard: false,
+          settingShow: false,
+        })
+        this.triggerEvent('hideKeyboard', true)
+      }
     },
 
     deleteKey() {
@@ -431,14 +463,14 @@ Component({
 
     showSettingPopup() {
       this.setData({
-        showKeyboard: false,
+        showKeyBoard: false,
         settingShow: true,
       });
     },
 
     closeSettingPopup() {
       this.setData({
-        showKeyboard: true,
+        showKeyBoard: true,
         settingShow: false
       });
     },
@@ -471,6 +503,31 @@ Component({
         pressDelTime: 0
       })
       clearInterval(this.data.longDelTimer)
+    },
+
+
+    watch: function (ctx, obj) {
+      Object.keys(obj).forEach(key => {
+        this.observer(ctx.data, key, ctx.data[key], function (value) {
+          obj[key].call(ctx, value)
+        })
+      })
+    },
+
+    // 监听属性，并执行监听函数
+    observer: function (data, key, val, fn) {
+      Object.defineProperty(data, key, {
+        configurable: true,
+        enumerable: true,
+        get: function () {
+          return val
+        },
+        set: function (newVal) {
+          if (newVal === val) return
+          fn && fn(newVal)
+          val = newVal
+        },
+      })
     },
 
   },

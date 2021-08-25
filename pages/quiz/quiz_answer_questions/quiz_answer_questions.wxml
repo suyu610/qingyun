@@ -1,17 +1,20 @@
 <wxs module="tools" src="../../../utils/numbertofix.wxs"></wxs>
 
 <view class="container">
+  <custom-keyboard id="customKeyBoard" bind:inputValugeChanged="textInputChange" bind:star="kbd_star"
+    bind:showAnswer="kbd_showAnswer" bind:voice="kbd_voice" hideKeyboard="hideKeyBoard" showKeyboard="{{keyboardShow}}">
+  </custom-keyboard>
   <view class="remain_time" wx:if="{{test.type=='test'}}">29:19</view>
   <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper" bindtransition="bindtransition"
     bindanimationfinish="bindanimationfinish">
     <block wx:for="{{ques_list}}" wx:key="index">
-      <swiper-item>
+      <swiper-item bindtap="hideKeyboard">
         <view style="padding:20px;box-sizing:border-box">
           <!-- 题目部分 -->
           <view class="title">
             <view class="ques_type">{{item.type}}</view>
-
-            <view class="ques_title"><text>({{item.value}}分) {{item.title}}</text></view>
+            <view class="ques_title"><text><text
+                  wx:if="{{item.value!=null}}">({{item.value}}分)</text>{{item.title}}</text></view>
             <view class="ques_img" wx:if="{{item.img[0] !='' && item.img[0]!=null}}" bindtap="previewImage"
               data-src="{{item.img[0]}}">
               <image mode="widthFix" src="{{item.img[0]}}"></image>
@@ -82,8 +85,11 @@
           </view>
 
           <view class="options" wx:if="{{item.type=='单词默写题'}}">
-            <van-field clearable left-icon="bulb-o" autosize center disabled value="{{ value }}" placeholder="请在此作答"
-              border="{{ true }}" bind:click-input="showKeyBoard"/>
+            <view class="input" catchtap="showKeyBoard"
+              style="padding-left: 30rpx;border:1px solid grey;border-radius:5px;height:40px;line-height:40px">
+              {{recorder[cur_ques_index].user_mark[0]}}</view>
+            <!-- <van-field clearable left-icon="bulb-o" autosize center value="{{value}}" placeholder="请在此作答"
+              border="{{ true }}" catchtap="showKeyBoard" /> -->
           </view>
 
           <view class="confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
@@ -118,6 +124,7 @@
       </block>
     </view>
   </van-transition>
+
 
 
 
@@ -211,11 +218,13 @@
             <van-empty image="error" wx:if="{{ques_list[cur_ques_index].other_explain == null}}" description="暂无解析" />
           </view>
           <view class="description" wx:else>
-            <van-divider textColor="lightgrey" hairline contentPosition="center">解析</van-divider>
+            <van-divider textColor="lightgrey" hairline contentPosition="center">
+              {{ques_list[cur_ques_index].type!='单词默写题'?'解析':'解释'}}"</van-divider>
             <view class="source">{{ques_list[cur_ques_index].explain.source}}</view>
-            <view class="body">{{ques_list[cur_ques_index].explain.body}}</view>
-            <view class="author">作者：{{ques_list[cur_ques_index].explain.user_name}}</view>
-            <view class="info">
+            <text class="body">{{ques_list[cur_ques_index].explain.body}}</text>
+            <view class="author" wx:if="{{ques_list[cur_ques_index].type!='单词默写题'}}">
+              作者：{{ques_list[cur_ques_index].explain.user_name}}</view>
+            <view class="info" wx:if="{{ques_list[cur_ques_index].type!='单词默写题'}}">
               <view class="flex">
                 <view class="timeline">{{ques_list[cur_ques_index].explain.create_time}}</view>
                 <view class="eye">
@@ -326,7 +335,7 @@
             更多笔记
           </van-button>
           <van-button wx:if="{{answer_page_index==2}}" custom-class="answer_btn" type="default" block
-            custom-style="color:#000;background-color:#ffe9a7;" icon="edit">
+            bindtap="showInsertNewNotPopup" custom-style="color:#000;background-color:#ffe9a7;" icon="edit">
             {{ques_list[cur_ques_index].user_explain!=null?'修改笔记':'新增笔记'}}
           </van-button>
         </van-col>
@@ -342,5 +351,13 @@
 <!-- 提醒操作 -->
 <van-notify id="van-notify" />
 
-<custom-keyboard bind:inputValugeChanged="textInputChange" bind:star="kbd_star" bind:showAnswer="kbd_showAnswer"
-    bind:voice="kbd_voice" hideKeyboard="hideKeyBoard" showKeyboard="{{keyboardShow}}"></custom-keyboard>
+
+
+<van-popup show="{{ showInsertNewNotePopup }}" closeable position="bottom" round custom-style="height:70%"
+  bind:close="onHideInsertNewNotePopup">
+  <richText style="width:100vw" id='richText' readOnly='{{readOnly}}' placeholder='{{newNotePlaceholder}}'
+    formatDate='YY/MM/DD' buttonTxt='保存' bind:clearBeforeEvent='clearBeforeEvent' bind:clearSuccess='clearSuccess'
+    bind:undo='undo' bind:restore='restore' bind:onEditorReady='onEditorReady' bind:bindfocus='bindfocus'
+    bind:bindblur='bindblur' bind:bindinput='bindinput' bind:insertImageEvent='insertImageEvent'
+    bind:getEditorContent='saveNote'></richText>
+</van-popup>

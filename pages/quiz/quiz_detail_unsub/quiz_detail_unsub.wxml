@@ -4,7 +4,7 @@
       <view class="text-bold" style="padding-bottom: 10px;font-size:28rpx">
         介绍
       </view>
-      在文字录入比赛（打字比赛）中，最公平的比赛用文本就是随机文本，这个随机汉字生成器便是为此所作。普通人的汉字录入速度一般是每分钟几十个到一百多个，我们可以生成一两千字的随机汉字文本，让比赛者录入完这些汉字，依据他们的比赛用时和正确率判断名次。生成随机汉字的原始文字一般选择常用汉字，经过随机排列之后只能一个字一个字的输入，对参赛者来说是相对公平的方案。
+      {{quiz.desc}}
     </view>
     <view class="author">
       <van-row gutter="20">
@@ -21,7 +21,7 @@
           </view>
         </van-col>
         <van-col span="5">
-          <view class="author_name text-bold">黄鹏宇</view>
+          <view class="author_name text-bold"> {{quiz.author}}</view>
         </van-col>
         <van-col span="2" class="arrow">
           <van-icon name="arrow" custom-class="arrow" />
@@ -52,10 +52,6 @@
     </view>
   </view>
   <view class="center">
-
-
-
-
     <view class="number">
       <van-row gutter="20">
         <van-col span="12">
@@ -63,7 +59,7 @@
             <van-col span="10" class="title">
               题目数量
             </van-col>
-            <van-col span="10" class="text-bold">80道</van-col>
+            <van-col span="10" class="text-bold">{{quiz.totalQuizNum}}道</van-col>
             <van-col span="4" class="arrow">
               <van-icon color="#F5F5F5" name="arrow" custom-class="arrow" />
             </van-col>
@@ -74,7 +70,7 @@
             <van-col span="10" class="title">
               笔记数量
             </van-col>
-            <van-col span="10" class="text-bold">15篇</van-col>
+            <van-col span="10" class="text-bold">{{quiz.noteNum}}篇</van-col>
             <van-col span="4" class="arrow">
               <van-icon name="arrow" custom-class="arrow" />
             </van-col>
@@ -89,7 +85,7 @@
             <van-col span="10" class="title">
               添加人数
             </van-col>
-            <van-col span="14" class="text-bold">21人</van-col>
+            <van-col span="14" class="text-bold">{{quiz.userAddNum}}人</van-col>
           </van-row>
         </van-col>
         <van-col span="12">
@@ -97,7 +93,7 @@
             <van-col span="10" class="title">
               评论数
             </van-col>
-            <van-col span="10" class="text-bold">47条</van-col>
+            <van-col span="10" class="text-bold">{{quiz.commentNum}}条</van-col>
             <van-col span="4" class="arrow">
               <van-icon name="arrow" custom-class="arrow" />
             </van-col>
@@ -111,7 +107,8 @@
           <van-row>
             <van-col span="10" class="title"> 创建时间
             </van-col>
-            <van-col span="10" class="text-bold" style="    line-height: 21px;height: 21rpx;">2021.07.21</van-col>
+            <van-col span="10" class="text-bold" style="line-height: 21px;height: 21rpx;">{{quiz.createTime}}
+            </van-col>
           </van-row>
         </van-col>
         <van-col span="12">
@@ -119,7 +116,7 @@
             <van-col span="10" class="title">
               迭代版本
             </van-col>
-            <van-col span="10" class="text-bold">第七版</van-col>
+            <van-col span="10" class="text-bold">第{{quiz.version}}版</van-col>
             <van-col span="4" class="arrow">
               <van-icon name="arrow" custom-class="arrow" />
             </van-col>
@@ -134,7 +131,12 @@
   </view>
 </view>
 
-<view class="add_btn">
+<view wx:if="{{!quiz.hasStar}}" class="add_btn" bindtap="onClickAddQuiz">
   <button class="block text-bold add-btn bg-blue">
     <text class="cuIcon-add text-white"></text> <text class="text-sm text-white"> 添加至我的题库</text> </button>
+</view>
+
+<view wx:else class="add_btn" bindtap="onClickRemoveQuiz">
+  <button class="block text-bold add-btn bg-red">
+    <text class="cuIcon-delete text-white"></text> <text class="text-sm text-white"> 已添加，移除题库</text> </button>
 </view>

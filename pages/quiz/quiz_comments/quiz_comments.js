@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isRating:false,
+    isRated:true,
     showRating: false,
     commentItemList: [{
       authorName: "皇甫素素",

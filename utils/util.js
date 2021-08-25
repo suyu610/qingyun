@@ -13,6 +13,8 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
+
+
 // 时间带T
 var timeFormatSeconds = function(time) {
   var d = time ? new Date(time) : new Date();

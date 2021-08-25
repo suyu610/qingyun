@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "custom-keyboard": "/components/keyboard/keyboard",
-    "van-toast": "@vant/weapp/toast/index"
+    "van-toast": "@vant/weapp/toast/index",
+    "richText":"/components/richText/richText"
+
 
   }
 }

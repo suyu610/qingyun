@@ -44,15 +44,18 @@
     <van-tabs tab-class="tab-class" tab-active-class="tab-active text-black" color="#FFE9A7" active="{{ active }}"
       line-height="4" title-inactive-color="#aaa" swipeable animated>
       <van-tab class="text-black" title="我的题库">
-        <view class="tab-item hot">
+        <view wx:if="{{self_quiz_list.length==0}}" class="tab-item hot">
+          <van-empty image="error" description="未添加题库" />
+        </view>
+        <view wx:else class="tab-item hot">
           <block wx:for="{{self_quiz_list}}" wx:for-item="item" wx:key="index" wx:for-index="idx">
             <quiz_progress_bar bindtap="jump2Detail_sub" title="{{item.title}}"
-              progress="{{item.done_num*100 / item.total_num}}" done_num="{{item.done_num}}"
-              total_num="{{item.total_num}}">
+              progress="{{item.doneNum*100 / item.totalNum}}" done_num="{{item.doneNum}}" total_num="{{item.totalNum}}">
             </quiz_progress_bar>
           </block>
         </view>
       </van-tab>
+      
       <van-tab class="text-black" title="我的笔记">
         <view class="tab-item hot">
           <view class="cu-bar bg-white">
@@ -74,14 +77,13 @@
       <van-tab title="所有题库">
         <view class="tab-item help" id="helpView">
           <van-search value="{{ value }}" shape="round" background="#fff" placeholder="请输入搜索关键词" />
-          <!-- <van-empty image="error" description="暂无周边产品" /> -->
           <view class="VerticalBox">
             <!-- 左侧目录 -->
             <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}"
               style="height:calc(95vh - 375rpx)">
               <view class="cu-item {{index==TabCur?'text-blue text-bold cur':''}}" wx:for="{{all_quiz_list}}"
                 wx:key="index" bindtap='tabSelect' data-id="{{index}}">
-                {{item.name}}({{item.quizzes.length!=null?item.quizzes.length:0}})
+                {{item.title}}({{item.quizzes.length!=null?item.quizzes.length:0}})
               </view>
             </scroll-view>
 
@@ -91,12 +93,12 @@
               <view class="padding-top padding-lr" wx:for="{{all_quiz_list}}" wx:key="index" id="main-{{index}}">
                 <view class='cu-bar solid-bottom bg-white'>
                   <view class='action'>
-                    <text class='cuIcon-title text-blue'></text> {{item.name}}
+                    <text class='cuIcon-title text-blue'></text> {{item.title}}
                   </view>
                 </view>
                 <view class="cu-list menu-avatar">
                   <block wx:for="{{item.quizzes}}" wx:for-item="quiz" wx:key="key">
-                    <view class="cu-item" bindtap="jump2Detail_unsub">
+                    <view class="cu-item" bindtap="jump2Detail_unsub" data-id="{{quiz.id}}">
                       <view class="bg cu-avatar round xs text-black"
                         style="font-size:24rpx;background-color:{{color.score2color(quiz.score)}}!important">
                         {{quiz.score}}
@@ -109,13 +111,13 @@
                           </block>
                         </view>
                         <view class="text-gray text-sm flex">
-                          <text class="text-cut">{{quiz.description}}
+                          <text class="text-cut">{{quiz.desc}}
                           </text>
                         </view>
                       </view>
                       <view class="action">
                         <view class="text-grey text-xs">{{quiz.author}}</view>
-                        <view class="cu-tag text-grey text-xs bg-white sm">{{quiz.add_num}}人</view>
+                        <view class="cu-tag text-grey text-xs bg-white sm">{{quiz.userAddNum}}人</view>
                       </view>
 
                     </view>

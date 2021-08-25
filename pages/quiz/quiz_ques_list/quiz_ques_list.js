@@ -37,10 +37,8 @@ Page({
             undo_num: 0
           }
         ]
-
       }, {
         id: 1,
-
         title: "第二章 生物化学",
         description: "分值大概在18%左右，是重点章节",
         total_num: 483,

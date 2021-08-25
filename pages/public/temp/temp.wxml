@@ -1,5 +1,10 @@
 <!--pages/public/temp/temp.wxml-->
 <view>
+  <richText id='richText' readOnly='{{readOnly}}' placeholder='{{placeholder}}' formatDate='YY/MM/DD' buttonTxt='保存'
+    bind:clearBeforeEvent='clearBeforeEvent' bind:clearSuccess='clearSuccess' bind:undo='undo' bind:restore='restore'
+    bind:onEditorReady='onEditorReady' bind:bindfocus='bindfocus' bind:bindblur='bindblur' bind:bindinput='bindinput'
+    bind:insertImageEvent='insertImageEvent' bind:getEditorContent='getEditorContent'></richText>
+
   <view bindtap="focusInput">{{cValue}}</view>
   <view>{{answer.mean_cn}}</view>
   <view>{{answer.mean_en}}</view>

@@ -5,8 +5,8 @@
     <text class="text-lg text-bold">评分</text>
   </view>
   <view class="action">
-    <button style="color: white;" disabled="{{isRating}}" class="cu-btn bg-blue  text-sm" bindtap="toggleRating"
-      data-target="gridModal">{{showRating?'提交评分':isRating?'已评分':'点击评分'}}</button>
+    <button style="color: white;" disabled="{{isRated}}" class="cu-btn bg-blue  text-sm" bindtap="toggleRating"
+      data-target="gridModal">{{showRating?'提交评分':isRated?'已评分':'点击评分'}}</button>
   </view>
 </view>
 <view wx:if="{{showRating}}" class="rate" style="padding:30rpx">

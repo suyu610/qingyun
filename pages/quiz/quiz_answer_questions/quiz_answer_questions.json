@@ -19,7 +19,11 @@
     "van-switch": "@vant/weapp/switch/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "custom-keyboard": "/components/keyboard/keyboard"
+    "custom-keyboard": "/components/keyboard/keyboard",
+    "van-overlay": "@vant/weapp/overlay/index",
+
+    "richText": "/components/richText/richText"
+
   },
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black"

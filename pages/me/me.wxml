@@ -32,7 +32,7 @@
       <van-icon name="fire" color="red" /><text>上传资料</text>
     </view>
     <view class="upload-quiz neumorphism " bindtap="jump2Upload">
-      <van-icon name="fire" color="red" /><text>创建试卷</text>
+      <van-icon name="fire" color="red" /><text>创建题库</text>
     </view>
   </view>
 

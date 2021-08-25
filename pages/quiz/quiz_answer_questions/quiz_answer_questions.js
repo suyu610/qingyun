@@ -4,6 +4,11 @@ let progress_timer = null;
 let flag_play_status = false;
 let flag_transition = false;
 import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+const word_audio = wx.createInnerAudioContext({});
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+
+const app = getApp();
+let richText = null; //富文本编辑器实例
 
 
 Page({
@@ -11,7 +16,14 @@ Page({
   /**
    * 页面的初始数据
    */
+
   data: {
+
+    // 新建笔记相关
+    showInsertNewNotePopup: false,
+    newNotePlaceholder: '开始编辑吧...',
+    // 键盘相关
+
     keyboardShow: false,
     // swiper正在滑动
     istransition: false,
@@ -28,22 +40,18 @@ Page({
     ques_list: [{
         id: 0,
         type: "单词默写题",
-        value: 2,
-        title: "abandon",
+        title: "",
         options: [''],
-        img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
         answer: ['abandon'],
         star_num: 10,
         has_star: false,
       },
       {
         id: 0,
-        type: "单词选择题",
-        value: 2,
-        title: "abandon",
+        type: "单词默写题",
+        title: "",
         options: [''],
-        img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
-        answer: [1],
+        answer: ['abolish'],
         star_num: 10,
         has_star: false,
       },
@@ -171,9 +179,11 @@ Page({
 
   // 键盘相关
   showKeyBoard: function () {
-    this.setData({
-      keyboardShow: true
-    })
+    this.data.customKeyBoard.showKeyBoard()
+  },
+
+  hideKeyboard: function () {
+    this.data.customKeyBoard.hideKeyBoard()
   },
 
   inputValugeChanged: function (e) {
@@ -182,6 +192,42 @@ Page({
     })
   },
 
+
+  // 添加笔记相关
+  // 编辑器初始化完成时触发，可以获取组件实例
+  onEditorReady() {
+    console.log('[onEditorReady callback]')
+    richText = this.selectComponent('#richText'); //获取组件实例
+  },
+
+  showInsertNewNotPopup: function () {
+    this.setData({
+      show_answer_page: false,
+      showInsertNewNotePopup: true
+    })
+  },
+  saveNote: function (res) {
+    this.onHideInsertNewNotePopup();
+    let {
+      value
+    } = res.detail;
+    wx.showToast({
+      title: '保存成功',
+      icon: 'none',
+    })
+    console.log('[getEditorContent callback]=>', value)
+  },
+
+  noop: function () {
+    console.log("blur")
+    this.onHideInsertNewNotePopup()
+  },
+  onHideInsertNewNotePopup: function () {
+    this.setData({
+      show_answer_page: true,
+      showInsertNewNotePopup: false
+    })
+  },
 
   starExplain() {
     let ques_list = this.data.ques_list;
@@ -334,16 +380,20 @@ Page({
 
   // 填空题
   textInputChange(e) {
+    console.log(e)
     let index = e.target.dataset.index;
     let text = e.detail
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
+
     if (index == null) {
       index = 0
+      recorder[cur_ques_index].user_mark[index] = text.join('')
       this.setData({
         value: text.join('')
       })
     }
+
     recorder[cur_ques_index].user_mark[index] = text.join('')
     this.setData({
       recorder
@@ -431,6 +481,8 @@ Page({
   },
 
   changeQuestion: function () {
+    this.data.customKeyBoard.setValue(this.data.recorder[this.data.cur_ques_index].user_mark[0]);
+
     let that = this;
     if (this.data.ques_list[this.data.cur_ques_index].audio != '' && this.data.ques_list[this.data.cur_ques_index].audio != null) {
       innerAudioContext = wx.createInnerAudioContext({});
@@ -562,21 +614,50 @@ Page({
       answer_page_index: 0,
     })
   },
+
+  onReady: function () {
+    this.data.customKeyBoard = this.selectComponent('#customKeyBoard')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     // 在这要生成
     let recorder = [];
-    this.data.ques_list.forEach(element => {
+    let ques_list = this.data.ques_list;
+    let that = this;
+    ques_list.forEach(element => {
       let colors = []
       let user_mark = []
+
+      if (element.type == "单词默写题") {
+        // 爬取
+        wx.request({
+          url: 'https://cdns.qdu.life/e/' + element.answer[0] + '.json',
+          success(e) {
+            element.title = e.data.mean_cn;
+            element.explain = {
+              body: e.data.mean_cn + '\n\n' + e.data.mean_en,
+              is_star: true,
+              view_count: 14,
+              create_time: "2021年8月14日23:12:38",
+              user_name: '青云'
+            }
+            that.setData({
+              recorder,
+              ques_list
+            })
+          }
+        })
+      }
+
       if (element.type == "填空题") {
         element.options.forEach(e => {
           user_mark.push('')
         })
       }
-
 
       element.options.forEach(e => {
         colors.push('white')
@@ -594,10 +675,24 @@ Page({
     })
 
     this.setData({
-      recorder
+      recorder,
+      ques_list
     })
   },
 
+  kbd_showAnswer: function () {
+    this.data.customKeyBoard.hideKeyBoard()
+    this.showAnswer()
+  },
+  kbd_voice: function () {
+    word_audio.src = "http://ali.bczcdn.com/r/" + this.data.ques_list[this.data.cur_ques_index].answer[0].toLowerCase() + ".mp3"
+    word_audio.play()
+    word_audio.onCanplay(_ => {})
+
+    word_audio.onError(_ => {
+      Toast.fail('暂无该单词发音');
+    })
+  },
   /**
    * 用户点击右上角分享
    */

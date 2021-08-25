@@ -21,8 +21,8 @@
   <view class="quiz_list">
     <van-collapse border="{{false}}" accordion value="{{ chapterActiveNames }}" bind:change="onChangeChapter">
       <block wx:for="{{quiz.chapter}}" wx:for-item="chapter" wx:key="index">
-        <van-collapse-item value="{{chapter.done_num}}/{{chapter.total_num}}"
-          label="{{chapter.description}}" name="{{chapter.id}}">
+        <van-collapse-item value="{{chapter.done_num}}/{{chapter.total_num}}" label="{{chapter.description}}"
+          name="{{chapter.id}}">
           <view slot="title" class="title" style="font-weight:bold">
             {{chapter.title}}
           </view>
@@ -47,15 +47,14 @@
     <view class="cu-bar bg-white tabbar border shop">
       <view class="action">
         <view class="cuIcon-upstage">
-          <view class="cu-tag badge bg-yellow">{{quiz.idea_num}}</view>
         </view>
-        知识点
+        赞赏作者
       </view>
       <view class="action">
         <view class="cuIcon-ticket">
           <view class="cu-tag badge  bg-yellow">{{quiz.total_num}}</view>
         </view>
-        题目
+        笔记
       </view>
       <view class="action">
         <view class=" cuIcon-comment"></view> 评论
