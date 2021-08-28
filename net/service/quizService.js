@@ -5,7 +5,9 @@ import {
   GetUserQuizCateUrl,
   GetQuizByIdUrl,
   AddQuizUrl,
-  RemoveQuizUrl
+  RemoveQuizUrl,
+  GetQuesListByQuizIdUrl,
+  StartAnswerUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -70,6 +72,29 @@ function AddQuiz(handleSuccess, handleFailure, params) {
     });
 }
 
+function GetQuesListByQuizId(handleSuccess, handleFailure, params) {
+  httpService.get(
+    GetQuesListByQuizIdUrl + '/' + params,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
+function StartAnswer(handleSuccess, handleFailure, data) {
+  httpService.post(
+    StartAnswerUrl,
+    data,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
 
 
 module.exports = {
@@ -77,5 +102,7 @@ module.exports = {
   getUserQuizCate,
   GetQuizById,
   AddQuiz,
-  RemoveQuiz
+  RemoveQuiz,
+  GetQuesListByQuizId,
+  StartAnswer
 }

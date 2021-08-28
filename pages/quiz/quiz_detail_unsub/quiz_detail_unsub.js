@@ -29,7 +29,7 @@ Page({
   getQuizByIdSuccess: function (e) {
     wx.hideLoading()
     console.log(e)
-    e.createTime = util.timeFormatSeconds(e.createTime)
+    e.createTime = util.timeFormatSeconds_short(e.createTime)
     this.setData({
       quiz: e
     })

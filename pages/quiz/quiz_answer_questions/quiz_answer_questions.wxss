@@ -1,10 +1,10 @@
 .container {
   width: 100vw;
   height: 100vh;
+  padding-top: 100rpx;
   box-sizing: border-box;
   background: white url(https://cdns.qdu.life/img/chat_bg_9.png) no-repeat fixed center;
   background-size: 100vw 100vh;
-  overflow: hidden;
 }
 
 .test {
@@ -48,6 +48,8 @@ swiper {
 .title .ques_img {
   padding-top: 20rpx;
   text-align: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .title .ques_voice {
@@ -138,9 +140,23 @@ swiper {
   font-weight: bold;
 }
 
+.header {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-top: 1px solid #fff4fa;
+  color: grey;
+}
+
 .footer {
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
@@ -154,7 +170,7 @@ swiper {
 }
 
 .footer .answer_btn {
-  text-align: left;
+  text-align: center;
   /* text-decoration: underline; */
 }
 
@@ -162,15 +178,19 @@ swiper {
   color: black;
 }
 
-.footer .do_num .done,
-.footer .do_num .undone,
+.header .do_num .done,
+.header .do_num .undone,
 .footer .all_ques,
 .footer .star {
   display: flex;
   justify-content: center;
 }
-
-.footer .do_num {
+.footer .star{
+  display: block;
+  text-align: center;    top: 8px;
+  position: relative;
+}
+.header .do_num {
   display: flex;
   justify-content: space-around;
 }

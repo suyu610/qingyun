@@ -34,6 +34,26 @@ var timeFormatSeconds = function(time) {
   return (year + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + seconds);
 }
 
+// 时间带T 转年月日
+var timeFormatSeconds_short = function(time) {
+  var d = time ? new Date(time) : new Date();
+  var year = d.getFullYear();
+  var month = d.getMonth() + 1;
+  var day = d.getDate();
+  var hours = d.getHours();
+  var min = d.getMinutes();
+  var seconds = d.getSeconds();
+
+  if (month < 10) month = '0' + month;
+  if (day < 10) day = '0' + day;
+  if (hours < 0) hours = '0' + hours;
+  if (min < 10) min = '0' + min;
+  if (seconds < 10) seconds = '0' + seconds;
+
+  return (year + '/' + month + '/' + day );
+}
+
+
 // 根据数组每一项对象的id值来数组去重
 export function removeDuplicateForObjArr(arr) {
   let obj = {}
@@ -90,5 +110,6 @@ export function getTagByScore(score) {
 
 module.exports = {
   formatTime,
-  timeFormatSeconds
+  timeFormatSeconds,
+  timeFormatSeconds_short
 }

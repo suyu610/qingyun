@@ -2,6 +2,7 @@
 
 const wxCharts = require("../../../utils/lib/wxcharts.js")
 var radarChart = null
+import router from '../../../utils/router/index.js';
 
 import {
   push
@@ -23,6 +24,10 @@ Page({
    */
   data: {
     isTransition: false,
+    quiz: {
+      id: 1,
+      title: ""
+    },
 
     calendarConfig: {
       takeoverTap: true,
@@ -106,13 +111,13 @@ Page({
         color: '#27B1FF',
         badge: 12,
         name: '错题本',
-        router:"quiz_list_err"
+        router: "quiz_list_err"
       }, {
         icon: 'favor',
         color: '#27B1FF',
         badge: 22,
         name: '收藏本',
-        router:"quiz_list_star"
+        router: "quiz_list_star"
 
       }, {
         icon: 'list',
@@ -143,7 +148,10 @@ Page({
 
   jumpHeadTools(e) {
     push({
-      name: e.currentTarget.dataset.router
+      name: e.currentTarget.dataset.router,
+      data: {
+        id: this.data.quiz.id
+      }
     })
   },
 
@@ -238,8 +246,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const data = router.extract(options);
+    let quiz = this.data.quiz;
+    quiz.id = data.id;
+    quiz.title = data.title;
+    this.setData({
+      quiz
+    })
     wx.setNavigationBarTitle({
-      title: '计算机二级 - C语言',
+      title: this.data.quiz.title,
     })
 
     //下面是图表一显示的数据，只需替换掉数据折现就会发生变化实现动态生成

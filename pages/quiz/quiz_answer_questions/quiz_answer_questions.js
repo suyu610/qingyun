@@ -1,15 +1,18 @@
 // pages/quiz/quiz_comments/quiz_comments.js
+import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
+import router from '../../../utils/router/index.js';
+import QuizService from '../../../net/service/quizService.js'
+import util from '../../../utils/util.js'
+
 let innerAudioContext = wx.createInnerAudioContext({});
 let progress_timer = null;
 let flag_play_status = false;
 let flag_transition = false;
-import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
-const word_audio = wx.createInnerAudioContext({});
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
-
-const app = getApp();
 let richText = null; //富文本编辑器实例
 
+const word_audio = wx.createInnerAudioContext({});
+const app = getApp();
 
 Page({
 
@@ -37,124 +40,7 @@ Page({
       user_mark: [],
     }],
     // 试卷本体
-    ques_list: [{
-        id: 0,
-        type: "单词默写题",
-        title: "",
-        options: [''],
-        answer: ['abandon'],
-        star_num: 10,
-        has_star: false,
-      },
-      {
-        id: 0,
-        type: "单词默写题",
-        title: "",
-        options: [''],
-        answer: ['abolish'],
-        star_num: 10,
-        has_star: false,
-      },
-      {
-        id: '5',
-        value: 6,
-        type: "填空题",
-        title: "请在下方输入皇甫素素；猪；头",
-        options: ["", "", ""],
-        answer: ["皇甫素素", "猪", "头"],
-        star_num: 10,
-        has_star: false,
-        explain: {
-          source: "",
-          body: "巴拉巴拉巴小魔仙",
-          user_name: "黄鹏宇",
-          user_id: "2019205913",
-          create_time: "2021年8月14日23:12:38",
-          view_count: 14,
-          is_star: false,
-        },
-        other_explain: [{
-          explain_id: 2,
-          body: "巴拉巴拉巴小魔仙",
-          user_name: "黄鹏宇",
-          user_id: "2019205913",
-          create_time: "2021年8月14日23:12:38",
-          view_count: 14,
-          is_star: false,
-        }, {
-          explain_id: 1,
-          body: "巴拉巴拉巴小魔仙",
-          user_name: "皇甫素素",
-          user_id: "2019205913",
-          create_time: "2021年8月14日23:12:38",
-          view_count: 14,
-          is_star: false,
-        }],
-        user_explain: {
-          explain_id: 1,
-          body: "巴拉巴拉巴小魔仙",
-          create_time: "2021年8月14日23:12:38",
-          view_count: 0,
-          is_public: false,
-        }
-      },
-      {
-        id: 1,
-        type: "单选题",
-        value: 2,
-        title: "请编写函数fun，其功能是：\n计算并输出下列多项式的值。\n例如在主函数中从键盘为n输入50后，\n输出为S=1.718282。\n注意：要求n的值大于1但不大于100之间。",
-        img: ["https://cdns.qdu.life/img/sample.png", "https://cdns.qdu.life/banner.png"],
-        options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
-        answer: [1],
-        star_num: 10,
-        has_star: false,
-      },
-
-      {
-        id: '2',
-        type: "单选题",
-        value: 2,
-        title: "听下面一段对话，回答第1至4题。",
-        audio: "https://api.uomg.com/api/rand.music?sort=%E7%83%AD%E6%AD%8C%E6%A6%9C",
-        options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
-        answer: [2],
-        star_num: 7,
-        has_star: false,
-      },
-      {
-        id: '3',
-        type: "简答题",
-        value: 8,
-        title: "请编写函数fun，其功能是：计算并输出3 到n 之间所有素数的平方根之和。 例如，若主函数从键盘给n 输入100 后，则输出为sum=148.874270。 注意：n 的值要大于2 但不大于100。",
-        img: "",
-        options: ["", ""],
-        answer: ["应收账款", "应收票据"],
-        star_num: 1,
-        has_star: false,
-      },
-      {
-        id: '4',
-        type: "多选题",
-        value: 3,
-        title: "企业取得收入的货币形式，包括现金、存款、（）等。",
-        options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
-        answer: [1, 2, 3],
-        star_num: 3,
-        has_star: false,
-      },
-
-      {
-        id: '6',
-        value: 2,
-        type: "单选题",
-        title: "企业取得收入的货币形式，包括现金、存款、（）等。",
-        options: ["应收账款", "应收票据", "准备持有至到期的债权投资", "债务的豁免"],
-        answer: [1],
-        answer_detail: '',
-        star_num: 6,
-        has_star: false,
-      }
-    ],
+    ques_list: [],
 
     paper: {
       type: "order",
@@ -229,10 +115,10 @@ Page({
     })
   },
 
-  starExplain() {
+  starDefaultNote() {
     let ques_list = this.data.ques_list;
     let cur_ques_index = this.data.cur_ques_index;
-    ques_list[cur_ques_index].explain.is_star = !ques_list[cur_ques_index].explain.is_star;
+    ques_list[cur_ques_index].defaultNote.hasStar = !ques_list[cur_ques_index].defaultNote.hasStar;
 
     this.setData({
       ques_list
@@ -244,7 +130,7 @@ Page({
     let index = e.currentTarget.dataset.index
     let ques_list = this.data.ques_list;
     let cur_ques_index = this.data.cur_ques_index;
-    ques_list[cur_ques_index].other_explain[index].is_star = !ques_list[cur_ques_index].other_explain[index].is_star;
+    ques_list[cur_ques_index].otherNote[index].hasStar = !ques_list[cur_ques_index].otherNote[index].hasStar;
 
     this.setData({
       ques_list
@@ -271,18 +157,6 @@ Page({
     })
   },
 
-  bindtransition(e) {
-    if (!flag_transition) {
-      flag_transition = true
-      if ((e.detail.dx < 20 && e.detail.dx > 0) || (e.detail.dx < 0 && e.detail.dx > -20)) {
-        console.log("正在滑动")
-        this.setData({
-          // cur_ques_index: -1,
-          istransition: true
-        })
-      }
-    }
-  },
 
   // 问题跳转
   jump2QuestionIndex(e) {
@@ -309,24 +183,11 @@ Page({
       total_audio_progress: 0,
       show_answer_page: false,
       show_answer_option: false,
-    })
-  },
-
-  bindanimationfinish() {
+    }) 
     this.setData({
-      istransition: false
+      cur_ques_index: this.data.tmp_transition_index,
     })
-
-    flag_transition = false;
-
-    // 如果实际发生了页面切换，才进行下面逻辑
-    if (this.data.cur_ques_index != this.data.tmp_transition_index) {
-      console.log("停止切换")
-      this.setData({
-        cur_ques_index: this.data.tmp_transition_index,
-      })
-      this.changeQuestion();
-    }
+    this.changeQuestion();
   },
 
   showNotify(right) {
@@ -483,64 +344,59 @@ Page({
   changeQuestion: function () {
     this.data.customKeyBoard.setValue(this.data.recorder[this.data.cur_ques_index].user_mark[0]);
 
-    let that = this;
-    if (this.data.ques_list[this.data.cur_ques_index].audio != '' && this.data.ques_list[this.data.cur_ques_index].audio != null) {
-      innerAudioContext = wx.createInnerAudioContext({});
-      // 切歌  
-      innerAudioContext.src = "https://api.uomg.com/api/rand.music?sort=热歌榜"
-      innerAudioContext.onCanplay(function getDuration() {
-        let intervalID = setInterval(function () {
-          if (innerAudioContext.duration != 0 && !isNaN(innerAudioContext.duration)) {
-            console.log(innerAudioContext.duration, '测试')
-            that.setData({
-              total_audio_progress: innerAudioContext.duration
-            })
-            clearInterval(intervalID);
-          }
-        }, 500);
-      })
+    this.setData({
+      audio_paused: true,
+      current_audio_progress: 0
+    })
+    innerAudioContext.stop()
+    clearInterval(progress_timer);
+  },
 
-      innerAudioContext.onPlay(() => {
-        if (progress_timer != null) {
-          clearInterval(progress_timer) // 去除定时器
-        }
-        this.setData({
-          audio_paused: innerAudioContext.paused
-        })
-        progress_timer = setInterval(function () {
-          console.log("計時")
+  initAudioPlayer() {
+    let that = this
+    innerAudioContext = wx.createInnerAudioContext({});
+
+    innerAudioContext.onCanplay(function getDuration() {
+      let intervalID = setInterval(function () {
+        if (innerAudioContext.duration != 0 && !isNaN(innerAudioContext.duration)) {
+          console.log(innerAudioContext.duration, '测试')
           that.setData({
-            current_audio_progress: innerAudioContext.currentTime,
-            audio_progress: innerAudioContext.currentTime / that.data.total_audio_progress * 100
+            total_audio_progress: innerAudioContext.duration
           })
-        }, 100)
-
-        console.log("开始播放")
-      })
-
-      innerAudioContext.onPause(() => {
-        this.setData({
-          audio_paused: innerAudioContext.paused
-        })
-      })
-
-      innerAudioContext.onEnded(() => {
-        console.log("播放結束")
-        that.setData({
-          audio_paused: true,
-          current_audio_progress: 0
-        })
-      })
-    } else {
+          clearInterval(intervalID);
+        }
+      }, 500);
+    })
+    innerAudioContext.onPlay(() => {
+      if (progress_timer != null) {
+        clearInterval(progress_timer) // 去除定时器
+      }
       this.setData({
+        audio_paused: innerAudioContext.paused
+      })
+      progress_timer = setInterval(function () {
+        console.log("計時")
+        that.setData({
+          current_audio_progress: innerAudioContext.currentTime,
+          audio_progress: innerAudioContext.currentTime / that.data.total_audio_progress * 100
+        })
+      }, 100)
+
+      console.log("开始播放")
+    })
+    innerAudioContext.onPause(() => {
+      this.setData({
+        audio_paused: innerAudioContext.paused
+      })
+    })
+    innerAudioContext.onEnded(() => {
+      console.log("播放結束")
+      that.setData({
         audio_paused: true,
         current_audio_progress: 0
       })
-      innerAudioContext.stop()
-      clearInterval(progress_timer);
-    }
+    })
   },
-
   ondragAudioProgStart(e) {
     clearInterval(progress_timer)
     flag_play_status = !innerAudioContext.paused;
@@ -573,7 +429,8 @@ Page({
   },
 
   // 切換播放狀態
-  togglePlay() {
+  togglePlay(e) {
+    innerAudioContext.src = e.currentTarget.dataset.url
     if (innerAudioContext.paused) {
       innerAudioContext.play();
     } else {
@@ -619,26 +476,32 @@ Page({
     this.data.customKeyBoard = this.selectComponent('#customKeyBoard')
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  loadQuesSuccess: function (e) {
 
     // 在这要生成
     let recorder = [];
-    let ques_list = this.data.ques_list;
+    let ques_list = e;
     let that = this;
-    ques_list.forEach(element => {
+
+    // 把时间弄短
+    ques_list.forEach(ques => {
+      // console.log(ques.defaultNote)
+      if (ques.defaultNote != null) {
+        ques.defaultNote.createTime = util.timeFormatSeconds(ques.defaultNote.createTime)
+      }
+      ques.otherNote.forEach(note => {
+        note.createTime = util.timeFormatSeconds(note.createTime)
+      })
       let colors = []
       let user_mark = []
 
-      if (element.type == "单词默写题") {
+      if (ques.type == "单词默写题") {
         // 爬取
         wx.request({
-          url: 'https://cdns.qdu.life/e/' + element.answer[0] + '.json',
+          url: 'https://cdns.qdu.life/e/' + ques.answer[0] + '.json',
           success(e) {
-            element.title = e.data.mean_cn;
-            element.explain = {
+            ques.title = e.data.mean_cn;
+            ques.explain = {
               body: e.data.mean_cn + '\n\n' + e.data.mean_en,
               is_star: true,
               view_count: 14,
@@ -653,18 +516,18 @@ Page({
         })
       }
 
-      if (element.type == "填空题") {
-        element.options.forEach(e => {
+      if (ques.type == "填空题") {
+        ques.options.forEach(e => {
           user_mark.push('')
         })
       }
 
-      element.options.forEach(e => {
+      ques.options.forEach(e => {
         colors.push('white')
       })
 
       let tmp = {
-        id: element.id,
+        id: ques.id,
         has_done: false,
         correct: false,
         colors: colors,
@@ -678,6 +541,18 @@ Page({
       recorder,
       ques_list
     })
+  },
+  loadQuesFail: function (e) {
+    console.log(e)
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    const data = router.extract(options);
+    this.initAudioPlayer()
+    QuizService.StartAnswer(this.loadQuesSuccess, this.loadQuesFail, data);
+
   },
 
   kbd_showAnswer: function () {
@@ -693,10 +568,5 @@ Page({
       Toast.fail('暂无该单词发音');
     })
   },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  }
 })

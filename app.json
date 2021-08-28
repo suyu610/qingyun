@@ -5,6 +5,8 @@
   },
   "pages": [
     "pages/empty/empty",
+    "pages/quiz/quiz_pre_questions/quiz_pre_questions",
+    "pages/quiz/quiz_ques_list/quiz_ques_list",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
     "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/public/temp/temp",
@@ -12,7 +14,6 @@
     "pages/quiz/quiz_card/quiz_card",
     "pages/quiz/quiz",
     "pages/quiz/quiz_list_err/quiz_list_err",
-    "pages/quiz/quiz_ques_list/quiz_ques_list",
     "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/public/order_list/order_list",
     "pages/public/admin/admin",

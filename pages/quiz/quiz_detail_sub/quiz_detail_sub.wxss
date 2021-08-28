@@ -6,9 +6,10 @@ page {
 
 .container {
   box-sizing: border-box;
-  padding: 30rpx;
+  /* padding: 30rpx; */
+  height: 100vh;
   background-color: #F5F5F5;
-  padding-top: 10rpx;
+  /* padding-top: 10rpx; */
 }
 
 image {
@@ -20,9 +21,11 @@ image {
 .introduce {
   transition: .5s;
   /* height: 250rpx; */
-  width: 690rpx;
+  width: 95vw;
+  margin: 0 auto;
   /* position: absolute; */
   padding: 30rpx;
+  margin: 0 auto;
   margin-top: 30rpx;
   /* bottom: 30rpx; */
   border-radius: 30rpx;
@@ -45,9 +48,8 @@ image {
 .center {
   background: #27B0FF;
   color: white;
-  margin-left: -30rpx;
   width: 100vw;
-  margin-top: 0rpx;
+  margin-top: -1rpx;
   position: absolute;
   top: 0;
   height: 332rpx;
@@ -60,7 +62,7 @@ image {
   /* color: black !important; */
 }
 
-.basic-introduce{
+.basic-introduce {
   padding-bottom: 20rpx;
 }
 

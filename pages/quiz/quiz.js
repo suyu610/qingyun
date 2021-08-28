@@ -14,8 +14,8 @@ Page({
       icon: 'order',
       color: 'white',
       badge: 0,
-      name: '做题模式',
-      router: 'quiz_answer_questions'
+      name: '刷题模式',
+      router: 'quiz_pre_questions'
     }, {
       icon: 'text',
       color: 'white',
@@ -91,10 +91,16 @@ Page({
 
   jumpRoute(e) {
     let router = e.currentTarget.dataset.router
+    console.log(e.currentTarget.dataset)
     push({
-      name: router
+      name: router,
+      data: {
+        id: e.currentTarget.dataset.id,
+        title: e.currentTarget.dataset.title,
+        doneNum:e.currentTarget.dataset.donenum,
+        totalNum:e.currentTarget.dataset.totalnum
+      }
     })
-
   },
 
   tabSelect(e) {
@@ -178,15 +184,18 @@ Page({
       name: 'quiz_detail_unsub',
       data: {
         id: e.currentTarget.dataset.id,
+        title: e.currentTarget.dataset.title,
       },
     });
   },
-  jump2Detail_sub: function () {
+  jump2Detail_sub: function (e) {
+    console.log(e)
     push({
       name: 'quiz_detail_sub',
       data: {
-        id: '123',
-        type: 1,
+        id: e.currentTarget.dataset.id,
+        title: e.currentTarget.dataset.title,
+
       },
     });
   },
@@ -258,7 +267,6 @@ Page({
   },
   onLoad: function (options) {
 
-
     wx.setNavigationBarTitle({
       title: '',
     })
@@ -267,8 +275,6 @@ Page({
       title: '加载中...',
       mask: true
     });
-
-
   },
 
   onReady: function () {

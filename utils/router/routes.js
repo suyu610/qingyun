@@ -35,6 +35,10 @@ export const quiz_list_star = {
   path:'/pages/quiz/quiz_list_star/quiz_list_star'
 }
 
+export const quiz_pre_questions = { 
+  path:'/pages/quiz/quiz_pre_questions/quiz_pre_questions'
+}
+
 export const quiz_card = { 
   path:'/pages/quiz/quiz_card/quiz_card'
 }

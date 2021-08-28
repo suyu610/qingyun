@@ -1,5 +1,5 @@
-// export const Host = 'https://api.book.uutrack.cn/v1/';
-export const Host = 'http://192.168.3.8:6110/v1/';
+export const Host = 'https://api.book.uutrack.cn/v1/';
+// export const Host = 'http://192.168.3.8:6110/v1/';
 // export const Host = 'http://10.195.119.143:6110/v1/';
 
 ////////////
@@ -70,3 +70,5 @@ export const GetUserQuizCateUrl = 'quiz/user_quiz'
 export const GetQuizByIdUrl = 'quiz/quiz'
 export const AddQuizUrl = 'quiz/quiz/add'
 export const RemoveQuizUrl = 'quiz/quiz/remove'
+export const GetQuesListByQuizIdUrl = 'quiz/queslist'
+export const StartAnswerUrl = 'quiz/core/startAnswer'

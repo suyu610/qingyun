@@ -1,4 +1,7 @@
 // pages/quiz/quiz_ques_list/quiz_ques_list.js
+import QuizService from '../../../net/service/quizService.js'
+import router from '../../../utils/router/index.js';
+
 Page({
 
   /**
@@ -7,64 +10,7 @@ Page({
   data: {
     chapterActiveNames: ['1'],
     ideaActiveNames: ['1'],
-    quiz: {
-      title: '计算机二级C语言',
-      total_num: 215,
-      idea_num: 78,
-      chapter_num: 7,
-      score: 3.7,
-      chapter: [{
-        id: 0,
-        title: "第一章 解剖学",
-        description: "这一章分值大概在12%左右，是重点章节",
-        total_num: 30,
-        done_num: 3,
-        idea: [{
-            title: "第1节 消化系统",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          },
-          {
-            title: "第2节 运动系统",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          }, {
-            title: "第3节 泌尿系统",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          }
-        ]
-      }, {
-        id: 1,
-        title: "第二章 生物化学",
-        description: "分值大概在18%左右，是重点章节",
-        total_num: 483,
-        done_num: 0,
-        idea: [{
-            title: "第1节 蛋白质",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          },
-          {
-            title: "第2节 核酸的结构和功能",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          }, {
-            title: "第3节 糖代谢",
-            right_num: 0,
-            err_num: 0,
-            undo_num: 0
-          }
-        ]
-
-      }]
-
-    }
+    quiz: {},
   },
   onChangeChapter(event) {
     this.setData({
@@ -79,13 +25,29 @@ Page({
     });
   },
 
+  getQuizByIdSuccess: function (e) {
+    console.log(e)
+    this.setData({
+      quiz: e
+    })
+
+    wx.setNavigationBarTitle({
+      title: e.title,
+    })
+  },
+
+  getQuizByIdFail: function (e) {
+    console.log(e)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: this.data.quiz.title,
-    })
+    const data = router.extract(options);
+    QuizService.GetQuesListByQuizId(this.getQuizByIdSuccess, this.getQuizByIdFail, data.id)
+
+
   },
 
   /**
