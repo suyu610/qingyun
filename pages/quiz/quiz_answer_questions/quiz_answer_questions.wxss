@@ -141,6 +141,7 @@ swiper {
 }
 
 .header {
+  z-index: 30;
   background-color: #fff;
   position: fixed;
   top: 0;
@@ -185,11 +186,14 @@ swiper {
   display: flex;
   justify-content: center;
 }
-.footer .star{
+
+.footer .star {
   display: block;
-  text-align: center;    top: 8px;
+  text-align: center;
+  top: 8px;
   position: relative;
 }
+
 .header .do_num {
   display: flex;
   justify-content: space-around;
@@ -310,6 +314,10 @@ z .answer_page .answer .answer_detail {
   box-sizing: border-box;
   position: absolute;
   bottom: 20px;
+}
+
+.timeline{
+  padding-right: 10rpx;
 }
 
 .answer_page .answer_btn {

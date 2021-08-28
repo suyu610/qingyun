@@ -70,12 +70,12 @@ Component({
 
     //编辑器初始化完成时触发
     onEditorReady() {
-      console.log('编辑器初始化完成时触发')
+      // console.log('编辑器初始化完成时触发')
       this.triggerEvent('onEditorReady');
       // 返回一个 SelectorQuery 对象实例。在自定义组件或包含自定义组件的页面中，应使用this.createSelectorQuery()来代替。
       // https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html 
       this.createSelectorQuery().select('#editor').context(res => {
-        console.log('createSelectorQuery=>', res)
+        // console.log('createSelectorQuery=>', res)
         this.editorCtx = res.context;
         let rtTxt = '';
         this.setContents(rtTxt); //设置富文本内容
@@ -87,7 +87,7 @@ Component({
       this.editorCtx.setContents({
         html: rechtext,
         success: res => {
-          console.log('[setContents success]', res)
+          // console.log('[setContents success]', res)
         }
       })
     },

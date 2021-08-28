@@ -21,7 +21,8 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "custom-keyboard": "/components/keyboard/keyboard",
     "van-overlay": "@vant/weapp/overlay/index",
-
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "richText": "/components/richText/richText"
 
   },

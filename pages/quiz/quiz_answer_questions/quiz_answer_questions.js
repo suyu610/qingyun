@@ -1,6 +1,5 @@
 // pages/quiz/quiz_comments/quiz_comments.js
 import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
-import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 import router from '../../../utils/router/index.js';
 import QuizService from '../../../net/service/quizService.js'
 import util from '../../../utils/util.js'
@@ -25,9 +24,7 @@ Page({
     // 新建笔记相关
     showInsertNewNotePopup: false,
     newNotePlaceholder: '开始编辑吧...',
-    // 键盘相关
-
-    keyboardShow: false,
+    showAnswerSwitch: false,
     // swiper正在滑动
     istransition: false,
     // 用户的做题记录
@@ -56,39 +53,31 @@ Page({
     audio_progress: 0,
     audio_paused: true,
     total_audio_progress: 0,
-    show_answer_page: false,
-    show_ques_list: false,
+    showAnswerPage: false,
+    showQuesList: false,
     tmp_transition_index: 0,
     answer_book: false,
+    settingTitle1: '显示答案',
+    settingTitle2: '重新开始',
+    itemTitle: '设置',
   },
 
 
-  // 键盘相关
-  showKeyBoard: function () {
-    this.data.customKeyBoard.showKeyBoard()
-  },
-
-  hideKeyboard: function () {
-    this.data.customKeyBoard.hideKeyBoard()
-  },
-
-  inputValugeChanged: function (e) {
+  onshowAnswerSwitchChange: function (e) {
     this.setData({
-      value: e.detail.join("")
+      showAnswerSwitch: e.detail
     })
   },
-
 
   // 添加笔记相关
   // 编辑器初始化完成时触发，可以获取组件实例
   onEditorReady() {
-    console.log('[onEditorReady callback]')
     richText = this.selectComponent('#richText'); //获取组件实例
   },
 
-  showInsertNewNotPopup: function () {
+  showInsertNewNotePopup: function () {
     this.setData({
-      show_answer_page: false,
+      showAnswerPage: false,
       showInsertNewNotePopup: true
     })
   },
@@ -110,7 +99,7 @@ Page({
   },
   onHideInsertNewNotePopup: function () {
     this.setData({
-      show_answer_page: true,
+      showAnswerPage: true,
       showInsertNewNotePopup: false
     })
   },
@@ -162,7 +151,7 @@ Page({
   jump2QuestionIndex(e) {
     this.setData({
       cur_ques_index: e.currentTarget.dataset.index,
-      show_ques_list: false
+      showQuesList: false
     })
   },
 
@@ -181,9 +170,9 @@ Page({
       tmp_transition_index: e.detail.current,
       audio_progress: 0,
       total_audio_progress: 0,
-      show_answer_page: false,
+      showAnswerPage: false,
       show_answer_option: false,
-    }) 
+    })
     this.setData({
       cur_ques_index: this.data.tmp_transition_index,
     })
@@ -209,35 +198,13 @@ Page({
 
   // 判断顺序不敏感的两个数组是否相等?
   isArrEqual: function (arr1, arr2) {
-    return arr1.length === arr2.length && arr1.every((ele) => arr2.includes(ele));
+    return arr1.length === arr2.length
+
+      &&
+      (arr1.every((ele) => arr2.includes(ele)) ||
+        arr1.every((ele) => arr2.includes(parseInt(ele))))
   },
 
-  // 点击确认答案
-  tapConfirmAnswer: function () {
-    let ques_list = this.data.ques_list;
-    let cur_ques_index = this.data.cur_ques_index;
-    let recorder = this.data.recorder;
-
-    if (recorder[this.data.cur_ques_index].has_done) {
-      return;
-    }
-    console.log(ques_list[cur_ques_index].answer)
-    console.log(recorder[cur_ques_index].user_mark)
-
-    // 比较答案的正确性
-    if (this.isArrEqual(ques_list[cur_ques_index].answer, recorder[cur_ques_index].user_mark)) {
-      this.showNotify(true)
-      recorder[cur_ques_index].correct = true;
-    } else {
-      this.showNotify(false)
-      recorder[cur_ques_index].correct = false;
-    }
-
-    recorder[cur_ques_index].has_done = true;
-    this.setData({
-      recorder
-    })
-  },
 
   // 填空题
   textInputChange(e) {
@@ -249,13 +216,9 @@ Page({
 
     if (index == null) {
       index = 0
-      recorder[cur_ques_index].user_mark[index] = text.join('')
-      this.setData({
-        value: text.join('')
-      })
+      recorder[cur_ques_index].user_mark[index] = text
     }
-
-    recorder[cur_ques_index].user_mark[index] = text.join('')
+    recorder[cur_ques_index].user_mark[index] = text
     this.setData({
       recorder
     })
@@ -266,6 +229,8 @@ Page({
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
     let clickOptionIndex = e.currentTarget.dataset.index
+    let clickOptionSeq = e.currentTarget.dataset.seq
+
     if (this.data.paper.type != 'test') {
       if (recorder[this.data.cur_ques_index].has_done) {
         return;
@@ -284,8 +249,21 @@ Page({
     }
   },
 
+  // 
+  handleSubmitQuesRecorderSuccess: function (e) {
+    console.log(e)
+  },
+
+  handleSubmitQuesRecorderFail: function (e) {
+    Notify({
+      message: '未能保存该答题记录',
+      type: 'danger',
+      duration: 700,
+    });
+  },
 
   // 点击单选题的选项
+
   // 1. 获取点击的序号
   // =================
   // 1.1 如果是做题模式
@@ -300,18 +278,23 @@ Page({
   // 2.2 则记录下来，并跳转下一题
 
   tapSingleOption: function (e) {
-    let that = this
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
     let clickOptionIndex = e.currentTarget.dataset.index;
+    let clickOptionSeq = e.currentTarget.dataset.seq;
+
+    let ques_list = this.data.ques_list;
+
     if (this.data.paper.type != 'test') {
       if (recorder[cur_ques_index].has_done) {
         return;
       }
       recorder[cur_ques_index].has_done = true;
       recorder[cur_ques_index].colors[clickOptionIndex] = 'blue'
-      let rightAnswer = this.data.ques_list[cur_ques_index].answer.toString()
-      if (clickOptionIndex == rightAnswer) {
+      let rightAnswer = ques_list[cur_ques_index].answer.toString()
+      recorder[cur_ques_index].user_mark = clickOptionSeq
+
+      if (clickOptionSeq == rightAnswer) {
         this.showNotify(true)
         recorder[cur_ques_index].correct = true;
       } else {
@@ -319,31 +302,79 @@ Page({
         recorder[cur_ques_index].correct = false;
       }
 
-
       this.setData({
         recorder
       })
+
+      // 添加答题记录
+      let submitData = {
+        "userInput": recorder[cur_ques_index].user_mark,
+        "quizId": this.data.quizId,
+        "quesId": ques_list[cur_ques_index].id,
+        "isRight": clickOptionIndex == rightAnswer ? '1' : '0'
+      }
+      QuizService.SubmitQuesRecorder(this.handleSubmitQuesRecorderSuccess, this.handleSubmitQuesRecorderFail, submitData)
+
+      console.log(recorder[cur_ques_index].user_mark, clickOptionIndex == rightAnswer, ques_list[cur_ques_index].id, this.data.quizId)
     }
   },
 
-  /*
-   * 根据用户点击arr,options,answer,返回颜色数组
-   * 正确的返回green
-   * 选中的返回blue
-   * 漏选的返回yellow
-   * 
-   * 错选的返回red
-   * 
-   */
-  changeColor() {
-    let recorder = this.data.recorder;
+  // 点击确认答案
+  tapConfirmAnswer: function () {
     let ques_list = this.data.ques_list;
-    let cur_ques_index = cur_ques_index;
+    let cur_ques_index = this.data.cur_ques_index;
+    let recorder = this.data.recorder;
+    let transfer_user_mark = []
+
+    if (recorder[this.data.cur_ques_index].has_done) {
+      return;
+    }
+
+    // 这里要对用户的uaser_mark进行一个转换，将index => seq
+    if (ques_list[cur_ques_index].type = "多选题") {
+      // 
+      recorder[cur_ques_index].user_mark.forEach(e => {
+        transfer_user_mark.push(ques_list[cur_ques_index].options[e].seq)
+      })
+    }
+
+    let isCorrect = this.isArrEqual(ques_list[cur_ques_index].answer, transfer_user_mark)
+    // 比较答案的正确性
+    if (isCorrect) {
+      this.showNotify(true)
+      recorder[cur_ques_index].correct = true;
+    } else {
+      this.showNotify(false)
+      recorder[cur_ques_index].correct = false;
+    }
+
+    recorder[cur_ques_index].has_done = true;
+    this.setData({
+      recorder
+    })
+
+    // 添加答题记录
+    // user_input is_correct,ques_id,quiz_id
+
+    // 添加答题记录
+    let submitData = {
+      "userInput": ques_list[cur_ques_index].type = "多选题" ? recorder[cur_ques_index].user_mark.join("&#&") : transfer_user_mark.join("&#&"),
+      "quizId": this.data.quizId,
+      "quesId": ques_list[cur_ques_index].id,
+      "isRight": isCorrect?'1':'0'
+    }
+
+    QuizService.SubmitQuesRecorder(this.handleSubmitQuesRecorderSuccess, this.handleSubmitQuesRecorderFail, submitData)
+
   },
 
-  changeQuestion: function () {
-    this.data.customKeyBoard.setValue(this.data.recorder[this.data.cur_ques_index].user_mark[0]);
 
+  // 切换题目需要进行的事
+  // 1. 暂停音频
+  // 2. 将音频进度为0
+  // 3. 结束音频的循环任务
+
+  changeQuestion: function () {
     this.setData({
       audio_paused: true,
       current_audio_progress: 0
@@ -352,10 +383,12 @@ Page({
     clearInterval(progress_timer);
   },
 
+  ////////////////////// 音频播放相关  ////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  // 初始化音频
   initAudioPlayer() {
     let that = this
     innerAudioContext = wx.createInnerAudioContext({});
-
     innerAudioContext.onCanplay(function getDuration() {
       let intervalID = setInterval(function () {
         if (innerAudioContext.duration != 0 && !isNaN(innerAudioContext.duration)) {
@@ -444,46 +477,54 @@ Page({
       audio_progress: e.detail,
       current_audio_progress: e.detail / 100 * this.data.total_audio_progress
     })
-
     innerAudioContext.seek(e.detail / 100 * this.data.total_audio_progress)
   },
 
+  /////////////////////////////////////////
+
   onShowQuestionList: function () {
     this.setData({
-      show_ques_list: true
+      showQuesList: true
     })
   },
 
   onCloseQuestionList: function () {
     this.setData({
-      show_ques_list: false
+      showQuesList: false
     })
   },
   showAnswer: function () {
     this.setData({
-      show_answer_page: true
+      showAnswerPage: true
     })
   },
 
   onCloseAnswer: function () {
     this.setData({
-      show_answer_page: false,
+      showAnswerPage: false,
       answer_page_index: 0,
     })
   },
+  // 打乱数组顺序
 
-  onReady: function () {
-    this.data.customKeyBoard = this.selectComponent('#customKeyBoard')
+  shuffle: function (arr) {
+    var len = arr.length;
+    for (var i = 0; i < len - 1; i++) {
+      var index = parseInt(Math.random() * (len - i));
+      var temp = arr[index];
+      arr[index] = arr[len - i - 1];
+      arr[len - i - 1] = temp;
+    }
+    return arr;
   },
 
   loadQuesSuccess: function (e) {
-
     // 在这要生成
     let recorder = [];
     let ques_list = e;
     let that = this;
 
-    // 把时间弄短
+    // 把时间的格式调整为yyyy-mm-dd hh:mm:ss
     ques_list.forEach(ques => {
       // console.log(ques.defaultNote)
       if (ques.defaultNote != null) {
@@ -494,6 +535,11 @@ Page({
       })
       let colors = []
       let user_mark = []
+
+      // 如果是单选或多选题，则将选项打乱顺序
+      if (ques.type == "多选题" || ques.type == "单选题") {
+        ques.options = this.shuffle(ques.options)
+      }
 
       if (ques.type == "单词默写题") {
         // 爬取
@@ -542,6 +588,7 @@ Page({
       ques_list
     })
   },
+
   loadQuesFail: function (e) {
     console.log(e)
   },
@@ -550,23 +597,16 @@ Page({
    */
   onLoad: function (options) {
     const data = router.extract(options);
+
+    this.setData({
+      quizId: data.id,
+      showAnswerSwitch: data.isShowAnswer
+    })
+
     this.initAudioPlayer()
     QuizService.StartAnswer(this.loadQuesSuccess, this.loadQuesFail, data);
-
   },
 
-  kbd_showAnswer: function () {
-    this.data.customKeyBoard.hideKeyBoard()
-    this.showAnswer()
-  },
-  kbd_voice: function () {
-    word_audio.src = "http://ali.bczcdn.com/r/" + this.data.ques_list[this.data.cur_ques_index].answer[0].toLowerCase() + ".mp3"
-    word_audio.play()
-    word_audio.onCanplay(_ => {})
 
-    word_audio.onError(_ => {
-      Toast.fail('暂无该单词发音');
-    })
-  },
 
 })

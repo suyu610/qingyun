@@ -7,7 +7,8 @@ import {
   AddQuizUrl,
   RemoveQuizUrl,
   GetQuesListByQuizIdUrl,
-  StartAnswerUrl
+  StartAnswerUrl,
+  SubmitQuesRecorderUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -96,6 +97,18 @@ function StartAnswer(handleSuccess, handleFailure, data) {
     });
 }
 
+function SubmitQuesRecorder(handleSuccess, handleFailure, data) {
+  httpService.post(
+    SubmitQuesRecorderUrl,
+    data,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
 
 module.exports = {
   getAllQuizCate,
@@ -104,5 +117,6 @@ module.exports = {
   AddQuiz,
   RemoveQuiz,
   GetQuesListByQuizId,
-  StartAnswer
+  StartAnswer,
+  SubmitQuesRecorder
 }

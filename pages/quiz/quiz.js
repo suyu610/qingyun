@@ -265,10 +265,10 @@ Page({
   getUserQuizCateFail: function (e) {
     console.log(e)
   },
+  
   onLoad: function (options) {
-
     wx.setNavigationBarTitle({
-      title: '',
+      title: '青云题库',
     })
 
     wx.showLoading({

@@ -13,24 +13,40 @@
         </view>
       </view>
     </van-col>
-    <van-col span="2" offset="12">
+    <van-col span="4" offset="10">
       <view style="line-height:105rpx">
-        <van-icon name="setting-o" />
+        <van-dropdown-menu active-color="#28B1FC">
+          <van-dropdown-item id="item" title="{{ itemTitle }}">
+            <view style="background-color:white">
+              <van-cell title="{{ settingTitle1 }}">
+                <van-switch slot="right-icon" size="24px" style="height: 26px" checked="{{ showAnswerSwitch }}"
+                  active-color="#28B1FC" bind:change="onshowAnswerSwitchChange" />
+              </van-cell>
+              <van-cell title="{{ settingTitle2 }}">
+                <van-icon slot="right-icon" name="replay" class="custom-icon" />
+              </van-cell>
+              <view style="padding: 15px 16px;">
+                <van-button size="small" round custom-class="answer_btn" type="default" block
+                  custom-style="color: #fff;background-color: #28B1FC;">
+                  确认
+                </van-button>
+              </view>
+            </view>
+          </van-dropdown-item>
+        </van-dropdown-menu>
       </view>
     </van-col>
   </van-row>
 </view>
 
 <view class="container" scroll-y="{{true}}">
-  <!-- <custom-keyboard id="customKeyBoard" bind:inputValugeChanged="textInputChange" bind:star="kbd_star"
-    bind:showAnswer="kbd_showAnswer" bind:voice="kbd_voice" hideKeyboard="hideKeyBoard" showKeyboard="{{keyboardShow}}">
-  </custom-keyboard> -->
+
   <view class="remain_time" wx:if="{{test.type=='test'}}">29:19</view>
   <!-- <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper" bindtransition="bindtransition"
     bindanimationfinish="bindanimationfinish"> -->
   <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper">
     <block wx:for="{{ques_list}}" wx:key="id">
-      <swiper-item bindtap="hideKeyboard">
+      <swiper-item>
         <scroll-view scroll-y="true"
           style="padding:20px;box-sizing:border-box; padding-top: 0;height:calc(100vh - 50px);    padding-bottom: 106rpx;">
           <!-- 题目部分 -->
@@ -65,12 +81,12 @@
           <view class="options {{istransition?'transition':''}}" wx:if="{{item.type=='单选题'}}">
             <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
               <van-transition name="fade-up" show="{{ !istransition }}" duration="{{ { enter: 100*index } }}">
-                <view class="option" bindtap="tapSingleOption" data-index="{{index}}">
+                <view class="option" bindtap="tapSingleOption" data-index="{{index}}" data-seq="{{option_item.seq}}">
                   <view class="option_title bg-{{recorder[cur_ques_index].colors[index]}}">
                     {{tools.number2Alpha(index)}}</view>
                   <view class="option_body">{{option_item.body}}</view>
                   <view class="answer_right"
-                    wx:if="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer==index}}">
+                    wx:if="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer==option_item.seq}}">
                   </view>
                 </view>
               </van-transition>
@@ -80,10 +96,11 @@
           <view class="options {{istransition?'transition':''}}" wx:if="{{item.type=='多选题'}}">
             <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
               <van-transition name="fade-up" show="{{ !istransition }}" duration="{{ { enter: 100*index } }}">
-                <view class="option option_multi" bindtap="tapMultiOption" data-index="{{index}}">
+                <view class="option option_multi" bindtap="tapMultiOption" data-index="{{index}}"
+                  data-seq="{{option_item.seq}}">
                   <view class="option_title bg-{{recorder[cur_ques_index].colors[index]}}">{{tools.number2Alpha(index)}}
                   </view>
-                  <view class="option_body">{{option_item}}</view>
+                  <view class="option_body">{{option_item.body}}</view>
                   <view class="answer_right"
                     wx:if="{{recorder[cur_ques_index].has_done && tools.contain(ques_list[cur_ques_index].answer,index)}}">
                   </view>
@@ -111,11 +128,9 @@
           </view>
 
           <view class="options" wx:if="{{item.type=='单词默写题'}}">
-            <view class="input" catchtap="showKeyBoard"
-              style="padding-left: 30rpx;border:1px solid grey;border-radius:5px;height:40px;line-height:40px">
-              {{recorder[cur_ques_index].user_mark[0]}}</view>
-            <!-- <van-field clearable left-icon="bulb-o" autosize center value="{{value}}" placeholder="请在此作答"
-              border="{{ true }}" catchtap="showKeyBoard" /> -->
+
+            <van-field clearable left-icon="bulb-o" autosize center value="{{value}}" placeholder="请在此作答"
+              border="{{ true }}" />
           </view>
 
           <view class="confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
@@ -134,7 +149,7 @@
   <van-transition name="slide-right" show="{{ques_list[cur_ques_index].type=='单选题' }}">
     <view class="quick_opera">
       <block wx:for="{{ques_list[cur_ques_index].options}}" wx:key="index" wx:for-item="option_item">
-        <view class="opera" bindtap="tapSingleOption" data-index="{{index}}">
+        <view class="opera" bindtap="tapSingleOption" data-index="{{option_item.seq}}">
           {{tools.number2Alpha(index)}}
         </view>
       </block>
@@ -163,8 +178,8 @@
 
     <van-col span="8">
       <view class="star" bindtap="starQuestion">
-        <van-icon name="bookmark-o" wx:if="{{!ques_list[cur_ques_index].has_star}}" size="24px"/>
-        <van-icon name="bookmark" wx:else color="#28B1FC" size="24px"/>        
+        <van-icon name="bookmark-o" wx:if="{{!ques_list[cur_ques_index].has_star}}" size="24px" />
+        <van-icon name="bookmark" wx:else color="#28B1FC" size="24px" />
         <!-- <view class="star_num">{{ques_list[cur_ques_index].starNum}}</view> -->
       </view>
     </van-col>
@@ -185,7 +200,7 @@
 
 </view>
 <!-- 题目列表 -->
-<van-popup show="{{ show_ques_list }}" bind:close="onCloseQuestionList" position="bottom" closeable round
+<van-popup show="{{ showQuesList }}" bind:close="onCloseQuestionList" position="bottom" closeable round
   custom-style="height: 40%;">
   <van-divider contentPosition="center">题目列表</van-divider>
   <view class="ques_list">
@@ -202,11 +217,11 @@
 </van-popup>
 
 <!-- 解答 -->
-<van-popup show="{{ show_answer_page }}" bind:close="onCloseAnswer" position="bottom" round custom-style="height: 55%;">
+<van-popup show="{{ showAnswerPage }}" bind:close="onCloseAnswer" position="bottom" round custom-style="height: 55%;">
   <view class="answer_page">
     <van-tabs bind:change="answerPageChanged" tab-active-class="tab-active" active="{{ answer_page_index }}"
       line-height="0" title-active-color="#27B1FF" title-inactive-color="#10101055" swipeable animated
-      wx:if="{{ show_answer_page }}">
+      wx:if="{{ showAnswerPage }}">
       <van-tab title="答案">
         <view class="answer">
           <view class="answer_detail">
@@ -214,18 +229,21 @@
               答案：{{ques_list[cur_ques_index].type=='多选题'||
               ques_list[cur_ques_index].type=='单选题'?tools.number2AlphaArr(ques_list[cur_ques_index].answer):ques_list[cur_ques_index].answer}}
             </view>
+
+            <!-- <view class="timeline" style="text-align: center;padding-top: 20rpx;color: lightgrey;">答案有误?</view> -->
           </view>
 
           <view class="description" wx:if="{{ques_list[cur_ques_index].defaultNote==null}}">
             <van-empty image="error" description="暂无解析" />
           </view>
           <view class="description" wx:else>
-            <van-divider textColor="lightgrey" hairline contentPosition="center">
-              {{ques_list[cur_ques_index].type!='单词默写题'?'解析':'解释'}}</van-divider>
+            <van-divider borderColor="transparent" textColor="lightgrey" hairline contentPosition="center">
+              {{ques_list[cur_ques_index].type!='单词默写题'?'答案有误?':'解释'}}</van-divider>
             <view class="source">{{ques_list[cur_ques_index].defaultNote.source}}</view>
             <text class="body">{{ques_list[cur_ques_index].defaultNote.body}}</text>
             <view class="author" wx:if="{{ques_list[cur_ques_index].type!='单词默写题'}}">
               作者：{{ques_list[cur_ques_index].defaultNote.userName}}</view>
+
             <view class="info" wx:if="{{ques_list[cur_ques_index].type!='单词默写题'}}">
               <view class="flex">
                 <view class="timeline">{{ques_list[cur_ques_index].defaultNote.createTime}}</view>
@@ -248,6 +266,8 @@
                 </view>
               </van-transition>
             </view>
+
+
           </view>
         </view>
       </van-tab>
@@ -329,32 +349,23 @@
       <van-row gutter="4">
         <van-col span="18">
           <van-row gutter="4">
-            <van-col span="16">
-              <van-button wx:if="{{answer_page_index==0}}" custom-class="answer_btn" type="default" block
-                custom-style="color:#000;background-color:#ffe9a7;" icon="good-job-o">
-                有帮助
-              </van-button>
-            </van-col>
-            <van-col span="8">
-              <van-button wx:if="{{answer_page_index==0}}" custom-class="answer_btn" type="default" block
-                custom-style="color:#000;background-color:#f1e9e9;">
-                没帮助
-              </van-button>
-            </van-col>
-
+            <van-button wx:if="{{answer_page_index==0}}" custom-class="answer_btn" type="default" block
+              custom-style="color:#000;background-color:#ffe9a7;" icon="good-job-o">
+              有帮助
+            </van-button>
             <van-button wx:if="{{answer_page_index==1}}" custom-class="answer_btn" type="default" block custom-style=""
               icon="diamond-o">
               更多笔记
             </van-button>
-
             <van-button wx:if="{{answer_page_index==2}}" custom-class="answer_btn" type="default" block
-              bindtap="showInsertNewNotPopup" custom-style="color:#000;background-color:#ffe9a7;" icon="edit">
+              bindtap="showInsertNewNotePopup" custom-style="color:#000;background-color:#ffe9a7;" icon="edit">
               {{ques_list[cur_ques_index].user_explain!=null?'修改笔记':'新增笔记'}}
             </van-button>
           </van-row>
         </van-col>
         <van-col span="6">
-          <van-button type="default" block custom-class="answer_btn" bindtap="onCloseAnswer">
+          <van-button type="default" block custom-class="answer_btn" bindtap="showInsertNewNotePopup"
+            custom-style="color:#000;background-color:#f3ecec;" bindtap="onCloseAnswer">
             关闭 </van-button>
         </van-col>
       </van-row>
