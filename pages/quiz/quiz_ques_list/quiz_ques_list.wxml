@@ -50,11 +50,9 @@
   <view class="bottom">
 
     <van-goods-action>
-      <van-goods-action-icon icon="balance-o" text="赞赏"  bind:click="onClickIcon" />
-      <van-goods-action-icon icon="notes-o" text="笔记" info="{{quiz.noteNum}}" bind:click="onClickIcon" />
-      <van-goods-action-icon icon="chat-o" text="评论" info="{{quiz.commentNum}}" bind:click="onClickIcon" />
-
-      <!-- <van-goods-action-button text="查看所有" color="#27B1FF"  bind:click="onClickButton" /> -->
+      <van-goods-action-icon  icon="balance-o" text="赞赏"  bind:click="onClickIcon" />
+      <van-goods-action-icon  icon="notes-o" text="笔记" info="{{quiz.noteNum}}" bind:click="onClickIcon" />
+      <van-goods-action-icon  icon="chat-o" text="评论" info="{{quiz.commentNum}}" bind:click="onClickIcon" />
       <van-goods-action-button size="mini" icon="plus" text="加入题库" color="#27B1FF" bind:click="onClickButton" />
     </van-goods-action>
 

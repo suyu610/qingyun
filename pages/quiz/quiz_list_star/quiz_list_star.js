@@ -12,34 +12,32 @@ Page({
         quizzes: [{
           id: 1,
           title: "巴拉巴拉巴拉巴拉",
-          type: "单选"
+          quesType: "单选"
         }, {
           id: 2,
           title: "巴拉巴拉巴拉巴拉",
-          type: "填空"
-
+          quesType: "填空"
         }, {
           id: 3,
           title: "巴拉巴拉巴拉巴拉",
-          type: "完型"
-
+          quesType: "完型"
         }]
       }, {
         title: '第三章 指针',
         quizzes: [{
           id: 1,
           title: "巴拉巴拉巴拉巴拉",
-          type: "单选"
+          quesType: "单选"
 
         }, {
           id: 2,
           title: "巴拉巴拉巴拉巴拉",
-          type: "简答"
+          quesType: "简答"
 
         }, {
           id: 3,
           title: "巴拉巴拉巴拉巴拉",
-          type: "多选"
+          quesType: "多选"
 
         }]
       }, ]
@@ -58,53 +56,4 @@ Page({
       title: '收藏本',
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

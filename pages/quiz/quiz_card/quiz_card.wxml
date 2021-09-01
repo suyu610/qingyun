@@ -1,7 +1,5 @@
 <van-dropdown-menu>
-
   <van-dropdown-item value="{{ subject_value1 }}" options="{{ option_subject }}" />
-
   <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
   <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
 </van-dropdown-menu>

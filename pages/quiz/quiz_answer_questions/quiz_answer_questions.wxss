@@ -7,6 +7,10 @@
   background-size: 100vw 100vh;
 }
 
+page {
+  background-color: #fff;
+}
+
 .test {
   box-sizing: border-box !important;
   height: 100%;
@@ -84,10 +88,10 @@ swiper {
 
 .ques_list_index_title,
 .options .option .option_title {
-  width: 50rpx;
-  height: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
   border: 1px solid #c5c1c1;
-  line-height: 50rpx;
+  line-height: 60rpx;
   text-align: center;
   border-radius: 50%;
   display: inline-block;
@@ -316,7 +320,7 @@ z .answer_page .answer .answer_detail {
   bottom: 20px;
 }
 
-.timeline{
+.timeline {
   padding-right: 10rpx;
 }
 

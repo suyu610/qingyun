@@ -1,5 +1,6 @@
 <wxs module="tools" src="../../../utils/numbertofix.wxs"></wxs>
-<view class="header">
+
+<view class="header" wx:if="{{ques_list.length != 0}}">
   <van-row>
     <van-col span="10">
       <view class="do_num">
@@ -39,12 +40,9 @@
   </van-row>
 </view>
 
-<view class="container" scroll-y="{{true}}">
-
+<view class="container" scroll-y="{{true}}" wx:if="{{ques_list.length != 0}}">
   <view class="remain_time" wx:if="{{test.type=='test'}}">29:19</view>
-  <!-- <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper" bindtransition="bindtransition"
-    bindanimationfinish="bindanimationfinish"> -->
-  <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper">
+  <swiper current="{{cur_ques_index}}" bindchange="bindChangeSwiper" circular>
     <block wx:for="{{ques_list}}" wx:key="id">
       <swiper-item>
         <scroll-view scroll-y="true"
@@ -55,11 +53,11 @@
             <view class="ques_title"><text><text
                   wx:if="{{item.value!=null}}">({{item.value}}分)</text>{{item.title}}</text></view>
             <block wx:for="{{item.files}}" wx:key="index" wx:for-item="file">
-              <view class="ques_img" wx:if="{{file.type=='img'}}" bindtap="previewImage" data-src="{{file.url}}">
+              <view class="ques_img" wx:if="{{file.mediaType=='img'}}" bindtap="previewImage" data-src="{{file.url}}">
                 <image mode="widthFix" src="{{file.url}}"></image>
               </view>
 
-              <view class="ques_voice" wx:if="{{file.type=='voice'}}">
+              <view class="ques_voice" wx:if="{{file.mediaType=='voice'}}">
                 <van-slider custom-class="audio_slider" value="{{audio_progress}}"
                   bind:drag-start="ondragAudioProgStart" bind:drag-end="ondragAudioProgEnd"
                   bind:change="onChangeAudioProgress" bar-height="4px" active-color="#28b1fc" />
@@ -86,7 +84,7 @@
                     {{tools.number2Alpha(index)}}</view>
                   <view class="option_body">{{option_item.body}}</view>
                   <view class="answer_right"
-                    wx:if="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer==option_item.seq}}">
+                    wx:if="{{(recorder[cur_ques_index].has_done||showAnswerSwitch) && ques_list[cur_ques_index].answer==option_item.seq}}">
                   </view>
                 </view>
               </van-transition>
@@ -102,7 +100,7 @@
                   </view>
                   <view class="option_body">{{option_item.body}}</view>
                   <view class="answer_right"
-                    wx:if="{{recorder[cur_ques_index].has_done && tools.contain(ques_list[cur_ques_index].answer,index)}}">
+                    wx:if="{{(recorder[cur_ques_index].has_done|| showAnswerSwitch) && tools.contain(ques_list[cur_ques_index].transfer_answer,index)}}">
                   </view>
                 </view>
               </van-transition>
@@ -112,8 +110,18 @@
           <view class="options" wx:if="{{item.type=='填空题'}}">
             <van-cell-group>
               <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
-                <van-field bind:change="textInputChange" data-index="{{index}}" clearable
-                  label="{{'第 '+tools.increment(index)+' 空'}}" placeholder="请在此作答"
+                <view style="padding-bottom:20rpx">{{tools.increment(index)}}、{{option_item.body}}</view>
+              </block>
+            </van-cell-group>
+            <view class="block padding-lg"></view>
+            <van-cell-group style="padding-top:30rpx">
+              <block wx:for="{{item.options}}" wx:key="index" wx:for-item="option_item">
+                <van-field wx:if="{{showAnswerSwitch}}" bind:change="textInputChange" data-index="{{index}}" clearable
+                  label="{{'第 '+tools.increment(index)+' 空'}}" placeholder="请在此作答" data-index="{{index}}"
+                  data-seq="{{option_item.seq}}" value="{{ques_list[cur_ques_index].answer[index]}}" />
+                <van-field wx:else bind:change="textInputChange" data-index="{{index}}" clearable
+                  label="{{'第 '+tools.increment(index)+' 空'}}" placeholder="请在此作答" data-index="{{index}}"
+                  data-seq="{{option_item.seq}}"
                   error="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer[index]!=recorder[cur_ques_index].user_mark[index]}}"
                   right-icon="{{recorder[cur_ques_index].has_done? ques_list[cur_ques_index].answer[index]==recorder[cur_ques_index].user_mark[index]?'success':'cross' :'' }}" />
               </block>
@@ -128,12 +136,13 @@
           </view>
 
           <view class="options" wx:if="{{item.type=='单词默写题'}}">
-
-            <van-field clearable left-icon="bulb-o" autosize center value="{{value}}" placeholder="请在此作答"
-              border="{{ true }}" />
+            <van-field clearable left-icon="bulb-o" autosize center placeholder="请在此作答" border="{{ true }}"
+              bind:change="textInputChange" data-index="{{0}}" clearable data-index="{{0}}" data-seq="{{0}}"
+              error="{{recorder[cur_ques_index].has_done && ques_list[cur_ques_index].answer[0]!=recorder[cur_ques_index].user_mark[0]}}"
+              right-icon="{{recorder[cur_ques_index].has_done? ques_list[cur_ques_index].answer[0]==recorder[cur_ques_index].user_mark[0]?'success':'cross' :'' }}" />
           </view>
 
-          <view class="confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
+          <view class=" confirm" wx:if="{{item.type!='单选题'}}" bindtap="tapConfirmAnswer">
             <view style="position: fixed;width:  90vw;text-align: center;bottom: 20vh;">
               <van-button disabled="{{recorder[cur_ques_index].has_done}}"
                 custom-style="margin-top:20px;border-radius:20rpx" slot="button" size="normal" color="#28b1fc">
@@ -166,43 +175,48 @@
     </view>
   </van-transition>
 </view>
+<view class="container" wx:else style="padding-top: 20vh;">
+  <van-empty description="题目都做完啦" />
+</view>
 
-<view class="footer">
+<view class="footer" wx:if="{{ques_list.length != 0}}">
   <van-row>
-    <van-col span="8">
-      <view class="all_ques" bindtap="onShowQuestionList">
+    <van-col span="3" bindtap="prevSwiperBtnClick">
+      <van-icon name="arrow-left" />
+    </van-col>
+    <van-col span="6" bindtap="onShowQuestionList">
+      <view class="all_ques">
         <van-icon name="apps-o" />
         <view class="all_num">{{cur_ques_index+1}} / {{ques_list.length}}</view>
       </view>
     </van-col>
-
-    <van-col span="8">
-      <view class="star" bindtap="starQuestion">
-        <van-icon name="bookmark-o" wx:if="{{!ques_list[cur_ques_index].has_star}}" size="24px" />
+    <van-col span="6" bindtap="starQuestion">
+      <view class="star">
+        <van-icon name="bookmark-o" wx:if="{{!ques_list[cur_ques_index].hasStar}}" size="24px" />
         <van-icon name="bookmark" wx:else color="#28B1FC" size="24px" />
         <!-- <view class="star_num">{{ques_list[cur_ques_index].starNum}}</view> -->
       </view>
     </van-col>
 
-    <van-col span="8">
+    <van-col span="6" bindtap="showAnswer">
       <view class="answer_btn" wx:if="{{paper.type == 'test'}}">
         交卷
       </view>
 
-      <view class="answer_btn" wx:else bindtap="showAnswer">
+      <view class="answer_btn" wx:else>
         解析
       </view>
     </van-col>
-
-
-
+    <van-col span="3" style="text-align:right" bindtap="nextSwiperBtnClick">
+      <van-icon name="arrow" />
+    </van-col>
   </van-row>
 
 </view>
 <!-- 题目列表 -->
 <van-popup show="{{ showQuesList }}" bind:close="onCloseQuestionList" position="bottom" closeable round
   custom-style="height: 40%;">
-  <van-divider contentPosition="center">题目列表</van-divider>
+  <van-divider contentPosition="center" borderColor="transparent">题目列表</van-divider>
   <view class="ques_list">
     <van-grid column-num="6" border="{{false}}">
       <block wx:for="{{ques_list}}" wx:key="index">
@@ -227,7 +241,7 @@
           <view class="answer_detail">
             <view class="body">
               答案：{{ques_list[cur_ques_index].type=='多选题'||
-              ques_list[cur_ques_index].type=='单选题'?tools.number2AlphaArr(ques_list[cur_ques_index].answer):ques_list[cur_ques_index].answer}}
+              ques_list[cur_ques_index].type=='单选题'?tools.number2AlphaArr(ques_list[cur_ques_index].transfer_answer):ques_list[cur_ques_index].answer}}
             </view>
 
             <!-- <view class="timeline" style="text-align: center;padding-top: 20rpx;color: lightgrey;">答案有误?</view> -->
@@ -315,31 +329,31 @@
       <van-tab title="我的笔记">
         <view class="mine">
           <!-- user_explain -->
-          <van-empty wx:if="{{ques_list[cur_ques_index].user_explain == null}}" description="暂无笔记" />
+          <van-empty wx:if="{{ques_list[cur_ques_index].userNote == null}}" description="暂无笔记" />
           <view wx:else>
             <van-cell-group border="{{ false }}">
-              <van-field value="巴拉巴拉巴拉吧巴拉巴拉巴拉吧巴拉巴拉巴拉吧巴拉巴拉巴拉吧巴拉巴拉巴拉吧" center type="textarea" autosize left-icon="edit"
-                border="{{ false }}" />
+              <rich-text style="display:block;padding: 10px 16px;font-size:18px;font-weight: bold;"
+                nodes="{{ques_list[cur_ques_index].userNote.body}}">
+              </rich-text>
             </van-cell-group>
-
             <view class="info" style="padding: 10px 16px;">
-              <view class="timeline">2021-8-14 15:35:21</view>
+              <view class="timeline">
+                {{ques_list[cur_ques_index].userNote.createTime}}
+              </view>
               <view class="flex">
                 <view class="eye">
                   <van-icon name="eye-o" />
-                  <text>14</text>
+                  <text>{{ques_list[cur_ques_index].userNote.viewCount}}</text>
                 </view>
                 <view class="book-white">
                   <van-icon name="bookmark-o" />
-                  <text>14</text>
+                  <text>{{ques_list[cur_ques_index].userNote.starCount}}</text>
                 </view>
               </view>
             </view>
-            <van-cell title="是否公开" border="{{ false }}">
-              <van-switch checked="{{ques_list[cur_ques_index].user_explain.is_public }}" size="24px"
-                bind:change="onChange" />
+            <van-cell title="是否公开" border="{{ false}}">
+              <van-switch checked="{{ques_list[cur_ques_index].userNote.public }}" size="24px" bind:change="onChange" />
             </van-cell>
-
           </view>
         </view>
       </van-tab>
@@ -350,15 +364,15 @@
         <van-col span="18">
           <van-row gutter="4">
             <van-button wx:if="{{answer_page_index==0}}" custom-class="answer_btn" type="default" block
-              custom-style="color:#000;background-color:#ffe9a7;" icon="good-job-o">
+              icon="good-job-o">
               有帮助
             </van-button>
-            <van-button wx:if="{{answer_page_index==1}}" custom-class="answer_btn" type="default" block custom-style=""
+            <van-button wx:if="{{answer_page_index==1}}" custom-class="answer_btn" type="default" block
               icon="diamond-o">
               更多笔记
             </van-button>
             <van-button wx:if="{{answer_page_index==2}}" custom-class="answer_btn" type="default" block
-              bindtap="showInsertNewNotePopup" custom-style="color:#000;background-color:#ffe9a7;" icon="edit">
+              bindtap="showInsertNewNotePopup" icon="edit">
               {{ques_list[cur_ques_index].user_explain!=null?'修改笔记':'新增笔记'}}
             </van-button>
           </van-row>

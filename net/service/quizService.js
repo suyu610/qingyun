@@ -8,7 +8,9 @@ import {
   RemoveQuizUrl,
   GetQuesListByQuizIdUrl,
   StartAnswerUrl,
-  SubmitQuesRecorderUrl
+  SubmitQuesRecorderUrl,
+  ToggleStarQuesUrl,
+  InsertOrUpdateNoteUrl
 } from "../httpConstants";
 
 const app = getApp()
@@ -109,6 +111,32 @@ function SubmitQuesRecorder(handleSuccess, handleFailure, data) {
     });
 }
 
+// 对题目进行收藏或取消
+function ToggleStarQues(handleSuccess, handleFailure, quizId, quesId) {
+  httpService.get(
+    ToggleStarQuesUrl + "/" + quizId + "/" + quesId,
+    "",
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
+// 新增或修改笔记
+function InsertOrUpdateNote(handleSuccess, handleFailure,data) {
+  httpService.post(
+    InsertOrUpdateNoteUrl,
+    data,
+    res => {
+      handleSuccess(res.data['data'])
+    },
+    er => {
+      handleFailure(er.data['msg'])
+    });
+}
+
 
 module.exports = {
   getAllQuizCate,
@@ -118,5 +146,7 @@ module.exports = {
   RemoveQuiz,
   GetQuesListByQuizId,
   StartAnswer,
-  SubmitQuesRecorder
+  SubmitQuesRecorder,
+  ToggleStarQues,
+  InsertOrUpdateNote
 }

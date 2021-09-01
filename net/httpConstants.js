@@ -73,4 +73,5 @@ export const RemoveQuizUrl = 'quiz/quiz/remove'
 export const GetQuesListByQuizIdUrl = 'quiz/queslist'
 export const StartAnswerUrl = 'quiz/core/startAnswer'
 export const SubmitQuesRecorderUrl = 'quiz/core/submitQuesRecorder'
-
+export const ToggleStarQuesUrl = "quiz/ques/star"
+export const InsertOrUpdateNoteUrl = "quiz/note/insert"

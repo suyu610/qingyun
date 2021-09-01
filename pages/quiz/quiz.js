@@ -91,14 +91,15 @@ Page({
 
   jumpRoute(e) {
     let router = e.currentTarget.dataset.router
-    console.log(e.currentTarget.dataset)
     push({
       name: router,
       data: {
         id: e.currentTarget.dataset.id,
         title: e.currentTarget.dataset.title,
-        doneNum:e.currentTarget.dataset.donenum,
-        totalNum:e.currentTarget.dataset.totalnum
+        doneNum: e.currentTarget.dataset.donenum,
+        totalNum: e.currentTarget.dataset.totalnum,
+        rightNum: e.currentTarget.dataset.rightnum,
+        errNum: e.currentTarget.dataset.errnum
       }
     })
   },
@@ -185,6 +186,10 @@ Page({
       data: {
         id: e.currentTarget.dataset.id,
         title: e.currentTarget.dataset.title,
+        doneNum: e.currentTarget.dataset.donenum,
+        totalNum: e.currentTarget.dataset.totalnum,
+        rightNum: e.currentTarget.dataset.rightNum,
+        errNum: e.currentTarget.dataset.errNum
       },
     });
   },
@@ -195,6 +200,10 @@ Page({
       data: {
         id: e.currentTarget.dataset.id,
         title: e.currentTarget.dataset.title,
+        doneNum: e.currentTarget.dataset.donenum,
+        totalNum: e.currentTarget.dataset.totalnum,
+        rightNum: e.currentTarget.dataset.rightNum,
+        errNum: e.currentTarget.dataset.errNum
 
       },
     });
@@ -205,9 +214,12 @@ Page({
     e.forEach(e => {
       // 把标签按分号切割
       if (e.quizzes.length != 0) {
+
         e.quizzes.forEach(q => {
-          q.tags = q.tags.split(';')
-          q.tags.pop()
+          if (q.tags != null) {
+            q.tags = q.tags.split(';')
+            q.tags.pop()
+          }
         })
       }
     })
@@ -265,11 +277,13 @@ Page({
   getUserQuizCateFail: function (e) {
     console.log(e)
   },
-  
+
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '青云题库',
     })
+
+    // 基础信息
 
     wx.showLoading({
       title: '加载中...',
@@ -284,7 +298,6 @@ Page({
   onShow: function () {
     QuizService.getAllQuizCate(this.getAllQuizCateSuccess, this.getAllQuizCateFail)
     QuizService.getUserQuizCate(this.getUserQuizCateSuccess, this.getUserQuizCateFail)
-
   },
 
   onHide: function () {

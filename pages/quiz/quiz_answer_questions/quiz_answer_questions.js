@@ -81,22 +81,51 @@ Page({
       showInsertNewNotePopup: true
     })
   },
-  saveNote: function (res) {
-    this.onHideInsertNewNotePopup();
-    let {
-      value
-    } = res.detail;
+
+  handleInsertNoteSuccess: function () {
     wx.showToast({
       title: '保存成功',
       icon: 'none',
     })
-    console.log('[getEditorContent callback]=>', value)
+
+    this.onHideInsertNewNotePopup();
+  },
+
+  handleInsertNoteFail: function () {
+    wx.showToast({
+      title: '保存失败',
+      icon: 'error',
+    })
+
+    this.onHideInsertNewNotePopup();
+  },
+
+
+  saveNote: function (res) {
+    let {
+      value
+    } = res.detail;
+
+    let quizId = this.data.quizId;
+    let quesId = this.data.ques_list[this.data.cur_ques_index].id;
+    console.log(value)
+
+    let data = {
+      quizId: quizId,
+      quesId: quesId,
+      body: value.html,
+      isPublic: false 
+    }
+    console.log(data)
+    // [ todo ] 内容文本检测
+    QuizService.InsertOrUpdateNote(this.handleInsertNoteSuccess, this.handleInsertNoteFail, data)
   },
 
   noop: function () {
     console.log("blur")
     this.onHideInsertNewNotePopup()
   },
+
   onHideInsertNewNotePopup: function () {
     this.setData({
       showAnswerPage: true,
@@ -131,16 +160,33 @@ Page({
       answer_page_index: e.detail.name
     })
   },
-  starQuestion(e) {
+
+
+  handleToggleStarSuccess: function () {
+
+  },
+
+  handleToggleStarFail: function () {
+    wx.showToast({
+      title: '收藏失败，请重试',
+      duration: 800,
+    })
+
     let index = this.data.cur_ques_index;
     let ques_list = this.data.ques_list;
 
-    if (!ques_list[index].has_star) {
-      ques_list[index].star_num++;
-    } else {
-      ques_list[index].star_num--;
-    }
-    ques_list[index].has_star = !ques_list[index].has_star;
+    ques_list[index].hasStar = !ques_list[index].hasStar;
+
+  },
+
+  starQuestion(e) {
+    let index = this.data.cur_ques_index;
+    let ques_list = this.data.ques_list;
+    let quizId = this.data.quizId;
+    let quesId = ques_list[index].id;
+    QuizService.ToggleStarQues(this.handleToggleStarSuccess, this.handleToggleStarFail, quizId, quesId);
+
+    ques_list[index].hasStar = !ques_list[index].hasStar;
     this.setData({
       ques_list
     })
@@ -158,9 +204,38 @@ Page({
   previewImage(event) {
     console.log(event.currentTarget.dataset.src)
     let currentUrl = event.currentTarget.dataset.src
+    let imageUrlList = []
+    this.data.ques_list[this.data.cur_ques_index].files.forEach(e => {
+      if (e.mediaType == "img")
+        imageUrlList.push(e.url)
+    })
     wx.previewImage({
       current: currentUrl, // 当前显示图片的http链接
-      urls: this.data.ques_list[this.data.cur_ques_index].img // 需要预览的图片http链接列表
+      urls: imageUrlList // 需要预览的图片http链接列表
+    })
+  },
+
+  nextSwiperBtnClick() {
+    let cur_ques_index = this.data.cur_ques_index;
+    if (cur_ques_index == this.data.ques_list.length - 1) {
+      cur_ques_index = 0
+    } else {
+      cur_ques_index++
+    }
+    this.setData({
+      cur_ques_index
+    })
+  },
+
+  prevSwiperBtnClick() {
+    let cur_ques_index = this.data.cur_ques_index;
+    if (cur_ques_index == 0) {
+      cur_ques_index = this.data.ques_list.length - 1
+    } else {
+      cur_ques_index--
+    }
+    this.setData({
+      cur_ques_index
     })
   },
 
@@ -293,7 +368,8 @@ Page({
       recorder[cur_ques_index].colors[clickOptionIndex] = 'blue'
       let rightAnswer = ques_list[cur_ques_index].answer.toString()
       recorder[cur_ques_index].user_mark = clickOptionSeq
-
+      console.log("点击的次序是", clickOptionSeq)
+      console.log("答案是", rightAnswer)
       if (clickOptionSeq == rightAnswer) {
         this.showNotify(true)
         recorder[cur_ques_index].correct = true;
@@ -331,14 +407,19 @@ Page({
     }
 
     // 这里要对用户的uaser_mark进行一个转换，将index => seq
-    if (ques_list[cur_ques_index].type = "多选题") {
+    if (ques_list[cur_ques_index].type == "多选题") {
       // 
       recorder[cur_ques_index].user_mark.forEach(e => {
         transfer_user_mark.push(ques_list[cur_ques_index].options[e].seq)
       })
+    } else {
+      transfer_user_mark = recorder[cur_ques_index].user_mark
     }
 
+
+
     let isCorrect = this.isArrEqual(ques_list[cur_ques_index].answer, transfer_user_mark)
+    console.log(ques_list[cur_ques_index].answer, transfer_user_mark)
     // 比较答案的正确性
     if (isCorrect) {
       this.showNotify(true)
@@ -361,7 +442,7 @@ Page({
       "userInput": ques_list[cur_ques_index].type = "多选题" ? recorder[cur_ques_index].user_mark.join("&#&") : transfer_user_mark.join("&#&"),
       "quizId": this.data.quizId,
       "quesId": ques_list[cur_ques_index].id,
-      "isRight": isCorrect?'1':'0'
+      "isRight": isCorrect ? '1' : '0'
     }
 
     QuizService.SubmitQuesRecorder(this.handleSubmitQuesRecorderSuccess, this.handleSubmitQuesRecorderFail, submitData)
@@ -408,20 +489,19 @@ Page({
         audio_paused: innerAudioContext.paused
       })
       progress_timer = setInterval(function () {
-        console.log("計時")
         that.setData({
           current_audio_progress: innerAudioContext.currentTime,
           audio_progress: innerAudioContext.currentTime / that.data.total_audio_progress * 100
         })
       }, 100)
-
-      console.log("开始播放")
     })
+
     innerAudioContext.onPause(() => {
       this.setData({
         audio_paused: innerAudioContext.paused
       })
     })
+
     innerAudioContext.onEnded(() => {
       console.log("播放結束")
       that.setData({
@@ -461,10 +541,11 @@ Page({
     })
   },
 
-  // 切換播放狀態
+  // 切换播放状态
   togglePlay(e) {
-    innerAudioContext.src = e.currentTarget.dataset.url
+    console.log(innerAudioContext.paused)
     if (innerAudioContext.paused) {
+      innerAudioContext.src = e.currentTarget.dataset.url
       innerAudioContext.play();
     } else {
       innerAudioContext.pause();
@@ -479,6 +560,8 @@ Page({
     })
     innerAudioContext.seek(e.detail / 100 * this.data.total_audio_progress)
   },
+
+
 
   /////////////////////////////////////////
 
@@ -523,12 +606,16 @@ Page({
     let recorder = [];
     let ques_list = e;
     let that = this;
-
+    // 如果是 isShowAnswer = true，则全部为has_done
     // 把时间的格式调整为yyyy-mm-dd hh:mm:ss
     ques_list.forEach(ques => {
       // console.log(ques.defaultNote)
       if (ques.defaultNote != null) {
         ques.defaultNote.createTime = util.timeFormatSeconds(ques.defaultNote.createTime)
+      }
+      if(ques.userNote!=null){
+        ques.userNote.createTime = util.timeFormatSeconds(ques.userNote.createTime)
+
       }
       ques.otherNote.forEach(note => {
         note.createTime = util.timeFormatSeconds(note.createTime)
@@ -536,16 +623,29 @@ Page({
       let colors = []
       let user_mark = []
 
-      // 如果是单选或多选题，则将选项打乱顺序
+      // 如果是单选或多选题，则将选项打乱顺序,这里答案也需要跟着边
       if (ques.type == "多选题" || ques.type == "单选题") {
+        // 现在要获取他现在的次序
+        // 现在记录的是他的次序比如0,1,4
         ques.options = this.shuffle(ques.options)
+        let transfer_answer = []
+        ques.answer.forEach(e => {
+          ques.options.forEach(option => {
+            if (option.seq == e) {
+              transfer_answer.push(ques.options.indexOf(option))
+            }
+          })
+        })
+        ques.transfer_answer = transfer_answer
       }
 
       if (ques.type == "单词默写题") {
         // 爬取
         wx.request({
-          url: 'https://cdns.qdu.life/e/' + ques.answer[0] + '.json',
+          url: 'https://cdns.qdu.life/e/' + ques.title + '.json',
           success(e) {
+            console.log(e)
+            ques.answer = [ques.title];
             ques.title = e.data.mean_cn;
             ques.explain = {
               body: e.data.mean_cn + '\n\n' + e.data.mean_en,
@@ -574,7 +674,7 @@ Page({
 
       let tmp = {
         id: ques.id,
-        has_done: false,
+        has_done: this.data.showAnswerSwitch,
         correct: false,
         colors: colors,
         user_mark: user_mark,
@@ -602,11 +702,8 @@ Page({
       quizId: data.id,
       showAnswerSwitch: data.isShowAnswer
     })
-
+    console.log(data);
     this.initAudioPlayer()
     QuizService.StartAnswer(this.loadQuesSuccess, this.loadQuesFail, data);
   },
-
-
-
 })

@@ -3,7 +3,7 @@
   <view class="center">
     <view class="bg function" style="height:100%">
       <view class="cu-list grid col-4 no-border" style="background-color: transparent;">
-        <view bindtap="jumpHeadTools" data-router="{{item.router}}" data-id="{{}}" class="cu-item "
+        <view bindtap="jumpHeadTools" data-router="{{item.router}}" class="cu-item "
           wx:for="{{icon_list}}" wx:key="index" wx:if="{{index<8}}">
           <view class="cuIcon-{{item.icon}} text-{{item.color}}">
             <view class="cu-tag {{item.icon!='warn'? 'bg-yellow':'bg-yellow'}} badge" wx:if="{{item.badge!=0}}">

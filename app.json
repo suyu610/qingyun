@@ -5,13 +5,14 @@
   },
   "pages": [
     "pages/empty/empty",
-    "pages/quiz/quiz_pre_questions/quiz_pre_questions",
+    "pages/quiz/quiz_list_star/quiz_list_star",
+    "pages/quiz/quiz_card/quiz_card",
     "pages/quiz/quiz_ques_list/quiz_ques_list",
+    "pages/quiz/quiz_comments/quiz_comments",
+    "pages/quiz/quiz_pre_questions/quiz_pre_questions",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
     "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/public/temp/temp",
-    "pages/quiz/quiz_comments/quiz_comments",
-    "pages/quiz/quiz_card/quiz_card",
     "pages/quiz/quiz",
     "pages/quiz/quiz_list_err/quiz_list_err",
     "pages/quiz/quiz_detail_sub/quiz_detail_sub",
@@ -41,8 +42,7 @@
     "pages/public/need_know/need_know",
     "pages/public/webview/webview",
     "pages/more/more",
-    "pages/quiz/quiz_rank/quiz_rank",
-    "pages/quiz/quiz_list_star/quiz_list_star"
+    "pages/quiz/quiz_rank/quiz_rank"
   ],
   "window": {
     "backgroundTextStyle": "light",

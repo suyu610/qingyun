@@ -100,7 +100,7 @@ Page({
         color: '#27B1FF',
         badge: 0,
         name: '做题',
-        router: 'quiz_answer_questions'
+        router: 'quiz_pre_questions'
       }, {
         icon: 'text',
         color: '#27B1FF',
@@ -149,9 +149,7 @@ Page({
   jumpHeadTools(e) {
     push({
       name: e.currentTarget.dataset.router,
-      data: {
-        id: this.data.quiz.id
-      }
+      data: this.data.quiz
     })
   },
 
@@ -161,8 +159,8 @@ Page({
     })
   },
 
+  // 点击日历
   takeoverTapDate: function (e) {
-
     // 判断是否要切换顶部图
     // 当日期相同 即取消的时候，要切换
     // 当之前无日期，且此时有日期了，要切换
@@ -181,7 +179,6 @@ Page({
     } else {
       cur_select_date = e.detail;
     }
-
 
     calendar.cancelSelectedDates()
     calendar.setSelectedDates([cur_select_date])
@@ -247,12 +244,14 @@ Page({
    */
   onLoad: function (options) {
     const data = router.extract(options);
-    let quiz = this.data.quiz;
-    quiz.id = data.id;
-    quiz.title = data.title;
+    let quiz = data;
+
     this.setData({
       quiz
     })
+
+    // 获取答题记录以及错题本，收藏本等
+    
     wx.setNavigationBarTitle({
       title: this.data.quiz.title,
     })

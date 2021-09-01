@@ -36,6 +36,7 @@ var increment = function (index) {
  *  数组中包含某元素，顺序不敏感
  */
 var contain = function (arr, arg) {
+  console.log(arr)
   return arr.indexOf(arg) > -1;
 }
 

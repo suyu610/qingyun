@@ -22,7 +22,8 @@
       <view class="function" wx:if="{{default_quiz.title!=null}}">
         <view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}" style="background-color: transparent;">
           <view class="cu-item" wx:for="{{icon_list}}" wx:key="index" wx:if="{{index<gridCol*2}}"
-            data-router="{{item.router}}" bindtap="jumpRoute" data-title="{{default_quiz.title}}"
+            data-router="{{item.router}}" bindtap="jumpRoute" data-errNum="{{default_quiz.errNum}}"
+            data-rightNum="{{default_quiz.rightNum}}" data-title="{{default_quiz.title}}"
             data-totalNum="{{default_quiz.totalNum}}" data-doneNum="{{default_quiz.doneNum}}"
             data-id="{{default_quiz.id}}" data-index="{{index}}">
             <view class=" cuIcon-{{item.icon}} text-{{item.color}}">
@@ -53,6 +54,7 @@
           <block wx:for="{{self_quiz_list}}" wx:for-item="item" wx:key="index" wx:for-index="idx">
             <quiz_progress_bar bindtap="jump2Detail_sub" data-title="{{item.title}}" data-id="{{item.id}}"
               data-totalNum="{{item.totalNum}}" data-doneNum="{{item.doneNum}}" title="{{item.title}}"
+              data-errNum="{{item.errNum}}" data-rightNum="{{item.rightNum}}"
               progress="{{item.doneNum*100 / item.totalNum}}" done_num="{{item.doneNum}}" total_num="{{item.totalNum}}">
             </quiz_progress_bar>
           </block>

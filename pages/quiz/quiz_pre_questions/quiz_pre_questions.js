@@ -10,7 +10,7 @@ Page({
     numIndex: 0,
     practiceMode: 'undo',
     isShowAnswer: false,
-    quesNum: 30,
+    quesNum: 5,
     quiz: {
       id: 0,
       title: "计算机二级C语言",
@@ -19,9 +19,8 @@ Page({
     }
   },
 
-
   startPractice: function (e) {
-    router.push({
+    router.replace({
       name: 'quiz_answer_questions',
       data: {
         id: this.data.quiz.id,
@@ -31,6 +30,7 @@ Page({
       }
     })
   },
+
   onClickNumGrid: function (e) {
     let index = e.currentTarget.dataset.index;
     if (index != 5) {
@@ -70,7 +70,7 @@ Page({
    */
   onLoad: function (options) {
     const data = router.extract(options);
-
+    console.log(data)
     this.setData({
       quiz:data
     })
@@ -79,52 +79,4 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
