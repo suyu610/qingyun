@@ -20,7 +20,8 @@ Page({
       icon: 'text',
       color: 'white',
       badge: 0,
-      name: '考试模式'
+      name: '考试模式',
+      router: 'quiz_pre_questions'
     }, {
       icon: 'warn',
       color: 'white',
@@ -188,8 +189,8 @@ Page({
         title: e.currentTarget.dataset.title,
         doneNum: e.currentTarget.dataset.donenum,
         totalNum: e.currentTarget.dataset.totalnum,
-        rightNum: e.currentTarget.dataset.rightNum,
-        errNum: e.currentTarget.dataset.errNum
+        rightNum: e.currentTarget.dataset.rightnum,
+        errNum: e.currentTarget.dataset.errnum
       },
     });
   },
@@ -202,8 +203,8 @@ Page({
         title: e.currentTarget.dataset.title,
         doneNum: e.currentTarget.dataset.donenum,
         totalNum: e.currentTarget.dataset.totalnum,
-        rightNum: e.currentTarget.dataset.rightNum,
-        errNum: e.currentTarget.dataset.errNum
+        rightNum: e.currentTarget.dataset.rightnum,
+        errNum: e.currentTarget.dataset.errnum
 
       },
     });

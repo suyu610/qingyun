@@ -25,6 +25,7 @@
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "richText": "/components/richText/richText"
 
+
   },
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black"

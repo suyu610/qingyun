@@ -98,6 +98,15 @@ swiper {
   margin-right: 30rpx;
 }
 
+.word_body {
+  padding-top: 20rpx;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-size: 29px;
+  font-weight: bold;
+}
+
 .ques_list_index_title {
   border: 1px solid #b79696;
   color: #b79696;

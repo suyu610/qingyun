@@ -27,7 +27,7 @@
     <van-grid-item wx:key="index" wx:for="{{ 6 }}" use-slot bindtap="onClickNumGrid" data-index="{{index}}">
       <view wx:if="{{index != 5}}" class="{{numIndex == index?'bg-blue':'bg-white'}}  grid-item">{{(index+1)*5}}</view>
       <view wx:else class="{{numIndex == index?'bg-blue grid-item-line':'bg-white'}} grid-item ">
-        <van-stepper value="{{ quesNum }}" bind:change="onChangeQuesNumStepper" />
+        <van-stepper max="100" value="{{ quesNum }}" bind:change="onChangeQuesNumStepper" />
       </view>
     </van-grid-item>
   </van-grid>

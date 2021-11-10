@@ -14,13 +14,16 @@ const word_audio = wx.createInnerAudioContext({});
 const app = getApp();
 
 Page({
-
   /**
    * 页面的初始数据
    */
 
   data: {
-
+    // 当打开答案时，使该值等于cur_ques_index
+    popUpIndex: 0,
+    // 是否存在音频
+    hasAudio: false,
+    isLoadQues: true,
     // 新建笔记相关
     showInsertNewNotePopup: false,
     newNotePlaceholder: '开始编辑吧...',
@@ -39,6 +42,8 @@ Page({
     // 试卷本体
     ques_list: [],
 
+    // 当前已经解析的答案的个数
+    parseQuesNum: 0,
     paper: {
       type: "order",
       //评判标准，优，良，及格
@@ -55,7 +60,6 @@ Page({
     total_audio_progress: 0,
     showAnswerPage: false,
     showQuesList: false,
-    tmp_transition_index: 0,
     answer_book: false,
     settingTitle1: '显示答案',
     settingTitle2: '重新开始',
@@ -73,9 +77,14 @@ Page({
   // 编辑器初始化完成时触发，可以获取组件实例
   onEditorReady() {
     richText = this.selectComponent('#richText'); //获取组件实例
+
+
   },
 
   showInsertNewNotePopup: function () {
+    if (this.data.ques_list[this.data.cur_ques_index].userNote != null) {
+      richText.setContents(this.data.ques_list[this.data.cur_ques_index].userNote.body)
+    }
     this.setData({
       showAnswerPage: false,
       showInsertNewNotePopup: true
@@ -114,7 +123,7 @@ Page({
       quizId: quizId,
       quesId: quesId,
       body: value.html,
-      isPublic: false 
+      isPublic: false
     }
     console.log(data)
     // [ todo ] 内容文本检测
@@ -239,19 +248,40 @@ Page({
     })
   },
 
+
+
+  // 切换题目需要进行的事
+  // 1. 暂停音频
+  // 2. 将音频进度为0
+  // 3. 结束音频的循环任务
+  // 4. 如果单词还没有查询，则去查询一下
+  // 5. 设置新增笔记的地方[todo]? 是不是应该放在显示的地方？
+
   bindChangeSwiper(e) {
-    console.log("bindChangeSwiper");
     this.setData({
-      tmp_transition_index: e.detail.current,
       audio_progress: 0,
       total_audio_progress: 0,
       showAnswerPage: false,
       show_answer_option: false,
+      audio_paused: true,
+      current_audio_progress: 0
     })
-    this.setData({
-      cur_ques_index: this.data.tmp_transition_index,
-    })
-    this.changeQuestion();
+
+    if (e.detail.source == "touch") {
+      this.setData({
+        cur_ques_index: e.detail.current,
+      })
+    }
+
+    innerAudioContext.stop()
+    // 关闭音频
+    clearInterval(progress_timer);
+
+    // 设置笔记内容
+    let ques_list = this.data.ques_list;
+    if (ques_list[this.data.cur_ques_index].userNote != null) {
+      richText.setContents(this.data.ques_list[this.data.cur_ques_index].userNote.body)
+    }
   },
 
   showNotify(right) {
@@ -280,10 +310,8 @@ Page({
         arr1.every((ele) => arr2.includes(parseInt(ele))))
   },
 
-
   // 填空题
   textInputChange(e) {
-    console.log(e)
     let index = e.target.dataset.index;
     let text = e.detail
     let recorder = this.data.recorder;
@@ -301,9 +329,11 @@ Page({
 
   // 点击多选题 
   tapMultiOption: function (e) {
+    console.log("tapMultiOption")
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
     let clickOptionIndex = e.currentTarget.dataset.index
+    console.log(clickOptionIndex)
     let clickOptionSeq = e.currentTarget.dataset.seq
 
     if (this.data.paper.type != 'test') {
@@ -353,11 +383,11 @@ Page({
   // 2.2 则记录下来，并跳转下一题
 
   tapSingleOption: function (e) {
+    console.log("tapSingleOption")
     let recorder = this.data.recorder;
     let cur_ques_index = this.data.cur_ques_index;
     let clickOptionIndex = e.currentTarget.dataset.index;
     let clickOptionSeq = e.currentTarget.dataset.seq;
-
     let ques_list = this.data.ques_list;
 
     if (this.data.paper.type != 'test') {
@@ -397,6 +427,9 @@ Page({
 
   // 点击确认答案
   tapConfirmAnswer: function () {
+    if (this.data.showAnswerSwitch) {
+      return
+    }
     let ques_list = this.data.ques_list;
     let cur_ques_index = this.data.cur_ques_index;
     let recorder = this.data.recorder;
@@ -450,19 +483,6 @@ Page({
   },
 
 
-  // 切换题目需要进行的事
-  // 1. 暂停音频
-  // 2. 将音频进度为0
-  // 3. 结束音频的循环任务
-
-  changeQuestion: function () {
-    this.setData({
-      audio_paused: true,
-      current_audio_progress: 0
-    })
-    innerAudioContext.stop()
-    clearInterval(progress_timer);
-  },
 
   ////////////////////// 音频播放相关  ////////////////////////////
   ////////////////////////////////////////////////////////////////
@@ -473,7 +493,6 @@ Page({
     innerAudioContext.onCanplay(function getDuration() {
       let intervalID = setInterval(function () {
         if (innerAudioContext.duration != 0 && !isNaN(innerAudioContext.duration)) {
-          console.log(innerAudioContext.duration, '测试')
           that.setData({
             total_audio_progress: innerAudioContext.duration
           })
@@ -481,6 +500,7 @@ Page({
         }
       }, 500);
     })
+
     innerAudioContext.onPlay(() => {
       if (progress_timer != null) {
         clearInterval(progress_timer) // 去除定时器
@@ -510,6 +530,7 @@ Page({
       })
     })
   },
+
   ondragAudioProgStart(e) {
     clearInterval(progress_timer)
     flag_play_status = !innerAudioContext.paused;
@@ -543,12 +564,17 @@ Page({
 
   // 切换播放状态
   togglePlay(e) {
-    console.log(innerAudioContext.paused)
-    if (innerAudioContext.paused) {
+    if (e.currentTarget.dataset.type == 'word') {
       innerAudioContext.src = e.currentTarget.dataset.url
+      innerAudioContext.stop();
       innerAudioContext.play();
     } else {
-      innerAudioContext.pause();
+      if (innerAudioContext.paused) {
+        innerAudioContext.src = e.currentTarget.dataset.url
+        innerAudioContext.play();
+      } else {
+        innerAudioContext.pause();
+      }
     }
   },
 
@@ -576,9 +602,11 @@ Page({
       showQuesList: false
     })
   },
+
   showAnswer: function () {
     this.setData({
-      showAnswerPage: true
+      showAnswerPage: true,
+      popUpIndex: this.data.cur_ques_index
     })
   },
 
@@ -602,10 +630,19 @@ Page({
   },
 
   loadQuesSuccess: function (e) {
+
     // 在这要生成
     let recorder = [];
     let ques_list = e;
+    this.setData({
+      ques_list
+    })
     let that = this;
+    // 只查5个单词，其他的需要的时候再查5个
+
+    if (ques_list.length == 0) {
+      wx.hideLoading()
+    }
     // 如果是 isShowAnswer = true，则全部为has_done
     // 把时间的格式调整为yyyy-mm-dd hh:mm:ss
     ques_list.forEach(ques => {
@@ -613,9 +650,9 @@ Page({
       if (ques.defaultNote != null) {
         ques.defaultNote.createTime = util.timeFormatSeconds(ques.defaultNote.createTime)
       }
-      if(ques.userNote!=null){
-        ques.userNote.createTime = util.timeFormatSeconds(ques.userNote.createTime)
 
+      if (ques.userNote != null) {
+        ques.userNote.createTime = util.timeFormatSeconds(ques.userNote.createTime)
       }
       ques.otherNote.forEach(note => {
         note.createTime = util.timeFormatSeconds(note.createTime)
@@ -644,20 +681,58 @@ Page({
         wx.request({
           url: 'https://cdns.qdu.life/e/' + ques.title + '.json',
           success(e) {
-            console.log(e)
-            ques.answer = [ques.title];
-            ques.title = e.data.mean_cn;
-            ques.explain = {
-              body: e.data.mean_cn + '\n\n' + e.data.mean_en,
-              is_star: true,
-              view_count: 14,
-              create_time: "2021年8月14日23:12:38",
-              user_name: '青云'
+            if (e.statusCode == 404) {
+              wx.request({
+                url: 'https://cdns.qdu.life/e/sim/' + ques.title + '.json',
+                success(e) {
+                  ques.answer = [ques.title];
+                  ques.title = e.data;
+                  ques.defaultNote = {
+                    body: e.data,
+                    is_star: true,
+                    view_count: 14,
+                    create_time: "2021年8月14日23:12:38",
+                    user_name: '青云'
+                  }
+                  if (that.data.parseQuesNum == ques_list.length - 1) {
+                    that.setData({
+                      ques_list,
+                      isLoadQues: false
+                    })
+                    wx.hideLoading()
+                  }
+
+                  that.setData({
+                    parseQuesNum: that.data.parseQuesNum + 1
+                  })
+                },
+              })
+            } else {
+              ques.answer = [ques.title];
+              ques.title = e.data;
+              ques.defaultNote = {
+                body: e.data,
+                is_star: true,
+                view_count: 14,
+                create_time: "2021年8月14日23:12:38",
+                user_name: '青云'
+              }
+
+              if (that.data.parseQuesNum == ques_list.length - 1) {
+                that.setData({
+                  ques_list,
+                  isLoadQues: false
+                })
+                wx.hideLoading()
+              }
+              that.setData({
+                parseQuesNum: that.data.parseQuesNum + 1
+              })
             }
-            that.setData({
-              recorder,
-              ques_list
-            })
+          },
+          // 如果找不到，就去sim下面找
+          fail() {
+            console.log("找不到")
           }
         })
       }
@@ -672,6 +747,19 @@ Page({
         colors.push('white')
       })
 
+      if (ques.type != "单词默写题") {
+        this.setData({
+          parseQuesNum: that.data.parseQuesNum + 1
+        })
+        if (this.data.parseQuesNum >= ques_list.length - 1) {
+          that.setData({
+            ques_list,
+            isLoadQues: false
+          })
+          wx.hideLoading()
+        }
+      }
+
       let tmp = {
         id: ques.id,
         has_done: this.data.showAnswerSwitch,
@@ -682,6 +770,7 @@ Page({
       }
       recorder.push(tmp);
     })
+
 
     this.setData({
       recorder,
@@ -696,12 +785,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '资源加载中',
+    })
     const data = router.extract(options);
 
+    // let data = {
+    //   id : 42,
+    //   practiceMode : "all",
+    //   quesNum:50
+    // }
     this.setData({
       quizId: data.id,
       showAnswerSwitch: data.isShowAnswer
     })
+
     console.log(data);
     this.initAudioPlayer()
     QuizService.StartAnswer(this.loadQuesSuccess, this.loadQuesFail, data);

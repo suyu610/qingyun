@@ -1,5 +1,6 @@
 // app.js
 const router = require('utils/router/index.js');
+const miniShopPlugin = requirePlugin('mini-shop-plugin');
 
 // 设置全局的分享
 ! function () {
@@ -115,10 +116,9 @@ App({
   },
   
   onLaunch() {
-
-
     this.networkManage(); //调用监听网络状态的方法
     this.updateManage(); //调用检测小程序版本更新的方法   
+    miniShopPlugin.initApp(this, wx);  
 
     this.globalData.initData = wx.getStorageSync('initData')
     let that = this
@@ -154,7 +154,7 @@ App({
 
   globalData: {
     debug: false,
-    // debugRouter:"homepage",
+    debugRouter:"quiz",
     userInfo: {
       userId: null, // 用户唯一id
       name: null, // 微信名称

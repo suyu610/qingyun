@@ -1,18 +1,18 @@
-// export const Host = 'https://api.book.uutrack.cn/v1/';
-export const Host = 'http://192.168.3.8:6110/v1/';
+export const Host = 'https://api.book.uutrack.cn/v1/';
+// export const Host = 'http://192.168.3.8:6110/v1/';
 // export const Host = 'http://10.195.119.143:6110/v1/';
+// export const Host = 'http://localhost:6110/v1/';
+
 
 ////////////
 /// 上传 ///
-///////////
-
+////////////
 export const UploadInfoUrl = 'doc/upload';
 export const GetUploadFileSignUrl = 'doc/getUploadFileSign';
 
 ////////////
 /// 用户 ///
-///////////
-
+////////////
 export const MatchNameAndNumberUrl = 'user/matchNameAndNumber';
 export const LoginByPwdUrl = 'user/loginByPwd';
 export const GetDataUrl = 'user/getData';
@@ -24,8 +24,7 @@ export const AddCommentUrl = 'comment/new'
 
 ////////////
 /// 文档 ///
-///////////
-
+////////////
 export const GetDocDetailUrl = 'doc/detail'
 export const GetUploadSignUrl = 'doc/getUploadFileSign'
 export const GetDocStarUrl = 'doc/getStarDoc'
@@ -38,8 +37,7 @@ export const SearchDocUrl = 'search/key'
 
 ////////////
 /// 分类 ///
-///////////
-
+////////////
 export const GetAllCourseUrl = 'cate/getAllCourse'
 export const GetCourseListByCourseNameUrl = 'cate/getDocListByCourseName'
 
@@ -47,8 +45,7 @@ export const GetCourseListByCourseNameUrl = 'cate/getDocListByCourseName'
 
 ////////////
 /// 订单 ///
-///////////
-
+////////////
 export const CheckHasBoughtUrl = 'order/hasBought'
 export const GetAllOrdersUrl = 'order/allBought'
 export const GetMoneyRecordUrl = 'order/moneyRecord'
@@ -56,15 +53,13 @@ export const GetMoneyRecordUrl = 'order/moneyRecord'
 
 ////////////
 /// 公告 ///
-///////////
-
+////////////
 export const GetDialogUrl = 'dialog/new'
 
 
 ////////////
 /// 题库 ///
-///////////
-
+////////////
 export const GetAllQuizCateUrl = 'quiz/cate/all'
 export const GetUserQuizCateUrl = 'quiz/user_quiz'
 export const GetQuizByIdUrl = 'quiz/quiz'

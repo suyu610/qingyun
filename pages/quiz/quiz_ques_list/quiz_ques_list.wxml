@@ -24,8 +24,8 @@
     </view>
     <van-collapse wx:else border="{{false}}" value="{{ chapterActiveNames }}" bind:change="onChangeChapter">
       <block wx:for="{{quiz.quizChapterList}}" wx:for-item="chapter" wx:key="index">
-        <van-collapse-item value="{{chapter.doneNum}}/{{chapter.totalNum}}" label="{{chapter.description}}"
-          name="{{chapter.id}}">
+        <van-collapse-item value="{{chapter.quizSectionList!=null?chapter.quizSectionList.length:0}}"
+          label="{{chapter.description}}" name="{{chapter.id}}">
           <view slot="title" class="title" style="font-weight:bold">
             {{chapter.title}}
           </view>
@@ -50,9 +50,9 @@
   <view class="bottom">
 
     <van-goods-action>
-      <van-goods-action-icon  icon="balance-o" text="赞赏"  bind:click="onClickIcon" />
-      <van-goods-action-icon  icon="notes-o" text="笔记" info="{{quiz.noteNum}}" bind:click="onClickIcon" />
-      <van-goods-action-icon  icon="chat-o" text="评论" info="{{quiz.commentNum}}" bind:click="onClickIcon" />
+      <van-goods-action-icon icon="balance-o" text="赞赏" bind:click="onClickIcon" />
+      <van-goods-action-icon icon="notes-o" text="笔记" info="{{quiz.noteNum}}" bind:click="onClickIcon" />
+      <van-goods-action-icon icon="chat-o" text="评论" info="{{quiz.commentNum}}" bind:click="onClickIcon" />
       <van-goods-action-button size="mini" icon="plus" text="加入题库" color="#27B1FF" bind:click="onClickButton" />
     </van-goods-action>
 

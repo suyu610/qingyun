@@ -6,10 +6,10 @@ import UserService from '../../net/service/userService.js'
 
 Page({
 
-  data:{
-    version:app.globalData.version
+  data: {
+    version: app.globalData.version
   },
-  
+
   handleGetInitDataSuccess(data) {
     // 检测token是否有效
     setTimeout(() => {
@@ -71,14 +71,14 @@ Page({
     // 若验证不通过，说明token失效，则使用code去换取token
     let token = wx.getStorageSync('token')
 
-    if(token=='' || token == 'guide'){
+    if (token == '' || token == 'guide') {
       router.replace({
         name: "onboarding"
       })
       return
     }
 
-    if(token == 'tourist'){
+    if (token == 'tourist') {
       wx.setStorageSync('token', "")
       router.replace({
         name: "login"
@@ -89,10 +89,10 @@ Page({
     let ssNumber = wx.getStorageSync('ssNumber')
     if (token != '' && ssNumber != '') {
       let params = {
-        "needCategory":0,
+        "needCategory": 0,
         "token": token,
       }
-      UserService.LoginByToken(this.handleGetInitDataSuccess, this.handleGetInitDataFail,params)
+      UserService.LoginByToken(this.handleGetInitDataSuccess, this.handleGetInitDataFail, params)
     } else {
       // 跳转到登陆页面
       router.replace({
@@ -100,10 +100,6 @@ Page({
       })
       return;
     }
-
-  },
-
-  onReady: function () {
 
   }
 

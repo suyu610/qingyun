@@ -65,18 +65,13 @@
         <view class="tab-item hot">
           <view class="cu-bar bg-white">
             <view class="action">
-              <text class="cuIcon-title text-blue"></text> 共 13 条
+              <text class="cuIcon-title text-blue"></text> 共 0 条
             </view>
             <view class="action">
               <view class="cu-btn sm bg-blue round" bindtap="jumpRoute" data-router="quiz_card">全部</view>
             </view>
           </view>
-          <van-cell title="1. 题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目题目" is-link
-            label="笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记笔记" border="{{ false }}" />
-          <van-cell title="单元格" is-link center label="描述信息" border="{{ false }}" />
-          <van-cell title="单元格" is-link center label="描述信息" border="{{ false }}" />
-          <van-cell title="单元格" is-link center label="描述信息" border="{{ false }}" />
-
+          <van-empty description="正在开发中"></van-empty>
         </view>
       </van-tab>
       <van-tab title="所有题库">

@@ -5,15 +5,15 @@
   },
   "pages": [
     "pages/empty/empty",
+    "pages/quiz/quiz",
+    "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/quiz/quiz_list_star/quiz_list_star",
     "pages/quiz/quiz_card/quiz_card",
     "pages/quiz/quiz_ques_list/quiz_ques_list",
     "pages/quiz/quiz_comments/quiz_comments",
     "pages/quiz/quiz_pre_questions/quiz_pre_questions",
     "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
-    "pages/quiz/quiz_answer_questions/quiz_answer_questions",
     "pages/public/temp/temp",
-    "pages/quiz/quiz",
     "pages/quiz/quiz_list_err/quiz_list_err",
     "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/public/order_list/order_list",
@@ -54,8 +54,7 @@
     "borderStyle": "white",
     "color": "#979797",
     "selectedColor": "#0CB1FF",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/homepage/homepage",
         "iconPath": "/icons/homepage/logo_un.png",
         "selectedIconPath": "/icons/homepage/logo_sl.png"
@@ -81,6 +80,12 @@
         "selectedIconPath": "/icons/me/logo_sl.png"
       }
     ]
+  },
+  "plugins": {
+    "mini-shop-plugin": {
+      "version": "latest",
+      "provider": "wx34345ae5855f892d"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

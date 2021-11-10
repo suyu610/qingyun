@@ -83,9 +83,9 @@ Component({
     },
 
     //设置富文本内容
-    setContents(rechtext) {
+    setContents(richtext) {
       this.editorCtx.setContents({
-        html: rechtext,
+        html: richtext,
         success: res => {
           // console.log('[setContents success]', res)
         }

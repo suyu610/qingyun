@@ -6,31 +6,47 @@ Page({
    */
   data: {
     functionList: [{
-      icon: 'order',
+      icon: 'search',
       color: 'black',
       badge: 0,
-      name: '顺序答题'
-    }, {
-      icon: 'text',
-      color: 'black',
-      badge: 0,
-      name: '模拟测试'
-    }, {
-      icon: 'warn',
-      color: 'black',
-      badge: 0,
-      name: '错题本'
+      name: '找空教室',
+      router: 'index'
     }, {
       icon: 'favor',
       color: 'black',
       badge: 0,
-      name: '收藏本'
+      name: '蹭课查询',
+      router: 'course_search'
+    }, {
+      icon: 'text',
+      color: 'black',
+      badge: 0,
+      name: '专业课表',
+      router: 'major_list'
+    }, {
+      icon: 'people',
+      color: 'black',
+      badge: 0,
+      name: '社团课表',
+      router: 'multi_course'
     }],
     gridCol: 3,
     skin: true,
-    gridBorder:true
+    gridBorder: true
   },
-
+  jump: function (e) {
+    let router = e.currentTarget.dataset.router
+    if (router == "index") {
+      wx.navigateToMiniProgram({
+        appId: 'wx607821b428f6d5d1',
+      })
+    } else {
+      wx.navigateToMiniProgram({
+        appId: 'wx607821b428f6d5d1',
+        path: 'pages/empty/empty?url=' + router,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
