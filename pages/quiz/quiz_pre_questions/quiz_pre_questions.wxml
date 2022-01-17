@@ -1,0 +1,37 @@
+<!--pages/quiz/quiz_pre_questions/quiz_pre_questions.wxml-->
+<van-cell-group title="{{quiz.title}}">
+  <van-cell title="总题量：{{quiz.totalNum}}" value="已做：{{quiz.doneNum}} 　做对：{{quiz.rightNum}}" />
+</van-cell-group>
+<van-cell-group title="选项">
+  <van-cell title="背题模式">
+    <van-switch active-color="#27B1FF" size="24px" checked="{{ isShowAnswer }}" bind:change="onChangeShowAnswer" />
+  </van-cell>
+</van-cell-group>
+<van-radio-group value="{{ practiceMode }}">
+  <van-cell-group title="出题范围">
+    <van-cell title="全部 x {{quiz.totalNum}}" clickable data-name="all" bind:click="onChangePracticeMode">
+      <van-radio slot="right-icon" checked-color="#27B1FF" name="all" />
+    </van-cell>
+    <van-cell title="错题 x {{quiz.errNum}}" clickable data-name="err" bind:click="onChangePracticeMode">
+      <van-radio slot="right-icon" checked-color="#27B1FF" name="err" />
+    </van-cell>
+    <van-cell title="未做 x {{quiz.totalNum - quiz.doneNum}}" clickable data-name="undo"
+      bind:click="onChangePracticeMode">
+      <van-radio slot="right-icon" checked-color="#27B1FF" name="undo" />
+    </van-cell>
+  </van-cell-group>
+</van-radio-group>
+
+<van-cell-group title="做题数量">
+  <van-grid border="{{false}}" direction="horizontal" column-num="3">
+    <van-grid-item wx:key="index" wx:for="{{ 6 }}" use-slot bindtap="onClickNumGrid" data-index="{{index}}">
+      <view wx:if="{{index != 5}}" class="{{numIndex == index?'bg-blue':'bg-white'}}  grid-item">{{(index+1)*5}}</view>
+      <view wx:else class="{{numIndex == index?'bg-blue grid-item-line':'bg-white'}} grid-item ">
+        <van-stepper max="100" value="{{ quesNum }}" bind:change="onChangeQuesNumStepper" />
+      </view>
+    </van-grid-item>
+  </van-grid>
+</van-cell-group>
+<view class="startBtn" bindtap="startPractice">
+  <van-button type="primary" custom-style="height:100rpx;background-color:#27B1FF" block>开始刷题</van-button>
+</view>

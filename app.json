@@ -1,12 +1,24 @@
 {
   "usingComponents": {
-    "van-empty": "@vant/weapp/empty/index"
+    "van-empty": "@vant/weapp/empty/index",
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "pages": [
     "pages/empty/empty",
+    "pages/quiz/quiz",
+    "pages/quiz/quiz_answer_questions/quiz_answer_questions",
+    "pages/quiz/quiz_list_star/quiz_list_star",
+    "pages/quiz/quiz_card/quiz_card",
+    "pages/quiz/quiz_ques_list/quiz_ques_list",
+    "pages/quiz/quiz_comments/quiz_comments",
+    "pages/quiz/quiz_pre_questions/quiz_pre_questions",
+    "pages/quiz/quiz_detail_unsub/quiz_detail_unsub",
+    "pages/public/temp/temp",
+    "pages/quiz/quiz_list_err/quiz_list_err",
+    "pages/quiz/quiz_detail_sub/quiz_detail_sub",
     "pages/public/order_list/order_list",
-    "pages/onboarding/onboarding",
     "pages/public/admin/admin",
+    "pages/onboarding/onboarding",
     "pages/public/money_list/money_list",
     "pages/public/doc_analysis/doc_analysis",
     "pages/public/preview_doc/preview_doc",
@@ -26,10 +38,11 @@
     "pages/document_detail/document_detail",
     "pages/public/buy_confirm/buy_confirm",
     "pages/homepage/homepage",
-    "pages/ourshop/ourshop",
     "pages/public/search/search",
     "pages/public/need_know/need_know",
-    "pages/public/webview/webview"
+    "pages/public/webview/webview",
+    "pages/more/more",
+    "pages/quiz/quiz_rank/quiz_rank"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -41,8 +54,7 @@
     "borderStyle": "white",
     "color": "#979797",
     "selectedColor": "#0CB1FF",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/homepage/homepage",
         "iconPath": "/icons/homepage/logo_un.png",
         "selectedIconPath": "/icons/homepage/logo_sl.png"
@@ -53,9 +65,14 @@
         "selectedIconPath": "/icons/category/logo_sl.png"
       },
       {
-        "pagePath": "pages/ourshop/ourshop",
-        "iconPath": "/icons/ourshop/logo_un.png",
-        "selectedIconPath": "/icons/ourshop/logo_sl.png"
+        "pagePath": "pages/quiz/quiz",
+        "iconPath": "/icons/quiz/logo_un.png",
+        "selectedIconPath": "/icons/quiz/logo_sl.png"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "/icons/more/logo_un.png",
+        "selectedIconPath": "/icons/more/logo_sl.png"
       },
       {
         "pagePath": "pages/me/me",
@@ -63,6 +80,12 @@
         "selectedIconPath": "/icons/me/logo_sl.png"
       }
     ]
+  },
+  "plugins": {
+    "mini-shop-plugin": {
+      "version": "latest",
+      "provider": "wx34345ae5855f892d"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

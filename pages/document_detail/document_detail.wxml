@@ -135,14 +135,10 @@
           </view>
         </view>
       </block>
-
-
-
     </view>
     <view wx:else style="text-align:center">
       <van-empty image="error" description="暂无评论"></van-empty>
     </view>
-
   </view>
 </view>
 <!-- 评论的输入框 -->

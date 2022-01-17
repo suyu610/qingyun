@@ -1,0 +1,48 @@
+.container {
+  width: 90%;
+  margin: 40rpx auto;
+  height: 8vh;
+  border-radius: 20rpx;
+  padding: 5px;
+  box-shadow: inset;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 26rpx;
+  padding-top: 4px;
+}
+
+.left {
+  width: 65%;
+  padding-left: 10px;
+
+}
+
+.progress-bar {
+  width: 100%;
+  padding-top: 10px;
+  display: inline-block;
+}
+
+.status {
+  height: 8vh;
+  line-height: 8vh;
+  font-size: 34rpx;
+  font-weight: bold;
+  width: 24%;
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 10rpx;
+}
+
+.status view {
+  display: inline;
+}
+
+.text-black{
+  color:#081f40!important;
+}

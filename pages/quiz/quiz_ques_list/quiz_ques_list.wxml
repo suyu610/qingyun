@@ -1,0 +1,80 @@
+<wxs module="color" src="../../../utils/color.wxs" />
+
+<view class="" style="box-sizing:border-box">
+  <view class="top">
+    <view class="cu-bar search bg-white">
+
+      <view class="bg cu-avatar round xs text-black"
+        style="font-size:24rpx;background-color:{{color.score2color(quiz.score)}}!important">
+        {{quiz.score}}
+      </view>
+
+      <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="搜索题目、知识点、章节" confirm-type="search"></input>
+      </view>
+      <view class="action">
+        <text class="cuIcon-info lg text-gray"></text>
+      </view>
+    </view>
+  </view>
+  <view class="quiz_list">
+    <view wx:if="{{quiz.quizChapterList.length==0}}">
+      <van-empty description="没有题目" />
+    </view>
+    <van-collapse wx:else border="{{false}}" value="{{ chapterActiveNames }}" bind:change="onChangeChapter">
+      <block wx:for="{{quiz.quizChapterList}}" wx:for-item="chapter" wx:key="index">
+        <van-collapse-item value="{{chapter.quizSectionList!=null?chapter.quizSectionList.length:0}}"
+          label="{{chapter.description}}" name="{{chapter.id}}">
+          <view slot="title" class="title" style="font-weight:bold">
+            {{chapter.title}}
+          </view>
+          <block wx:for="{{chapter.quizSectionList}}" wx:for-item="section" wx:key="index">
+            <van-cell border="{{false}}" custom-class="quiz_cell" title="{{section.title}}" right-icon="edit"
+              use-label-slot>
+              <view slot="label" class="cell_label">
+                <view>总数:{{section.totalNum}}</view>
+                <view>做对:{{section.rightNum}}</view>
+                <view>做错:{{section.errNum}}</view>
+                <view>未答:{{section.undoNum}}</view>
+              </view>
+              <van-icon slot="right-icon" name="edit" class="custom-icon" color="blue" />
+            </van-cell>
+          </block>
+
+        </van-collapse-item>
+      </block>
+
+    </van-collapse>
+  </view>
+  <view class="bottom">
+
+    <van-goods-action>
+      <van-goods-action-icon icon="balance-o" text="赞赏" bind:click="onClickIcon" />
+      <van-goods-action-icon icon="notes-o" text="笔记" info="{{quiz.noteNum}}" bind:click="onClickIcon" />
+      <van-goods-action-icon icon="chat-o" text="评论" info="{{quiz.commentNum}}" bind:click="onClickIcon" />
+      <van-goods-action-button size="mini" icon="plus" text="加入题库" color="#27B1FF" bind:click="onClickButton" />
+    </van-goods-action>
+
+    <!-- <view class="cu-bar bg-white tabbar shop">
+      <view class="action">
+        <view class="cuIcon-upstage">
+        </view>
+        赞赏作者
+      </view>
+      <view class="action">
+        <view class="cuIcon-ticket">
+          <view class="cu-tag badge  bg-yellow">{{quiz.noteNum}}</view>
+        </view>
+        笔记
+      </view>
+      <view class="action">
+        <view class="cu-tag badge  bg-yellow">{{quiz.commentNum}}</view>
+        <view class=" cuIcon-comment"></view> 评论
+      </view>
+      <view class="btn-group">
+        <button class="cu-btn bg-blue round ">加入题库</button>
+      </view>
+    </view> -->
+  </view>
+</view>

@@ -1,0 +1,33 @@
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ subject_value1 }}" options="{{ option_subject }}" />
+  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+  <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
+</van-dropdown-menu>
+
+<swiper class="card-swiper round-dot" indicator-dots="true" circular="true" bindchange="cardSwiper"
+  indicator-color="#e0" indicator-active-color="#27B1FF">
+  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+    <view class="bg swiper-item">
+      <view class="title">题目：<text class="text-black text-bold">{{item.quiz_title}}</text> </view>
+      <view class="options">选项：<text class="text-black text-bold">{{item.options}}</text> </view>
+      <view class="note">笔记：<text class="text-black text-bold">{{item.note}}</text> </view>
+    </view>
+  </swiper-item>
+</swiper>
+
+<view style="position:fixed;bottom:100rpx;width:100vw;margin:0 auto;">
+  <van-row>
+    <van-col span="10" offset="1">
+      <van-button custom-class="bg-blue answer_btn" type="default" block
+        custom-style="color:#fff;background-color:#ffe9a7;" icon="edit">
+        修改
+      </van-button>
+    </van-col>
+    <van-col span="10" offset="2">
+      <van-button custom-style="color:#000;background-color:#ffe9a7;" custom-class="answer_btn" type="default" block
+        icon="delete-o">
+        删除
+      </van-button>
+    </van-col>
+  </van-row>
+</view>

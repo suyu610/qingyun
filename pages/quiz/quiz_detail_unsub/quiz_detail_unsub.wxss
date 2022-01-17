@@ -1,0 +1,120 @@
+page {
+  background-color: #F5F5F5;
+
+}
+
+.container {
+  padding: 30rpx;
+  background-color: #F5F5F5;
+  padding-top: 10rpx;
+}
+
+image {
+  box-sizing: content-box !important;
+}
+
+.center,
+.introduce {
+  padding-top: 0;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  background-color: #fff;
+}
+
+.introduce {
+  padding-bottom: 15rpx;
+}
+
+.info_pic,
+.center {
+  margin-top: 40rpx;
+  border-radius: 20rpx;
+}
+
+.introduce .title {
+  padding-bottom: 20rpx;
+}
+
+.title {
+  color: #909090;
+  text-align: left;
+  font-size: 24rpx;
+
+  /* font-weight: bold; */
+}
+
+.add-btn {
+  border-radius: 0;
+  border: 0;
+  line-height: 8vh;
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  color: white;
+  bottom: 0
+}
+
+.add-btn::after {
+  border: 0;
+}
+
+
+.introduce .intro {
+  color: #909090;
+  display: -webkit-box;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author_name {
+  text-align: center;
+}
+
+.arrow {
+  top: 7rpx !important;
+  color: #d4c8c8 !important;
+  float: right !important;
+}
+
+.contributor {
+  padding-top: 10rpx;
+}
+
+.number {
+  font-size: 26rpx;
+
+}
+
+.author,
+.basic-introduce,
+.basic_info,
+.add_btn {
+  padding-top: 35rpx;
+  font-size: 26rpx;
+}
+
+.info_pic {
+  padding-top: 30rpx;
+  padding-bottom: 0rpx;
+}
+
+
+.canvas {
+  width: 100vw;
+  height: 30vh;
+  text-align: center;
+  margin-left: 10vw;
+}
+
+.info_pic {
+  background-color: #fff;
+}
+
+.text-bold {
+  color: #2B2B2B !important;
+}
