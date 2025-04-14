@@ -1,0 +1,157 @@
+page {
+  background-color: #F5F5F5;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  box-sizing: border-box;
+  /* padding: 30rpx; */
+  height: 100vh;
+  background-color: #F5F5F5;
+  /* padding-top: 10rpx; */
+}
+
+image {
+  box-sizing: content-box !important;
+}
+
+
+
+.introduce {
+  transition: .5s;
+  /* height: 250rpx; */
+  width: 95vw;
+  margin: 0 auto;
+  /* position: absolute; */
+  padding: 30rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  /* bottom: 30rpx; */
+  border-radius: 30rpx;
+  background-color: #fff;
+}
+
+.center {
+  padding: 0;
+}
+
+.center .function .cu-item {
+  border-radius: 20rpx;
+}
+
+.info_pic {
+  margin-top: 40rpx;
+  border-radius: 30rpx;
+}
+
+.center {
+  background: #27B0FF;
+  color: white;
+  width: 100vw;
+  margin-top: -1rpx;
+  position: absolute;
+  top: 0;
+  height: 332rpx;
+}
+
+
+
+.tab-active {
+  font-weight: bold !important;
+  /* color: black !important; */
+}
+
+.basic-introduce {
+  padding-bottom: 20rpx;
+}
+
+.default_normal-date {
+  color: grey !important;
+}
+
+.todo-dot-bottom {
+  font-weight: bold !important;
+}
+
+
+.title {
+  color: #909090 !important;
+  text-align: left;
+  font-size: 24rpx;
+}
+
+.add-btn {
+  border-radius: 0;
+  border: 0;
+  line-height: 8vh;
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  color: white;
+  bottom: 0
+}
+
+.add-btn::after {
+  border: 0;
+}
+
+
+.introduce .intro {
+  color: #909090;
+  display: -webkit-box;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author_name {
+  text-align: left;
+  /* font-weight: bold; */
+}
+
+.arrow {
+  top: 7rpx !important;
+  color: #d4c8c8 !important;
+  float: right !important;
+}
+
+.number,
+.author,
+.contributor,
+.basic-introduce,
+.basic_info,
+.add_btn {
+  padding-top: 35rpx;
+  font-size: 26rpx;
+}
+
+.author {
+  padding-top: 0;
+}
+
+.info_pic {
+  padding-top: 15rpx;
+  padding-bottom: 0rpx;
+  line-height: 724rpx;
+  height: 724rpx;
+}
+
+.canvas {
+  width: 98%;
+  height: 724rpx;
+  text-align: center;
+  margin-left: 2vw;
+}
+
+.info_pic {
+  background-color: #fff;
+}
+
+.text-bold {
+  color: #2B2B2B;
+}

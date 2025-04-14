@@ -1,0 +1,37 @@
+/* pages/quiz/quiz_ques_list/quiz_ques_list.wxss */
+
+.top {
+  padding-top: 20rpx;
+}
+
+.quiz_cell {
+  padding-left: 5rpx !important;
+  padding-right: 5rpx !important;
+}
+
+.quiz_cell_title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.quiz_list {
+  padding-top: 30rpx;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+}
+
+.cell_label {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.title {
+  width: 75vw !important;
+}

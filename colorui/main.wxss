@@ -7,11 +7,11 @@ page {
 	/* 标准色 */
 	--red: #e54d42;
 	--orange: #f37b1d;
-	--yellow: #fbbd08;
+	--yellow: #ffe9a7;
 	--olive: #8dc63f;
 	--green: #39b54a;
 	--cyan: #1cbbb4;
-	--blue: #0081ff;
+	--blue: #27B1FF;
 	--purple: #6739b6;
 	--mauve: #9c26b0;
 	--pink: #e03997;
@@ -967,7 +967,7 @@ button.icon.lg {
 .cu-avatar-group {
 	direction: rtl;
 	unicode-bidi: bidi-override;
-	padding: 0 10rpx 0 40rpx;
+	padding: 0 10rpx 0 17rpx;
 	display: inline-block;
 }
 
@@ -1279,7 +1279,7 @@ button.icon.lg {
 
 .cu-list.menu-avatar>.cu-item .content {
 	position: absolute;
-	left: 146rpx;
+	left: 114rpx;
 	width: calc(100% - 96rpx - 60rpx - 120rpx - 20rpx);
 	line-height: 1.6em;
 }
@@ -1602,7 +1602,7 @@ button.icon.lg {
 
 .cu-bar .action:first-child {
 	margin-left: 30rpx;
-	font-size: 30rpx;
+	font-size: 24rpx;
 }
 
 .cu-bar .action text.text-cut {

@@ -1,0 +1,209 @@
+.modal-mark {
+  background-color: #000;
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  transition: .5s;
+}
+
+.delete-key {
+  right: 20rpx;
+  position: absolute;
+  bottom: 120rpx;
+  height: 112rpx;
+  width: 66rpx;
+  line-height: 61px !important;
+  font-weight: bold;
+}
+
+.fle_center {
+  align-items: center;
+  justify-content: center;
+}
+
+.fle {
+  display: flex;
+  /* height: 61px; */
+  margin-bottom: 20rpx;
+  justify-content: center;
+}
+
+.fle:first-child {
+  margin-bottom: 0rpx;
+
+}
+
+.fle_1 {
+  display: flex;
+  flex: 0.1;
+  justify-content: center;
+}
+
+.fle_0_11 {
+  flex: 0.11;
+}
+
+.mar_4 {
+  margin: 4rpx 7rpx 4rpx 7rpx;
+  line-height: 60px;
+}
+
+.key_contrl {
+  width: 29vw;
+  display: flex;
+  height: 60rpx;
+  line-height: 60rpx;
+  box-sizing: border-box;
+}
+
+.fle_1_6 {
+  display: flex;
+  flex: 1.6;
+}
+
+.bg-grey {
+  background-color: grey !important;
+}
+
+.bg-grey:active,
+.bg-grey:focus {
+  color: black !important;
+  background-color: lightgrey !important;
+}
+
+.fs_40 {
+  font-size: 40rpx;
+}
+
+.key_contrl van-icon {
+  top: 3px !important;
+  position: relative;
+}
+
+.newButton {
+  background-color: #03a9f4;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.btn-red {
+  background-color: #000 !important;
+}
+
+.keybord {
+  position: absolute;
+  border-radius: 10px;
+  /* width: 100%; */
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: 1000;
+  background: #e8eaea;
+}
+
+.bg-yellow {
+  background-color: #ffe9a7 !important;
+  color: black !important;
+  transition: .5s;
+}
+
+.keybord .box {
+  width: 100%;
+  box-shadow: 0px 5px 8px #ccc0c047;
+  border-radius: 8rpx;
+  background: #fff;
+  text-align: center;
+}
+
+.keybord .box2 {
+  width: 100%;
+  margin: 4rpx;
+  padding: 10rpx;
+  border-radius: 8rpx;
+  line-height: 42px;
+  background: #acb3bb;
+  text-align: center;
+}
+
+.p_40 {
+  padding: 40rpx 30rpx;
+}
+
+.en_last_row {
+  padding: 0 20rpx;
+}
+
+.keybord {
+  padding: 10rpx;
+  padding-top: 25rpx;
+}
+
+.keyboard-show {
+  bottom: 0vh;
+  /* transition: .5s; */
+
+}
+
+.keyboard-hidden {
+  display: none;
+  /* transition: .5s; */
+}
+
+.fle_0_5 {
+  flex: 0.5;
+}
+
+.fle_1_5 {
+  flex: 0.15;
+  display: flex;
+  justify-content: center;
+}
+
+.underline {
+  /* text-decoration: underline; */
+  border-bottom: 2px solid lightgrey;
+  padding-bottom: 4px;
+
+}
+
+.box-blue {
+  background-color: #27B1FF !important;
+  color: white;
+}
+
+.box-yellow {
+  background-color: #dedede !important;
+  color: black !important;
+  box-shadow: 0px 5px 8px #d8d6d6 !important;
+  transition: .5s;
+}
+
+.box-yellow-hover {
+  background-color: #fff !important;
+  color: black !important;
+}
+
+.box-hover,
+.keybord .box-hover {
+  background-color: lightgrey !important;
+  color: white !important;
+}
+
+.box-blue-hover {
+  background-color: #76ceff !important;
+  color: #000000 !important;
+}
+
+.focus_input {
+  border: 1px dashed#000 !important;
+  box-shadow: 0px 0px 8px-3px#147EFB inset;
+}
+
+.settingPopup {
+  padding: 20rpx;
+  padding-top: 0rpx;
+}

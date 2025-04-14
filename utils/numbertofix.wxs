@@ -1,0 +1,87 @@
+var bar = function (a) {
+  return a.toFixed(1);
+}
+/**
+ * 将秒转换为 分:秒
+ * s int 秒数
+ */
+var s_to_hs = function (s) {
+  if (s == null) return
+  s = s.toFixed(0);
+  //计算分钟
+  //算法：将秒数除以60，然后下舍入，既得到分钟数
+  var h;
+  h = Math.floor(s / 60);
+  //计算秒
+  //算法：取得秒%60的余数，既得到秒数
+  s = s % 60;
+  //将变量转换为字符串
+  h += '';
+  s += '';
+  //如果只有一位数，前面增加一个0
+  h = (h.length == 1) ? '0' + h : h;
+  s = (s.length == 1) ? '0' + s : s;
+  return h + ':' + s;
+}
+
+/*
+ * 数字加1
+ */
+
+var increment = function (index) {
+  return Number(index) + 1;
+}
+
+/*
+ *  数组中包含某元素，顺序不敏感
+ */
+var contain = function (arr, arg) {
+  if (arr != null) {
+    console.log(arr)
+    return arr.indexOf(arg) > -1;
+  }
+}
+
+/*
+ *  将数字转为对应的字母
+ */
+var number2Alpha = function (num) {
+  alphaList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  return alphaList[num];
+}
+
+/*
+ *  将数字数组转为对应的字母
+ */
+var number2AlphaArr = function (numArr) {
+  alphaList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  var resultArr = [];
+  for (var i = 0; i < numArr.length; i++) {
+    resultArr.push(alphaList[parseInt(numArr[i])])
+  }
+
+  console.log(resultArr)
+  return resultArr;
+}
+
+var hasCompeteNum = function (arr) {
+  var num = 0;
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].has_done) {
+      num++
+    }
+  }
+
+  return num;
+}
+
+module.exports = {
+  bar: bar,
+  hasCompeteNum: hasCompeteNum,
+  number2Alpha: number2Alpha,
+  number2AlphaArr: number2AlphaArr,
+  s_to_hs: s_to_hs,
+  contain: contain,
+  increment: increment
+};

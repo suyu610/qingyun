@@ -1,0 +1,29 @@
+/* pages/quiz/quiz_pre_questions/quiz_pre_questions.wxss */
+
+.startBtn {
+  position: absolute;
+  width: 100%;
+  bottom: 0rpx;
+}
+
+.grid-item {
+  width: 100% !important;
+  height: 80rpx !important;
+  line-height: 80rpx !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  border-radius: 10rpx !important;
+}
+
+.grid-item-line{
+  background-color: #fff!important;
+  border: 1px solid lightblue;
+}
+
+.bg-blue {
+  transition: .2s;
+}
+
+.bg-white {
+  transition: .2s;
+}

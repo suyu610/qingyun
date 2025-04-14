@@ -89,17 +89,27 @@
   padding-bottom: 10px;
 }
 
-.main_info .upload {
+.main_info .upload-quiz {
   margin-top: 20px;
-  width: 80vw;
-  margin-left: 10vw;
+  width: 40vw;
+  margin-right: 5vw;
+  height: 4.5vh;
+  line-height: 4.5vh;
+  box-shadow: #eae7dc6b 1px 2px 1px 1px;
+  display: inline-block;
+  margin-left: 5vw;
+  border-radius: 30px;
+}
+.main_info .upload-doc {
+  display: inline-block;
+  margin-top: 20px;
+  width: 40vw;
+  margin-left: 5vw;
   height: 4.5vh;
   line-height: 4.5vh;
   box-shadow: #eae7dc6b 1px 2px 1px 1px;
   border-radius: 30px;
-
 }
-
 .van-cell-text{
   display: inline-block;
   padding-right:10px;

@@ -1,4 +1,5 @@
 <!--pages/homepage/homepage.wxml-->
+<official-account></official-account>
 <view class="container">
   <view class="header bg">
     <view class="ads">

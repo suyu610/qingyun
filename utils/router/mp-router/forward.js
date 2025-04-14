@@ -1,5 +1,10 @@
-const { encodeKey } = require('./store.js');
-const { encode, querify } = require('./data.js');
+const {
+  encodeKey
+} = require('./store.js');
+const {
+  encode,
+  querify
+} = require('./data.js');
 const routeParser = require('./routeParser.js');
 
 /**
@@ -8,21 +13,37 @@ const routeParser = require('./routeParser.js');
  */
 function forward(routeObj = {}, isReplace = false) {
   const {
-    name, data, query, success, fail, complete,
+    name,
+    data,
+    query,
+    success,
+    fail,
+    complete,
   } = routeObj;
   let url = '';
   const queryData = query || {};
   if (!name) {
+    wx.showToast({
+      icon:'none',
+
+      title: '开发中..',
+      duration: 700
+    })
     throw new Error('路由名称不能为空');
   }
   const route = routeParser(name);
   if (!route) {
+    wx.showToast({
+      icon:'none',
+      title: '开发中..',
+      duration: 700
+    })
     throw new Error('没有匹配的路由规则');
   }
   url = route.path;
   if (data) {
     queryData[encodeKey] = encode(data);
-  }  
+  }
   if (route.type !== 'tab') {
     url += `?${querify(queryData)}`;
   }
@@ -61,7 +82,7 @@ function push(option) {
  * 替换
  * @param {object} option
  */
-function replace(option) {  
+function replace(option) {
   return forward.call(this, option, true);
 }
 

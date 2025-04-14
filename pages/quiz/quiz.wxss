@@ -1,0 +1,237 @@
+/* pages/homepage/homepage.wxss */
+view {
+  box-sizing: content-box;
+}
+
+
+.header {
+  overflow: hidden;
+  width: 100vw;
+  height: 19vh;
+  position: relative;
+  background-color: #27B1FF;
+  color: white;
+}
+
+
+.header .title .flex {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  line-height: 25px;
+
+}
+
+
+.header .title .quiz-title {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.header:first-child {
+  position: relative;
+}
+
+.header .title {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.header .title text {
+  /* font-size: 34rpx; */
+}
+
+.header .function .box {
+  border: 2px solid #fff;
+  width: 20vw;
+  height: 20vw;
+  line-height: 20vw;
+  text-align: center;
+  margin-top: 40rpx;
+  border-radius: 10rpx;
+}
+
+.header .function {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20rpx;
+  color:white;
+}
+
+
+.header .progress-bar {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.header .ads {
+  height: 100%;
+  top: 0;
+
+}
+
+.header .ads swiper {
+  height: 100%;
+
+}
+
+.ads-item {
+  height: 100%;
+  position: relative;
+  padding: 5vw;
+  width: 85vw;
+}
+
+.tab-active {
+  font-weight: bold !important;
+  /* color: black !important; */
+}
+
+.tab-class {
+  padding-top: 1vh !important;
+  /* background-color: #27B1FF; */
+}
+
+.createQuiz {
+  /* background-color: #6FCF97; */
+  font-weight: bold;
+  color: black;
+  width: 90%;
+  margin: 24rpx auto;
+  height: 7vh;
+  line-height: 7vh;
+  text-align: center;
+  border-radius: 20rpx;
+  padding: 5px;
+}
+
+.header .ads-item .info {
+  color: #ffffff99;
+  font-size: 26rpx;
+}
+
+.header .ads-item .title {
+  color: #ffffff;
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 45rpx;
+}
+
+.header .ads-item .price {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 35rpx;
+  display: inline-block;
+  padding-top: 10px;
+
+}
+
+.header .ads-item .entry-btn {
+  margin-left: 3vw;
+  color: #000;
+  font-size: 28rpx;
+  background-color: #FFE9A7;
+  display: inline-block;
+  border-radius: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.header .ads-item image {
+  position: absolute;
+  right: 0px;
+  top: 5vw;
+  border-radius: 10px;
+  width: 20vw;
+  height: 25vw;
+}
+
+
+.body {
+  position: relative;
+  overflow: hidden;
+  height: 80vh;
+  width: 100vw;
+  background-color: #fff;
+}
+
+.tab-item {
+  height: 80vh;
+}
+
+.dropdown-item-title {
+  background-color: red;
+  font-size: 14px !important;
+}
+
+.cu-item,
+#helpView {
+  box-sizing: border-box;
+}
+
+.text-cut{
+  font-size: 26rpx;
+}
+.cu-list.menu-avatar>.cu-item .content {
+  width: calc(100% - 96rpx - 60rpx - 72rpx);
+}
+
+.cu-list.menu-avatar>.cu-item .action .cu-tag {
+  display: block;
+  font-size: 24rpx;
+}
+
+.VerticalNav.nav {
+  width: 180rpx;
+  white-space: initial;
+}
+
+.VerticalNav.nav .cu-item {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  margin: 0;
+  border: none;
+  height: 50px;
+  position: relative;
+  font-size: 24rpx;
+  color: #081f40;
+}
+
+.VerticalNav.nav .cu-item.cur {
+  background-color: #f1f1f1;
+}
+
+.VerticalNav.nav .cu-item.cur::after {
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  position: absolute;
+  background-color: currentColor;
+  top: 0;
+  right: 0rpx;
+  bottom: 0;
+  margin: auto;
+}
+
+.VerticalBox {
+  display: flex;
+}
+
+.VerticalMain {
+  background-color: #f1f1f157;
+}
+
+.cu-bar {
+  border-radius: 10px 10px 0 0;
+}
+
+.cu-list.menu-avatar {
+  border-radius: 0 0 10px 10px;
+}
+

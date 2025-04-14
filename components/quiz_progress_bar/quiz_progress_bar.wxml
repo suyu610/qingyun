@@ -1,0 +1,15 @@
+<view class="container neumorphism">
+  <view class="left">
+    <view class="title text-black">{{title}}</view>
+    <view class="progress-bar">
+      <view class="cu-progress round sm striped active">
+        <view class="bg-blue" style="width:{{progress+'%'}};background-color:#27B1FF"></view>
+      </view>
+    </view>
+  </view>
+  <view class="status text-black">
+    <view class="done-num">{{done_num}}</view>
+    <view> / </view>
+    <view class="total-num">{{total_num}}</view>
+  </view>
+</view>

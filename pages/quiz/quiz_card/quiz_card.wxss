@@ -1,0 +1,30 @@
+.card-swiper {
+  height: 1000rpx !important;
+}
+
+.swiper-item {
+  padding: 30rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 10px !important;
+  transition: .5s !important;
+  /* box-shadow: 6px 5px 20px 10px #c1c0c02e; */
+  border: 1px solid #efdfdf;
+
+}
+
+.title,
+.options,
+.note {
+  color: grey;
+}
+
+
+.answer_btn {
+  transition: .5s !important;
+  color: #fff;
+  background-color: #28B1FC;
+  border-radius: 20rpx !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}

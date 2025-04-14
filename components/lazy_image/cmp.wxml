@@ -1,0 +1,7 @@
+<block>
+    <image src="{{src}}" bindload="onLoad"  class="hidden" />
+    <image src="{{isLoad ? src : lazySrc}}"  mode="{{mode}}" class="show" />
+</block>
+
+
+

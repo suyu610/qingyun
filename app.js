@@ -1,5 +1,6 @@
 // app.js
 const router = require('utils/router/index.js');
+const miniShopPlugin = requirePlugin('mini-shop-plugin');
 
 // 设置全局的分享
 ! function () {
@@ -10,7 +11,7 @@ const router = require('utils/router/index.js');
       onShareAppMessage: function () {
         return {
           title: '青云知识库',
-          imageUrl: "https://cdns.qdu.life/qingyun/images/share_1.png",
+          imageUrl: "https://cdns.qdu.life/qingyun/images/share_3.png",
           path: '/pages/empty/empty',
         };
       }
@@ -29,27 +30,26 @@ const router = require('utils/router/index.js');
 }();
 App({
 
-   // ---------------------------------------------网络状态 
-   networkManage: function () {
+  // ---------------------------------------------网络状态 
+  networkManage: function () {
     var that = this;
     //监听网络状态
     wx.onNetworkStatusChange(function (res) {
       if (!res.isConnected) {
         console.log("123")
         that.msg('网络似乎不太顺畅');
-      }else{
+      } else {
         console.log(res)
       }
     })
   },
   //---------------------------------------------检测小程序版本更新
   updateManage: function () {
-    var that = this; 
+    var that = this;
     var updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      if (!res.hasUpdate) {
-      }
+      if (!res.hasUpdate) {}
     })
     // 监听新版本下载成功
     updateManager.onUpdateReady(function () {
@@ -81,11 +81,46 @@ App({
     })
   },
 
+  watch: function (ctx, obj) {
+    Object.keys(obj).forEach(key => {
+      this.observer(ctx.data, key, ctx.data[key], function (value) {
+        obj[key].call(ctx, value)
+      })
+    })
+  },
+
+  // 监听属性，并执行监听函数
+  observer: function (data, key, val, fn) {
+    Object.defineProperty(data, key, {
+      configurable: true,
+      enumerable: true,
+      get: function () {
+        return val
+      },
+      set: function (newVal) {
+        if (newVal === val) return
+        fn && fn(newVal)
+        val = newVal
+      },
+    })
+  },
+
+   // 获取本地存储,如果没写默认值，则返回空
+   get: function (key, defautValue = '') {
+    var value = wx.getStorageSync(key)
+    if (value === '') {
+      return defautValue;
+    } else {
+      return value
+    }
+  },
+  
   onLaunch() {
     this.networkManage(); //调用监听网络状态的方法
     this.updateManage(); //调用检测小程序版本更新的方法   
-    
-    this.globalData.initData =  wx.getStorageSync('initData')
+    miniShopPlugin.initApp(this, wx);  
+
+    this.globalData.initData = wx.getStorageSync('initData')
     let that = this
     wx.cloud.init({
       traceUser: true,
@@ -118,10 +153,19 @@ App({
 
 
   globalData: {
-    openid: "",
+    debug: false,
+    debugRouter:"quiz",
+    userInfo: {
+      userId: null, // 用户唯一id
+      name: null, // 微信名称
+      gender: 0, // 性别：0未知、1男、2女
+      photoUrl: null, // 头像url地址
+      address: "全国", // 用户定位地址精确到市，默认为全国
+      isSuper: false, // 该用户是否为超级用户，如果是的话就有回复和删除留言的能力
+    },
     token: "",
     ssNumber: "",
-    version:"1.0.1",
-    categoryList:null
+    version: "1.0.1",
+    categoryList: null
   }
 })

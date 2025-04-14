@@ -1,0 +1,118 @@
+<scroll-view scroll-y class="container">
+
+  <view class="center">
+    <view class="bg function" style="height:100%">
+      <view class="cu-list grid col-4 no-border" style="background-color: transparent;">
+        <view bindtap="jumpHeadTools" data-router="{{item.router}}" class="cu-item "
+          wx:for="{{icon_list}}" wx:key="index" wx:if="{{index<8}}">
+          <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+            <view class="cu-tag {{item.icon!='warn'? 'bg-yellow':'bg-yellow'}} badge" wx:if="{{item.badge!=0}}">
+              <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+            </view>
+          </view>
+          <text style="font-size: 24rpx;color:white">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="info_pic" style="margin-top: 360rpx;    width: 95vw;    margin: 0 auto;margin-top: 198px;">
+    <van-tabs tab-class="tab-class" tab-active-class="tab-active text-black" color="#FFE9A7"
+      active="{{ info_pics_index }}" bind:change="infoPicsIndexChanged" line-height="4" title-inactive-color="#aaa"
+      swipeable>
+      <van-tab title="答题日历">
+        <calendar bind:takeoverTap="takeoverTapDate" config="{{calendarConfig}}" id="calendar" />
+      </van-tab>
+      <van-tab title="历史分数">
+        <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas"></canvas>
+      </van-tab>
+    </van-tabs>
+  </view>
+  <van-transition duration="{{ { enter: 300, leave: 300 } }}" name="slide-left" show="{{ cur_select_date.year!=null }}">
+    <view class="introduce" wx:if="{{ cur_select_date.year!=null }}">
+      <view style="display:inline" class="days-info" wx:if="{{ cur_select_date.year!=null }}">
+        {{cur_select_date.year}} - {{cur_select_date.month}} - {{cur_select_date.date}} 答题记录
+      </view>
+    </view>
+  </van-transition>
+
+  <van-transition duration="{{ { enter: 300, leave: 300 } }}" name="slide-right"
+    show="{{ cur_select_date.year==null }}">
+    <view class="introduce" wx:if="{{ cur_select_date.year==null }}">
+      <view class="author">
+        <van-row gutter="20">
+          <van-col span="12">
+            <view class="title">
+              <view style="">
+              </view>
+              创建者
+            </view>
+          </van-col>
+
+          <van-col span="5">
+            <view class="author_name">黄鹏宇</view>
+          </van-col>
+          <van-col span="2" class="arrow">
+            <van-icon name="arrow" custom-class="arrow" />
+          </van-col>
+        </van-row>
+      </view>
+
+      <view class="number">
+        <van-row gutter="20">
+          <van-col span="12">
+            <van-row>
+              <van-col span="10" class="title">
+                学习时间
+              </van-col>
+              <van-col span="10">4h35min</van-col>
+              <van-col span="4" class="arrow">
+                <van-icon color="#F5F5F5" name="arrow" custom-class="arrow" />
+              </van-col>
+            </van-row>
+          </van-col>
+          <van-col span="12">
+            <van-row>
+              <van-col span="10" class="title">
+                学习计划
+              </van-col>
+              <van-col span="10">每日1小时</van-col>
+              <van-col span="4" class="arrow">
+                <van-icon name="arrow" custom-class="arrow" />
+              </van-col>
+            </van-row>
+          </van-col>
+        </van-row>
+      </view>
+      <view class="basic-introduce">
+        <van-row gutter="20">
+          <van-col span="12">
+            <van-row>
+              <van-col span="10" class="title">
+                笔记数量
+              </van-col>
+              <van-col span="10">21篇</van-col>
+              <van-col span="4" class="arrow">
+                <van-icon name="arrow" custom-class="arrow" />
+              </van-col>
+            </van-row>
+          </van-col>
+          <van-col span="12">
+            <van-row>
+              <van-col span="10" class="title">
+                评论数
+              </van-col>
+              <van-col span="10">47条</van-col>
+              <van-col span="4" class="arrow">
+                <van-icon name="arrow" custom-class="arrow" />
+              </van-col>
+            </van-row>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+  </van-transition>
+
+
+</scroll-view>

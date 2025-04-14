@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-image": "@vant/weapp/image/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
+  },
+  "navigationBarBackgroundColor": "#F5F5F5",
+  "navigationBarTextStyle": "black"
+
+}

@@ -1,0 +1,23 @@
+<view class="container">
+  <van-tabs tab-class="tab-class" tab-active-class="tab-active text-black" color="#FFE9A7" active="{{ active }}"
+    line-height="4" title-inactive-color="#aaa" animated bind:change="onChange">
+    <block wx:for="{{err_list}}" wx:key="index">
+      <van-tab title="{{item.title}}">
+        <view style="padding-top:20rpx">
+          <block wx:for="{{item.chapter}}" wx:key='index' wx:for-item="chapter">
+            <van-cell-group title="{{chapter.title}}">
+              <block wx:for="{{chapter.quizzes}}" wx:key="index" wx:for-item="quiz">
+                <van-swipe-cell right-width="{{ 65 }}">
+                  <van-cell-group>
+                    <van-cell title-width="80%" title="{{index+1}}. {{quiz.title}}" value="{{quiz.type}}" is-link />
+                  </van-cell-group>
+                  <view slot="right">删除</view>
+                </van-swipe-cell>
+              </block>
+            </van-cell-group>
+          </block>
+        </view>
+      </van-tab>
+    </block>
+  </van-tabs>
+</view>

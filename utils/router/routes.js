@@ -10,6 +10,39 @@ export const homepage = {
   path:'/pages/homepage/homepage'
 }
 
+export const quiz = { 
+  path:'/pages/quiz/quiz'
+}
+
+export const quiz_detail_unsub = { 
+  path:'/pages/quiz/quiz_detail_unsub/quiz_detail_unsub'
+}
+
+export const quiz_detail_sub = { 
+  path:'/pages/quiz/quiz_detail_sub/quiz_detail_sub'
+}
+export const quiz_answer_questions = { 
+  path:'/pages/quiz/quiz_answer_questions/quiz_answer_questions'
+}
+
+export const quiz_ques_list = { 
+  path:'/pages/quiz/quiz_ques_list/quiz_ques_list'
+}
+export const quiz_list_err = { 
+  path:'/pages/quiz/quiz_list_err/quiz_list_err'
+}
+export const quiz_list_star = { 
+  path:'/pages/quiz/quiz_list_star/quiz_list_star'
+}
+
+export const quiz_pre_questions = { 
+  path:'/pages/quiz/quiz_pre_questions/quiz_pre_questions'
+}
+
+export const quiz_card = { 
+  path:'/pages/quiz/quiz_card/quiz_card'
+}
+
 export const login = { 
   path:'/pages/public/login/login'
 }
@@ -34,7 +67,6 @@ export const buy_confirm = {
 export const order_list = { 
   path:'/pages/public/order_list/order_list'
 }
-
 
 export const preview_doc = { 
   path:'/pages/public/preview_doc/preview_doc'

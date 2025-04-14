@@ -1,0 +1,156 @@
+<block>
+  <view class="keybord {{showKeyBoard?'keyboard-show':'keyboard-hidden'}}"
+    style="background-color:{{isSpeaking?'#F3F2F2':''}}">
+    <view wx:if="{{!isSpeaking}}" class="fle" style=" height: 40px; justify-content: space-between;">
+      <view class='key_contrl mar_4'>
+        <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-yellow-hover"
+          catchtap="showSettingPopup">
+          <span class="fs_40">
+            <van-icon name="setting-o" />
+            <!-- <van-icon name="fail" /> -->
+          </span>
+        </view>
+      </view>
+
+      <view class='key_contrl mar_4'>
+        <view class="box {{!star?'box-yellow':' bg-yellow'}}" hover-start-time="10" hover-stay-time="50"
+          hover-class="box-yellow-hover" catchtap="starWord">
+          <span class="fs_40 ">
+            <van-icon name="star-o" color="{{!star?'black':'black'}}" />
+          </span>
+        </view>
+      </view>
+      <view class='key_contrl mar_4'>
+        <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-yellow-hover"
+          catchtap="showAnswerKey">
+          <span class="fs_40">
+            <!-- <van-icon name="bulb-o" size="24" /> -->
+            <van-icon name="eye-o" />
+            <!-- <van-icon name="fail" /> -->
+          </span>
+        </view>
+      </view>
+      <view class='key_contrl mar_4'>
+        <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-yellow-hover"
+          catchtap="hideKeyBoard">
+          <span class="fs_40">
+            <van-icon name="arrow-down" />
+          </span>
+        </view>
+      </view>
+    </view>
+
+    <view id="keyboard_center" class="fle" wx:if="{{!isSpeaking}}" wx:for="{{keyBoardObject[currentType]}}"
+      wx:for-item="arrayItem" wx:for-index="Arrayindex" wx:key="Arrayindex">
+      <block wx:if="{{Arrayindex === keyBoardObject[currentType].length-1}}">
+        <view class="mar_4 {{item=='del'||item=='voice' ?'fle_1_5':'fle_1'}}" wx:for="{{arrayItem}}"
+          wx:for-index="index" wx:for-item="item" wx:key="index">
+          <!-- 删除按钮 -->
+          <view wx:if="{{item=='del'}}" class='box box-yellow' hover-start-time="10" hover-stay-time="50"
+            hover-class="box-yellow-hover" catchtap="deleteKey" catchlongpress="longDeleteKey"
+            catchtouchend="longDeleteKeyDismiss">
+            <span class="fs_40">
+              <van-icon name="cross" />
+            </span>
+          </view>
+
+          <view wx:if="{{item=='voice'}}" class='box box-yellow' hover-start-time="10" hover-stay-time="50"
+            hover-class="box-yellow-hover" catchtap="voiceKey">
+            <span class="fs_40">
+              <van-icon name="service-o" />
+            </span>
+          </view>
+
+          <view wx:if="{{item!='voice' && item!='del'}}" class="box" hover-start-time="10" hover-stay-time="50"
+            hover-class="box-hover" catchtap='clickKeybord' data-key="{{item}}">
+            <span class="fs_40">{{item}}</span>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="fle_1 mar_4" wx:for="{{arrayItem}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+          <view class='box' hover-start-time="10" hover-stay-time="50" hover-class="box-hover" catchtap='clickKeybord'
+            data-key="{{item}}">
+            <span class="fs_40 {{item=='F' || item=='J'?'underline':''}}">{{item}}</span>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="{{isSpeaking}}" class="fle"
+      style="display:block;padding:40rpx;padding-top:72rpx;text-align:center">
+      <image wx:if="{{isSpeaking && !isSpeakEditing}}" mode="heightFix" src="icons/recorder_{{recorder_img_index}}.png"
+        style="box-sizing:content-box;height:100rpx;width:100rpx;opacity:0.8;border:2px solid #cec2c2;padding:30rpx;border-radius:50%;">
+      </image>
+
+      <image wx:if="{{isSpeakEditing}}" bindtap="playAudio" mode="heightFix"
+        src="{{!isPlaying?' icons/play.png':' icons/pause.png'}}"
+        style="box-sizing:content-box;height:100rpx;width:100rpx;padding:30rpx;border-radius:50%;">
+      </image>
+
+      <view style="font-size:34rpx;font-weight:bold;padding-top:10rpx">1：24</view>
+    </view>
+
+    <view class="fle" style="height: 40px; margin-bottom:10rpx; justify-content: space-between; ">
+      <view class='key_contrl mar_4' style="width: 25%;">
+        <view class='box box-yellow' hover-start-time="10" hover-stay-time="50" hover-class="box-hover"
+          catchtap="leftdownButtonTap" style="{{isSpeakEditing?'background-color:#ffe9a7':''}}">
+          <span>
+            <van-icon name="{{isSpeakEditing?'cross':'back-top'}}" />
+          </span>
+        </view>
+      </view>
+      <view class='key_contrl mar_4' style="width: 100%;">
+        <view class='box' hover-start-time="10" hover-stay-time="50" hover-class="box-hover" catchtap="spaceKey"
+          catchlongpress="toggleCapital" style="{{isSpeakEditing?'background-color:#27B1FF!important;color:white':''}}">
+          <span>
+            {{isSpeakEditing?'发音评测':isSpeaking?'录音中':capital?'大写':'小写'}}
+            <!-- Space -->
+          </span>
+        </view>
+      </view>
+
+      <view class='key_contrl mar_4' style="width: 25%;">
+        <view class='box' hover-start-time="10" hover-stay-time="50" hover-class="box-hover" catchtap="rightDownKeyTap"
+          catchlongpress="startRecorder" bindtouchend="stopRecorder"
+          style="background-color:#27B1FF!important;color:white">
+
+          <!-- style="{{isSpeakEditing?'background-color:#27B1FF!important;color:white':'#27B1FF'}}"> -->
+          <span>
+            <van-icon
+              name="{{!isSpeakEditing?'https://cdns.qdu.life/icons/mic_white.png':'https://cdns.qdu.life/icons/mic_white.png'}}"
+              size="18" />
+          </span>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <van-popup overlay="{{true}}" show="{{ settingShow }}" round position="bottom" custom-style="height: 45%;"
+    bind:close="closeSettingPopup">
+    <view class="settingPopup">
+      <van-divider contentPosition="center" hairline customStyle="color: #DEE4E4; border-color: transparent;">键盘设置
+      </van-divider>
+      <van-cell-group border="{{false}}">
+        <van-cell border="{{false}}" title="{{capital?'大写':'小写'}}" center>
+          <van-switch active-color="#27B1FF" inactive-color="#bbd3e0" checked="{{ capital }}"
+            bind:change="toggleCapital" size="24px" />
+        </van-cell>
+        <van-cell border="{{false}}" title="是否按键反馈" center>
+          <van-switch active-color="#27B1FF" inactive-color="#bbd3e0" checked="{{ openVibrate }}"
+            bind:change="toggleVibrate" size="24px" />
+        </van-cell>
+        <!-- <van-cell border="{{false}}" title="使用系统键盘" center>
+          <van-switch active-color="#27B1FF" inactive-color="#bbd3e0" checked="{{ !openVibrate }}"
+            bind:change="toggleVibrate" size="24px" />
+        </van-cell> -->
+      </van-cell-group>
+
+      <van-button custom-style="margin:40rpx auto;background-color:#27B1FF; border:0; width: 80vw;" type="primary" round
+        block>保存
+      </van-button>
+    </view>
+  </van-popup>
+
+</block>
